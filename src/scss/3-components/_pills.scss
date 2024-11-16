@@ -1,0 +1,69 @@
+// ---------
+// 3-components
+// pill
+
+.c-status-pill {
+    border-radius: 2rem;
+    padding: 0.6rem .9rem 0.6rem .9rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.6rem;
+    border: 1px solid transparent;
+    margin-left: -2px;
+    position: relative;
+    &+h3{
+        margin-top: 1rem;
+    }
+  }
+  
+  .c-status-pill__icon {
+    display: block;
+    border-radius: 0.5rem;
+    .o-svg-icon{
+        width: 1.2rem;
+        height: 1.2rem;
+        svg{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            top: -4px;
+        }
+    }
+  }
+
+  .c-status-pill__label{
+    line-height: 1;
+  }
+  
+  .c-status-pill__icon + .c-status-pill__label {
+    margin-left: 0.8rem;
+  }
+
+  .c-status-pill + .c-status-pill{
+      margin-left: .5rem;
+  }
+  
+  /* Skins
+     ========================================================================== */
+  
+  .c-status-pill--default {
+    border: 2px solid var(--color-pill--border);
+    background: var(--color-pill--bg);
+    color: var(--color-pill--text);
+    .c-status-pill__icon {
+        svg *{
+            stroke: var(--color-pill--icon);
+        }
+    }
+    &:hover{
+        border: 2px solid var(--color-pill--border-hover);
+        background: var(--color-pill--bg-hover);
+        color: var(--color-pill--text-hover);
+        cursor: pointer;
+        .c-status-pill__icon {
+            svg *{
+                stroke: var(--color-pill--icon-hover);
+            }
+          }
+    }
+  }

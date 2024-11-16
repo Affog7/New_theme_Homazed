@@ -1,0 +1,140 @@
+.acf-field{
+	margin-bottom: 2rem;
+}
+
+.acf-field .af-label{
+}
+
+.gform_wrapper {
+	.gfield_label{
+		margin-bottom: .8rem;
+		display: block;
+		color: var(--color-black);
+		font: {
+			family: "LufgaBold", sans-serif;
+			size: 1.7rem;
+			weight: 500;
+		}
+	}
+
+
+	.gfield_description, .gfield_description.instruction, .gfield_description.gform_fileupload_rules{
+		font-size: 1.25rem !important;
+		padding-top: 4px !important;
+		margin-top: 0 !important;
+		opacity: .75;
+	} 
+}
+
+
+
+input[type=text], input[type=url], input[type=email], input[type=tel], input[type=number], input[type=password], textarea, select, .form-tag-list {
+	font: {
+		family: "LufgaRegular", sans-serif !important;
+		size: 1.4rem !important;
+	}
+	border: {
+		style: solid !important;
+		width: 0.1rem !important;
+		// color: var(--color-black-500);
+		color: #e5e7eb !important;
+		radius: var(--forms-radius) !important;
+	}
+	padding: 0.6rem 1rem;
+	width:100%;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+	
+	&:focus {
+		border-color: var(--color-green-water);
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(33,126,104,.5);
+	}
+
+	option.frm-select-placeholder:after {
+		content: "Click to select";
+		font-size: 14px;
+		color: var(--color-black-300);
+	}
+
+	&::-webkit-input-placeholder {
+		color: var(--color-black-300);
+	}
+}
+
+
+.login-remember {
+	font-size: 1.4rem;
+}
+
+.acf-notice{
+	background-color: var(--color-green-water);
+	border-radius: var(--border-radius--small);
+    color: white;
+    padding: 1rem 2rem 2rem 2rem;
+    margin-bottom: .8rem;
+    margin-top: 1.4rem;
+	&.-error{
+		background-color: red;
+		color: white;
+	}
+}
+
+.frm_none_container .frm_primary_label{
+	display: none !important;
+}
+
+.acf-hidden{
+	display: none !important;
+	opacity: 0;
+}
+
+.forbidden {
+	p {
+		width: 100%;
+		text-align: center;
+		padding-bottom: 24px;
+		margin-bottom: 24px;
+		border-bottom: {
+			style: solid;
+			width: 2px;
+			color: var(--color-black-50);
+		}
+	}
+
+	a {
+		align-self: center;
+	}
+}
+
+
+input.button{
+	@extend.btn;
+	@extend.btn--primary;
+}
+
+
+.gfield_validation_message{
+	b{
+		font-family: "LufgaExtraBold", sans-serif;
+ 		font-weight: 500;
+	}
+}
+.gform_wrapper.gravity-theme .field_description_above .gfield_description:not(.gform_fileupload_rules){
+	padding-bottom: .6rem !important;
+	color: #0590ff;
+}
+.gform-body{
+	padding: 0 .4rem;
+}
+
+// Progress Bar GF
+.gform_wrapper.gravity-theme .gf_progressbar{
+	margin-bottom: 3.2rem;
+}
+.gf_progressbar_wrapper{
+	margin-top: -3rem;
+}
+.gform_wrapper.gravity-theme .gf_progressbar_percentage.percentbar_blue {
+    background-color: #0590ff;
+}
+

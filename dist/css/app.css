@@ -1,0 +1,5642 @@
+/*!******************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/scss/app.scss ***!
+  \******************************************************************************************************************************************************/
+@charset "UTF-8";
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  border: none;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary,
+main {
+  display: block;
+}
+
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  background: transparent;
+  text-decoration: none;
+}
+
+button,
+input {
+  line-height: normal;
+}
+
+input[type=search] {
+  -webkit-appearance: textfield;
+}
+
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+textarea:focus,
+input:focus {
+  outline: 0;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+:root {
+  --color-green: #02dd7e;
+  --color-lightgreen: #32ec9b;
+  --color-darkgreen: #006338;
+  --color-purple: #8400e9;
+  --color-purple-dark: #6200ad;
+  --color-green-water: #034751;
+  --color-green-water-dark: #002d34;
+  --color-yellow: #d8ab05;
+  --color-dark-yellow: #CBA00A;
+  --color-red: #bc0271;
+  --color-pink: #FB8FBD;
+  --color-blue: rgb(18, 8, 85);
+  --color-darkblue: #0090cd;
+  --color-lightblue: rgb(81, 203, 255);
+  --color-black: #000000;
+  --color-black-800: #282828;
+  --color-black-700: rgb(82, 82, 82);
+  --color-black-500: #7E7E7E;
+  --color-black-400: rgb(155, 155, 155);
+  --color-black-300: #bdbdbd;
+  --color-black-200: rgb(220, 220, 220);
+  --color-black-100: rgb(230, 230, 230);
+  --color-black-50: rgb(240, 240, 240);
+  --color-white: #fff;
+  --color-magenta: #B50EA7;
+  --color-violet: #6F12B6;
+  --color-green-water: rgb(1, 70, 79);
+  --color-dark-blue: #0066B4;
+  --color-black-rgb: 0, 0, 0;
+  --color-green-water-rgb: 1, 70, 79;
+  --homazed-linear-gradient: linear-gradient(225deg, var(--color-magenta) 0%, var(--color-violet) 20%, var(--color-green-water) 73%, var(--color-dark-blue) 100%);
+  --box-shadow-post-type:
+      0 1px 1px 0 rgb(var(--color-black-rgb), 8%),
+      1px -1px 1px 0 rgb(var(--color-black-rgb), 6%),
+      0 1px 6px 0 rgb(var(--color-black-rgb), 12%) ;
+  --box-shadow-card:
+      0 1px 2px 0 rgb(var(--color-black-rgb), 8%),
+      0 0 10px 0 rgb(var(--color-black-rgb), 8%) ;
+  --box-shadow-card--big:
+      0 1px 2px 0 rgb(var(--color-black-rgb), 38%),
+      0 0 20px 0 rgb(var(--color-black-rgb), 28%),
+      0 0 40px 0 rgb(var(--color-black-rgb), 18%) ;
+  --border-radius: 1.2rem;
+  --border-radius--small: .8rem;
+  --border-radius--xsmall: .4rem;
+  --forms-radius: 4px;
+  --default-space: 2rem;
+}
+
+.theme-light {
+  --color-page--bg: var(--color-black-100);
+  --color-page--bg-reverse: var(--color-black);
+  --color-page--text: var(--color-black-800);
+  --color-page--text-active: var(--color-black);
+  --color-page--text-reverse: var(--color-white);
+  --color-card--bg: var(--color-white);
+  --color-card--text: var(--color-black);
+  --color-card--bg-secondary: var(--color-black);
+  --color-card--text-secondary: var(--color-white);
+  --color-card--bg-tertiary: var(--color-white);
+  --color-card--text-tertiary: var(--color-black);
+  --color-pill--bg: var(--color-white);
+  --color-pill--text: var(--color-green-water);
+  --color-pill--icon: var(--color-green-water);
+  --color-pill--border: var(--color-black);
+  --color-pill--bg-hover: var(--color-black);
+  --color-pill--text-hover: var(--color-white);
+  --color-pill--icon-hover: var(--color-white);
+  --color-pill--border-hover: var(--color-black);
+  --color-btn--bg: var(--color-black);
+  --color-btn--bg-hover: var(--color-black-800);
+  --color-btn--bg-focus: var(--color-black);
+  --color-btn--bg-disabled: var(--color-black-800);
+  --color-btn--bg-white: var(--color-white);
+  --color-btn--text: var(--color-white);
+  --color-btn--text-black: var(--color-black);
+  --color-btn--bg-secondary: var(--color-black);
+  --color-btn--bg-hover-secondary: var(--color-black);
+  --color-btn--text-secondary: var(--color-white);
+  --color-btn--bg-transparent: rgb(var(--color-black-rgb), 0);
+  --color-btn--bg-white: var(--color-white);
+}
+
+@media print {
+  @page {
+    margin: 1cm;
+  }
+  body {
+    background: var(--color-page--bg);
+    color: var(---color-page--text);
+  }
+  a {
+    page-break-inside: avoid;
+  }
+  blockquote {
+    page-break-inside: avoid;
+  }
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+  ul, ol, dl {
+    page-break-before: avoid;
+  }
+}
+@font-face {
+  font-family: "LufgaRegular";
+  src: url(../images/design/LufgaRegular.deb4a2.woff) format("woff"), url(../images/design/LufgaRegular.4f0d57.ttf) format("truetype");
+}
+@font-face {
+  font-family: "LufgaExtraBold";
+  src: url(../images/design/LufgaExtraBold.47f155.woff) format("woff"), url(../images/design/LufgaExtraBold.46261d.ttf) format("truetype");
+}
+@font-face {
+  font-family: "LufgaBold";
+  src: url(../images/design/LufgaBold.53ab75.woff) format("woff"), url(../images/design/LufgaBold.0b819e.ttf) format("truetype");
+}
+@font-face {
+  font-family: "LufgaMedium";
+  src: url(../images/design/LufgaMedium.73f738.woff) format("woff"), url(../images/design/LufgaMedium.8a6e8c.ttf) format("truetype");
+}
+@font-face {
+  font-family: "LufgaSemiBold";
+  src: url(../images/design/LufgaSemiBold.f825c5.woff) format("woff"), url(../images/design/LufgaSemiBold.3c7b91.ttf) format("truetype");
+}
+@font-feature-values "Plex Serif" {
+  @styleset {
+    alt-a: 1;
+    alt-g: 2;
+    alt-u: 3;
+    alt-w: 4;
+  }
+}
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "LufgaRegular", sans-serif;
+  position: relative;
+  height: 100vh;
+}
+
+p, a {
+  font-family: "LufgaRegular", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  -webkit-font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 0;
+          font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 0;
+}
+
+p, .p, .resume__username, .resume__account-creation, dt, dd {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  -webkit-font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 0;
+          font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 0;
+}
+p + p, .p + p, .resume__username + p, .resume__account-creation + p, dt + p, dd + p {
+  margin-top: 1rem;
+}
+
+.p-sm {
+  font-size: 1.2rem;
+}
+
+.p-xs {
+  font-size: 1rem;
+}
+
+.-light {
+  opacity: 0.6;
+}
+
+.sub-title {
+  text-transform: uppercase;
+  color: var(--color-page--text);
+  margin-bottom: 1.5rem;
+}
+
+h1, .h1 {
+  font-size: 2.4rem;
+  line-height: 1.36;
+}
+
+h2, .h2, .card-form__title {
+  font-size: 1.8rem;
+  line-height: 1.36;
+}
+
+h3, .h3 {
+  font-size: 1.8rem;
+  line-height: 1.36;
+}
+
+h4, .h4, .flexi_content .title {
+  font-size: 1.6rem;
+  line-height: 1.36;
+}
+
+h5, .h5 {
+  font-size: 1.4rem;
+  line-height: 1.36;
+}
+
+h1, .h1, h2, .h2, .card-form__title, h3, .h3, h4, .h4, .flexi_content .title, h5, .h5 {
+  font-family: "LufgaBold", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--color-black-800);
+}
+h1 + p, .h1 + p, h2 + p, .h2 + p, .card-form__title + p, h3 + p, .h3 + p, h4 + p, .h4 + p, .flexi_content .title + p, h5 + p, .h5 + p {
+  margin-top: 1.6rem;
+}
+
+h1 + h2, h2 + h3, h3 + h4, h4 + h5 {
+  margin-top: 1rem;
+}
+
+abbr {
+  text-decoration: none;
+}
+
+@media (min-width: 992px) {
+  p, .p, .resume__username, .resume__account-creation, dt, dd {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+  p + p, .p + p, .resume__username + p, .resume__account-creation + p, dt + p, dd + p {
+    margin-top: 1.6rem;
+  }
+  .p-sm {
+    font-size: 1.4rem;
+  }
+  .p-xs {
+    font-size: 1.2rem;
+  }
+  h2, .h2, .card-form__title {
+    font-size: 2rem;
+  }
+  h3, .h3 {
+    font-size: 1.9rem;
+    line-height: 1.36;
+  }
+}
+.grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-left: calc(var(--default-space) / 2 / -2);
+  margin-right: calc(var(--default-space) / 2 / -2);
+}
+
+.gap-9 {
+  row-gap: 0.9rem;
+}
+
+[class*=grid-col] {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 calc(100% - var(--default-space) / 2);
+          flex: 1 0 calc(100% - var(--default-space) / 2);
+  min-width: 0;
+  margin-left: calc(var(--default-space) / 2 / 2);
+  margin-right: calc(var(--default-space) / 2 / 2);
+}
+
+.grid-col-2 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-2-5 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-3 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-4 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-5 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-6 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-7 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(50% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-8 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.grid-col-12 {
+  width: calc(100% - var(--default-space) / 2);
+  max-width: calc(100% - var(--default-space) / 2);
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+@media (min-width: 480px) {
+  .grid-col-2 {
+    width: calc(50% - var(--default-space) / 2);
+    max-width: calc(50% - var(--default-space) / 2);
+  }
+  .grid-col-6-sm {
+    width: calc(50% - var(--default-space) / 2);
+    max-width: calc(50% - var(--default-space) / 2);
+  }
+}
+@media (min-width: 600px) {
+  .grid-col-2 {
+    width: calc(25% - var(--default-space) / 2);
+    max-width: calc(25% - var(--default-space) / 2);
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  }
+  .grid-col-2-5 {
+    width: calc(20% - var(--default-space) / 2);
+    max-width: calc(20% - var(--default-space) / 2);
+  }
+  .grid-col-3 {
+    width: calc(50% - var(--default-space) / 2);
+    max-width: calc(50% - var(--default-space) / 2);
+  }
+  .grid-col-4 {
+    width: calc(33.33% - var(--default-space) / 2);
+    max-width: calc(33.33% - var(--default-space) / 2);
+  }
+  .grid-col-5 {
+    width: calc(41.67% - var(--default-space) / 2);
+    max-width: calc(41.67% - var(--default-space) / 2);
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  }
+  .grid-col-6 {
+    width: calc(50% - var(--default-space) / 2);
+    max-width: calc(50% - var(--default-space) / 2);
+  }
+  .grid-col-7 {
+    width: calc(58.33% - var(--default-space) / 2);
+    max-width: calc(58.33% - var(--default-space) / 2);
+  }
+  .grid-col-8 {
+    width: calc(66.66% - var(--default-space) / 2);
+    max-width: calc(66.66% - var(--default-space) / 2);
+  }
+}
+@media (min-width: 992px) {
+  .grid-col-3 {
+    width: calc(25% - var(--default-space) / 2);
+    max-width: calc(25% - var(--default-space) / 2);
+  }
+}
+@media (min-width: 1480px) {
+  .grid-col-2 {
+    width: calc(16.66% - var(--default-space) / 2);
+    max-width: calc(16.66% - var(--default-space) / 2);
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  }
+}
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (min-width: 992px) {
+  .flex-md {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.flex-inline {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.flex--vertical {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.flex--reverse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.flex--vertical-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex--horizontal-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex--center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex--justify-between {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.flex--justify-around {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.flex--justify-end {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.flex--align-start {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.flex--align-baseline {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.flex--wrap {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.flex--spaced > *:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+.flex--spaced-wide > *:not(:last-child) {
+  margin-right: 1.6rem;
+}
+
+.flex__item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.flex__item--shrink {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 0%;
+          flex: 0 1 0%;
+}
+
+.flex__item--auto {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+.v-p {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.h-p, .card-popup .quicklinks--item {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.mg-h-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.maximize-w {
+  width: 100%;
+}
+
+.mg-t-1 {
+  margin-top: 1rem;
+}
+
+.mg-r-1 {
+  margin-right: 0.6rem;
+}
+
+.p-rel {
+  position: relative;
+}
+
+.t-left {
+  text-align: left !important;
+}
+
+.t-center {
+  text-align: center !important;
+}
+
+.u-sr-accessible, .dropdown-menu__item__link span {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.hide {
+  display: none;
+  opacity: 0;
+}
+
+.hide--mobile, .hide--mobile--flex {
+  display: none !important;
+}
+
+.hide--desktop {
+  display: block !important;
+}
+
+.hide--desktop--flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+@media (min-width: 1200px) {
+  .hide--mobile {
+    display: block !important;
+  }
+  .hide--mobile--flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+  .hide--desktop, .hide--desktop--flex {
+    display: none !important;
+  }
+}
+.g1 {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.bb-2 {
+  padding-bottom: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--color-black-50);
+}
+
+.bt-2, .main--congrats .congrats__actions-container {
+  padding-top: 1.4rem;
+  margin-top: 1rem;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: var(--color-black-50);
+}
+
+.mb-sm {
+  margin-bottom: 1.6rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+body {
+  background-color: var(--color-page--bg);
+  color: var(--color-page--text);
+}
+
+.container, .flexi_content--image-only {
+  margin: 0 auto;
+  max-width: 130rem;
+  width: calc(100% - 4.8rem);
+  width: calc(100% - 0.8rem);
+  min-height: calc(100vh - 60px - 60px);
+}
+.container--small {
+  margin: 0 auto;
+  max-width: 105rem;
+  width: calc(100% - 2.8rem);
+}
+@media (min-width: 480px) {
+  .container, .flexi_content--image-only {
+    width: calc(100% - 4rem);
+  }
+  .container--small {
+    width: calc(100% - 4rem);
+  }
+}
+@media (min-width: 600px) {
+  .container, .flexi_content--image-only {
+    width: calc(100% - 6rem);
+  }
+  .container--small {
+    width: calc(100% - 18rem);
+  }
+}
+@media (min-width: 992px) {
+  .container, .flexi_content--image-only {
+    width: calc(100% - 8rem);
+  }
+  .container--small {
+    width: calc(100% - 24rem);
+  }
+}
+@media (min-width: 1200px) {
+  .container, .flexi_content--image-only {
+    width: 112rem;
+  }
+  .container--small {
+    width: 80rem;
+  }
+}
+@media (min-width: 1480px) {
+  .container, .flexi_content--image-only {
+    width: 124rem;
+  }
+  .container--small {
+    width: 86rem;
+  }
+}
+.container--xlarge {
+  width: calc(100% - 0.8rem);
+  max-width: 144rem;
+  margin: 0 auto;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+}
+
+.buttons__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.container--full {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.container--home {
+  width: calc(100% - 1.2rem);
+  margin: 0 auto;
+}
+
+.container--default {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding-top: 1.6rem;
+  padding-bottom: 0.8rem;
+}
+
+.container--body {
+  width: calc(100% - 1.2rem);
+}
+
+.container--flex {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.container-vertical {
+  padding: 3rem 0;
+  margin: 0 auto;
+  max-width: 130rem;
+}
+
+@media (min-width: 992px) {
+  .container--home, .container--large {
+    padding-right: 4.2rem;
+    padding-left: 4.2rem;
+  }
+}
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-top: 6rem;
+}
+.main > .container, .main > .flexi_content--image-only {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content dd {
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
+.content ul li + li, .content dl {
+  margin-top: 1.6rem;
+}
+.content dd {
+  margin-top: 0.4rem;
+}
+.content ul.inline-list li {
+  display: inline-block;
+  margin-right: 0.6rem;
+}
+.content ul.inline-list li + li {
+  margin-top: 0;
+}
+.content a:not(.btn):not(button.gfgeo-locator-button):not(.acf-basic-uploader):not(input.button) {
+  color: var(--color-black);
+  font-family: "LufgaBold";
+}
+.content a:not(.btn):not(button.gfgeo-locator-button):not(.acf-basic-uploader):not(input.button):hover {
+  text-decoration: underline;
+}
+
+.user__actions {
+  background-color: var(--color-white);
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+  z-index: 800;
+}
+.user__actions__container {
+  width: calc(100% - 2.8rem);
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+@media (min-width: 480px) {
+  .user__actions__container {
+    width: calc(100% - 4rem);
+  }
+}
+.card {
+  border-radius: var(--border-radius);
+  background-color: var(--color-card--bg);
+  color: var(--color-card--text);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+}
+.card__img {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+.card__img figure {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.card__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-transition: border 0.15s ease;
+  transition: border 0.15s ease;
+  border: 0 solid transparent;
+}
+.card__body {
+  padding: 1.3rem 1.7rem 1.1rem 1.7rem;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.card__body h2, .card__body h3, .card__body h4, .card__body p {
+  color: var(--color-card--text);
+}
+.card__body .dates, .card__body .flex {
+  margin-bottom: calc(var(--default-space) / 2);
+}
+.card__body .right {
+  white-space: nowrap;
+}
+.card__body .icon {
+  margin-right: 4px;
+}
+
+a.card:hover {
+  cursor: pointer;
+}
+
+button.card__header:hover {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+  btn
+ ========================================================================== */
+/* Default size
+   ========================================================================== */
+.btn, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .acf-icon.-minus, button.gfgeo-locator-button, .acf-basic-uploader, .acf-repeater .-minus, .acf-image-uploader .-cancel, input.button, .card-form .login-submit input[type=submit] {
+  display: block;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: 2rem;
+  padding: 0.9rem 1.6rem;
+  font-size: 1.4rem;
+  font-family: "LufgaMedium";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: 500;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-style: solid;
+  border-width: 0.2rem;
+  border-color: var(--color-btn--bg);
+  min-height: 4rem;
+  height: 4rem;
+}
+.btn .o-svg-icon, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon .o-svg-icon, .af-field-type-open-street-map .tools .acf-icon.-minus .o-svg-icon, button.gfgeo-locator-button .o-svg-icon, .acf-basic-uploader .o-svg-icon, .acf-repeater .-minus .o-svg-icon, .acf-image-uploader .-cancel .o-svg-icon, input.button .o-svg-icon, .card-form .login-submit input[type=submit] .o-svg-icon {
+  height: inherit;
+  width: 2rem;
+}
+.btn .o-svg-icon svg, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon .o-svg-icon svg, .af-field-type-open-street-map .tools .acf-icon.-minus .o-svg-icon svg, button.gfgeo-locator-button .o-svg-icon svg, .acf-basic-uploader .o-svg-icon svg, .acf-repeater .-minus .o-svg-icon svg, .acf-image-uploader .-cancel .o-svg-icon svg, input.button .o-svg-icon svg, .card-form .login-submit input[type=submit] .o-svg-icon svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.btn .o-svg-icon svg path, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon .o-svg-icon svg path, .af-field-type-open-street-map .tools .acf-icon.-minus .o-svg-icon svg path, button.gfgeo-locator-button .o-svg-icon svg path, .acf-basic-uploader .o-svg-icon svg path, .acf-repeater .-minus .o-svg-icon svg path, .acf-image-uploader .-cancel .o-svg-icon svg path, input.button .o-svg-icon svg path, .card-form .login-submit input[type=submit] .o-svg-icon svg path {
+  stroke-width: 2;
+}
+
+button.btn, .acf-osm-above .leaflet-control-geocoder > button.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools button.acf-icon.-minus, button.gfgeo-locator-button, button.acf-basic-uploader, .acf-repeater button.-minus, .acf-image-uploader button.-cancel {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  margin: 0;
+}
+button.btn::-moz-focus-inner, .acf-osm-above .leaflet-control-geocoder > button.leaflet-control-geocoder-icon::-moz-focus-inner, .af-field-type-open-street-map .tools button.acf-icon.-minus::-moz-focus-inner, button.gfgeo-locator-button::-moz-focus-inner, button.acf-basic-uploader::-moz-focus-inner, .acf-repeater button.-minus::-moz-focus-inner, .acf-image-uploader button.-cancel::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input.btn, .acf-osm-above .leaflet-control-geocoder > input.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools input.acf-icon.-minus, input.acf-basic-uploader, .acf-repeater input.-minus, .acf-image-uploader input.-cancel, input.button, .card-form .login-submit input[type=submit] {
+  height: 4rem;
+}
+
+.btn .btn__content, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon .btn__content, .af-field-type-open-street-map .tools .acf-icon.-minus .btn__content, button.gfgeo-locator-button .btn__content, .acf-basic-uploader .btn__content, .acf-repeater .-minus .btn__content, .acf-image-uploader .-cancel .btn__content, input.button .btn__content, .card-form .login-submit input[type=submit] .btn__content {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  pointer-events: none;
+  height: 100%;
+}
+
+.btn__label {
+  line-height: 2rem;
+  white-space: nowrap;
+  height: inherit;
+}
+
+.o-svg-icon + .btn__label {
+  margin-left: 0.6rem;
+}
+
+.btn__label + .o-svg-icon {
+  margin-left: 0.6rem;
+}
+
+.btn:not(.btn--icon) .o-svg-icon:first-child, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) .o-svg-icon:first-child, .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon) .o-svg-icon:first-child, button.gfgeo-locator-button:not(.btn--icon) .o-svg-icon:first-child, .acf-basic-uploader:not(.btn--icon) .o-svg-icon:first-child, .acf-repeater .-minus:not(.btn--icon) .o-svg-icon:first-child, .acf-image-uploader .-cancel:not(.btn--icon) .o-svg-icon:first-child, input.button:not(.btn--icon) .o-svg-icon:first-child, .card-form .login-submit input[type=submit]:not(.btn--icon) .o-svg-icon:first-child {
+  margin-left: -0.1rem;
+}
+
+.btn:not(.btn--icon) .o-svg-icon:last-child, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) .o-svg-icon:last-child, .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon) .o-svg-icon:last-child, button.gfgeo-locator-button:not(.btn--icon) .o-svg-icon:last-child, .acf-basic-uploader:not(.btn--icon) .o-svg-icon:last-child, .acf-repeater .-minus:not(.btn--icon) .o-svg-icon:last-child, .acf-image-uploader .-cancel:not(.btn--icon) .o-svg-icon:last-child, input.button:not(.btn--icon) .o-svg-icon:last-child, .card-form .login-submit input[type=submit]:not(.btn--icon) .o-svg-icon:last-child {
+  margin-right: -0.1rem;
+}
+
+.btn:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, button.gfgeo-locator-button:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, .acf-basic-uploader:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, .acf-repeater .-minus:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, .acf-image-uploader .-cancel:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, input.button:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child, .card-form .login-submit input[type=submit]:not(.btn--icon) [class*=o-svg-icon-arrows-caret]:last-child {
+  margin-left: 0;
+  margin-right: -1.5rem;
+}
+
+/* Btn menu item
+   ========================================================================== */
+.menu-item.btn--ghost, .acf-osm-above .leaflet-control-geocoder > .menu-item.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .menu-item.acf-icon.-minus, button.menu-item.gfgeo-locator-button, .menu-item.acf-basic-uploader, .acf-repeater .menu-item.-minus, .acf-image-uploader .menu-item.-cancel {
+  border-radius: 1.6rem;
+}
+
+/* Icon-only Button
+    ========================================================================== */
+.btn--icon, .modal__header .btn, .modal__header .card-form .login-submit input[type=submit], .card-form .login-submit .modal__header input[type=submit], .modal__header input.button, .modal__header .acf-repeater .-minus, .acf-repeater .modal__header .-minus, .modal__header .acf-image-uploader .-cancel, .acf-image-uploader .modal__header .-cancel, .modal__header .acf-basic-uploader, .modal__header button.gfgeo-locator-button, .modal__header .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .modal__header .acf-icon.-minus, .modal__header .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .modal__header .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+  width: 40px;
+  display: block;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.7rem;
+}
+
+/* Button Group
+    ========================================================================== */
+.btn-group {
+  -webkit-column-gap: 0.4rem;
+     -moz-column-gap: 0.4rem;
+          column-gap: 0.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.btn-group--related {
+  -webkit-column-gap: 0;
+     -moz-column-gap: 0;
+          column-gap: 0;
+}
+.btn-group--related .btn, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .btn-group--related .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .btn-group--related .acf-icon.-minus, .btn-group--related button.gfgeo-locator-button, .btn-group--related .acf-basic-uploader, .btn-group--related .acf-repeater .-minus, .acf-repeater .btn-group--related .-minus, .btn-group--related .acf-image-uploader .-cancel, .acf-image-uploader .btn-group--related .-cancel, .btn-group--related input.button, .btn-group--related .card-form .login-submit input[type=submit], .card-form .login-submit .btn-group--related input[type=submit] {
+  border-radius: 0;
+  padding: 0.9rem 0.9rem;
+}
+.btn-group--related .btn:first-child, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:first-child, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .leaflet-control-geocoder-icon:first-child, .btn-group--related .af-field-type-open-street-map .tools .acf-icon.-minus:first-child, .af-field-type-open-street-map .tools .btn-group--related .acf-icon.-minus:first-child, .btn-group--related button.gfgeo-locator-button:first-child, .btn-group--related .acf-basic-uploader:first-child, .btn-group--related .acf-repeater .-minus:first-child, .acf-repeater .btn-group--related .-minus:first-child, .btn-group--related .acf-image-uploader .-cancel:first-child, .acf-image-uploader .btn-group--related .-cancel:first-child, .btn-group--related input.button:first-child, .btn-group--related .card-form .login-submit input[type=submit]:first-child, .card-form .login-submit .btn-group--related input[type=submit]:first-child {
+  padding-left: 1.3rem;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+.btn-group--related .btn:last-child, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:last-child, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .leaflet-control-geocoder-icon:last-child, .btn-group--related .af-field-type-open-street-map .tools .acf-icon.-minus:last-child, .af-field-type-open-street-map .tools .btn-group--related .acf-icon.-minus:last-child, .btn-group--related button.gfgeo-locator-button:last-child, .btn-group--related .acf-basic-uploader:last-child, .btn-group--related .acf-repeater .-minus:last-child, .acf-repeater .btn-group--related .-minus:last-child, .btn-group--related .acf-image-uploader .-cancel:last-child, .acf-image-uploader .btn-group--related .-cancel:last-child, .btn-group--related input.button:last-child, .btn-group--related .card-form .login-submit input[type=submit]:last-child, .card-form .login-submit .btn-group--related input[type=submit]:last-child {
+  padding-right: 1.3rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+.btn-group--related .btn.active + .btn:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .btn:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .btn:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .btn.active + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .btn.active + .leaflet-control-geocoder-icon:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .leaflet-control-geocoder-icon:hover, .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + .btn:hover, .btn-group--related .af-field-type-open-street-map .tools .acf-osm-above .leaflet-control-geocoder > .active.acf-icon.-minus + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .af-field-type-open-street-map .tools .leaflet-control-geocoder > .active.acf-icon.-minus + .leaflet-control-geocoder-icon:hover, .af-field-type-open-street-map .tools .btn-group--related .active.acf-icon.-minus + .btn:hover, .af-field-type-open-street-map .tools .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.acf-icon.-minus + .leaflet-control-geocoder-icon:hover, .acf-osm-above .af-field-type-open-street-map .tools .btn-group--related .leaflet-control-geocoder > .active.acf-icon.-minus + .leaflet-control-geocoder-icon:hover, .btn-group--related .af-field-type-open-street-map .tools .btn.active + .acf-icon.-minus:hover, .btn-group--related .af-field-type-open-street-map .tools .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .acf-icon.-minus:hover, .acf-osm-above .btn-group--related .af-field-type-open-street-map .tools .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related .btn.active + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .acf-icon.-minus:hover, .acf-osm-above .af-field-type-open-street-map .tools .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .acf-icon.-minus:hover, .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related .active.acf-icon.-minus + .acf-icon.-minus:hover, .btn-group--related button.active.gfgeo-locator-button + .btn:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > button.active.gfgeo-locator-button + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > button.active.gfgeo-locator-button + .leaflet-control-geocoder-icon:hover, .btn-group--related .af-field-type-open-street-map .tools button.active.gfgeo-locator-button + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related button.active.gfgeo-locator-button + .acf-icon.-minus:hover, .btn-group--related .btn.active + button.gfgeo-locator-button:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + button.gfgeo-locator-button:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + button.gfgeo-locator-button:hover, .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + button.gfgeo-locator-button:hover, .af-field-type-open-street-map .tools .btn-group--related .active.acf-icon.-minus + button.gfgeo-locator-button:hover, .btn-group--related button.active.gfgeo-locator-button + button.gfgeo-locator-button:hover, .btn-group--related .active.acf-basic-uploader + .btn:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.acf-basic-uploader + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .active.acf-basic-uploader + .leaflet-control-geocoder-icon:hover, .btn-group--related .af-field-type-open-street-map .tools .active.acf-basic-uploader + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related .active.acf-basic-uploader + .acf-icon.-minus:hover, .btn-group--related .active.acf-basic-uploader + button.gfgeo-locator-button:hover, .btn-group--related .btn.active + .acf-basic-uploader:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .acf-basic-uploader:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .acf-basic-uploader:hover, .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + .acf-basic-uploader:hover, .af-field-type-open-street-map .tools .btn-group--related .active.acf-icon.-minus + .acf-basic-uploader:hover, .btn-group--related button.active.gfgeo-locator-button + .acf-basic-uploader:hover, .btn-group--related .active.acf-basic-uploader + .acf-basic-uploader:hover, .btn-group--related .acf-repeater .active.-minus + .btn:hover, .btn-group--related .acf-repeater .acf-osm-above .leaflet-control-geocoder > .active.-minus + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .acf-repeater .leaflet-control-geocoder > .active.-minus + .leaflet-control-geocoder-icon:hover, .btn-group--related .acf-repeater .active.-minus + button.gfgeo-locator-button:hover, .btn-group--related .acf-repeater .active.-minus + .acf-basic-uploader:hover, .acf-repeater .btn-group--related .active.-minus + .btn:hover, .acf-repeater .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.-minus + .leaflet-control-geocoder-icon:hover, .acf-osm-above .acf-repeater .btn-group--related .leaflet-control-geocoder > .active.-minus + .leaflet-control-geocoder-icon:hover, .acf-repeater .btn-group--related .active.-minus + button.gfgeo-locator-button:hover, .acf-repeater .btn-group--related .active.-minus + .acf-basic-uploader:hover, .btn-group--related .acf-image-uploader .active.-cancel + .btn:hover, .btn-group--related .acf-image-uploader .acf-osm-above .leaflet-control-geocoder > .active.-cancel + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .acf-image-uploader .leaflet-control-geocoder > .active.-cancel + .leaflet-control-geocoder-icon:hover, .btn-group--related .acf-image-uploader .af-field-type-open-street-map .tools .active.-cancel + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related .acf-image-uploader .active.-cancel + .acf-icon.-minus:hover, .btn-group--related .acf-image-uploader .active.-cancel + button.gfgeo-locator-button:hover, .btn-group--related .acf-image-uploader .active.-cancel + .acf-basic-uploader:hover, .acf-image-uploader .btn-group--related .active.-cancel + .btn:hover, .acf-image-uploader .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.-cancel + .leaflet-control-geocoder-icon:hover, .acf-osm-above .acf-image-uploader .btn-group--related .leaflet-control-geocoder > .active.-cancel + .leaflet-control-geocoder-icon:hover, .acf-image-uploader .btn-group--related .af-field-type-open-street-map .tools .active.-cancel + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .acf-image-uploader .btn-group--related .active.-cancel + .acf-icon.-minus:hover, .acf-image-uploader .btn-group--related .active.-cancel + button.gfgeo-locator-button:hover, .acf-image-uploader .btn-group--related .active.-cancel + .acf-basic-uploader:hover, .btn-group--related .acf-repeater .btn.active + .-minus:hover, .btn-group--related .acf-repeater .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-minus:hover, .acf-osm-above .btn-group--related .acf-repeater .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-minus:hover, .btn-group--related .acf-repeater button.active.gfgeo-locator-button + .-minus:hover, .btn-group--related .acf-repeater .active.acf-basic-uploader + .-minus:hover, .acf-repeater .btn-group--related .btn.active + .-minus:hover, .acf-repeater .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-minus:hover, .acf-osm-above .acf-repeater .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-minus:hover, .acf-repeater .btn-group--related button.active.gfgeo-locator-button + .-minus:hover, .acf-repeater .btn-group--related .active.acf-basic-uploader + .-minus:hover, .btn-group--related .acf-repeater .active.-minus + .-minus:hover, .acf-repeater .btn-group--related .active.-minus + .-minus:hover, .btn-group--related .acf-image-uploader .acf-repeater .active.-cancel + .-minus:hover, .acf-repeater .btn-group--related .acf-image-uploader .active.-cancel + .-minus:hover, .acf-image-uploader .btn-group--related .acf-repeater .active.-cancel + .-minus:hover, .acf-repeater .acf-image-uploader .btn-group--related .active.-cancel + .-minus:hover, .btn-group--related .acf-image-uploader .btn.active + .-cancel:hover, .btn-group--related .acf-image-uploader .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-cancel:hover, .acf-osm-above .btn-group--related .acf-image-uploader .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-cancel:hover, .btn-group--related .acf-image-uploader .af-field-type-open-street-map .tools .active.acf-icon.-minus + .-cancel:hover, .af-field-type-open-street-map .tools .btn-group--related .acf-image-uploader .active.acf-icon.-minus + .-cancel:hover, .btn-group--related .acf-image-uploader button.active.gfgeo-locator-button + .-cancel:hover, .btn-group--related .acf-image-uploader .active.acf-basic-uploader + .-cancel:hover, .acf-image-uploader .btn-group--related .btn.active + .-cancel:hover, .acf-image-uploader .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-cancel:hover, .acf-osm-above .acf-image-uploader .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + .-cancel:hover, .acf-image-uploader .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + .-cancel:hover, .af-field-type-open-street-map .tools .acf-image-uploader .btn-group--related .active.acf-icon.-minus + .-cancel:hover, .acf-image-uploader .btn-group--related button.active.gfgeo-locator-button + .-cancel:hover, .acf-image-uploader .btn-group--related .active.acf-basic-uploader + .-cancel:hover, .btn-group--related .acf-repeater .acf-image-uploader .active.-minus + .-cancel:hover, .acf-image-uploader .btn-group--related .acf-repeater .active.-minus + .-cancel:hover, .acf-repeater .btn-group--related .acf-image-uploader .active.-minus + .-cancel:hover, .acf-image-uploader .acf-repeater .btn-group--related .active.-minus + .-cancel:hover, .btn-group--related .acf-image-uploader .active.-cancel + .-cancel:hover, .acf-image-uploader .btn-group--related .active.-cancel + .-cancel:hover, .btn-group--related input.active.button + .btn:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > input.active.button + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > input.active.button + .leaflet-control-geocoder-icon:hover, .btn-group--related .af-field-type-open-street-map .tools input.active.button + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related input.active.button + .acf-icon.-minus:hover, .btn-group--related input.active.button + button.gfgeo-locator-button:hover, .btn-group--related input.active.button + .acf-basic-uploader:hover, .btn-group--related .acf-repeater input.active.button + .-minus:hover, .acf-repeater .btn-group--related input.active.button + .-minus:hover, .btn-group--related .acf-image-uploader input.active.button + .-cancel:hover, .acf-image-uploader .btn-group--related input.active.button + .-cancel:hover, .btn-group--related .btn.active + input.button:hover, .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + input.button:hover, .acf-osm-above .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + input.button:hover, .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + input.button:hover, .af-field-type-open-street-map .tools .btn-group--related .active.acf-icon.-minus + input.button:hover, .btn-group--related button.active.gfgeo-locator-button + input.button:hover, .btn-group--related .active.acf-basic-uploader + input.button:hover, .btn-group--related .acf-repeater .active.-minus + input.button:hover, .acf-repeater .btn-group--related .active.-minus + input.button:hover, .btn-group--related .acf-image-uploader .active.-cancel + input.button:hover, .acf-image-uploader .btn-group--related .active.-cancel + input.button:hover, .btn-group--related input.active.button + input.button:hover, .btn-group--related .card-form .login-submit input.active[type=submit] + .btn:hover, .btn-group--related .card-form .login-submit .acf-osm-above .leaflet-control-geocoder > input.active[type=submit] + .leaflet-control-geocoder-icon:hover, .acf-osm-above .btn-group--related .card-form .login-submit .leaflet-control-geocoder > input.active[type=submit] + .leaflet-control-geocoder-icon:hover, .btn-group--related .card-form .login-submit .af-field-type-open-street-map .tools input.active[type=submit] + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .btn-group--related .card-form .login-submit input.active[type=submit] + .acf-icon.-minus:hover, .btn-group--related .card-form .login-submit input.active[type=submit] + button.gfgeo-locator-button:hover, .btn-group--related .card-form .login-submit input.active[type=submit] + .acf-basic-uploader:hover, .btn-group--related .card-form .login-submit .acf-repeater input.active[type=submit] + .-minus:hover, .acf-repeater .btn-group--related .card-form .login-submit input.active[type=submit] + .-minus:hover, .btn-group--related .card-form .login-submit .acf-image-uploader input.active[type=submit] + .-cancel:hover, .acf-image-uploader .btn-group--related .card-form .login-submit input.active[type=submit] + .-cancel:hover, .btn-group--related .card-form .login-submit input.active[type=submit] + input.button:hover, .card-form .login-submit .btn-group--related input.active[type=submit] + .btn:hover, .card-form .login-submit .btn-group--related .acf-osm-above .leaflet-control-geocoder > input.active[type=submit] + .leaflet-control-geocoder-icon:hover, .acf-osm-above .card-form .login-submit .btn-group--related .leaflet-control-geocoder > input.active[type=submit] + .leaflet-control-geocoder-icon:hover, .card-form .login-submit .btn-group--related .af-field-type-open-street-map .tools input.active[type=submit] + .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .card-form .login-submit .btn-group--related input.active[type=submit] + .acf-icon.-minus:hover, .card-form .login-submit .btn-group--related input.active[type=submit] + button.gfgeo-locator-button:hover, .card-form .login-submit .btn-group--related input.active[type=submit] + .acf-basic-uploader:hover, .card-form .login-submit .btn-group--related .acf-repeater input.active[type=submit] + .-minus:hover, .acf-repeater .card-form .login-submit .btn-group--related input.active[type=submit] + .-minus:hover, .card-form .login-submit .btn-group--related .acf-image-uploader input.active[type=submit] + .-cancel:hover, .acf-image-uploader .card-form .login-submit .btn-group--related input.active[type=submit] + .-cancel:hover, .card-form .login-submit .btn-group--related input.active[type=submit] + input.button:hover, .btn-group--related .card-form .login-submit .btn.active + input[type=submit]:hover, .btn-group--related .card-form .login-submit .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + input[type=submit]:hover, .acf-osm-above .btn-group--related .card-form .login-submit .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + input[type=submit]:hover, .btn-group--related .card-form .login-submit .af-field-type-open-street-map .tools .active.acf-icon.-minus + input[type=submit]:hover, .af-field-type-open-street-map .tools .btn-group--related .card-form .login-submit .active.acf-icon.-minus + input[type=submit]:hover, .btn-group--related .card-form .login-submit button.active.gfgeo-locator-button + input[type=submit]:hover, .btn-group--related .card-form .login-submit .active.acf-basic-uploader + input[type=submit]:hover, .btn-group--related .card-form .login-submit .acf-repeater .active.-minus + input[type=submit]:hover, .acf-repeater .btn-group--related .card-form .login-submit .active.-minus + input[type=submit]:hover, .btn-group--related .card-form .login-submit .acf-image-uploader .active.-cancel + input[type=submit]:hover, .acf-image-uploader .btn-group--related .card-form .login-submit .active.-cancel + input[type=submit]:hover, .btn-group--related .card-form .login-submit input.active.button + input[type=submit]:hover, .card-form .login-submit .btn-group--related .btn.active + input[type=submit]:hover, .card-form .login-submit .btn-group--related .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + input[type=submit]:hover, .acf-osm-above .card-form .login-submit .btn-group--related .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon + input[type=submit]:hover, .card-form .login-submit .btn-group--related .af-field-type-open-street-map .tools .active.acf-icon.-minus + input[type=submit]:hover, .af-field-type-open-street-map .tools .card-form .login-submit .btn-group--related .active.acf-icon.-minus + input[type=submit]:hover, .card-form .login-submit .btn-group--related button.active.gfgeo-locator-button + input[type=submit]:hover, .card-form .login-submit .btn-group--related .active.acf-basic-uploader + input[type=submit]:hover, .card-form .login-submit .btn-group--related .acf-repeater .active.-minus + input[type=submit]:hover, .acf-repeater .card-form .login-submit .btn-group--related .active.-minus + input[type=submit]:hover, .card-form .login-submit .btn-group--related .acf-image-uploader .active.-cancel + input[type=submit]:hover, .acf-image-uploader .card-form .login-submit .btn-group--related .active.-cancel + input[type=submit]:hover, .card-form .login-submit .btn-group--related input.active.button + input[type=submit]:hover, .btn-group--related .card-form .login-submit input.active[type=submit] + input[type=submit]:hover, .card-form .login-submit .btn-group--related input.active[type=submit] + input[type=submit]:hover {
+  border-left-color: transparent;
+}
+.btn-group--related .btn:has(+ .active), .btn-group--related .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:has(+ .active), .acf-osm-above .btn-group--related .leaflet-control-geocoder > .leaflet-control-geocoder-icon:has(+ .active), .btn-group--related .af-field-type-open-street-map .tools .acf-icon.-minus:has(+ .active), .af-field-type-open-street-map .tools .btn-group--related .acf-icon.-minus:has(+ .active), .btn-group--related button.gfgeo-locator-button:has(+ .active), .btn-group--related .acf-basic-uploader:has(+ .active), .btn-group--related .acf-repeater .-minus:has(+ .active), .acf-repeater .btn-group--related .-minus:has(+ .active), .btn-group--related .acf-image-uploader .-cancel:has(+ .active), .acf-image-uploader .btn-group--related .-cancel:has(+ .active), .btn-group--related input.button:has(+ .active), .btn-group--related .card-form .login-submit input[type=submit]:has(+ .active), .card-form .login-submit .btn-group--related input[type=submit]:has(+ .active) {
+  border-right-color: transparent;
+}
+
+.btn--small {
+  padding: 0.3rem 1rem;
+  font-size: 1.2rem;
+  height: 3rem;
+  min-height: 3rem;
+}
+.btn--small .o-svg-icon {
+  height: inherit;
+  width: 1.6rem;
+  margin-top: -0.1rem;
+}
+
+.btn--xsmall {
+  width: 3rem;
+  height: 3rem;
+  min-height: 3rem;
+  padding: 0.3rem 0.3rem;
+}
+.btn--xsmall .o-svg-icon {
+  width: 1.4rem;
+}
+
+.btn--inline {
+  display: inline-block;
+  margin-top: -0.3rem;
+}
+
+.relation_btn--like.relation_btn--checked svg {
+  fill: var(--color-red);
+}
+.relation_btn--like.relation_btn--checked svg path {
+  stroke: var(--color-red);
+}
+
+.relation_btn--favorite.relation_btn--checked svg path:first-child {
+  fill: var(--color-yellow);
+  stroke: var(--color-yellow);
+}
+.relation_btn--favorite.relation_btn--checked svg path:last-child {
+  fill: var(--color-btn--bg-white);
+  stroke: var(--color-btn--bg-white);
+}
+
+.btn.show-favorites-checked, .acf-osm-above .leaflet-control-geocoder > .show-favorites-checked.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .show-favorites-checked.acf-icon.-minus, button.show-favorites-checked.gfgeo-locator-button, .show-favorites-checked.acf-basic-uploader, .acf-repeater .show-favorites-checked.-minus, .acf-image-uploader .show-favorites-checked.-cancel, input.show-favorites-checked.button, .card-form .login-submit input.show-favorites-checked[type=submit] {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  color: var(--color-btn--bg-white);
+}
+.btn.show-favorites-checked svg path:first-child, .acf-osm-above .leaflet-control-geocoder > .show-favorites-checked.leaflet-control-geocoder-icon svg path:first-child, .af-field-type-open-street-map .tools .show-favorites-checked.acf-icon.-minus svg path:first-child, button.show-favorites-checked.gfgeo-locator-button svg path:first-child, .show-favorites-checked.acf-basic-uploader svg path:first-child, .acf-repeater .show-favorites-checked.-minus svg path:first-child, .acf-image-uploader .show-favorites-checked.-cancel svg path:first-child, input.show-favorites-checked.button svg path:first-child, .card-form .login-submit input.show-favorites-checked[type=submit] svg path:first-child {
+  fill: var(--color-btn--bg-white);
+  stroke: var(--color-btn--bg-white);
+}
+.btn.show-favorites-checked svg path:last-child, .acf-osm-above .leaflet-control-geocoder > .show-favorites-checked.leaflet-control-geocoder-icon svg path:last-child, .af-field-type-open-street-map .tools .show-favorites-checked.acf-icon.-minus svg path:last-child, button.show-favorites-checked.gfgeo-locator-button svg path:last-child, .show-favorites-checked.acf-basic-uploader svg path:last-child, .acf-repeater .show-favorites-checked.-minus svg path:last-child, .acf-image-uploader .show-favorites-checked.-cancel svg path:last-child, input.show-favorites-checked.button svg path:last-child, .card-form .login-submit input.show-favorites-checked[type=submit] svg path:last-child {
+  fill: var(--color-yellow);
+  stroke: var(--color-yellow);
+}
+.btn.show-favorites-checked:hover, .acf-osm-above .leaflet-control-geocoder > .show-favorites-checked.leaflet-control-geocoder-icon:hover, .af-field-type-open-street-map .tools .show-favorites-checked.acf-icon.-minus:hover, button.show-favorites-checked.gfgeo-locator-button:hover, .show-favorites-checked.acf-basic-uploader:hover, .acf-repeater .show-favorites-checked.-minus:hover, .acf-image-uploader .show-favorites-checked.-cancel:hover, input.show-favorites-checked.button:hover, .card-form .login-submit input.show-favorites-checked[type=submit]:hover {
+  border-color: var(--color-dark-yellow);
+}
+
+.relation_btn--recommend.relation_btn--checked {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  color: var(--color-btn--bg-white);
+}
+.relation_btn--recommend.relation_btn--checked svg path {
+  stroke: var(--color-dark-yellow);
+}
+
+.relation_btn--contact-list.relation_btn--checked, .relation_btn--contact-list.relation_btn--contact-requested {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--checked svg, .relation_btn--contact-list.relation_btn--contact-requested svg {
+  fill: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--checked svg path, .relation_btn--contact-list.relation_btn--contact-requested svg path {
+  stroke: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--checked:hover, .relation_btn--contact-list.relation_btn--contact-requested:hover {
+  border-color: var(--color-lightblue);
+}
+
+.relation_btn--contact-list.relation_btn--contact-him-requested {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--contact-him-requested svg {
+  fill: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--contact-him-requested svg path {
+  stroke: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--contact-him-requested:hover {
+  border-color: var(--color-lightgreen);
+}
+
+.relation_btn--contact-list.relation_btn--contact-relation-done {
+  background-color: var(--color-darkgreen);
+  border-color: var(--color-darkgreen);
+  color: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--contact-relation-done svg {
+  fill: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--contact-relation-done svg path {
+  stroke: var(--color-btn--bg-white);
+}
+.relation_btn--contact-list.relation_btn--contact-relation-done:hover {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.btn.notification, .acf-osm-above .leaflet-control-geocoder > .notification.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .notification.acf-icon.-minus, button.notification.gfgeo-locator-button, .notification.acf-basic-uploader, .acf-repeater .notification.-minus, .acf-image-uploader .notification.-cancel, input.notification.button, .card-form .login-submit input.notification[type=submit] {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-btn--bg-white);
+}
+
+@media (min-width: 992px) {
+  .btn, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .acf-icon.-minus, button.gfgeo-locator-button, .acf-basic-uploader, .acf-repeater .-minus, .acf-image-uploader .-cancel, input.button, .card-form .login-submit input[type=submit] {
+    font-size: 1.6rem;
+  }
+  .btn--small {
+    font-size: 1.4rem;
+  }
+}
+.edit_post_btn {
+  position: relative;
+  margin-left: -3.5rem;
+}
+
+/* ==========================================================================
+  Component: Button Skins
+  ---
+  Rules of this file: you CAN'T touch the box model here, just colors.
+   ========================================================================== */
+/* Primary
+   ========================================================================== */
+.btn--primary, input.button, .card-form .login-submit input[type=submit] {
+  background: var(--color-btn--bg);
+  border-color: var(--color-btn--bg);
+  color: var(--color-btn--text);
+}
+.btn--primary svg *, input.button svg *, .card-form .login-submit input[type=submit] svg * {
+  stroke: var(--color-btn--text);
+}
+.btn--primary:hover, input.button:hover, .card-form .login-submit input[type=submit]:hover, .btn--primary.btn--hover, input.btn--hover.button, .card-form .login-submit input.btn--hover[type=submit] {
+  border-color: var(--color-black-700);
+}
+.btn--primary:focus, input.button:focus, .card-form .login-submit input[type=submit]:focus {
+  outline: var(--color-btn--bg-focus) auto 1px;
+}
+.btn--primary:focus:not(:focus-visible), input.button:focus:not(:focus-visible), .card-form .login-submit input[type=submit]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Highlight
+   ========================================================================== */
+.btn--highlight {
+  background: var(--color-green-water);
+  border-color: var(--color-green-water);
+  color: var(--color-btn--text);
+}
+.btn--highlight svg * {
+  stroke: var(--color-btn--text);
+}
+.btn--highlight:hover, .btn--highlight.btn--hover {
+  border-color: var(--color-green-water-dark);
+}
+.btn--highlight:focus {
+  outline: var(--color-btn--bg-focus) auto 1px;
+}
+.btn--highlight:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Transparent
+========================================================================== */
+.btn--transparent {
+  background: var(--color-btn--bg-transparent);
+  border-color: var(--color-btn--bg);
+  color: var(--color-btn--text-black);
+  border-color: transparent;
+}
+.btn--transparent svg * {
+  stroke: var(--color-btn--text-black);
+}
+.btn--transparent:hover, .btn--transparent.btn--hover {
+  border-color: var(--color-black-300);
+}
+.btn--transparent:focus {
+  outline: var(--color-btn--bg-focus) auto 1px;
+}
+.btn--transparent:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Transparent inline
+ ========================================================================== */
+.btn--transparent--inline {
+  padding: 0;
+  color: var(--color-black);
+  font-family: "LufgaBold";
+  border: none;
+  height: auto;
+  min-height: auto;
+}
+.btn--transparent--inline:hover, .btn--transparent--inline.btn--hover {
+  border: none;
+  text-decoration: underline;
+}
+
+/*
+Ghost
+========================================================================== */
+.btn--ghost, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .acf-icon.-minus, button.gfgeo-locator-button, .acf-basic-uploader, .acf-repeater .-minus, .acf-image-uploader .-cancel {
+  background-color: var(--color-black-300);
+  color: var(--color-btn--text-black);
+  border-color: var(--color-black-300);
+}
+.btn--ghost svg *, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon svg *, .af-field-type-open-street-map .tools .acf-icon.-minus svg *, button.gfgeo-locator-button svg *, .acf-basic-uploader svg *, .acf-repeater .-minus svg *, .acf-image-uploader .-cancel svg * {
+  fill: transparent;
+}
+.btn--ghost:hover, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:hover, .af-field-type-open-street-map .tools .acf-icon.-minus:hover, button.gfgeo-locator-button:hover, .acf-basic-uploader:hover, .acf-repeater .-minus:hover, .acf-image-uploader .-cancel:hover, .btn--ghost.btn--hover, .acf-osm-above .leaflet-control-geocoder > .btn--hover.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .btn--hover.acf-icon.-minus, button.btn--hover.gfgeo-locator-button, .btn--hover.acf-basic-uploader, .acf-repeater .btn--hover.-minus, .acf-image-uploader .btn--hover.-cancel {
+  border-color: var(--color-black-400);
+}
+/*
+Active
+========================================================================== */
+.btn.active, .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .active.acf-icon.-minus, button.active.gfgeo-locator-button, .active.acf-basic-uploader, .acf-repeater .active.-minus, .acf-image-uploader .active.-cancel, input.active.button, .card-form .login-submit input.active[type=submit] {
+  background-color: var(--color-green-water);
+  border-color: var(--color-green-water);
+  color: var(--color-white);
+}
+.btn.active svg *, .acf-osm-above .leaflet-control-geocoder > .active.leaflet-control-geocoder-icon svg *, .af-field-type-open-street-map .tools .active.acf-icon.-minus svg *, button.active.gfgeo-locator-button svg *, .active.acf-basic-uploader svg *, .acf-repeater .active.-minus svg *, .acf-image-uploader .active.-cancel svg *, input.active.button svg *, .card-form .login-submit input.active[type=submit] svg * {
+  stroke: var(--color-white);
+}
+
+.tab-button.active {
+  background-color: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-black);
+}
+.tab-button.active svg * {
+  stroke: var(--color-black);
+}
+
+/* Shared disabled state for primary and secondary buttons
+   ========================================================================== */
+*[disabled] .btn--primary, *[disabled] input.button, *[disabled] .card-form .login-submit input[type=submit], .card-form .login-submit *[disabled] input[type=submit],
+.btn--primary[disabled],
+input[disabled].button,
+.card-form .login-submit input[disabled][type=submit],
+.btn--primary:disabled,
+input.button:disabled,
+.card-form .login-submit input[type=submit]:disabled,
+.btn--disabled {
+  background: var(--color-btn--bg-disabled);
+  border-color: var(--color-btn--bg-disabled);
+  color: var(--color-btn--text);
+  pointer-events: none;
+}
+*[disabled] .btn--primary svg *, *[disabled] input.button svg *, *[disabled] .card-form .login-submit input[type=submit] svg *, .card-form .login-submit *[disabled] input[type=submit] svg *,
+.btn--primary[disabled] svg *,
+input[disabled].button svg *,
+.card-form .login-submit input[disabled][type=submit] svg *,
+.btn--primary:disabled svg *,
+input.button:disabled svg *,
+.card-form .login-submit input[type=submit]:disabled svg *,
+.btn--disabled svg * {
+  fill: var(--color-btn--text);
+}
+
+.square, .af-field-type-open-street-map .tools .acf-icon.-minus {
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+@media (min-width: 600px) {
+  .menu-item {
+    background-color: var(--color-black);
+    border-radius: 16px;
+    height: 40px;
+    min-width: 40px;
+  }
+  .menu-item path {
+    stroke: var(--color-white);
+  }
+  .square, .af-field-type-open-street-map .tools .acf-icon.-minus {
+    height: 40px;
+    min-width: 40px;
+  }
+  .menu-item:is(.btn--ghost, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .acf-icon.-minus, button.gfgeo-locator-button, .acf-basic-uploader, .acf-repeater .-minus, .acf-image-uploader .-cancel) {
+    background-color: var(--color-black-200);
+  }
+  .menu-item:is(.btn--ghost, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .af-field-type-open-street-map .tools .acf-icon.-minus, button.gfgeo-locator-button, .acf-basic-uploader, .acf-repeater .-minus, .acf-image-uploader .-cancel) path {
+    stroke: var(--color-black);
+  }
+  .menu-item > span.btn__content {
+    bottom: 0;
+  }
+  .menu-item span.btn__label {
+    display: initial;
+    color: var(--color-white);
+    line-height: unset;
+  }
+}
+/*
+   Button themes
+*/
+.btn--white {
+  background-color: var(--color-btn--bg-white);
+  color: var(--color-btn--text-black);
+  border-color: transparent;
+}
+
+.card {
+  background-color: var(--color-card--bg);
+  border-radius: var(--border-radius);
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+  border: none;
+  padding: 0;
+  font-family: "LufgaRegular";
+}
+.card .card__img__grid a, .card .glide__slides a, .card .post-image a {
+  position: relative;
+}
+.card .card__img__grid a::before, .card .glide__slides a::before, .card .post-image a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
+  -webkit-transition: all 0.15s ease;
+  transition: all 0.15s ease;
+  border: 3px solid rgba(0, 0, 0, 0);
+}
+.card .card__img__grid a:hover, .card .glide__slides a:hover, .card .post-image a:hover {
+  cursor: pointer;
+}
+.card .card__img__grid a:hover:before, .card .glide__slides a:hover:before, .card .post-image a:hover:before {
+  opacity: 1;
+  border: 3px solid var(--color-black);
+  cursor: pointer;
+}
+.card a {
+  color: var(--color-black);
+  font-family: "LufgaBold";
+}
+.card a:hover {
+  text-decoration: underline;
+}
+.card.mouseover .card__title {
+  text-decoration: underline;
+}
+.card.mouseover--link .card__title {
+  text-decoration: none;
+}
+.card button .card__title {
+  color: var(--color-black);
+}
+.card.highlight {
+  -webkit-box-shadow: var(--box-shadow-card--big);
+          box-shadow: var(--box-shadow-card--big);
+}
+.card + .card {
+  margin-top: 0.5rem;
+}
+.card__wrapper__title {
+  display: inline;
+  margin-left: 1.8rem;
+}
+.card__title {
+  color: var(--color-black);
+  font-family: "LufgaExtraBold", sans-serif;
+  font-size: 1.6rem;
+  margin-right: 0.4rem;
+  display: inline;
+}
+.card__title__owner {
+  color: var(--color-black);
+  font-family: "LufgaExtraBold", sans-serif;
+  font-size: 1.6rem;
+  margin-right: 1.8rem;
+}
+.card .avatar__list + .card__title {
+  margin-left: 1.8rem;
+}
+.card__header {
+  width: 100%;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+.card__header__item {
+  padding: 1.3rem 1.7rem 1.1rem 1.7rem;
+  width: 100%;
+  text-align: left;
+}
+.card__header__item + .card__header__item {
+  position: relative;
+  font-size: 1.5rem;
+  padding-top: 1.1rem;
+  padding-bottom: 1rem;
+}
+.card__header__item + .card__header__item:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 1.7rem;
+  height: 1px;
+  width: calc(100% - 3.4rem);
+  background-color: var(--color-black-50);
+}
+.card__header__item--tags {
+  padding-top: 0;
+  position: relative;
+}
+.card__header .by {
+  color: var(--color-black);
+  opacity: 0.75;
+  position: relative;
+}
+.card__img {
+  position: relative;
+}
+.card__img__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 160px 160px;
+  grid-auto-flow: column;
+  width: 100%;
+  row-gap: 2px;
+}
+.card__img__grid__item img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+.card__img__grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 340px;
+}
+.card__img__grid--2 .card__img__grid__item {
+  grid-column: 1/2;
+}
+.card__img__grid--2 .card__img__grid__item--1 {
+  grid-column: 2/3;
+  border-left: 2px solid white;
+}
+.card__img__grid--3 .card__img__grid__item {
+  grid-column: 1/2;
+}
+.card__img__grid--3 .card__img__grid__item--1 {
+  grid-row: 2/3;
+}
+.card__img__grid--3 .card__img__grid__item--2 {
+  grid-column: 2;
+  grid-row: 1/3;
+  border-left: 2px solid white;
+}
+.card__img__grid:hover {
+  cursor: pointer;
+}
+.card__img img {
+  height: 322px;
+}
+.card button > .card__header__item--tags:first-child {
+  padding-top: 0.8rem;
+}
+.card__body {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  text-align: left;
+}
+.card__body__relations {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.card__body__relations p {
+  color: var(--color-card--text);
+  font-size: 1.2rem;
+  text-align: right;
+}
+.card__footer {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.card.active {
+  -webkit-box-shadow: var(--box-shadow-card--big);
+          box-shadow: var(--box-shadow-card--big);
+}
+.card .event__frame {
+  padding: 0.2rem;
+}
+.card .event__frame__link {
+  font-size: 1.4rem;
+}
+.card .event__frame__description {
+  font-size: 1.4rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+}
+
+.floating-bar {
+  position: absolute;
+  top: 0.8rem;
+  right: 1.2rem;
+  z-index: 101;
+}
+.floating-bar a {
+  color: black;
+}
+.floating-bar .edit_post_btn {
+  margin-right: -1rem;
+}
+.floating-bar .gallery__size {
+  height: 3rem;
+  min-height: 3rem;
+  border-radius: var(--border-radius--small);
+  padding: 0 0.8rem;
+  background-color: white;
+  color: black;
+  text-align: center;
+  margin-left: 0.8rem;
+}
+.floating-bar .gallery__size b {
+  font-family: "LufgaBold";
+}
+.floating-bar .gallery__size + .btn, .floating-bar .acf-osm-above .leaflet-control-geocoder > .gallery__size + .leaflet-control-geocoder-icon, .acf-osm-above .floating-bar .leaflet-control-geocoder > .gallery__size + .leaflet-control-geocoder-icon, .floating-bar .af-field-type-open-street-map .tools .gallery__size + .acf-icon.-minus, .af-field-type-open-street-map .tools .floating-bar .gallery__size + .acf-icon.-minus, .floating-bar .gallery__size + button.gfgeo-locator-button, .floating-bar .gallery__size + .acf-basic-uploader, .floating-bar .acf-repeater .gallery__size + .-minus, .acf-repeater .floating-bar .gallery__size + .-minus, .floating-bar .acf-image-uploader .gallery__size + .-cancel, .acf-image-uploader .floating-bar .gallery__size + .-cancel, .floating-bar .gallery__size + input.button, .floating-bar .card-form .login-submit .gallery__size + input[type=submit], .card-form .login-submit .floating-bar .gallery__size + input[type=submit] {
+  margin-left: 0.8rem;
+}
+.floating-bar .gallery__size .o-svg-icon {
+  margin-left: 0.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.floating-bar .gallery__size .o-svg-icon svg {
+  margin-top: -0.1rem;
+  width: 1.8rem;
+}
+
+.owner {
+  row-gap: 0.8rem;
+  -webkit-column-gap: 0.8rem;
+     -moz-column-gap: 0.8rem;
+          column-gap: 0.8rem;
+}
+.owner_by {
+  -webkit-column-gap: 0.5rem;
+     -moz-column-gap: 0.5rem;
+          column-gap: 0.5rem;
+}
+.owner__name__link {
+  font-family: "LufgaBold";
+  -webkit-column-gap: 0.6rem;
+     -moz-column-gap: 0.6rem;
+          column-gap: 0.6rem;
+  font-size: 1.4rem;
+}
+.owner__name__link:hover {
+  text-decoration: underline;
+}
+.owner--header {
+  padding: 0.7rem;
+}
+.owner__avatar {
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 1.8rem;
+  border-radius: 100%;
+}
+.owner__avatar--header {
+  width: 30px;
+  border-style: solid;
+  border-width: 0.2rem;
+  border-color: var(--color-black);
+}
+.owner__avatar--header--blank {
+  background-image: var(--homazed-linear-gradient);
+}
+.owner__avatar--header--blank .first-letters {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--color-page--text-reverse);
+}
+.owner__avatar--header.active {
+  border-color: var(--color-green-water);
+}
+
+a.post-header:hover .owner {
+  text-decoration: underline;
+}
+
+.post-type {
+  -webkit-column-gap: 0.3rem;
+     -moz-column-gap: 0.3rem;
+          column-gap: 0.3rem;
+  border-radius: 0.2rem;
+  height: 1.2rem;
+  padding: 0.1rem 0.3rem;
+  margin-top: 0.8rem;
+  background-color: var(--color-black-50);
+}
+.post-type__name {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: var(--color-black);
+  font-family: "LufgaSemiBold", sans-serif;
+}
+.post-type svg {
+  height: 1.8rem;
+  width: auto;
+}
+.post-location {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.post-location__icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+.post-details {
+  color: var(--color-black);
+}
+.post-details__caracteristics {
+  -webkit-column-gap: 1rem;
+     -moz-column-gap: 1rem;
+          column-gap: 1rem;
+}
+.post-details__suffix {
+  color: var(--color-black-700);
+}
+.post-image__gallery img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.post-image__picture, .post-image__picture--compact {
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 16/10;
+}
+.post-footer__left, .post-footer__right {
+  min-width: 30%;
+}
+.post-footer__button {
+  padding: 7px 8px;
+}
+.post-footer__button > span {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+.post-footer__publish-date {
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .card + .card {
+    margin-top: 1rem;
+  }
+  .card__footer {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+  .owner__link--header {
+    padding: 0;
+  }
+  .owner__avatar {
+    width: 2.8rem;
+  }
+  .owner__avatar--header {
+    width: 4rem;
+    border-radius: 1.6rem;
+  }
+  .post-type {
+    height: 2.2rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+  }
+  .post-type__name {
+    font-size: 1.4rem;
+  }
+  .post-location__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .post-footer__button > span {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+.card-popup {
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+  background-color: white;
+  position: fixed;
+  left: 32%;
+  bottom: 25%;
+  width: 36%;
+  z-index: 10001;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.card-popup .quicklinks--item {
+  max-width: 63.2rem;
+  margin: 0 auto;
+}
+.card-popup .quicklinks--item:first-child {
+  padding-right: 1rem;
+}
+.card-popup--hidden {
+  display: none;
+  opacity: 0;
+}
+
+@media (min-width: 1680px) {
+  .card__header__item {
+    padding: 1.8rem 2rem 1.6rem 2rem;
+  }
+  .card__header__item--tags {
+    padding-top: 1.4rem;
+    padding-bottom: 1.2rem;
+  }
+}
+.card-form {
+  background-color: var(--color-white);
+  padding: 1.8rem;
+  border-radius: var(--border-radius);
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+}
+.card-form + .card-form {
+  margin-top: 1.6rem;
+}
+.card-form .frm_section_spacing {
+  margin-bottom: 2.4rem;
+}
+.card-form .mandatory {
+  font-size: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+.card-form .edit-account {
+  margin-bottom: 2.4rem;
+}
+.card-form .login-submit {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.default-bckg {
+  background-color: var(--color-white);
+  padding: 1.8rem;
+  border-radius: var(--border-radius);
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+}
+.default-bckg.np {
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  .card-form .account-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .card-form .edit-account {
+    margin-bottom: 0;
+  }
+}
+.c-status-pill {
+  border-radius: 2rem;
+  padding: 0.6rem 0.9rem 0.6rem 0.9rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.6rem;
+  border: 1px solid transparent;
+  margin-left: -2px;
+  position: relative;
+}
+.c-status-pill + h3 {
+  margin-top: 1rem;
+}
+
+.c-status-pill__icon {
+  display: block;
+  border-radius: 0.5rem;
+}
+.c-status-pill__icon .o-svg-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.c-status-pill__icon .o-svg-icon svg {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: -4px;
+}
+
+.c-status-pill__label {
+  line-height: 1;
+}
+
+.c-status-pill__icon + .c-status-pill__label {
+  margin-left: 0.8rem;
+}
+
+.c-status-pill + .c-status-pill {
+  margin-left: 0.5rem;
+}
+
+/* Skins
+   ========================================================================== */
+.c-status-pill--default {
+  border: 2px solid var(--color-pill--border);
+  background: var(--color-pill--bg);
+  color: var(--color-pill--text);
+}
+.c-status-pill--default .c-status-pill__icon svg * {
+  stroke: var(--color-pill--icon);
+}
+.c-status-pill--default:hover {
+  border: 2px solid var(--color-pill--border-hover);
+  background: var(--color-pill--bg-hover);
+  color: var(--color-pill--text-hover);
+  cursor: pointer;
+}
+.c-status-pill--default:hover .c-status-pill__icon svg * {
+  stroke: var(--color-pill--icon-hover);
+}
+
+.site-navigation--mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  z-index: 10001;
+  background-color: var(--color-white);
+  padding: 2rem 0;
+  text-align: center;
+}
+.site-navigation--mobile .container, .site-navigation--mobile .flexi_content--image-only {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  padding-left: 64px;
+}
+.site-navigation--mobile .site-navigation__link {
+  display: block;
+  padding: 1.1rem 0;
+  width: 100%;
+  font-size: 3.5rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--color-green);
+}
+.site-navigation--mobile .site-navigation__link.active {
+  color: var(--color-orange);
+}
+
+@media (min-width: 992px) {
+  .site-navigation--desktop {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: auto;
+    padding: 2rem;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    position: relative;
+  }
+  .site-navigation--desktop .site-navigation__link, .site-navigation--desktop .site-navigation__social-list__link {
+    color: var(--color-page--text);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .site-navigation--mobile {
+    display: none;
+  }
+  .site-navigation--burger {
+    display: none;
+  }
+}
+.dropdown {
+  position: relative;
+  margin-left: 1rem;
+  display: block;
+  width: auto;
+}
+.dropdown--wrapper {
+  background: var(--color-pill--bg);
+  position: absolute;
+  width: auto;
+  border-radius: var(--border-radius);
+  z-index: 1000001;
+  overflow: hidden;
+}
+.dropdown--wrapper.open {
+  -webkit-box-shadow: 0px 6px 22px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 6px 22px rgba(0, 0, 0, 0.12);
+}
+
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  border-bottom-right-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+.dropdown-menu__item {
+  width: 100%;
+}
+.dropdown-menu__item__link {
+  display: block;
+  width: 100%;
+  padding: 1.5rem 1.3rem;
+  height: 5.4rem;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  color: var(--color-pill--text);
+}
+.dropdown-menu__item__link:hover {
+  background-color: rgb(220, 220, 220);
+}
+.dropdown-menu__item__link:before {
+  content: attr(data-label);
+  display: block;
+}
+.dropdown-menu__item__link:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 1.3rem;
+  width: calc(100% - 2.6rem);
+  height: 1px;
+  background-color: rgb(220, 220, 220);
+  color: var(--color-page--text);
+}
+.dropdown-menu__item + .dropdown-menu__item .dropdown-menu__item__link:after {
+  top: -1px;
+}
+
+.dropdown-toggle {
+  display: block;
+  padding: 1.5rem 1.3rem;
+  height: 5.4rem;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  background-color: transparent;
+  border-radius: var(--border-radius);
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+  border: 1px solid transparent;
+  color: var(--color-page--text);
+}
+.dropdown-toggle:hover {
+  background-color: rgb(220, 220, 220);
+}
+.dropdown--wrapper.open .dropdown-toggle:hover {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.site-navigation--burger {
+  min-width: 68px;
+  text-align: right;
+}
+
+.burger {
+  background-color: transparent;
+  border: none;
+  margin-top: -9px;
+  position: relative;
+}
+.burger__label {
+  position: relative;
+  z-index: 101;
+  font-size: 1.8rem;
+  padding: 1.2rem 0 1.1rem;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  font-weight: 500;
+  -webkit-transition: color 0.6s ease;
+  transition: color 0.6s ease;
+}
+.burger-icon {
+  background-color: transparent;
+  width: 100%;
+  height: 0.5rem;
+  position: relative;
+}
+.burger-icon__bar {
+  position: absolute;
+  bottom: 4px;
+  width: 100%;
+  height: 1px;
+  left: 0;
+  background-color: var(--color-page--text);
+  -webkit-transition: all 0.15s ease;
+  transition: all 0.15s ease;
+  -webkit-transition: height 0.6s ease, left 0.6s ease, width 0.6s ease;
+  transition: height 0.6s ease, left 0.6s ease, width 0.6s ease;
+}
+.burger-icon__bar:last-child {
+  bottom: 0;
+}
+.burger--open .burger-icon__bar {
+  background-color: var(--color-page--text);
+}
+.burger--open .burger-icon__bar:first-child {
+  background-color: var(--color-page--text);
+  z-index: 2;
+}
+.burger--open .burger-icon__bar:last-child {
+  height: 44px;
+  left: -6px;
+  width: calc(100% + 12px);
+  bottom: 0;
+}
+
+.burger--close .burger-icon__bar {
+  margin-top: 0;
+  position: absolute;
+  left: 0;
+}
+
+.acf-field {
+  margin-bottom: 2rem;
+}
+
+.gform_wrapper .gfield_label {
+  margin-bottom: 0.8rem;
+  display: block;
+  color: var(--color-black);
+  font-family: "LufgaBold", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+.gform_wrapper .gfield_description, .gform_wrapper .gfield_description.instruction, .gform_wrapper .gfield_description.gform_fileupload_rules {
+  font-size: 1.25rem !important;
+  padding-top: 4px !important;
+  margin-top: 0 !important;
+  opacity: 0.75;
+}
+
+input[type=text], input[type=url], input[type=email], input[type=tel], input[type=number], input[type=password], textarea, select, .form-tag-list {
+  font-family: "LufgaRegular", sans-serif !important;
+  font-size: 1.4rem !important;
+  border-style: solid !important;
+  border-width: 0.1rem !important;
+  border-color: #e5e7eb !important;
+  border-radius: var(--forms-radius) !important;
+  padding: 0.6rem 1rem;
+  width: 100%;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+input[type=text]:focus, input[type=url]:focus, input[type=email]:focus, input[type=tel]:focus, input[type=number]:focus, input[type=password]:focus, textarea:focus, select:focus, .form-tag-list:focus {
+  border-color: var(--color-green-water);
+  outline: none;
+  -webkit-box-shadow: 0 0 0 3px rgba(33, 126, 104, 0.5);
+          box-shadow: 0 0 0 3px rgba(33, 126, 104, 0.5);
+}
+input[type=text] option.frm-select-placeholder:after, input[type=url] option.frm-select-placeholder:after, input[type=email] option.frm-select-placeholder:after, input[type=tel] option.frm-select-placeholder:after, input[type=number] option.frm-select-placeholder:after, input[type=password] option.frm-select-placeholder:after, textarea option.frm-select-placeholder:after, select option.frm-select-placeholder:after, .form-tag-list option.frm-select-placeholder:after {
+  content: "Click to select";
+  font-size: 14px;
+  color: var(--color-black-300);
+}
+input[type=text]::-webkit-input-placeholder, input[type=url]::-webkit-input-placeholder, input[type=email]::-webkit-input-placeholder, input[type=tel]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-webkit-input-placeholder, .form-tag-list::-webkit-input-placeholder {
+  color: var(--color-black-300);
+}
+
+.login-remember {
+  font-size: 1.4rem;
+}
+
+.acf-notice {
+  background-color: var(--color-green-water);
+  border-radius: var(--border-radius--small);
+  color: white;
+  padding: 1rem 2rem 2rem 2rem;
+  margin-bottom: 0.8rem;
+  margin-top: 1.4rem;
+}
+.acf-notice.-error {
+  background-color: red;
+  color: white;
+}
+
+.frm_none_container .frm_primary_label {
+  display: none !important;
+}
+
+.acf-hidden {
+  display: none !important;
+  opacity: 0;
+}
+
+.forbidden p {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--color-black-50);
+}
+.forbidden a {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.gfield_validation_message b {
+  font-family: "LufgaExtraBold", sans-serif;
+  font-weight: 500;
+}
+
+.gform_wrapper.gravity-theme .field_description_above .gfield_description:not(.gform_fileupload_rules) {
+  padding-bottom: 0.6rem !important;
+  color: #0590ff;
+}
+
+.gform-body {
+  padding: 0 0.4rem;
+}
+
+.gform_wrapper.gravity-theme .gf_progressbar {
+  margin-bottom: 3.2rem;
+}
+
+.gf_progressbar_wrapper {
+  margin-top: -3rem;
+}
+
+.gform_wrapper.gravity-theme .gf_progressbar_percentage.percentbar_blue {
+  background-color: #0590ff;
+}
+
+.acf-image-uploader {
+  border-radius: 0.5em;
+  background-color: rgb(241, 240, 239);
+  padding: 0 1rem 0 1rem;
+}
+.acf-image-uploader .show-if-value {
+  display: none;
+}
+.acf-image-uploader.has-value .show-if-value {
+  display: block;
+  position: relative;
+}
+.acf-image-uploader.has-value .show-if-value .acf-actions {
+  position: absolute;
+  top: 2px;
+  left: 12px;
+}
+.acf-image-uploader.has-value .show-if-value.image-wrap {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 100% !important;
+}
+.acf-image-uploader.has-value .show-if-value img {
+  height: 300px;
+  margin: 0 auto;
+}
+.acf-image-uploader.has-value .hide-if-value {
+  display: none;
+}
+.acf-image-uploader .acf-actions {
+  float: left;
+  margin-top: 1.8rem;
+}
+
+.acf-repeater .-minus, .acf-image-uploader .-cancel {
+  display: block;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  min-height: inherit;
+}
+.acf-repeater .-minus:after, .acf-image-uploader .-cancel:after {
+  content: "x";
+}
+
+.acf-row-handle .-duplicate, .acf-row-handle .-plus {
+  display: none;
+}
+
+.acf-basic-uploader {
+  margin: 1rem 1rem 1rem 1rem;
+}
+.acf-basic-uploader:after {
+  content: "Add a picture";
+}
+.acf-basic-uploader input[type=file] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.filepond--drop-label {
+  border: 1px dashed rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.gpfup__droparea {
+  background: rgb(241, 240, 239) !important;
+  border-radius: 10px !important;
+}
+
+button.gfgeo-locator-button {
+  margin-top: 2.8rem;
+}
+
+.gform_wrapper.gravity-theme .gform_page_footer {
+  margin: 0 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  padding-top: 1.6rem !important;
+  padding-bottom: 0.6rem !important;
+}
+
+.gform_wrapper.gravity-theme .gform_page_footer button.button {
+  margin-bottom: 0 !important;
+}
+
+.af-field-type-checkbox .af-label, .af-field-type-radio .af-label {
+  margin-bottom: 1rem;
+}
+
+.gfield_checkbox, .gfield_radio, .login-remember {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 0.6rem;
+}
+
+.gchoice {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.gchoice > label, .login-remember > label {
+  font-size: 1.4rem;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 0.8rem;
+     -moz-column-gap: 0.8rem;
+          column-gap: 0.8rem;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.gchoice > label .svg_wrapper, .login-remember > label .svg_wrapper {
+  position: relative;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: var(--color-black);
+  border-radius: var(--forms-radius);
+  background-color: var(--color-white);
+  width: 2.6rem;
+  height: 2.6rem;
+}
+.gchoice > label svg, .login-remember > label svg {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.gchoice > label svg path, .login-remember > label svg path {
+  stroke-dasharray: 3rem;
+  stroke-dashoffset: -3rem;
+  -webkit-transition: stroke-dashoffset 0.2s ease-out;
+  transition: stroke-dashoffset 0.2s ease-out;
+}
+
+.gchoice > input[type=checkbox], .gchoice > input[type=radio], .login-remember > label input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.gchoice > input[type=checkbox]:checked + label .svg_wrapper, .gchoice > input[type=radio]:checked + label .svg_wrapper, .login-remember > label input[type=checkbox]:checked + label .svg_wrapper {
+  background-color: var(--color-black);
+}
+.gchoice > input[type=checkbox]:checked + label .svg_wrapper svg path, .gchoice > input[type=radio]:checked + label .svg_wrapper svg path, .login-remember > label input[type=checkbox]:checked + label .svg_wrapper svg path {
+  stroke-dashoffset: 0;
+  stroke-width: 0.2rem;
+  stroke: var(--color-white);
+}
+
+.gchoice > label .svg_wrapper {
+  border-radius: 2.6rem;
+}
+
+@media (min-width: 992px) {
+  .gfield_checkbox > li > label, .gchoice > label {
+    font-size: 1.6rem;
+  }
+  .gfield_checkbox, .gfield_radio {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    row-gap: 1rem;
+  }
+}
+.af-page-wrap {
+  display: none !important;
+  margin: 0 !important;
+  border: none !important;
+}
+.af-page-wrap a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  background: white !important;
+  color: var(--color-black-500);
+  border: none;
+  height: auto;
+  line-height: inherit;
+}
+.af-page-wrap a:before, .af-page-wrap a:after {
+  content: "" !important;
+  display: block;
+  position: absolute;
+  border: none !important;
+  left: 0;
+  width: 100%;
+  top: 16px;
+  height: 4px;
+  background-color: var(--color-black-100);
+  z-index: 1;
+}
+.af-page-wrap a .title {
+  margin-top: 1rem;
+  opacity: 1;
+}
+.af-page-wrap a .index {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background-color: var(--color-black-100);
+  color: var(--color-black-500);
+  margin: 0;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 3.6rem;
+  line-height: 3.2rem;
+  font-size: 1.6rem;
+  border: 3px solid var(--color-white);
+}
+.af-page-wrap a.enabled {
+  color: var(--color-green-water);
+}
+.af-page-wrap a.enabled .index {
+  background-color: var(--color-green-water);
+  color: var(--color-white);
+}
+.af-page-wrap a.current {
+  color: var(--color-black);
+}
+.af-page-wrap a.current .index {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+.af-page-wrap a.current + a.enabled {
+  color: var(--color-black);
+}
+.af-page-wrap a.current + a.enabled .index {
+  background-color: var(--color-black-100);
+  color: var(--color-black-500);
+}
+
+.af-field-type-open-street-map .tools .acf-icon.-minus {
+  display: block;
+  width: 30px;
+  height: 30px;
+  min-width: 40px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border: none;
+}
+.af-field-type-open-street-map .tools .acf-icon.-minus:before {
+  content: " ";
+  display: block;
+  position: relative;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCAyNCAyNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTcuMjUgMjEuMjM1NEg2Ljc1QzUuOTIxNTcgMjEuMjM1NCA1LjI1IDIwLjU2MzggNS4yNSAxOS43MzU0VjYuMjM1MzVIMTguNzVWMTkuNzM1NEMxOC43NSAyMC41NjM4IDE4LjA3ODQgMjEuMjM1NCAxNy4yNSAyMS4yMzU0WiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPg0KPHBhdGggZD0iTTkuNzUgMTYuNzM1NFYxMC43MzU0IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8cGF0aCBkPSJNMTQuMjUgMTYuNzM1NFYxMC43MzU0IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8cGF0aCBkPSJNMi4yNSA2LjIzNTM1SDIxLjc1IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE0LjI1IDMuMjM1MzVIOS43NUM4LjkyMTU3IDMuMjM1MzUgOC4yNSAzLjkwNjkyIDguMjUgNC43MzUzNVY2LjIzNTM1SDE1Ljc1VjQuNzM1MzVDMTUuNzUgMy45MDY5MiAxNS4wNzg0IDMuMjM1MzUgMTQuMjUgMy4yMzUzNVoiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3ZnPg0K);
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  top: 1px;
+}
+
+.leaflet-below {
+  display: none;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.leaflet-control-geocoder-form-no-error {
+  display: none;
+}
+
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.leaflet-bar-part .dashicons {
+  margin-top: 4px;
+}
+
+.acf-osm-settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.acf-osm-settings .acf-osm-layer-variants {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.acf-osm-settings .acf-osm-layer-variants .layer-variant {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 250px;
+          flex: 0 1 250px;
+  padding: 0.5em 0.5em 0.5em 0;
+}
+.acf-osm-settings .acf-osm-layer-variants .action-test {
+  margin-left: auto;
+  font-weight: normal;
+}
+.acf-osm-settings .acf-osm-tag {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 0.8em;
+  color: #fff;
+  border-radius: 1em;
+  line-height: 1em;
+  margin-left: 1em;
+  font-weight: normal;
+  white-space: nowrap;
+  background-color: darkgrey;
+}
+.acf-osm-settings .acf-osm-tag.warn {
+  background-color: red;
+}
+.acf-osm-settings .acf-osm-test-map-container {
+  position: relative;
+  margin-left: 5px;
+  background-color: #fff;
+  max-width: 300px;
+  min-width: 300px;
+}
+.acf-osm-settings .acf-osm-test-map {
+  background: blue;
+  position: sticky;
+  top: 32px;
+}
+.acf-osm-settings .leaflet-container {
+  min-height: 400px;
+  height: calc(100vh - 32px);
+}
+
+.acf-osm-setting {
+  -webkit-transition: -webkit-filter 0.3s;
+  transition: -webkit-filter 0.3s;
+  transition: filter 0.3s;
+  transition: filter 0.3s, -webkit-filter 0.3s;
+}
+.acf-osm-setting.disabled {
+  -webkit-filter: grayscale(1) contrast(0.5) brightness(1.75);
+          filter: grayscale(1) contrast(0.5) brightness(1.75);
+}
+.acf-osm-setting.disabled .disabled {
+  -webkit-filter: none;
+          filter: none;
+}
+
+.acf-osm-setting-provider {
+  background: #fff;
+  padding: 10px 20px;
+  margin-bottom: 5px;
+}
+.acf-osm-setting-provider h4 {
+  margin-bottom: 0.33em;
+}
+
+[data-map=leaflet] {
+  width: 100%;
+}
+
+.block-editor__container .leaflet-map {
+  width: 100%;
+}
+.block-editor__container .leaflet-map .leaflet-top,
+.block-editor__container .leaflet-map .leaflet-bottom {
+  /* .editor-block-toolbar: 101 */
+  z-index: 80;
+}
+.leaflet-map[data-can-add-marker=false] ~ .markers-instruction {
+  margin: 0.4rem 0;
+}
+.leaflet-map[data-can-add-marker=false] ~ .markers-instruction .can-add-marker {
+  display: none;
+}
+.leaflet-map[data-has-markers=false] ~ .markers-instruction .has-markers {
+  display: none;
+}
+.leaflet-map.add-marker-on-taphold ~ .markers-instruction .marker-on-dblclick {
+  display: none;
+}
+.leaflet-map.add-marker-on-dblclick ~ .markers-instruction .marker-on-taphold {
+  display: none;
+}
+
+.acf-block-preview iframe[src*="openstreetmap.org"] {
+  pointer-events: none;
+}
+
+.acf-field-open-street-map .acf-osm-map {
+  width: 100%;
+  height: 400px;
+}
+.acf-field-open-street-map input[type=search][data-prop=address] {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  color: darkgrey;
+}
+
+.osm-markers .osm-marker {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.osm-markers .osm-marker:nth-of-type(2n) {
+  background-color: lightgrey;
+}
+.osm-markers .osm-marker > .locate.dashicons, .osm-markers .osm-marker > .locate.dashicons::before {
+  font-size: 32px;
+  cursor: pointer;
+}
+.osm-markers .osm-marker > .tools, .osm-markers .osm-marker > .locate {
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
+  min-width: 32px;
+  text-align: center;
+}
+.osm-markers .osm-marker > .input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.osm-markers .osm-marker input[type=text] {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 300;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.osm-markers .osm-marker a.acf-icon.light {
+  border: 1px solid darkgrey;
+}
+.osm-markers [data-id=__osm_marker_template__] {
+  display: none;
+}
+
+@-webkit-keyframes pling {
+  0% {
+    left: 0;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: -25px;
+    top: -25px;
+    width: 62px;
+    height: 62px;
+    opacity: 0;
+  }
+}
+
+@keyframes pling {
+  0% {
+    left: 0;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: -25px;
+    top: -25px;
+    width: 62px;
+    height: 62px;
+    opacity: 0;
+  }
+}
+.osm-marker-icon {
+  border-radius: 50%;
+}
+.osm-marker-icon:before {
+  content: "";
+  border-style: solid;
+  border-color: blue transparent transparent transparent;
+  border-width: 20px 12px 0 12px;
+  position: absolute;
+  left: -6px;
+  top: -14px;
+  z-index: 1;
+}
+.osm-marker-icon:after {
+  content: "";
+  clip: rect(0, 0, 100%, 100%);
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  background-color: #fff;
+  border: 8px solid blue;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  bottom: 18px;
+  left: -7px;
+}
+.osm-marker-icon.focus:after, .osm-marker-icon:focus:after {
+  -webkit-box-shadow: 0 0 6px 12px var(--color-black-200);
+          box-shadow: 0 0 6px 12px var(--color-black-200);
+}
+.osm-marker-icon:hover:before {
+  border-top-color: red;
+}
+.osm-marker-icon:hover:after {
+  content: "Move";
+  color: #fff;
+  font-size: 26px;
+  line-height: 27px;
+  border-color: red;
+  background-color: red;
+  border-width: 0;
+  z-index: 2;
+}
+.osm-marker-icon .pling {
+  position: absolute;
+  opacity: 0;
+  border: 4px solid blue;
+  border-radius: 50%;
+  -webkit-animation-name: pling;
+          animation-name: pling;
+  -webkit-animation-duration: 0.75s;
+          animation-duration: 0.75s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
+}
+@media screen and (min-width: 768px) {
+  .osm-marker-icon .pling {
+    border-width: 2px;
+  }
+}
+
+.acf-osm-above {
+  position: relative;
+  z-index: 2;
+}
+.acf-osm-above + .leaflet-map {
+  z-index: 1;
+}
+.acf-osm-above .leaflet-control-geocoder {
+  margin-bottom: 0.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-form {
+  border-radius: none;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+  -webkit-box-flex: 0;
+      -ms-flex: 0;
+          flex: 0;
+  min-width: 42px;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+  padding-left: 0;
+  padding-right: 0;
+  background-image: none;
+  border-radius: 0 4px 4px 0;
+  border: none;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:before {
+  content: " ";
+  display: block;
+  position: relative;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAxOCAxOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNy42ODc1IDE0LjQ4NTRDMTEuNDE1NCAxNC40ODU0IDE0LjQzNzUgMTEuNDYzMyAxNC40Mzc1IDcuNzM1MzVDMTQuNDM3NSA0LjAwNzQzIDExLjQxNTQgMC45ODUzNTIgNy42ODc1IDAuOTg1MzUyQzMuOTU5NTggMC45ODUzNTIgMC45Mzc1IDQuMDA3NDMgMC45Mzc1IDcuNzM1MzVDMC45Mzc1IDExLjQ2MzMgMy45NTk1OCAxNC40ODU0IDcuNjg3NSAxNC40ODU0WiIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPg0KPHBhdGggZD0iTTE3LjI1IDE3LjI5NzlMMTIuNDY4OCAxMi41MTY2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+DQo8L3N2Zz4NCg==);
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  top: 1px;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-form {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-form input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 20px;
+  font-weight: 300;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-error, .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-alternatives {
+  margin: 0;
+  position: absolute;
+  left: 1em;
+  width: calc(100% - 3rem);
+  top: 100%;
+  background: #fff;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-error {
+  padding: 0.5em 1em;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-alternatives {
+  margin-top: 1em;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-alternatives li {
+  white-space: nowrap;
+  display: block;
+  overflow: hidden;
+  padding: 5px 8px;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+.acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-alternatives li a {
+  width: 100%;
+}
+
+.postbox .leaflet-pane, .components-panel .leaflet-pane, .wp-block .leaflet-pane {
+  z-index: 30;
+}
+
+.leaflet-control-container a {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */ /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+supported by Chrome, Opera and Firefox */
+}
+
+.wp-block .leaflet-control-layers {
+  text-align: left;
+}
+
+.leaflet-control-layers-scrollbar {
+  -ms-scroll-chaining: none;
+      overscroll-behavior: contain;
+}
+
+.leaflet-control a .dashicons {
+  line-height: 30px;
+}
+
+.leaflet-control-locate + .leaflet-control-add-location-marker {
+  display: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-width: 0 !important;
+  margin-top: -10px !important;
+}
+[data-can-add-marker=true] .leaflet-control-locate.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+[data-can-add-marker=true] .leaflet-control-locate.active .dashicons-location-alt {
+  position: relative;
+}
+[data-can-add-marker=true] .leaflet-control-locate.active .dashicons-location-alt::before {
+  content: "location icon";
+}
+[data-can-add-marker=true] .leaflet-control-locate.active + .leaflet-control-add-location-marker {
+  display: block;
+}
+.leaflet-control-locate:not(.active):not(.following) .dashicons:not(.dashicons-warning) {
+  border-radius: 50%;
+  outline: 1px solid currentcolor;
+  outline-offset: -3px;
+  -o-border-image: conic-gradient(currentcolor 6deg, transparent 6deg 90deg, currentcolor 90deg 96deg, transparent 96deg 180deg, currentcolor 180deg 186deg, transparent 186deg 270deg, currentcolor 270deg 276deg, transparent 276deg);
+     border-image: conic-gradient(currentcolor 6deg, transparent 6deg 90deg, currentcolor 90deg 96deg, transparent 96deg 180deg, currentcolor 180deg 186deg, transparent 186deg 270deg, currentcolor 270deg 276deg, transparent 276deg);
+  border-width: 0.5em;
+  border-style: solid;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-image-repeat: stretch;
+  border-image-slice: 50%;
+  -webkit-transform: rotate(-3deg);
+          transform: rotate(-3deg);
+  margin-top: 5px;
+}
+.leaflet-control-locate:not(.active):not(.following) .dashicons:not(.dashicons-warning)::before {
+  color: transparent;
+}
+.leaflet-control-locate.following .dashicons {
+  color: lightblue;
+}
+.leaflet-control-locate a .dashicons-warning {
+  color: red;
+}
+.leaflet-control-locate a .spinner {
+  float: none;
+  margin: -3px 0 0 0;
+}
+
+.leaflet-control-add-location-marker .dashicons::before {
+  line-height: 30px;
+  font-size: 18px;
+}
+.leaflet-control-add-location-marker .dashicons::after {
+  content: "plus icon";
+  font-size: 13px;
+  position: absolute;
+  top: -6px;
+  right: 0;
+}
+
+.leaflet-control-attribution {
+  display: none;
+}
+
+#map {
+  width: 100%;
+}
+#map .marker-user-wrap {
+  width: 0.9rem !important;
+  height: 0.9rem !important;
+  display: block;
+  left: -1.1rem;
+  top: -1.1rem;
+  position: relative;
+  border-radius: 3rem 3rem 0;
+  -webkit-transform: rotate(45deg) !important;
+          transform: rotate(45deg) !important;
+  border: 1px solid #FFFFFF;
+  background: red;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+#map .marker-wrap {
+  width: 2.2rem !important;
+  height: 2.2rem !important;
+  display: block;
+  left: -1.1rem;
+  top: -1.1rem;
+  position: relative;
+  border-radius: 3rem 3rem 0;
+  -webkit-transform: rotate(45deg) !important;
+          transform: rotate(45deg) !important;
+  border: 1px solid #FFFFFF;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+#map .marker {
+  z-index: 500;
+}
+#map .marker--cluster {
+  width: 3.2rem !important;
+  height: 3.2rem !important;
+  border: 1px solid var(--color-white);
+  background-color: var(--color-purple);
+  border-radius: 100%;
+  color: var(--color-white);
+  font-size: 1.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+#map .marker--selected {
+  z-index: 500000 !important;
+  position: relative;
+}
+#map .marker--selected .marker-wrap {
+  left: -1.25rem;
+  top: -1.25rem;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border: 3px solid black;
+}
+
+.map--wall {
+  width: 100%;
+}
+
+.pulse-pin {
+  position: relative;
+  display: block;
+  width: 1.4rem;
+  height: 1.4rem;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 50%;
+  background: rgb(3, 126, 242);
+  -webkit-box-shadow: 0 0 0 0 rgba(3, 126, 242, 0.7);
+          box-shadow: 0 0 0 0 rgba(3, 126, 242, 0.7);
+  -webkit-animation: pulse 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 2.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@-webkit-keyframes pulse {
+  to {
+    -webkit-box-shadow: 0 0 0 10px rgba(3, 126, 242, 0);
+            box-shadow: 0 0 0 10px rgba(3, 126, 242, 0);
+  }
+}
+@keyframes pulse {
+  to {
+    -webkit-box-shadow: 0 0 0 10px rgba(3, 126, 242, 0);
+            box-shadow: 0 0 0 10px rgba(3, 126, 242, 0);
+  }
+}
+.glide {
+  position: relative;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.glide * {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+.glide__track {
+  overflow: hidden;
+}
+
+.glide__slides {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -ms-touch-action: pan-Y;
+      touch-action: pan-Y;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  will-change: transform;
+  height: 292.5px;
+}
+.glide__slides:hover {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.glide__slides--dragging {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.glide__slide {
+  width: 100%;
+  height: 100%;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  white-space: normal;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.glide__slide a {
+  -webkit-user-select: none;
+          user-select: none;
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.glide__arrows {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.glide__bullet__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.glide__bullets {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.glide__bullet {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid white;
+  opacity: 1;
+  cursor: pointer;
+}
+.glide__bullet:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.glide__bullet + .glide__bullet {
+  margin-left: 4px;
+}
+
+.glide__bullet--active {
+  opacity: 1;
+  border-color: white;
+  background-color: white;
+}
+.glide__bullet--active:hover {
+  background-color: white;
+}
+
+.glide .btn-controls .btn, .glide .btn-controls .card-form .login-submit input[type=submit], .card-form .login-submit .glide .btn-controls input[type=submit], .glide .btn-controls input.button, .glide .btn-controls .acf-repeater .-minus, .acf-repeater .glide .btn-controls .-minus, .glide .btn-controls .acf-image-uploader .-cancel, .acf-image-uploader .glide .btn-controls .-cancel, .glide .btn-controls .acf-basic-uploader, .glide .btn-controls button.gfgeo-locator-button, .glide .btn-controls .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .glide .btn-controls .acf-icon.-minus, .glide .btn-controls .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .glide .btn-controls .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+  opacity: 0;
+  position: absolute;
+  top: calc(50% - 2rem);
+  padding: 0 0.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-color: white;
+  background-color: white;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.glide .btn-controls .btn.glide__arrow--left, .glide .btn-controls .card-form .login-submit input.glide__arrow--left[type=submit], .card-form .login-submit .glide .btn-controls input.glide__arrow--left[type=submit], .glide .btn-controls input.glide__arrow--left.button, .glide .btn-controls .acf-repeater .glide__arrow--left.-minus, .acf-repeater .glide .btn-controls .glide__arrow--left.-minus, .glide .btn-controls .acf-image-uploader .glide__arrow--left.-cancel, .acf-image-uploader .glide .btn-controls .glide__arrow--left.-cancel, .glide .btn-controls .glide__arrow--left.acf-basic-uploader, .glide .btn-controls button.glide__arrow--left.gfgeo-locator-button, .glide .btn-controls .af-field-type-open-street-map .tools .glide__arrow--left.acf-icon.-minus, .af-field-type-open-street-map .tools .glide .btn-controls .glide__arrow--left.acf-icon.-minus, .glide .btn-controls .acf-osm-above .leaflet-control-geocoder > .glide__arrow--left.leaflet-control-geocoder-icon, .acf-osm-above .glide .btn-controls .leaflet-control-geocoder > .glide__arrow--left.leaflet-control-geocoder-icon {
+  left: 1.7rem;
+}
+.glide .btn-controls .btn.glide__arrow--right, .glide .btn-controls .card-form .login-submit input.glide__arrow--right[type=submit], .card-form .login-submit .glide .btn-controls input.glide__arrow--right[type=submit], .glide .btn-controls input.glide__arrow--right.button, .glide .btn-controls .acf-repeater .glide__arrow--right.-minus, .acf-repeater .glide .btn-controls .glide__arrow--right.-minus, .glide .btn-controls .acf-image-uploader .glide__arrow--right.-cancel, .acf-image-uploader .glide .btn-controls .glide__arrow--right.-cancel, .glide .btn-controls .glide__arrow--right.acf-basic-uploader, .glide .btn-controls button.glide__arrow--right.gfgeo-locator-button, .glide .btn-controls .af-field-type-open-street-map .tools .glide__arrow--right.acf-icon.-minus, .af-field-type-open-street-map .tools .glide .btn-controls .glide__arrow--right.acf-icon.-minus, .glide .btn-controls .acf-osm-above .leaflet-control-geocoder > .glide__arrow--right.leaflet-control-geocoder-icon, .acf-osm-above .glide .btn-controls .leaflet-control-geocoder > .glide__arrow--right.leaflet-control-geocoder-icon {
+  right: 1.7rem;
+}
+.glide .btn-controls .btn:hover, .glide .btn-controls .card-form .login-submit input[type=submit]:hover, .card-form .login-submit .glide .btn-controls input[type=submit]:hover, .glide .btn-controls input.button:hover, .glide .btn-controls .acf-repeater .-minus:hover, .acf-repeater .glide .btn-controls .-minus:hover, .glide .btn-controls .acf-image-uploader .-cancel:hover, .acf-image-uploader .glide .btn-controls .-cancel:hover, .glide .btn-controls .acf-basic-uploader:hover, .glide .btn-controls button.gfgeo-locator-button:hover, .glide .btn-controls .af-field-type-open-street-map .tools .acf-icon.-minus:hover, .af-field-type-open-street-map .tools .glide .btn-controls .acf-icon.-minus:hover, .glide .btn-controls .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:hover, .acf-osm-above .glide .btn-controls .leaflet-control-geocoder > .leaflet-control-geocoder-icon:hover {
+  border-color: black;
+}
+
+.glide:hover .btn-controls .btn, .glide:hover .btn-controls .card-form .login-submit input[type=submit], .card-form .login-submit .glide:hover .btn-controls input[type=submit], .glide:hover .btn-controls input.button, .glide:hover .btn-controls .acf-repeater .-minus, .acf-repeater .glide:hover .btn-controls .-minus, .glide:hover .btn-controls .acf-image-uploader .-cancel, .acf-image-uploader .glide:hover .btn-controls .-cancel, .glide:hover .btn-controls .acf-basic-uploader, .glide:hover .btn-controls button.gfgeo-locator-button, .glide:hover .btn-controls .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .glide:hover .btn-controls .acf-icon.-minus, .glide:hover .btn-controls .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .glide:hover .btn-controls .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+  opacity: 1;
+}
+
+.resume {
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.resume.reverse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.resume--alone {
+  -webkit-column-gap: 20px;
+     -moz-column-gap: 20px;
+          column-gap: 20px;
+}
+.resume__name {
+  font-family: "LufgaBold", sans-serif;
+}
+.resume__username, .resume__account-creation {
+  color: var(--color-black-500);
+  margin-bottom: 0.6rem;
+}
+.resume__profile-picture {
+  width: 7.5rem;
+}
+.resume__data {
+  width: calc(100% - 9.5rem);
+}
+.resume__title_supplement {
+  margin-left: 0.6rem;
+}
+.resume__image {
+  width: inherit;
+  height: 7.5rem;
+  border-radius: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-bottom: 0.4rem;
+}
+.resume__image--blank {
+  width: 7.5rem;
+  background-image: var(--homazed-linear-gradient);
+}
+.resume__image--blank .first-letters {
+  font-size: 3rem;
+  color: var(--color-page--text-reverse);
+}
+.resume__picture-edition {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.resume + .edit-account__quicklinks {
+  margin-top: 2.4rem;
+}
+
+.resume-on-post {
+  padding: 2px;
+  border: 2px solid var(--color-black-500);
+  border-radius: 3.6rem;
+}
+.resume-on-post .resume__profile-picture {
+  width: auto;
+}
+.resume-on-post .resume__image {
+  width: 3.6rem;
+  height: 3.6rem;
+  margin-bottom: 0;
+}
+.resume-on-post .resume__account_type {
+  margin-left: 2rem;
+  margin-top: 0;
+  color: var(--color-black);
+}
+.resume-on-post:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+.resume-on-post:hover .resume__account_type, .resume-on-post:hover .resume__name {
+  color: var(--color-white);
+}
+
+.avatar {
+  width: 3.8rem;
+  min-width: 3.8rem;
+  height: 3.8rem;
+  display: block;
+}
+
+.avatar__image {
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 3.8rem;
+  min-width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 100%;
+  border: 2px solid white;
+}
+
+.avatar:hover .avatar__image {
+  border-color: var(--color-black);
+}
+
+.avatar--blank {
+  background-image: var(--homazed-linear-gradient);
+}
+.avatar--blank .first-letters {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: var(--color-page--text-reverse);
+  text-align: center;
+}
+
+.avatar-list {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 1.2rem;
+}
+
+.avatar-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.avatar-line .resume__image {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-right: 1rem;
+}
+.avatar-line__actions {
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.avatar__list {
+  width: 6.2rem;
+  display: block;
+}
+.avatar__list--wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.avatar__list .avatar {
+  z-index: 2;
+}
+.avatar__list .avatar + .avatar {
+  z-index: 1;
+  margin-left: -0.8rem;
+}
+
+.profile-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.profile-actions .btn-group--related {
+  margin-top: 1rem;
+}
+.profile-actions .btn-group--related {
+  margin-top: 0;
+}
+.profile-actions__quick-actions .btn:not(.btn--icon), .profile-actions__quick-actions .card-form .login-submit input[type=submit]:not(.btn--icon), .card-form .login-submit .profile-actions__quick-actions input[type=submit]:not(.btn--icon), .profile-actions__quick-actions input.button:not(.btn--icon), .profile-actions__quick-actions .acf-repeater .-minus:not(.btn--icon), .acf-repeater .profile-actions__quick-actions .-minus:not(.btn--icon), .profile-actions__quick-actions .acf-image-uploader .-cancel:not(.btn--icon), .acf-image-uploader .profile-actions__quick-actions .-cancel:not(.btn--icon), .profile-actions__quick-actions .acf-basic-uploader:not(.btn--icon), .profile-actions__quick-actions button.gfgeo-locator-button:not(.btn--icon), .profile-actions__quick-actions .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon), .af-field-type-open-street-map .tools .profile-actions__quick-actions .acf-icon.-minus:not(.btn--icon), .profile-actions__quick-actions .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon), .acf-osm-above .profile-actions__quick-actions .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) {
+  width: 40px;
+}
+.profile-actions__quick-actions .btn:not(.btn--icon) .btn__label, .profile-actions__quick-actions .card-form .login-submit input[type=submit]:not(.btn--icon) .btn__label, .card-form .login-submit .profile-actions__quick-actions input[type=submit]:not(.btn--icon) .btn__label, .profile-actions__quick-actions input.button:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-repeater .-minus:not(.btn--icon) .btn__label, .acf-repeater .profile-actions__quick-actions .-minus:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-image-uploader .-cancel:not(.btn--icon) .btn__label, .acf-image-uploader .profile-actions__quick-actions .-cancel:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-basic-uploader:not(.btn--icon) .btn__label, .profile-actions__quick-actions button.gfgeo-locator-button:not(.btn--icon) .btn__label, .profile-actions__quick-actions .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon) .btn__label, .af-field-type-open-street-map .tools .profile-actions__quick-actions .acf-icon.-minus:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) .btn__label, .acf-osm-above .profile-actions__quick-actions .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) .btn__label {
+  display: none;
+}
+.profile-actions .left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 0.4rem;
+     -moz-column-gap: 0.4rem;
+          column-gap: 0.4rem;
+}
+
+.profile-content__img {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: var(--border-radius--xsmall);
+  overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .profile-actions__quick-actions .btn:not(.btn--icon), .profile-actions__quick-actions .card-form .login-submit input[type=submit]:not(.btn--icon), .card-form .login-submit .profile-actions__quick-actions input[type=submit]:not(.btn--icon), .profile-actions__quick-actions input.button:not(.btn--icon), .profile-actions__quick-actions .acf-repeater .-minus:not(.btn--icon), .acf-repeater .profile-actions__quick-actions .-minus:not(.btn--icon), .profile-actions__quick-actions .acf-image-uploader .-cancel:not(.btn--icon), .acf-image-uploader .profile-actions__quick-actions .-cancel:not(.btn--icon), .profile-actions__quick-actions .acf-basic-uploader:not(.btn--icon), .profile-actions__quick-actions button.gfgeo-locator-button:not(.btn--icon), .profile-actions__quick-actions .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon), .af-field-type-open-street-map .tools .profile-actions__quick-actions .acf-icon.-minus:not(.btn--icon), .profile-actions__quick-actions .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon), .acf-osm-above .profile-actions__quick-actions .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) {
+    width: auto;
+  }
+  .profile-actions__quick-actions .btn:not(.btn--icon) .btn__label, .profile-actions__quick-actions .card-form .login-submit input[type=submit]:not(.btn--icon) .btn__label, .card-form .login-submit .profile-actions__quick-actions input[type=submit]:not(.btn--icon) .btn__label, .profile-actions__quick-actions input.button:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-repeater .-minus:not(.btn--icon) .btn__label, .acf-repeater .profile-actions__quick-actions .-minus:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-image-uploader .-cancel:not(.btn--icon) .btn__label, .acf-image-uploader .profile-actions__quick-actions .-cancel:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-basic-uploader:not(.btn--icon) .btn__label, .profile-actions__quick-actions button.gfgeo-locator-button:not(.btn--icon) .btn__label, .profile-actions__quick-actions .af-field-type-open-street-map .tools .acf-icon.-minus:not(.btn--icon) .btn__label, .af-field-type-open-street-map .tools .profile-actions__quick-actions .acf-icon.-minus:not(.btn--icon) .btn__label, .profile-actions__quick-actions .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) .btn__label, .acf-osm-above .profile-actions__quick-actions .leaflet-control-geocoder > .leaflet-control-geocoder-icon:not(.btn--icon) .btn__label {
+    display: block;
+  }
+}
+.wall .card {
+  min-width: 100%;
+}
+.wall--map .toolbar {
+  position: absolute;
+  top: 1.4rem;
+  left: 1.4rem;
+  z-index: 10001;
+}
+
+.toolbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 0.6rem;
+     -moz-column-gap: 0.6rem;
+          column-gap: 0.6rem;
+  margin-bottom: 1.6rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+.toolbar .filters {
+  margin-left: auto;
+}
+
+.split-view {
+  width: 100%;
+}
+.split-view .left-map {
+  position: sticky;
+  top: 7.6rem;
+}
+
+.right-slates .post-type__name {
+  display: none;
+}
+.right-slates .card__img__grid {
+  grid-template-rows: 100px 100px;
+}
+.right-slates .card__img__grid--2 {
+  grid-template-rows: 200px;
+}
+.right-slates .card__img img {
+  height: 200px;
+}
+.right-slates .card__body {
+  max-height: 79px;
+}
+.right-slates .owner_by {
+  -webkit-column-gap: 0.2rem;
+     -moz-column-gap: 0.2rem;
+          column-gap: 0.2rem;
+}
+.right-slates .post-location__adress, .right-slates .owner_by .post_type, .right-slates .owner_by .by, .right-slates .owner__name__link {
+  font-size: 1.2rem;
+}
+.right-slates .card__header__item {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.right-slates .card__header--lower {
+  height: 100%;
+}
+.right-slates .card__header__item--content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.right-slates .card__header__item--content p {
+  margin-top: auto;
+}
+.right-slates .glide__slides {
+  height: 200px;
+}
+
+@media (min-width: 1200px) {
+  .right-slates {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-column-gap: calc(var(--default-space) / 2);
+       -moz-column-gap: calc(var(--default-space) / 2);
+            column-gap: calc(var(--default-space) / 2);
+    row-gap: calc(var(--default-space) / 2);
+  }
+  .right-slates .p-xs {
+    font-size: 1rem;
+  }
+  .right-slates .card {
+    margin-top: 10px;
+    width: calc(50% - var(--default-space) / 2);
+    max-width: calc(50% - var(--default-space) / 2);
+    min-width: inherit;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+  }
+}
+@media (min-width: 1480px) {
+  .right-slates {
+    -webkit-column-gap: var(--default-space);
+       -moz-column-gap: var(--default-space);
+            column-gap: var(--default-space);
+    row-gap: var(--default-space);
+  }
+}
+.quicklinks {
+  margin-bottom: 1.6rem;
+}
+.quicklinks--item {
+  padding: 1.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: var(--color-black);
+  border-top: 1px solid var(--color-black-50);
+}
+.quicklinks--item svg {
+  width: 2rem;
+}
+
+.card-popup a.quicklinks--item {
+  padding-right: 2.6rem !important;
+}
+a.quicklinks--item:hover {
+  background-color: var(--color-black-300);
+}
+
+.resume + .quicklinks {
+  margin-top: 2rem;
+}
+
+/* ==========================================================================
+  c-tooltip
+ ========================================================================== */
+/* Variables
+   ========================================================================== */
+/* Component
+   ========================================================================== */
+.tooltip .arrow {
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: auto;
+  -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+}
+.tooltip .arrow:before {
+  content: "";
+  position: absolute;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--color-white);
+  z-index: -1;
+}
+
+.tooltip-pill[data-tooltip-placement*=top] + .tooltip > .arrow {
+  -webkit-filter: none;
+          filter: none;
+  bottom: -4px;
+}
+.tooltip-pill[data-tooltip-placement*=bottom] + .tooltip > .arrow {
+  -webkit-filter: none;
+          filter: none;
+  top: -0.6rem;
+}
+.tooltip-pill[data-tooltip-placement*=left] + .tooltip > .arrow {
+  -webkit-filter: none;
+          filter: none;
+  right: -16px;
+}
+.tooltip-pill[data-tooltip-placement*=right] + .tooltip > .arrow {
+  -webkit-filter: none;
+          filter: none;
+  left: -16px;
+}
+.tooltip-pill[data-tooltip-placement*=end] + .tooltip > .arrow {
+  -webkit-filter: none;
+          filter: none;
+  right: 14px;
+}
+.tooltip {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+  background: white;
+  color: #FFF;
+  padding: 1rem 1.2rem;
+  font-size: 1.3rem;
+  border-radius: 0.4rem;
+  max-width: 24rem;
+  display: none;
+}
+
+.tooltip--dynamic_content {
+  background: var(--color-white);
+  border: 0.1rem solid var(--color-black-200);
+  color: black;
+  -webkit-box-shadow: var(--box-shadow-card);
+          box-shadow: var(--box-shadow-card);
+}
+
+.tooltip[data-show] {
+  display: block;
+}
+
+.tooltip-pill {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 2.4rem;
+  padding: 0.2rem;
+  height: 2.4rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border: 0.1rem solid transparent;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  border: 0.1rem solid var(--color-black-300);
+  background: var(--color-black-200);
+}
+.tooltip-pill__content + .o-svg-icon {
+  margin-left: 0.8rem;
+}
+.tooltip-pill .o-svg-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.tooltip-pill:hover {
+  cursor: pointer;
+}
+
+.notification_counter {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  display: inline-block;
+  width: 1.8rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 100%;
+}
+
+.notifications--section {
+  padding: 1rem 0;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--color-black-300);
+}
+.notifications--section .avatar-small {
+  width: 3rem;
+}
+.notifications--section .avatar-small img {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+}
+.notifications--section p {
+  font-size: 1.4rem;
+  width: calc(100% - 3rem);
+  padding-left: 1rem;
+}
+.notifications--section p a {
+  color: var(--color-green-water);
+}
+.notifications--section p a:hover {
+  text-decoration: underline;
+}
+
+.copy-past-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.copy-past-btn__ref {
+  margin-right: 0.4rem;
+}
+
+.copy-paste-wrapper {
+  padding: 1.8rem;
+  margin: 1.8rem 0;
+  border: 1px solid var(--color-black);
+  border-style: dotted;
+  border-radius: var(--border-radius);
+}
+
+.iconss {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.iconss a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.iconss img {
+  width: 30px;
+  height: 30px;
+}
+
+.tag {
+  background-color: var(--color-black-50);
+  border: 2px dotted var(--color-black-100);
+  color: var(--color-black);
+  font-family: "LufgaBold";
+  border-radius: 4px;
+  padding: 1px 4px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  margin-right: 2px;
+  display: inline-block;
+}
+.tag:hover {
+  text-decoration: underline;
+}
+.tag span.hash {
+  font-family: "LufgaRegular";
+}
+
+.form-tag-list input[type=text] {
+  border: none !important;
+}
+
+.gfield_post_tags_hint.gfield_description {
+  display: none;
+}
+
+.tag-list-wrapper {
+  width: 100%;
+}
+.tag-list-wrapper:focus {
+  border-color: var(--color-green-water);
+  outline: none;
+  -webkit-box-shadow: 0 0 0 3px rgba(33, 126, 104, 0.5);
+          box-shadow: 0 0 0 3px rgba(33, 126, 104, 0.5);
+}
+.tag-list-wrapper span {
+  display: inline-block;
+}
+.tag-list-wrapper span.new-tag {
+  position: relative;
+}
+.tag-list-wrapper span.new-tag input {
+  width: 40px;
+  padding: 0.6rem 0.2rem;
+  background: transparent;
+  border: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-appearance: textfield;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  background: rgba(126, 153, 112, 0.85);
+  background: rgba(240, 235, 235, 0.65);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 900;
+}
+
+.modal__container {
+  background-color: #fff;
+  padding: 1rem;
+  max-width: calc(100% - 4rem);
+  max-height: 100vh;
+  width: calc(100% - 4rem);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.modal__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--color-black-200);
+}
+.modal__header .welcome {
+  margin-top: 1rem;
+  max-width: 50rem;
+}
+.modal__header .welcome p {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  margin-right: 2rem;
+}
+.modal__header .btn .btn__label, .modal__header .card-form .login-submit input[type=submit] .btn__label, .card-form .login-submit .modal__header input[type=submit] .btn__label, .modal__header input.button .btn__label, .modal__header .acf-repeater .-minus .btn__label, .acf-repeater .modal__header .-minus .btn__label, .modal__header .acf-image-uploader .-cancel .btn__label, .acf-image-uploader .modal__header .-cancel .btn__label, .modal__header .acf-basic-uploader .btn__label, .modal__header button.gfgeo-locator-button .btn__label, .modal__header .af-field-type-open-street-map .tools .acf-icon.-minus .btn__label, .af-field-type-open-street-map .tools .modal__header .acf-icon.-minus .btn__label, .modal__header .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon .btn__label, .acf-osm-above .modal__header .leaflet-control-geocoder > .leaflet-control-geocoder-icon .btn__label {
+  display: none;
+}
+.modal__header .btn .o-svg-icon, .modal__header .card-form .login-submit input[type=submit] .o-svg-icon, .card-form .login-submit .modal__header input[type=submit] .o-svg-icon, .modal__header input.button .o-svg-icon, .modal__header .acf-repeater .-minus .o-svg-icon, .acf-repeater .modal__header .-minus .o-svg-icon, .modal__header .acf-image-uploader .-cancel .o-svg-icon, .acf-image-uploader .modal__header .-cancel .o-svg-icon, .modal__header .acf-basic-uploader .o-svg-icon, .modal__header button.gfgeo-locator-button .o-svg-icon, .modal__header .af-field-type-open-street-map .tools .acf-icon.-minus .o-svg-icon, .af-field-type-open-street-map .tools .modal__header .acf-icon.-minus .o-svg-icon, .modal__header .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon .o-svg-icon, .acf-osm-above .modal__header .leaflet-control-geocoder > .leaflet-control-geocoder-icon .o-svg-icon {
+  top: 1px;
+  position: relative;
+}
+
+.modal__title {
+  margin-top: 0;
+  margin-bottom: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.modal__content {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+  padding-top: 1.5rem;
+  padding-right: 2rem;
+  color: rgba(0, 0, 0, 0.8);
+  max-height: 750px;
+}
+
+/**************************\
+  Demo Animation Style
+\**************************/
+@-webkit-keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes mmfadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes mmfadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes mmfadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes mmslideIn {
+  from {
+    -webkit-transform: translateY(15%);
+            transform: translateY(15%);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@keyframes mmslideIn {
+  from {
+    -webkit-transform: translateY(15%);
+            transform: translateY(15%);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+@-webkit-keyframes mmslideOut {
+  from {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  to {
+    -webkit-transform: translateY(-10%);
+            transform: translateY(-10%);
+  }
+}
+@keyframes mmslideOut {
+  from {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  to {
+    -webkit-transform: translateY(-10%);
+            transform: translateY(-10%);
+  }
+}
+.micromodal-slide {
+  display: none;
+}
+
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden=false] .modal__overlay {
+  -webkit-animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+          animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden=false] .modal__container {
+  -webkit-animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+          animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden=true] .modal__overlay {
+  -webkit-animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+          animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden=true] .modal__container {
+  -webkit-animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+          animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+}
+
+@media (min-width: 992px) {
+  .modal__container {
+    padding: var(--default-space);
+    max-width: 75rem;
+  }
+  .modal__header .welcome p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-right: 0;
+  }
+}
+.modal--publish .af-submit {
+  padding-top: var(--default-space);
+  border-top: 1px solid var(--color-black-200);
+}
+
+.grid-slate__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.grid-slate__list .grid-slate {
+  width: calc(33.333% - 1.333px);
+  border-left: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-white);
+}
+.grid-slate__list .grid-slate:nth-child(3n+1) {
+  border-left: 0;
+}
+.grid-slate__list .grid-slate img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.map-slate {
+  padding: 0;
+  overflow: hidden;
+  padding-top: 6px;
+}
+.map-slate:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+}
+.map-slate.real-estate:before {
+  background: linear-gradient(225deg, var(--color-magenta) 0%, var(--color-violet) 100%);
+}
+.map-slate.users:before {
+  background: linear-gradient(225deg, var(--color-yellow) 0%, var(--color-dark-yellow) 100%);
+}
+.map-slate__image {
+  background-color: lightblue;
+  width: 200px;
+  height: 100%;
+}
+.map-slate__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.map-slate__content {
+  width: calc(100% - 132px);
+}
+.map-slate__content * {
+  color: var(--color-black);
+}
+.map-slate .post-location {
+  font-size: 1.4rem;
+}
+.map-slate .card__header__item {
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.map-slate--link {
+  height: 100%;
+}
+
+.event {
+  width: 100%;
+}
+.event__frame {
+  display: block;
+  width: 100%;
+  border: 2px solid var(--color-green-water);
+  border-radius: var(--border-radius--small);
+  padding: 0.4rem;
+}
+.event__frame__link {
+  display: block;
+  width: 100%;
+  background-color: var(--color-green-water);
+  padding: 0.4rem;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+.event__frame__link:hover {
+  background-color: var(--color-green-water-dark);
+}
+.event__frame__description {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.event__frame a {
+  color: white;
+}
+.event--tour {
+  margin-bottom: 1.4rem;
+}
+.event--tour .event__frame {
+  border: 2px solid var(--color-black);
+}
+.event--tour .event__frame__link {
+  background-color: var(--color-black);
+}
+.event--tour .event__frame__link:hover {
+  background-color: var(--color-black);
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 801;
+}
+.header--wrapper {
+  height: 6rem;
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
+}
+.header__right {
+  position: relative;
+}
+.header__title {
+  font-family: "LufgaSemiBold", sans-serif;
+  font-size: 1.7rem;
+  color: var(--color-black);
+}
+.header__title sup {
+  font-size: 0.9rem;
+}
+.header .btn svg *, .header .card-form .login-submit input[type=submit] svg *, .card-form .login-submit .header input[type=submit] svg *, .header input.button svg *, .header .acf-repeater .-minus svg *, .acf-repeater .header .-minus svg *, .header .acf-image-uploader .-cancel svg *, .acf-image-uploader .header .-cancel svg *, .header .acf-basic-uploader svg *, .header button.gfgeo-locator-button svg *, .header .af-field-type-open-street-map .tools .acf-icon.-minus svg *, .af-field-type-open-street-map .tools .header .acf-icon.-minus svg *, .header .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon svg *, .acf-osm-above .header .leaflet-control-geocoder > .leaflet-control-geocoder-icon svg * {
+  stroke-width: 2px;
+}
+
+.header .notifications {
+  position: absolute;
+  bottom: 5px;
+  right: -1rem;
+}
+
+@media (min-width: 600px) {
+  .header--wrapper {
+    background-color: var(--color-white);
+    height: 6rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    border-bottom-left-radius: 2.8rem;
+    border-bottom-right-radius: 2.8rem;
+  }
+  .header__right {
+    -webkit-column-gap: 0.8rem;
+       -moz-column-gap: 0.8rem;
+            column-gap: 0.8rem;
+  }
+}
+@media (min-width: 992px) {
+  .header--home .header--wrapper {
+    margin-top: 2rem;
+    border-radius: 2.8rem;
+  }
+  .header__right {
+    -webkit-column-gap: 1.2rem;
+       -moz-column-gap: 1.2rem;
+            column-gap: 1.2rem;
+  }
+  .header__title {
+    font-size: 2.2rem;
+  }
+  .header__title sup {
+    font-size: 1.2rem;
+  }
+}
+.discover {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+  row-gap: 10px;
+  /* A arranger après mise en place du champ de recherche */
+}
+.discover__container, .needs__actions {
+  border-radius: var(--border-radius);
+  row-gap: 2.4rem;
+}
+.discover__wrap {
+  min-height: 100%;
+}
+.discover--search, .needs__actions {
+  background-image: var(--homazed-linear-gradient);
+  margin-bottom: 0.8rem;
+  padding: 4.6rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  border-radius: 2.8rem;
+  row-gap: 2.4rem;
+}
+.discover--connect {
+  background-color: var(--color-green-water);
+  padding: 4.6rem;
+  border-radius: 2.8rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  row-gap: 2.4rem;
+}
+.discover--connect a {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.discover__title {
+  color: var(--color-page--text);
+  margin-bottom: 2.6rem;
+  font-family: "LufgaSemiBold", sans-serif;
+  font-size: 21px;
+}
+.discover__text {
+  color: var(--color-page--text-reverse);
+  font-size: 1.8rem;
+  font-family: "LufgaMedium", sans-serif;
+  line-height: 3rem;
+}
+.discover__research {
+  background-color: var(--color-black-50);
+  height: 4.4rem;
+  border-radius: var(--border-radius);
+  padding-right: 1.8rem;
+  padding-left: 1.8rem;
+}
+
+.last-news {
+  -webkit-column-gap: 2.5rem;
+     -moz-column-gap: 2.5rem;
+          column-gap: 2.5rem;
+  margin-bottom: 4rem;
+  font-family: "LufgaMedium", sans-serif;
+}
+.last-news dt {
+  text-transform: uppercase;
+}
+
+.last-news svg {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.trending {
+  border-radius: 2.6rem;
+  padding: 1rem;
+}
+.trending-homes, .trending-services {
+  margin-bottom: 4rem;
+}
+.trending__cards {
+  -webkit-column-gap: 1rem;
+     -moz-column-gap: 1rem;
+          column-gap: 1rem;
+}
+.trending__left {
+  height: 100%;
+  margin-right: 18px;
+  margin-left: 18px;
+  padding-top: 5rem;
+  padding-bottom: 1rem;
+}
+.trending__title svg {
+  width: 4.4rem;
+  height: 4.4rem;
+  margin-right: 1.4rem;
+}
+.trending__action {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: auto;
+}
+
+.needs h4 {
+  margin-bottom: 1rem;
+}
+.needs__actions h5 {
+  color: var(--color-page--text-reverse);
+}
+
+@media (min-width: 600px) {
+  .trending {
+    background-color: var(--color-card--bg);
+  }
+}
+@media (min-width: 992px) {
+  .discover--search, .needs__actions {
+    margin-bottom: 0;
+  }
+  .discover__title {
+    font-size: 3.6rem;
+  }
+  .discover__text {
+    font-size: 2.2rem;
+    line-height: 3rem;
+  }
+  .trending__left {
+    padding-bottom: 5rem;
+    margin-right: 3.4rem;
+    margin-left: 3.4rem;
+  }
+  .trending__title {
+    font-size: 32px;
+  }
+}
+.main-content {
+  position: relative;
+  z-index: 20;
+}
+
+.flexi_content {
+  margin: 6rem 0;
+  padding: 0;
+  z-index: 18;
+  position: relative;
+}
+.flexi_content .image + .text, .flexi_content .text + .image, .flexi_content .image + .image {
+  margin-top: 6rem;
+}
+.flexi_content .image video::-webkit-media-controls {
+  display: none;
+}
+.flexi_content .image video {
+  width: 100%;
+}
+.flexi_content .image figcaption {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+}
+.flexi_content .image img {
+  width: 100%;
+}
+.flexi_content .grid-4 {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (min-width: 992px) {
+  .flexi_content--text-image .text__ctn {
+    padding-right: 2.8rem;
+    padding-left: 0.3rem;
+  }
+}
+@media (min-width: 992px) {
+  .flexi_content--image-text .text__ctn {
+    padding-left: 2.8rem;
+  }
+}
+.flexi_content--image-image .grid-4 {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+}
+.flexi_content--image-only {
+  padding: 1rem 0;
+  width: 100%;
+}
+.flexi_content--text-text .title {
+  margin-bottom: 1.8rem;
+}
+
+@media (min-width: 992px) {
+  .flexi_content {
+    margin-top: 6rem;
+  }
+  .flexi_content .image + .text, .flexi_content .text + .image, .flexi_content .image + .image {
+    margin-top: 0;
+  }
+  .flexi_content .text .title {
+    margin-top: -0.5rem;
+  }
+  .flexi_content--text-text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .flexi_content--text-text .text-2-columns {
+    -webkit-column-count: 2;
+       -moz-column-count: 2;
+            column-count: 2;
+    -webkit-column-gap: 40px;
+       -moz-column-gap: 40px;
+            column-gap: 40px;
+  }
+  .flexi_content .text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.login-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.login-wrapper .card-form {
+  width: 100%;
+}
+.login-wrapper .card-form:first-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+.login-wrapper .card-form__centered p {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.login-wrapper .card-form__centered .btn, .login-wrapper .card-form__centered .card-form .login-submit input[type=submit], .card-form .login-submit .login-wrapper .card-form__centered input[type=submit], .login-wrapper .card-form__centered input.button, .login-wrapper .card-form__centered .acf-repeater .-minus, .acf-repeater .login-wrapper .card-form__centered .-minus, .login-wrapper .card-form__centered .acf-image-uploader .-cancel, .acf-image-uploader .login-wrapper .card-form__centered .-cancel, .login-wrapper .card-form__centered .acf-basic-uploader, .login-wrapper .card-form__centered button.gfgeo-locator-button, .login-wrapper .card-form__centered .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .login-wrapper .card-form__centered .acf-icon.-minus, .login-wrapper .card-form__centered .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .login-wrapper .card-form__centered .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+}
+.login-wrapper .frm_forms, .login-wrapper form, .login-wrapper .frm_form_fields, .login-wrapper fieldset, .login-wrapper .frm_fields_container {
+  height: 100%;
+}
+.login-wrapper .frm_fields_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.login-wrapper .frm_form_field:first-child, .login-wrapper .frm_submit {
+  margin-top: auto;
+}
+
+@media (min-width: 992px) {
+  body.form .main--login .login-wrapper .frm_submit {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  body.form .main--login .login-wrapper .frm_submit button[type=submit] {
+    margin: 0;
+  }
+}
+.reset-password {
+  display: inline-block;
+  margin: 1.8rem 0 1.4rem;
+  font-size: 1.4rem;
+  color: #bdbdbd;
+}
+
+.login-remember {
+  margin: 1.6rem 0 1.4rem;
+}
+
+.main--congrats .congrats__icon-container {
+  margin-bottom: 4rem;
+}
+.main--congrats .congrats__icon {
+  padding: 2.4rem;
+  background-image: var(--homazed-linear-gradient);
+  border-radius: 100%;
+  width: 8.8rem;
+  height: 8.8rem;
+}
+.main--congrats .congrats__icon svg path {
+  stroke: var(--color-white);
+}
+.main--congrats .congrats__incentive {
+  margin-bottom: 1.8rem;
+}
+.main--congrats .congrats__actions-container__actions-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.main--congrats .congrats__choice {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+}
+.main--congrats .h3, .main--congrats .card-form__title, .main--congrats p, .main--congrats .congrats__choice {
+  text-align: center;
+}
+.main--congrats .h3 {
+  font-family: "LufgaBold", sans-serif;
+  margin-bottom: 1.6rem;
+}
+.main--congrats .card-form__title {
+  margin-top: unset;
+  margin-bottom: 2.4rem;
+}
+
+@media (min-width: 992px) {
+  .main--congrats .congrats__incentive {
+    max-width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .main--congrats .congrats__actions-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+.profile-content__map {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#map-popup {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 0.9rem;
+  width: calc(100% - 1.8rem);
+  height: 132px;
+  z-index: 5000;
+  border-radius: var(--border-radius--small);
+  -webkit-box-shadow: var(--box-shadow-card--big);
+          box-shadow: var(--box-shadow-card--big);
+}
+
+.post-page__section .h4, .post-page__section .flexi_content .title, .flexi_content .post-page__section .title {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+.post-page__section + .post-page__section {
+  margin-top: 1.6rem;
+}
+.post-page .price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.post-page .post-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.post-image__gallery a {
+  position: relative;
+}
+.post-image__gallery a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0;
+  -webkit-transition: all 0.15s ease;
+  transition: all 0.15s ease;
+  border: 3px solid rgba(0, 0, 0, 0);
+}
+.post-image__gallery a:hover {
+  cursor: pointer;
+}
+.post-image__gallery a:hover:before {
+  opacity: 1;
+  border: 3px solid var(--color-black);
+  cursor: pointer;
+}
+
+.card__header__item--tags {
+  overflow-x: auto; /* Permet le défilement horizontal */
+  white-space: nowrap; /* Empêche le retour à la ligne des éléments */
+  scrollbar-width: thin;
+}
+
+.tag-list {
+  display: inline-block; /* Aligne les tags horizontalement */
+}
+
+.tag {
+  display: inline-block; /* Affiche chaque tag comme un bloc en ligne */
+  margin-right: 10px; /* Espacement entre les tags */
+  padding: 5px 10px; /* Espacement interne */
+  /* background-color: #007bff; /* Couleur de fond des tags */
+  border-radius: 5px; /* Coins arrondis */
+  text-decoration: none; /* Pas de soulignement */
+}
+
+.tag:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+.add-contact-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #0b7439; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none;
+  border-radius: 4px;
+}
+
+.add-contact-btn:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+.fade-out {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+
+.quicklinks {
+  padding: 22px;
+  background: #e6e6e6;
+}
+
+/* popup form edit*/
+.popup {
+  position: fixed;
+  z-index: 1200;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 40%;
+  -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+  -webkit-animation: slideIn 0.4s ease forwards;
+          animation: slideIn 0.4s ease forwards;
+}
+
+.popup-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.popup-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.popup-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 8px;
+}
+
+/* Dropdown styling */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.active-status {
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+.button-update {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 14px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+/* Close button styling */
+.close-btn-circle {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #888; /* Light grey border */
+  border-radius: 50%; /* Makes it circular */
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* Dark color for the "X" */
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn-circle:hover {
+  background-color: #f5f5f5; /* Light background on hover */
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-step {
+  display: none;
+  height: 400px; /* Hauteur de la div */
+  overflow: auto; /* Barre de défilement automatique si nécessaire */
+}
+
+.form-step#step0 {
+  display: block; /* Par défaut, afficher le sommaire */
+}
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-list li {
+  margin: 12px 0;
+}
+
+.step-list a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 6px;
+  display: inline-block;
+  -webkit-transition: background 0.2s ease;
+  transition: background 0.2s ease;
+}
+
+.step-list a:hover {
+  background: #f0f0f0;
+}
+
+.form-navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 30px;
+}
+
+#post-status {
+  color: green;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#update-button {
+  float: right;
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-transition: background 0.2s ease;
+  transition: background 0.2s ease;
+}
+
+#update-button:hover {
+  background: #0056b3;
+}
+
+#prevBtn, #nextBtn {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-transition: background 0.2s ease;
+  transition: background 0.2s ease;
+}
+
+#prevBtn:hover, #nextBtn:hover {
+  background: #0056b3;
+}
+
+@-webkit-keyframes slideIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+/* */
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 30px -15px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/* Conteneur principal du carrousel */
+.map-slate__image {
+  max-width: 300px; /* Largeur du carrousel */
+  margin: 0 auto; /* Centrer le carrousel */
+  border-radius: 8px; /* Arrondir les coins du conteneur */
+  overflow: hidden;
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour effet visuel */
+  background-color: #ffffff; /* Couleur de fond du conteneur */
+  position: relative;
+}
+
+/* Styles des slides */
+.swiper-slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%; /* S'adapte à la largeur du conteneur */
+  padding: 10px;
+}
+
+/* Images des slides */
+.swiper-slide img {
+  width: 100%; /* Ajuste l'image à la taille du slide */
+  height: auto;
+  border-radius: 8px; /* Arrondi les coins de l'image */
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease; /* Animation lors du hover */
+}
+
+.swiper-slide img:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05); /* Agrandit légèrement l'image au survol */
+}
+
+/* Pagination (points en bas) */
+.swiper-pagination {
+  position: relative;
+  bottom: 10px;
+}
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  opacity: 0.7;
+  margin: 0 4px;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background: #007bff; /* Couleur active */
+  opacity: 1;
+}
+
+/* Boutons de navigation (chevrons) */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #007bff; /* Couleur des flèches */
+  top: 50%; /* Centré verticalement */
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  opacity: 0; /* Cacher par défaut */
+  position: absolute;
+}
+
+/* Afficher les chevrons au survol de l'image */
+.map-slate__image:hover .swiper-button-next,
+.map-slate__image:hover .swiper-button-prev {
+  opacity: 1; /* Afficher au survol */
+}
+
+.swiper-button-next {
+  right: 10px; /* Positionné à droite */
+}
+
+.swiper-button-prev {
+  left: 10px; /* Positionné à gauche */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgb(255, 255, 255); /* Fond blanc au survol */
+}
+
+/* Conteneur principal de la barre latérale */
+.sidebar-icons {
+  top: 50%;
+  left: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px 5px;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px; /* Espace entre les icônes */
+}
+
+/* Style des icônes */
+.sidebar-icons .icon {
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.sidebar-icons .icon img {
+  width: 100%;
+  height: auto;
+}
+
+/* Ajouter une animation de survol pour les icônes */
+.sidebar-icons .icon:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.card__header__item--tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.tag-list-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.chevron {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 1;
+}
+
+.left-chevron {
+  left: 0;
+}
+
+.right-chevron {
+  right: 0;
+}
+
+.tag-list-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 30px; /* Add padding to create space for the chevrons */
+}
+
+.tag-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  white-space: nowrap;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.tag-list p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+}
+
+.custom-checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px; /* Décalage pour la case */
+  margin-bottom: 12px;
+  font-size: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; /* Empêche la sélection du texte */
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0; /* Masque la case native */
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ccc;
+  border-radius: 4px; /* Coin arrondi */
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #4CAF50; /* Couleur pour case cochée */
+}
+
+.custom-checkbox .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 15px;
+}
+.row .info p {
+  text-align: left;
+}
+
+/* Structure principale */
+.post-container {
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.post-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 0;
+}
+
+.options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+h1 {
+  color: #333;
+}
+
+.info-section {
+  padding: 10px;
+}
+
+/* Boutons */
+.premium-button,
+.event-button,
+.action-button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.premium-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.event-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.action-button {
+  margin-top: 10px;
+  background-color: #ffc107;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.action-button:hover {
+  background-color: #e0a800;
+}
+
+/* Premium et Event Sections */
+#event-info, #premium-info {
+  background-color: #fafff5;
+}
+
+.reset-password {
+  display: block; /* Transforme le lien en élément de bloc */
+  text-align: center; /* Centre le texte à l'intérieur */
+  margin: 20px auto; /* Centre l'élément lui-même et ajoute un espacement vertical */
+  font-size: 16px; /* Taille de police personnalisée, optionnel */
+  text-decoration: none; /* Retire le soulignement, optionnel */
+  color: #0073aa; /* Couleur du lien, personnalise-la selon ton thème */
+}
+
+.reset-password:hover {
+  color: #005177; /* Change la couleur au survol */
+}
+
+#wp-submit {
+  background: #2b5eb4;
+}
+
+.login-submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-submit input[type=submit] {
+  width: 100%; /* Ajuste la largeur ici si nécessaire */
+  /*max-width: 500px;  Limite la largeur maximale */
+  font-size: 16px;
+  border-radius: 8px; /* Coins arrondis, optionnel */
+}
+
+.separateur {
+  height: 2px;
+  background-color: #ddd;
+  margin: 10px 0;
+}

@@ -1,0 +1,235 @@
+/* ==========================================================================
+  Component: Button Skins
+  ---
+  Rules of this file: you CAN'T touch the box model here, just colors.
+   ========================================================================== */
+
+   
+   /* Primary
+      ========================================================================== */
+   
+   .btn--primary {
+     background: var(--color-btn--bg);
+     border-color: var(--color-btn--bg);
+     color: var(--color-btn--text);
+   
+     svg * {
+       stroke: var(--color-btn--text);
+     }
+
+     &:hover,
+      &.btn--hover {
+        border-color: var(--color-black-700);
+      }
+   
+     &:focus {
+       outline: var(--color-btn--bg-focus) auto 1px;
+     }
+   
+     &:focus:not(:focus-visible) {
+       outline: none;
+     }
+   }
+   
+   /* Highlight
+      ========================================================================== */
+   
+   .btn--highlight {
+     background: var(--color-green-water);
+     border-color: var(--color-green-water);
+     color: var(--color-btn--text);
+   
+     svg * {
+       stroke: var(--color-btn--text);
+     }
+
+     &:hover,
+      &.btn--hover {
+        border-color: var(--color-green-water-dark);
+      }
+   
+     &:focus {
+       outline: var(--color-btn--bg-focus) auto 1px;
+     }
+   
+     &:focus:not(:focus-visible) {
+       outline: none;
+     }
+   }
+
+   /* Transparent
+   ========================================================================== */
+
+  .btn--transparent {
+    background: var(--color-btn--bg-transparent);
+    border-color: var(--color-btn--bg);
+    color: var(--color-btn--text-black);
+    border-color: transparent;
+  
+    svg * {
+      stroke: var(--color-btn--text-black);
+    }
+  
+    &:hover,
+    &.btn--hover {
+      border-color: var(--color-black-300);
+    }
+  
+    &:focus {
+      outline: var(--color-btn--bg-focus) auto 1px;
+    }
+  
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+   
+  /* Transparent inline
+   ========================================================================== */
+
+  .btn--transparent--inline {
+    padding: 0;
+    color: var(--color-black);
+    font-family: "LufgaBold";
+    border: none;
+    height: auto;
+    min-height: auto;
+    &:hover,
+    &.btn--hover {
+      border: none;
+      text-decoration: underline;
+    }
+  }
+  
+  /*
+  Ghost
+  ========================================================================== */
+
+  .btn--ghost {
+    background-color: var(--color-black-300);
+    color: var(--color-btn--text-black);
+    border-color: var(--color-black-300);
+  
+    svg * {
+      fill: transparent;
+    }
+  
+    &:hover,
+    &.btn--hover {
+      border-color: var(--color-black-400);
+    }
+  
+    &:focus:not(:focus-visible) {
+      // outline: none;
+    }
+
+  
+  }
+
+
+  /*
+  Active
+  ========================================================================== */
+  .btn{
+    &.active{
+      background-color: var(--color-green-water);
+      border-color: var(--color-green-water);
+      color: var(--color-white);
+      svg * {
+        stroke: var(--color-white);
+      }
+    }
+  }
+
+  .tab-button.active{
+    background-color: var(--color-white);
+      border-color: var(--color-white);
+      color: var(--color-black);
+      svg * {
+        stroke: var(--color-black);
+      }
+  }
+  
+  
+   /* Shared disabled state for primary and secondary buttons
+      ========================================================================== */
+   
+   *[disabled] .btn--primary,
+   .btn--primary[disabled],
+   .btn--primary:disabled,
+   .btn--disabled {
+     background: var(--color-btn--bg-disabled);
+     border-color: var(--color-btn--bg-disabled);
+     color: var(--color-btn--text);
+     pointer-events: none;
+   
+     svg * {
+       fill: var(--color-btn--text);
+     }
+   
+   }
+
+  
+
+  .square {
+    padding: {
+      right: 7px;
+      left: 7px;
+    }
+  }
+
+   @include mq(small) {
+    .menu-item {
+      background-color: var(--color-black);
+      border-radius: 16px;
+      height: 40px;
+      min-width: 40px;
+
+      path {
+        stroke: var(--color-white);
+      }
+    }
+
+    .square{
+      height: 40px;
+      min-width: 40px;
+    }
+
+    .menu-item:is(.btn--ghost) {
+      background-color: var(--color-black-200);
+
+      path {
+        stroke: var(--color-black);
+      }
+    }
+
+    // .menu-item:not(.btn--icon) {
+    //   padding: {
+    //     right: 16px;
+    //     left: 16px;
+    //   }
+    // }
+
+    .menu-item > span.btn__content {
+      bottom: 0;
+    }
+
+    .menu-item span.btn__label {
+      display: initial;
+      color: var(--color-white);
+      line-height: unset;
+    }
+
+  }
+
+/*
+   Button themes
+*/
+.btn--white {
+  background-color: var(--color-btn--bg-white);
+  color: var(--color-btn--text-black);
+  border: {
+    color: transparent;
+    // radius: 1.4rem;
+  }
+}

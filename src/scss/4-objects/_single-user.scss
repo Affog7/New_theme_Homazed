@@ -1,0 +1,23 @@
+.map--single{
+    #map{
+        // height: 500px;
+    }
+}
+
+.profile-content__map{
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+#map-popup{
+    position: absolute;
+    bottom: .9rem;
+    left: .9rem;
+    width: calc(100% - 1.8rem);
+    height: 132px;
+    z-index: 5000;
+    border-radius: var(--border-radius--small);
+	box-shadow: var(--box-shadow-card--big);
+
+}

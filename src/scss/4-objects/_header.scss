@@ -1,0 +1,92 @@
+// ---------
+// 4-objects
+// Header
+
+.header {
+	position: fixed;
+    top: 0;
+    width: 100%;
+	z-index: 801;
+	&--wrapper{
+		height: 6rem;
+		padding: {
+			right: 1.2rem;
+			left: 1.2rem;
+		}
+	}
+
+	&__left {}
+
+	&__right {
+		position: relative;
+	}
+
+	&__title {
+		font: {
+			family: "LufgaSemiBold", sans-serif;
+			size: 1.7rem;
+		}
+		color: var(--color-black);
+
+		sup {
+			font-size: 0.9rem;
+		}
+	}
+
+	.btn svg *{
+		stroke-width: 2px;
+	}
+}
+
+.header{
+	.notifications{
+		position: absolute;
+		bottom: 5px;
+		right: -1rem;
+	}
+}
+
+@include mq(small) {
+	.header {
+		&--wrapper{
+			background-color: var(--color-white);
+			height: 6rem;
+			padding: {
+				right: 4rem;
+				left: 4rem;
+			}
+			border-bottom: {
+				left-radius: 2.8rem;
+				right-radius: 2.8rem;
+			}
+		}
+
+		&__right {
+			column-gap: .8rem;
+		}
+	}
+}
+
+@include mq(medium) {
+	.header {
+		&--home {
+			.header--wrapper{
+				margin: {
+					top: 2rem;
+				}
+				border-radius: 2.8rem;
+			}
+		}
+
+		&__right {
+			column-gap: 1.2rem;
+		}
+
+		&__title {
+			font-size: 2.2rem;
+			sup {
+				font-size: 1.2rem;
+			}
+		}
+	}
+}

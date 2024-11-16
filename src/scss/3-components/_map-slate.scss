@@ -1,0 +1,52 @@
+.map-slate{
+    padding: 0;
+    overflow: hidden;
+    padding-top: 6px;
+    &:before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 6px;
+        width: 100%;
+    }
+    &.real-estate{
+        &:before{
+            background: linear-gradient(225deg, var(--color-magenta) 0%, var(--color-violet) 100%);
+        }
+    }
+    &.users{
+        &:before{
+            background: linear-gradient(225deg, var(--color-yellow) 0%, var(--color-dark-yellow) 100%);
+        }
+    }
+    &__image{
+        background-color: lightblue;
+        width: 200px;
+        height: 100%;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    } 
+    &__content{
+        width: calc( 100% - 132px);
+        *{
+            color: var(--color-black);
+        }
+    }
+    .post-location{
+        font-size: 1.4rem;
+    }
+    .card__header__item{
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    &--link{
+        height: 100%;
+    }
+}

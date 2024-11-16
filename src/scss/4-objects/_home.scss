@@ -1,0 +1,177 @@
+// ---------
+// 4-objects
+// Home style
+
+
+.discover {
+	margin: {
+		top: 3rem;
+		bottom: 4rem;
+	}
+	row-gap: 10px;
+
+	&__container {
+		border-radius: var(--border-radius);
+		row-gap: 2.4rem;
+	}
+
+	&__wrap {
+		min-height: 100%;
+	}
+
+	&--search {
+		background-image: var(--homazed-linear-gradient);
+		margin-bottom: 0.8rem;
+		padding: 4.6rem;
+		flex-grow: 1;
+		border-radius: 2.8rem;
+		row-gap: 2.4rem;
+	}
+
+	&--connect {
+		background-color: var(--color-green-water);
+		padding: 4.6rem;
+		border-radius: 2.8rem;
+		flex-grow: 1;
+		row-gap: 2.4rem;
+
+		a {
+			width: fit-content;
+		}
+	}
+
+	&__title {
+		color: var(--color-page--text);
+		margin-bottom: 2.6rem;
+		font: {
+			family: "LufgaSemiBold", sans-serif;
+			size: 21px;
+		}
+	}
+
+	&__text {
+		color: var(--color-page--text-reverse);
+		font: {
+			size: 1.8rem;
+			family: "LufgaMedium", sans-serif;
+		}
+		line-height: 3rem;
+	}
+
+	/* A arranger après mise en place du champ de recherche */
+	&__research {
+		background-color: var(--color-black-50);
+		height: 4.4rem;
+		border-radius: var(--border-radius);
+		padding: {
+			right: 1.8rem;
+			left: 1.8rem;
+		}
+	}
+}
+
+.last-news {
+	column-gap: 2.5rem;
+	margin-bottom: 4rem;
+	font-family: "LufgaMedium", sans-serif;
+
+	dt {
+		text-transform: uppercase;
+	}
+}
+
+.last-news svg {
+	align-self: center;
+}
+
+.trending {
+	border-radius: 2.6rem;
+	padding: 1rem;
+
+	&-homes, &-services {
+		margin-bottom: 4rem;
+	}
+
+	&__cards {
+		column-gap: 1rem;
+	}
+
+	&__left {
+		height: 100%;
+		margin: {
+			right: 18px;
+			left: 18px;
+		}
+		padding: {
+			top: 5rem;
+			bottom: 1rem;
+		}
+	}
+
+	&__title {
+		svg {
+			width: 4.4rem;
+			height: 4.4rem;
+			margin-right: 1.4rem;
+		}
+	}
+
+	&__action {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		margin-top: auto;
+	}
+}
+
+.needs {
+	h4 {
+		margin-bottom: 1rem;
+	}
+
+	&__actions {
+		@extend .discover--search;
+		@extend .discover__container;
+
+		h5 {
+			color: var(--color-page--text-reverse);
+		}
+	}
+}
+
+@include mq(small) {
+	.trending {
+		background-color: var(--color-card--bg);
+	}
+}
+
+@include mq(medium) {
+	.discover {
+		&--search {
+			margin-bottom: 0;
+		}
+
+		&__title {
+			font-size: 3.6rem;
+		}
+
+		&__text {
+			font-size: 2.2rem;
+			line-height: 3rem;
+		}
+	}
+
+	.trending {
+		&__left {
+			padding-bottom: 5rem;
+			margin: {
+				right: 3.4rem;
+				left: 3.4rem;
+			}
+		}
+
+		&__title {
+			font-size: 32px;
+		}
+	}
+}

@@ -1,0 +1,100 @@
+.resume {
+	// @extend .bb-2;
+	column-gap: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+
+	&.reverse{
+		flex-direction: row-reverse;
+		justify-content: space-between;
+	}
+
+	&--alone{
+		column-gap: 20px;
+	}
+
+	&__name {
+		font: {
+			family: "LufgaBold", sans-serif;
+		}
+	}
+
+	&__username {
+		color: var(--color-black-500);
+		margin-bottom: 0.6rem;
+		@extend .p;
+	}
+
+	&__account-creation {
+		@extend .resume__username;
+	}
+
+	&__profile-picture {
+		width: 7.5rem;
+	}
+
+	&__data{
+		width: calc(100% - 9.5rem);
+	}
+
+	&__title_supplement{
+		margin-left: .6rem;
+	}
+
+	&__image {
+		width: inherit;
+		height: 7.5rem;
+		border-radius: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		margin-bottom: 0.4rem;
+	}
+
+	&__image--blank{
+		width: 7.5rem;
+		background-image: var(--homazed-linear-gradient);
+
+		.first-letters {
+			font-size: 3rem;
+			color: var(--color-page--text-reverse);
+		}
+	}
+
+	&__picture-edition {
+		font-size: 1rem;
+		text-align: center;
+	}
+}
+
+.resume + .edit-account__quicklinks {
+	margin-top: 2.4rem;
+}
+
+.resume-on-post{
+	padding: 2px;
+	border: 2px solid var(--color-black-500);
+	border-radius: 3.6rem;
+	.resume__profile-picture{
+		width: auto;
+	}
+	.resume__image{
+		width: 3.6rem;
+		height: 3.6rem;
+		margin-bottom: 0;
+	}
+	.resume__account_type{
+		margin-left: 2rem;
+		margin-top: 0;
+		color: var(--color-black);
+	}
+	&:hover{
+		background-color: var(--color-black);
+		color: var(--color-white);
+		border-color:var(--color-black);
+		.resume__account_type, .resume__name{
+			color: var(--color-white);
+		}
+	}
+}

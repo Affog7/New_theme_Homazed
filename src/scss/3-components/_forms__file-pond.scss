@@ -1,0 +1,33 @@
+// .show-if-value.image-wrap{
+//     display: none;
+// }
+
+
+.filepond--drop-label{
+    border: 1px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.gpfup__droparea{
+    background: rgb(241 240 239) !important;
+    border-radius: 10px !important;
+}
+
+button.gfgeo-locator-button{
+    margin-top: 2.8rem;
+    @extend .btn;
+    @extend .btn--ghost;
+}
+
+.gform_wrapper.gravity-theme .gform_page_footer{
+    margin: 0 !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    padding-top: 1.6rem !important;
+    padding-bottom: .6rem !important;
+}
+
+.gform_wrapper.gravity-theme .gform_page_footer button.button{
+    margin-bottom: 0 !important;
+}

@@ -1,0 +1,74 @@
+.acf-image-uploader{
+    border-radius: 0.5em;
+    background-color: rgb(241 240 239);
+    padding: 0 1rem 0 1rem;
+    .show-if-value{
+        display: none;
+    }
+    &.has-value{
+        .show-if-value{
+            display: block;
+            position: relative;
+            .acf-actions{
+                position: absolute;
+                top: 2px;
+                left: 12px;
+            }
+        }
+        .show-if-value.image-wrap{
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            width: 100%;
+            max-width: 100% !important;
+        }
+        .show-if-value img{
+            height: 300px;
+            margin: 0 auto;
+        }
+        .hide-if-value{
+            display: none;
+        }
+    }
+    .acf-actions{
+        float: left;
+        margin-top: 1.8rem;
+    }
+}
+
+.acf-repeater .-minus, .acf-image-uploader .-cancel{
+    display: block;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    min-height: inherit;
+    @extend .btn;
+    @extend .btn--ghost;
+    &:after{
+        content: "x";
+    }
+    // position: absolute;
+    // top: 0;
+}
+
+.acf-row-handle{
+    .-duplicate, .-plus{
+        display: none;
+    }
+}
+
+.acf-basic-uploader{
+    @extend .btn;
+    @extend .btn--ghost;
+    margin: 1rem 1rem 1rem 1rem;
+    &:after{
+        content: "Add a picture";
+    }
+    input[type='file'] {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+}

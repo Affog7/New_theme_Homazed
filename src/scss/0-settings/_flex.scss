@@ -1,0 +1,89 @@
+// ---------
+// 0-settings
+// Flex-box
+
+   $flex-gutter-width: 0.8rem !default;
+
+
+   .flex {
+     display: flex;
+   }
+   
+   .flex-md {
+     @include mq(medium){
+       display: flex;
+     }
+   }
+   
+   .flex-inline {
+     display: inline-flex;
+   }
+   
+   .flex--vertical {
+     flex-direction: column;
+   }
+   
+   .flex--reverse {
+     flex-direction: row-reverse;
+   }
+   
+   .flex--vertical-center {
+     align-items: center;
+   }
+   
+   .flex--horizontal-center {
+     justify-content: center;
+   }
+   
+   .flex--center {
+     justify-content: center;
+     align-items: center;
+   }
+   
+   .flex--justify-between {
+     justify-content: space-between;
+   }
+   
+   .flex--justify-around {
+     justify-content: space-around;
+   }
+   
+   .flex--justify-end {
+     justify-content: flex-end;
+   }
+   
+   .flex--align-start {
+     align-items: flex-start;
+   }
+   
+   .flex--align-baseline {
+     align-items: baseline;
+   }
+   .flex--wrap {
+     flex-wrap: wrap;
+   }
+   
+   .flex--spaced {
+     & > *:not(:last-child) {
+       margin-right: $flex-gutter-width;
+     }
+   }
+   
+   .flex--spaced-wide {
+     & > *:not(:last-child) {
+       margin-right: $flex-gutter-width * 2;
+     }
+   }
+   
+   .flex__item {
+     flex: 1;
+   }
+   
+   .flex__item--shrink {
+     flex: 0 1 0%;
+   }
+   
+   .flex__item--auto {
+     flex: 1 0 auto;
+   }
+   

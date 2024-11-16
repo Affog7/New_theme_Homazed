@@ -1,0 +1,28 @@
+.content{
+    dd{
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
+    ul li + li, dl{
+        margin-top: 1.6rem;
+    }
+    dd{
+        margin-top: .4rem;
+    }
+    ul.inline-list{
+        li{
+            display: inline-block;
+            margin-right: .6rem;
+        }
+        li+li{
+            margin-top: 0;
+        }
+    }
+    a:not(.btn){
+        color: var(--color-black);
+        font-family: "LufgaBold";
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

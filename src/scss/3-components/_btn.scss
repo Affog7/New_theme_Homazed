@@ -1,0 +1,343 @@
+// ---------
+// 3-components
+// Buttons
+
+/* ==========================================================================
+  btn
+ ========================================================================== */
+
+// Border radius
+$btn-border-radius: 2rem !default;
+$btn-border-radius-sm: 1.6rem !default;
+
+// Sizes (heights)
+
+$btn-height: 4rem !default;
+$btn-height-small: 2.6rem !default;
+
+// Font size
+
+$btn-font-size-small: 1.4rem;
+
+// Line height
+
+$btn-line-height: 2rem;
+$btn-line-height-small: 1.8rem;
+
+// Horizontal padding (border included)
+
+$btn-padding-horizontal: 1.6rem !default;
+$btn-padding-horizontal-small: 1rem !default;
+
+// Spacing between icon and label
+
+$btn-icon-spacing: 0.6rem !default;
+$btn-icon-spacing-small: 0.4rem !default;
+
+/* Default size
+   ========================================================================== */
+
+.btn {
+  display: block;
+  appearance: none; // Fix for Mobile Safari
+  text-decoration: none; // to reset <a> element
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: $btn-border-radius;
+  padding:  calc((($btn-height - $btn-line-height - 0.2rem) / 2)) $btn-padding-horizontal;
+  font-size: 1.4rem;
+  font-family: "LufgaMedium";
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  display: inline-flex;
+  transition: all .2s ease;
+
+  border: {
+    style: solid;
+    width: 0.2rem;
+    color: var(--color-btn--bg);
+  }
+
+  min-height: 4rem;
+  height: 4rem;
+
+  .o-svg-icon {
+    height: inherit;
+    width: 2rem;
+    svg{
+      display: block;
+      height: 100%;
+      width: 100%;
+      path{
+        stroke-width: 2;
+      }
+    }
+  }
+}
+
+// a.btn, button.btn {
+//   display: block;
+// }
+
+button.btn {
+  appearance: none;
+  margin: 0;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+input.btn {
+  height: 4rem;
+}
+
+.btn .btn__content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  pointer-events: none;
+  height: 100%;
+}
+
+.btn__label {
+  line-height: $btn-line-height;
+  white-space: nowrap;
+
+  height: inherit;
+}
+
+.o-svg-icon + .btn__label {
+  margin-left: $btn-icon-spacing;
+}
+
+.btn__label + .o-svg-icon {
+  margin-left: $btn-icon-spacing;
+}
+
+.btn:not(.btn--icon) .o-svg-icon:first-child {
+  margin-left: -0.1rem;
+}
+
+.btn:not(.btn--icon) .o-svg-icon:last-child {
+  margin-right: -0.1rem;
+}
+
+// Different spacing for carets
+.btn:not(.btn--icon) [class*='o-svg-icon-arrows-caret']:last-child {
+  margin-left: 0;
+  margin-right: -1.5rem;
+}
+
+/* Btn menu item
+   ========================================================================== */
+
+.menu-item.btn--ghost {
+  border-radius: $btn-border-radius-sm;
+}
+
+/* Icon-only Button
+    ========================================================================== */
+
+.btn--icon {
+  width: 40px;
+  display: block;
+  text-align: center;
+  display: flex;
+  padding: .7rem;
+  // &:not(.square){
+  //   .o-svg-icon{
+  //     top: 1px;
+  //     position: relative;
+  //   }
+  // }
+}
+
+/* Button Group
+    ========================================================================== */
+
+.btn-group{
+  column-gap: 0.4rem;
+  display: flex;
+  &--related{
+    column-gap: 0;
+    .btn{
+      border-radius: 0;
+      padding: .9rem .9rem;
+      &:first-child{
+        padding-left: 1.3rem;
+        border-top-left-radius: $btn-border-radius;
+        border-bottom-left-radius: $btn-border-radius;
+      }
+      &:last-child{
+        padding-right: 1.3rem;
+        border-top-right-radius: $btn-border-radius;
+        border-bottom-right-radius: $btn-border-radius;
+      }
+    }
+    .btn.active + .btn:hover{
+      border-left-color: transparent;
+    }
+    .btn:has(+ .active){
+      border-right-color: transparent;
+    }
+  }
+}
+
+.btn--small{
+  padding: .3rem 1rem;
+  font-size: 1.2rem;
+  height: 3rem;
+  min-height: 3rem;
+  .o-svg-icon {
+    height: inherit;
+    width: 1.6rem;
+    margin-top: -.1rem;
+  }
+}
+
+.btn--xsmall{
+  width: 3rem;
+  height: 3rem;
+  min-height: 3rem;
+  padding: .3rem .3rem;
+  .o-svg-icon{
+    width: 1.4rem;
+  }
+}
+
+.btn--inline{
+  display: inline-block;
+  margin-top: -.3rem;
+}
+
+
+
+.relation_btn--like.relation_btn--checked {
+  svg {
+    fill: var(--color-red);
+
+    path {
+      stroke: var(--color-red);
+    }
+  }
+}
+
+.relation_btn--favorite.relation_btn--checked {
+  svg {
+    path:first-child {
+      fill: var(--color-yellow);
+      stroke: var(--color-yellow);
+    }
+
+    path:last-child {
+      fill: var(--color-btn--bg-white);
+      stroke: var(--color-btn--bg-white);
+    }
+  }
+}
+
+.btn.show-favorites-checked{
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  color: var(--color-btn--bg-white);
+  svg {
+    path:first-child {
+      fill: var(--color-btn--bg-white);
+      stroke: var(--color-btn--bg-white);
+    }
+
+    path:last-child {
+      fill: var(--color-yellow);
+      stroke: var(--color-yellow);
+    }
+  }
+  &:hover{
+    border-color: var(--color-dark-yellow);
+  }
+}
+
+.relation_btn--recommend.relation_btn--checked {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  color: var(--color-btn--bg-white);
+  svg {
+    path {
+      stroke: var(--color-dark-yellow);
+    }
+  }
+}
+
+.relation_btn--contact-list.relation_btn--checked, .relation_btn--contact-list.relation_btn--contact-requested {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-btn--bg-white);
+  svg {
+    fill: var(--color-btn--bg-white);
+    
+    path {
+      stroke: var(--color-btn--bg-white); 
+    }
+  }
+  &:hover{
+    border-color: var(--color-lightblue);
+  }
+}
+
+.relation_btn--contact-list.relation_btn--contact-him-requested {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-btn--bg-white);
+  svg {
+    fill: var(--color-btn--bg-white);
+    
+    path {
+      stroke: var(--color-btn--bg-white); 
+    }
+  }
+  &:hover{
+    border-color: var(--color-lightgreen);
+  }
+}
+
+.relation_btn--contact-list.relation_btn--contact-relation-done {
+  background-color: var(--color-darkgreen);
+  border-color: var(--color-darkgreen);
+  color: var(--color-btn--bg-white);
+  svg {
+    fill: var(--color-btn--bg-white);
+    
+    path {
+      stroke: var(--color-btn--bg-white); 
+    }
+  }
+  &:hover{
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+  }
+}
+
+.btn.notification{
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-btn--bg-white);
+}
+
+@include mq(medium) {
+  .btn {
+    font-size: 1.6rem;
+  }
+  .btn--small{
+    font-size: 1.4rem;
+  }
+}
+
+
+.edit_post_btn{
+  position: relative;
+  margin-left: -3.5rem;
+}

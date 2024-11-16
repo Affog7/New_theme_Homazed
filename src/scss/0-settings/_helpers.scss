@@ -1,0 +1,124 @@
+// ---------
+// 0-settings
+// Helpers
+
+.p-rel{
+    position: relative;
+}
+
+.t-left{
+    text-align: left !important;
+}
+
+.t-center{
+    text-align: center !important;
+}
+
+.u-sr-accessible{
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.hide{
+    display: none;
+    opacity: 0;
+}
+.hide--mobile, .hide--mobile--flex{
+    display: none !important;
+}
+.hide--desktop{
+    display: block !important;
+}
+.hide--desktop--flex{
+    display: flex !important;
+}
+
+
+@include  mq(large) {
+    .hide--mobile{
+        display: block !important;
+    }
+    .hide--mobile--flex{
+        display: flex !important;
+    }
+    .hide--desktop, .hide--desktop--flex{
+        display: none !important;
+    }
+}
+
+.g1{
+    flex-grow: 1;
+}
+
+
+
+
+// /* width */
+// ::-webkit-scrollbar {
+//     width: 4px;
+// }
+  
+// ::-webkit-scrollbar:hover {
+//     width: 4px;
+// }
+  
+// /* Track */
+// ::-webkit-scrollbar-track {
+//     background: var(--color-white);
+//     padding: 2px;
+//     margin: 2px;
+//     width: 8px;
+// }
+  
+//   /* Handle */
+//   ::-webkit-scrollbar-thumb {
+//     background: var(--color-green-water);
+//     padding-right: 2px;
+//     width: 4px;
+//     right: 2px;
+// }
+  
+//   /* Handle on hover */
+//   ::-webkit-scrollbar-thumb:hover {
+//     // background: var(--color-card--bg);
+// }
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.bb-2{
+    padding-bottom: 1.4rem;
+	margin-bottom: 1rem;
+	border-bottom: {
+		style: solid;
+		width: 2px;
+		color: var(--color-black-50);
+	}
+}
+
+.bt-2{
+    padding-top: 1.4rem;
+	margin-top: 1rem;
+	border-top: {
+		style: solid;
+		width: 2px;
+		color: var(--color-black-50);
+	}
+}
+
+.mb-sm{
+    margin-bottom: 1.6rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
+}

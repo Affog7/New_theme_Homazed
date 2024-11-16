@@ -1,0 +1,63 @@
+.card-form {
+	background-color: var(--color-white);
+	padding: 1.8rem;
+	border-radius: var(--border-radius);
+	box-shadow: var(--box-shadow-card);
+
+	+ .card-form{
+		margin-top: 1.6rem
+	}
+
+	&__title{
+		@extend .h2;
+	}
+
+	.frm_section_spacing {
+		margin-bottom: 2.4rem;
+	}
+
+	.mandatory {
+		font-size: 1.2rem;
+		margin-bottom: 2.4rem;
+	}
+
+	.edit-account {
+		margin-bottom: 2.4rem;
+	}
+
+	.login-submit {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		display: flex;
+		justify-content: space-between;
+		
+		input[type=submit] {
+			@extend.btn;
+			@extend.btn--primary;
+		}
+	}
+}
+
+.default-bckg{
+	background-color: var(--color-white);
+	padding: 1.8rem;
+	border-radius: var(--border-radius);
+	box-shadow: var(--box-shadow-card);
+	&.np{
+		padding: 0;
+		overflow: hidden;
+	}
+}
+
+@include mq(medium) {
+	.card-form {
+		.account-actions {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.edit-account {
+			margin-bottom: 0;
+		}
+	}
+}

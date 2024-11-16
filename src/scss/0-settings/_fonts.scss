@@ -1,0 +1,160 @@
+// ---------
+// 0-settings
+// Fonts
+
+@font-face {
+  font-family: "LufgaRegular";
+  src: url("/src/fonts/LufgaRegular.woff") format("woff"),
+  url("/src/fonts/LufgaRegular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LufgaExtraBold";
+  src: url("/src/fonts/LufgaExtraBold.woff") format("woff"),
+  url("/src/fonts/LufgaExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LufgaBold";
+  src: url("/src/fonts/LufgaBold.woff") format("woff"),
+  url("/src/fonts/LufgaBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LufgaMedium";
+  src: url("/src/fonts/LufgaMedium.woff") format("woff"),
+  url("/src/fonts/LufgaMedium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "LufgaSemiBold";
+  src: url("/src/fonts/LufgaSemiBold.woff") format("woff"),
+  url("/src/fonts/LufgaSemiBold.ttf") format("truetype");
+}
+
+@font-feature-values "Plex Serif" {
+  @styleset { alt-a: 1; alt-g: 2; alt-u: 3; alt-w: 4; }
+}
+
+html {
+  // font-size: 58.33%; // 14px
+  // @include  mq(medium) {
+  //   font-size: 58.33%; // 14px
+  // }
+  // @include  mq(large) {
+    font-size: 10px; // Base 10
+  // }
+  
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "LufgaRegular", sans-serif;
+  position: relative;
+  height: 100vh;
+}
+
+p, a {
+  font-family: "LufgaRegular", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 0;
+}
+
+
+p, .p, dt, dd{
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  font-feature-settings: 'ss01' 1, 'ss02' 1, 'ss03' 1, 'ss04' 0;
+
+  &+p{
+    margin-top: 1rem;
+  }
+}
+
+.p-sm{
+  font-size: 1.2rem;
+}
+
+.p-xs{
+  font-size: 1rem;
+}
+
+.-light{
+  opacity: .6;
+}
+
+.sub-title{
+  text-transform: uppercase;
+  color: var(--color-page--text);
+  margin-bottom: 1.5rem;
+}
+
+h1, .h1 {
+  font-size: 2.4rem;
+  line-height: 1.36;
+}
+
+h2, .h2 {
+  font-size: 1.8rem;
+  line-height: 1.36;
+}
+
+ h3, .h3 {
+  font-size: 1.8rem;
+  line-height: 1.36;
+}
+
+h4, .h4 {
+  font-size: 1.6rem;
+  line-height: 1.36;
+}
+ h5, .h5 {
+  font-size: 1.4rem;
+  line-height: 1.36;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+ font-family: "LufgaBold", sans-serif;
+ font-weight: 500;
+ font-style: normal;
+ color: var(--color-black-800);
+ &+p{
+   margin-top: 1.6rem;
+ }
+}
+
+h1 + h2, h2 + h3, h3 + h4, h4 + h5{
+  margin-top: 1rem;
+}
+
+abbr{
+  text-decoration: none;
+}
+
+@include mq(medium) {
+  p, .p, dt, dd {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    &+p{
+      margin-top: 1.6rem;
+    }
+  }
+  
+  .p-sm{
+    font-size: 1.4rem;
+  }
+
+  .p-xs{
+    font-size: 1.2rem;
+  }
+
+
+  h2, .h2 {
+    font-size: 2rem;
+  }
+  h3, .h3 {
+    font-size: 1.9rem;
+    line-height: 1.36;
+  }
+}

@@ -1,0 +1,111 @@
+// ---------
+// 4-objects
+// Flexible content
+
+$space-flexi-content: 6rem;
+
+.main-content{
+    position: relative;
+    z-index: 20;
+}
+
+.flexi_content{
+    margin: $space-flexi-content 0;
+    padding: 0;
+    z-index: 18;
+    position: relative;
+
+    .title{
+        @extend .h4;
+    }
+
+    .image + .text, .text + .image, .image + .image{
+        margin-top: $space-flexi-content;
+    }
+
+    .image{
+        video::-webkit-media-controls {
+            display: none;
+        }
+        video{
+            width: 100%;
+        }
+        figcaption{
+            text-align: center;
+            font-size: 1.4rem;
+            margin-top: .8rem;
+        }
+        img{
+            width: 100%;
+        }
+    }
+
+
+    .grid-4{
+        align-items: center;
+    }
+    
+    &--text-image{
+        @include mq(medium) {
+            .text{
+                &__ctn{
+                    padding-right: 2.8rem;
+                    padding-left: .3rem;
+                }
+            }
+        }
+    }
+    &--image-text{
+        @include mq(medium) {
+            .text{
+                &__ctn{
+                    padding-left: 2.8rem;
+                    // padding-right: .2rem;
+                }
+            }
+        }
+    }
+    &--image-image{
+        .grid-4{
+            align-items: end;
+        }
+    }
+
+    &--image-only{
+        padding: 1rem 0;
+        @extend .container;
+        width: 100%;
+    }
+
+    &--text-text .title{
+        margin-bottom: 1.8rem;
+    }
+
+}
+
+@include mq(medium) {
+    .flexi_content{
+        margin-top: $space-flexi-content;
+
+        .image + .text, .text + .image, .image + .image{
+            margin-top: 0;
+        }
+
+        .text .title{
+            margin-top: -.5rem;
+        }
+
+        &--text-text{
+            padding-left: 0;
+            padding-right: 0;
+            .text-2-columns{
+                column-count: 2;
+                column-gap: 40px;
+            }
+        }
+        .text{
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}

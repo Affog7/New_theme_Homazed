@@ -1,0 +1,78 @@
+// ---------
+// By Marcel Pirnay © hellomarcel
+// V1: 11-2022
+
+//----- '0-settings
+@import '0-settings/reset';
+@import '0-settings/colors';
+@import '0-settings/breakpoints';
+@import '0-settings/print';
+@import '0-settings/media-queries';
+@import '0-settings/fonts';
+// @import '0-settings/grid--debug';
+@import '0-settings/grid-template';
+@import '0-settings/flex';
+@import '0-settings/space';
+@import '0-settings/helpers';
+@import '0-settings/themes';
+
+//----- '1-tools
+@import '1-tools/mixins';
+
+//----- '2-generic
+@import '2-generic/container';
+@import '2-generic/content';
+@import '2-generic/footer';
+
+//----- '3-components
+@import '3-components/card';
+@import '3-components/btn';
+@import '3-components/btn-skins';
+@import '3-components/card-homazed';
+@import '3-components/card-form';
+@import '3-components/pills';
+@import '3-components/navigation';
+@import '3-components/dropdown';
+@import '3-components/navigation-burger';
+
+//----- Forms
+@import '3-components/forms';
+@import '3-components/forms__file_upload';
+@import '3-components/forms__file-pond';
+@import '3-components/forms__checkboxes_radios';
+@import '3-components/forms__timeline';
+
+@import '3-components/maps';
+@import '3-components/carrousel';
+
+@import '3-components/user-resume';
+@import '3-components/avatar-list';
+@import '3-components/public-profile';
+@import '3-components/wall';
+@import '3-components/quicklinks';
+@import '3-components/tooltip';
+@import '3-components/copy-paste';
+@import '3-components/tags';
+@import '3-components/modal';
+@import '3-components/grid-slate';
+@import '3-components/map-slate';
+@import '3-components/event';
+
+//----- '4-objects
+@import '4-objects/header';
+@import '4-objects/lang-switch';
+@import '4-objects/home';
+@import '4-objects/hero';
+@import '4-objects/flexi-content';
+@import '4-objects/login';
+@import '4-objects/congrats';
+@import '4-objects/single-user';
+@import '4-objects/single-post';
+
+
+//-----'5-home 
+@import '5-home/index';
+
+// todo_alassane
+//-----'6 auth
+@import '6-auth/login.scss'

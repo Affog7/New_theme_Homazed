@@ -1,0 +1,81 @@
+.main--congrats {
+	.congrats {
+		&__icon-container {
+			margin-bottom: 4rem;
+		}
+
+		&__icon {
+			padding: 2.4rem;
+			background-image: var(--homazed-linear-gradient);
+			border-radius: 100%;
+			width: 8.8rem;
+			height: 8.8rem;
+
+			svg {
+				path {
+					stroke: var(--color-white);
+				}
+			}
+		}
+
+		&__profile-link {}
+
+		&__actions {}
+
+		&__incentive {
+			margin-bottom: 1.8rem;
+		}
+
+		&__actions-container{
+			@extend .bt-2;
+			&__actions-container {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
+
+		&__choice {
+			margin: {
+				top: 1.2rem;
+				bottom: 1.2rem;
+			}
+			font-size: 1.2rem;
+		}
+	}
+
+	.h3, .card-form__title, p, .congrats__choice {
+		text-align: center;
+	}
+
+	.h3 {
+		font-family: "LufgaBold", sans-serif;
+		margin-bottom: 1.6rem;
+	}
+
+	.card-form__title {
+		margin: {
+			top: unset;
+			bottom: 2.4rem;
+		}
+	}
+}
+
+@include mq(medium) {
+	.main--congrats {
+		.congrats {
+			&__incentive {
+				max-width: 400px;
+				margin: {
+					right: auto;
+					left: auto;
+				}
+			}
+
+			&__actions-container {
+				display: flex;
+				justify-content: space-between;
+			}
+
+		}
+	}
+}

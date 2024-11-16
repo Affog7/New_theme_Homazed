@@ -1,0 +1,70 @@
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .card-form {
+        width: 100%;
+
+        &:first-child {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            align-content: center;
+        }
+
+        &__centered {
+            p {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .btn {
+                display: block;
+                width: fit-content;
+                margin: {
+                    right: auto;
+                    left: auto;
+                }
+            }
+        }
+    }
+
+    .frm_forms, form, .frm_form_fields, fieldset, .frm_fields_container {
+        height: 100%;
+    }
+
+    .frm_fields_container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .frm_form_field:first-child, .frm_submit {
+        margin-top: auto;
+    }
+}
+
+@include mq(medium) {
+    body.form {
+        .main--login {
+            .login-wrapper {
+                .frm_submit {
+                    justify-content: space-between;
+
+                    button[type=submit] {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.reset-password{
+    display: inline-block;
+    margin: 1.8rem 0 1.4rem;
+    font-size: 1.4rem;
+    color: #bdbdbd;
+}
+.login-remember{
+    margin: 1.6rem 0 1.4rem;
+}

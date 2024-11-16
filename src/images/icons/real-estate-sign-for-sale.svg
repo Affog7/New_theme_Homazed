@@ -1,0 +1,16 @@
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.73535 10.6177V6.11768C4.73535 5.28925 5.40692 4.61768 6.23535 4.61768H7.73535" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.73535 7.61768H6.98535" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.7354 10.6177V4.61768" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.7354 4.61768H17.8604C18.8959 4.61768 19.7354 5.45714 19.7354 6.49268C19.7354 7.52821 18.8959 8.36768 17.8604 8.36768H16.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.7354 10.6177L17.4854 8.36768" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.2354 4.61768C11.4069 4.61768 10.7354 5.28925 10.7354 6.11768V9.11768C10.7354 9.9461 11.4069 10.6177 12.2354 10.6177C13.0638 10.6177 13.7354 9.9461 13.7354 9.11768V6.11768C13.7354 5.28925 13.0638 4.61768 12.2354 4.61768Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.7354 13.6177V18.1177C13.7354 18.9461 14.4069 19.6177 15.2354 19.6177H16.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.73535 13.6176H3.23535C2.49251 13.5441 1.82673 14.0768 1.73535 14.8176C1.73535 16.6176 4.73535 16.6176 4.73535 18.4176C4.64397 19.1585 3.97819 19.6911 3.23535 19.6176H1.73535" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.73535 19.6177V15.1177C7.73535 14.2892 8.40692 13.6177 9.23535 13.6177C10.0638 13.6177 10.7354 14.2892 10.7354 15.1177V19.6177" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.73535 16.6177H10.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.7354 19.6177H21.2354C20.4069 19.6177 19.7354 18.9461 19.7354 18.1177V15.1177C19.7354 14.2892 20.4069 13.6177 21.2354 13.6177H22.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.7354 16.6177H22.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.73535 1.61768H22.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.73535 22.6177H22.7354" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

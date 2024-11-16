@@ -1,0 +1,31 @@
+.copy-past-btn{
+  display: flex;
+  align-items: center;
+  &__ref{
+    margin-right: .4rem;
+  }
+}
+
+.copy-paste-wrapper{
+  padding: 1.8rem;
+  margin: 1.8rem 0;
+  border: 1px solid var(--color-black);
+  border-style: dotted;
+  border-radius: var(--border-radius);
+}
+
+// todo_augustin
+.iconss {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.iconss a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.iconss img {
+  width: 30px;
+  height: 30px;
+}

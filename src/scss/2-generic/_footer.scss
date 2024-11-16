@@ -1,0 +1,20 @@
+.user__actions{
+	background-color: var(--color-white);
+	position: sticky;
+	bottom: 0;
+	width: 100%;
+	box-shadow: var(--box-shadow-card);
+	z-index: 800;
+	&__container{
+		width: calc(100% - 2.8rem);
+		max-width: 60rem;
+		margin: 0 auto;
+		padding: 1rem 0;
+	}
+}
+
+@include mq(xsmall){
+	.user__actions__container{
+		width: calc(100% - 4rem);
+	}
+}

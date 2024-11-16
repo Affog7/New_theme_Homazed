@@ -1,0 +1,90 @@
+$dropdown_hover:rgb(220, 220, 220);
+$dropdown_paddgin_h: 1.3rem;
+
+.dropdown{
+   position: relative;
+   margin-left: 1rem;
+   display: block;
+   width: auto;
+    &--wrapper{
+        background: var(--color-pill--bg);
+        position: absolute;
+        width: auto;
+        border-radius: var(--border-radius);
+        z-index: 1000001;
+        overflow: hidden;
+        &.open{
+            box-shadow: 0px 6px 22px rgba(black, 0.12);
+        }
+    }
+}
+
+
+
+.dropdown-menu{
+	position: absolute;
+    width: 100%;
+    border-bottom-right-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+
+    &__item{
+        width: 100%;
+        &__link{
+            display: block;
+            width: 100%;
+            padding: 1.5rem $dropdown_paddgin_h;
+            height: 5.4rem;
+            font-size: 1.6rem;
+            line-height: 2.2rem;
+            color: var(--color-pill--text);
+            &:hover{
+                background-color: $dropdown_hover;
+            }
+            &:before{
+                content: attr(data-label);
+                display: block;
+            }
+            &:after{
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                left: $dropdown_paddgin_h;
+                width: calc(100% - ($dropdown_paddgin_h*2));
+                height: 1px;
+                background-color: $dropdown_hover;
+                color: var(--color-page--text);
+            }
+            span{
+                @extend .u-sr-accessible;
+            }
+        }
+        &+.dropdown-menu__item{
+            .dropdown-menu__item__link:after{
+                top: -1px;
+            }
+        }
+    }   
+}
+
+.dropdown-toggle{
+    display: block;
+    padding: 1.5rem $dropdown_paddgin_h;
+    height: 5.4rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    transition: background-color .3s ease;
+    border: 1px solid transparent;
+    color: var(--color-page--text);
+    &:hover{
+        background-color: $dropdown_hover;
+    }
+    .dropdown--wrapper.open &{
+        &:hover{
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+}

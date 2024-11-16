@@ -1,0 +1,94 @@
+.af-field-type-checkbox, .af-field-type-radio{
+	.af-label{
+		margin-bottom: 1rem;
+	}
+}
+
+
+.gfield_checkbox, .gfield_radio, .login-remember {
+	display: flex;
+	flex-direction: column;
+	row-gap: 0.6rem;
+}
+
+.gchoice {
+	display: flex;
+	align-items: center;
+}
+
+.gchoice > label, .login-remember > label {
+	font-size: 1.4rem;
+	display: flex !important;
+	align-items: center;
+	column-gap: 0.8rem;
+	display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+
+	.svg_wrapper {
+		position: relative;
+		border: {
+			style: solid;
+			width: 0.1rem;
+			color: var(--color-black);
+			radius: var(--forms-radius);
+		}
+		background-color: var(--color-white);
+		width: 2.6rem;
+		height: 2.6rem;
+	}
+
+	svg {
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+		width: 1.4rem;
+		height: 1.4rem;
+
+		path {
+			stroke: {
+				dasharray: 3rem;
+				dashoffset: -3rem;
+			}
+			transition: stroke-dashoffset .2s ease-out;
+		}
+	}
+}
+
+.gchoice > input[type=checkbox], .gchoice > input[type=radio], .login-remember > label input[type=checkbox] {
+	position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+	&:checked + label .svg_wrapper {
+		background-color: var(--color-black);
+	}
+
+    &:checked + label .svg_wrapper svg path {
+		stroke: {
+			dashoffset: 0;
+			width: 0.2rem;
+		}
+		stroke: var(--color-white);
+    }
+}
+
+.gchoice > label{
+
+	.svg_wrapper {
+		border: {
+			radius: 2.6rem;
+		}
+	}
+}
+
+@include mq(medium) {
+	.gfield_checkbox > li > label, .gchoice > label {
+		font-size: 1.6rem;
+	}
+	.gfield_checkbox, .gfield_radio {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+	}
+}

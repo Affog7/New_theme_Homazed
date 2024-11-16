@@ -1,0 +1,37 @@
+.reset-password {
+    display: block; /* Transforme le lien en élément de bloc */
+    text-align: center; /* Centre le texte à l'intérieur */
+    margin: 20px auto; /* Centre l'élément lui-même et ajoute un espacement vertical */
+    font-size: 16px; /* Taille de police personnalisée, optionnel */
+    text-decoration: none; /* Retire le soulignement, optionnel */
+    color: #0073aa; /* Couleur du lien, personnalise-la selon ton thème */
+}
+
+.reset-password:hover {
+    color: #005177; /* Change la couleur au survol */
+}
+
+
+#wp-submit{
+    background: #2b5eb4
+}
+
+.login-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-submit input[type="submit"] {
+    width: 100%; /* Ajuste la largeur ici si nécessaire */
+    /*max-width: 500px;  Limite la largeur maximale */
+    //padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px; /* Coins arrondis, optionnel */
+}
+
+.separateur {
+    height: 2px;
+    background-color: #ddd;
+    margin: 10px 0;
+  }

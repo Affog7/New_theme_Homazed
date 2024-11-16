@@ -1,0 +1,27 @@
+.quicklinks{
+    margin-bottom: 1.6rem;
+    &--item{
+        padding: 1.6rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--color-black);
+        border-top: 1px solid var(--color-black-50);
+        svg{
+            width: 2rem;
+        }
+    }
+}
+
+a.quicklinks--item{
+    .card-popup &{
+        padding-right: 2.6rem !important;
+    }
+    &:hover{
+        background-color: var(--color-black-300);
+    }
+}
+
+.resume + .quicklinks{
+    margin-top: 2rem;
+}

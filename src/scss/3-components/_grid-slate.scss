@@ -1,0 +1,19 @@
+.grid-slate__list{
+    display: flex;
+    flex-wrap: wrap;
+    .grid-slate{
+        width: calc(33.333% - 1.333px);
+        border-left: 2px solid var(--color-white);
+        border-bottom: 2px solid var(--color-white);
+        
+        &:nth-child(3n + 1){
+            border-left: 0;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+    }
+}

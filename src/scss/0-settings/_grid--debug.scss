@@ -1,0 +1,13 @@
+// ---------
+// 0-settings
+// Grid-debug
+  
+  .container{
+    // background-color: transparentize(red, .95);
+  }
+  .grid{
+    // background-color: transparentize(green, .85);
+  }
+  [class*='grid-col']{
+    background-color: transparentize(red, .75);
+  }

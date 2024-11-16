@@ -1,0 +1,56 @@
+.tag{
+    background-color: var(--color-black-50);
+    border: 2px dotted var(--color-black-100);
+    color: var(--color-black);
+    font-family: "LufgaBold";
+    border-radius: 4px;
+    padding: 1px 4px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    margin-right: 2px;
+    display: inline-block;
+    &:hover{
+        text-decoration: underline;
+    }
+    span.hash{
+        font-family: "LufgaRegular";
+	}
+}
+
+.form-tag-list{
+    input[type=text]{
+        border: none !important;
+    }
+}
+
+.gfield_post_tags_hint.gfield_description{
+    display: none;
+}
+
+.tag-list-wrapper{
+	width:100%;
+	&:focus {
+		border-color: var(--color-green-water);
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(33,126,104,.5);
+	}
+
+    span{
+        display: inline-block;
+        &.new-tag{
+            position: relative;
+            input{
+                width: 40px;
+                padding: .6rem .2rem ;
+                background: transparent;
+                border: none;
+                outline: 0;
+                box-shadow: none;
+                -webkit-appearance: textfield;
+            }
+        }
+    }
+}
+
+
+

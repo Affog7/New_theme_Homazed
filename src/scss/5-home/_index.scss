@@ -1,0 +1,571 @@
+.card__header__item--tags {
+    overflow-x: auto; /* Permet le défilement horizontal */
+    white-space: nowrap; /* Empêche le retour à la ligne des éléments */
+    scrollbar-width: thin;
+}
+
+.tag-list {
+    display: inline-block; /* Aligne les tags horizontalement */
+}
+
+.tag { 
+    display: inline-block; /* Affiche chaque tag comme un bloc en ligne */
+    margin-right: 10px; /* Espacement entre les tags */
+    padding: 5px 10px; /* Espacement interne */
+   /* background-color: #007bff; /* Couleur de fond des tags */
+     border-radius: 5px; /* Coins arrondis */
+    text-decoration: none; /* Pas de soulignement */
+}
+
+.tag:hover {
+    background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+
+.add-contact-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #0b7439; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte */
+    border: none;
+    border-radius: 4px;
+}
+
+.add-contact-btn:hover {
+    background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+.quicklinks{
+    padding: 22px;
+    background: #e6e6e6;
+}
+
+
+/* popup form edit*/
+.popup {
+   position: fixed;
+   z-index: 1200;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+ .popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 40%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    transform: translateY(-10px);
+    animation: slideIn 0.4s ease forwards;
+ }
+ .popup-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.popup-header h2 {
+   margin: 0;
+   font-size: 18px;
+}
+
+.popup-controls {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}
+
+/* Dropdown styling */
+.dropdown {
+   position: relative;
+   display: inline-block;
+}
+
+.active-status {
+   cursor: pointer;
+   font-weight: bold;
+   color: #333;
+}
+
+.dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f9f9f9;
+   min-width: 120px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+   border-radius: 4px;
+}
+
+.dropdown-content a {
+   color: #333;
+   padding: 8px 16px;
+   text-decoration: none;
+   display: block;
+}
+
+.dropdown-content a:hover {
+   background-color: #f1f1f1;
+}
+.show {
+   display: block;
+}
+
+.button-update {
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding: 2px 8px;
+   font-size: 14px;
+   background-color: #f5f5f5;
+   cursor: pointer;
+}
+/* Close button styling */
+.close-btn-circle {
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   width: 32px;
+   height: 32px;
+   border: 1px solid #888; /* Light grey border */
+   border-radius: 50%; /* Makes it circular */
+   font-size: 16px;
+   font-weight: bold;
+   color: #333; /* Dark color for the "X" */
+   background-color: transparent;
+   cursor: pointer;
+   outline: none;
+   transition: background-color 0.3s ease;
+}
+
+.close-btn-circle:hover {
+   background-color: #f5f5f5; /* Light background on hover */
+}
+
+ .close-btn:hover {
+    color: #333;
+ }
+ .step-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+ }
+ .form-step {
+    display: none;
+    height: 400px; /* Hauteur de la div */
+    overflow: auto; /* Barre de défilement automatique si nécessaire */
+ }
+ .form-step#step0 {
+    display: block; /* Par défaut, afficher le sommaire */
+ }
+ .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+ }
+ .step-list li {
+    margin: 12px 0;
+ }
+ .step-list a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: background 0.2s ease;
+ }
+ .step-list a:hover {
+    background: #f0f0f0;
+ }
+ .form-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+ }
+ #post-status {
+    color: green;
+    font-weight: bold;
+    margin-right: 10px;
+ }
+ #update-button {
+    float: right;
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+ }
+ #update-button:hover {
+    background: #0056b3;
+ }
+ #prevBtn, #nextBtn {
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+ }
+ #prevBtn:hover, #nextBtn:hover {
+    background: #0056b3;
+ }
+
+ @keyframes slideIn {
+    from {
+       opacity: 0;
+       transform: translateY(-20px);
+    }
+    to {
+       opacity: 1;
+       transform: translateY(0);
+    }
+ }
+
+ /* */
+
+ .row {
+    display: flex;
+    margin: 30px -15px;
+    justify-content: space-between;
+ }
+
+/* Conteneur principal du carrousel */
+.map-slate__image {
+   max-width: 300px; /* Largeur du carrousel */
+   margin: 0 auto; /* Centrer le carrousel */
+   border-radius: 8px; /* Arrondir les coins du conteneur */
+   overflow: hidden;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre pour effet visuel */
+   background-color: #ffffff; /* Couleur de fond du conteneur */
+   position: relative;
+}
+
+/* Styles des slides */
+.swiper-slide {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%; /* S'adapte à la largeur du conteneur */
+   padding: 10px;
+}
+
+/* Images des slides */
+.swiper-slide img {
+   width: 100%; /* Ajuste l'image à la taille du slide */
+   height: auto;
+   border-radius: 8px; /* Arrondi les coins de l'image */
+   transition: transform 0.3s ease; /* Animation lors du hover */
+}
+
+.swiper-slide img:hover {
+   transform: scale(1.05); /* Agrandit légèrement l'image au survol */
+}
+
+/* Pagination (points en bas) */
+.swiper-pagination {
+   position: relative;
+   bottom: 10px;
+}
+
+.swiper-pagination-bullet {
+   width: 8px;
+   height: 8px;
+   background: #ccc;
+   opacity: 0.7;
+   margin: 0 4px;
+   transition: background 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+   background: #007bff; /* Couleur active */
+   opacity: 1;
+}
+
+/* Boutons de navigation (chevrons) */
+.swiper-button-next,
+.swiper-button-prev {
+   color: #007bff; /* Couleur des flèches */
+   top: 50%; /* Centré verticalement */
+   transform: translateY(-50%);
+   width: 30px;
+   height: 30px;
+   background-color: rgba(255, 255, 255, 0.8); /* Fond semi-transparent */
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: background-color 0.3s;
+   opacity: 0; /* Cacher par défaut */
+   position: absolute;
+}
+
+/* Afficher les chevrons au survol de l'image */
+.map-slate__image:hover .swiper-button-next,
+.map-slate__image:hover .swiper-button-prev {
+   opacity: 1; /* Afficher au survol */
+}
+
+.swiper-button-next {
+   right: 10px; /* Positionné à droite */
+}
+
+.swiper-button-prev {
+   left: 10px; /* Positionné à gauche */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+   background-color: rgba(255, 255, 255, 1); /* Fond blanc au survol */
+}
+
+
+/* Conteneur principal de la barre latérale */
+.sidebar-icons {
+ 
+   top: 50%;
+   left: 10px;
+   background-color: #ffffff;
+   border-radius: 10px;
+   padding: 10px 5px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 10px; /* Espace entre les icônes */
+}
+
+/* Style des icônes */
+.sidebar-icons .icon {
+   width: 30px;
+   height: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.sidebar-icons .icon img {
+   width: 100%;
+   height: auto;
+}
+
+/* Ajouter une animation de survol pour les icônes */
+.sidebar-icons .icon:hover {
+   transform: scale(1.1);
+   transition: transform 0.3s ease;
+}
+
+
+.card__header__item--tags {
+   display: flex;
+   align-items: center;
+   width: 100%;
+}
+
+.tag-list-container {
+   display: flex;
+   align-items: center;
+   position: relative;
+   width: 100%;
+}
+
+.chevron {
+   background: none;
+   border: none;
+   font-size: 1.5em;
+   cursor: pointer;
+   color: #333;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   z-index: 1;
+}
+
+.left-chevron {
+   left: 0;
+}
+
+.right-chevron {
+   right: 0;
+}
+
+.tag-list-wrapper {
+   overflow: hidden;
+   width: 100%;
+   padding: 0 30px; /* Add padding to create space for the chevrons */
+}
+
+.tag-list {
+   display: flex;
+   white-space: nowrap;
+   transition: transform 0.3s ease;
+}
+
+.tag-list p {
+   display: flex;
+   gap: 10px;
+   margin: 0;
+   padding: 0;
+}
+
+.tag {
+   padding: 5px 10px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   text-decoration: none;
+   color: #333;
+}
+
+// manage slate
+
+.custom-checkbox {
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+   position: relative;
+   padding-left: 35px; /* Décalage pour la case */
+   margin-bottom: 12px;
+   font-size: 16px;
+   user-select: none; /* Empêche la sélection du texte */
+}
+
+.custom-checkbox input {
+   position: absolute;
+   opacity: 0; /* Masque la case native */
+   cursor: pointer;
+   height: 0;
+   width: 0;
+}
+
+.custom-checkbox .checkmark {
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   background-color: #ccc;
+   border-radius: 4px; /* Coin arrondi */
+   transition: background-color 0.2s ease;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+   background-color: #4CAF50; /* Couleur pour case cochée */
+}
+
+.custom-checkbox .checkmark:after {
+   content: "";
+   position: absolute;
+   display: none;
+   left: 6px;
+   top: 3px;
+   width: 5px;
+   height: 10px;
+   border: solid white;
+   border-width: 0 2px 2px 0;
+   transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+   display: block;
+}
+
+.row {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin: 0 15px;
+   .info {
+      p {
+         text-align: left;
+      }
+   }
+}
+/* Structure principale */
+.post-container {
+   margin: 0 auto;
+   font-family: Arial, sans-serif;
+}
+
+.post-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 0;
+}
+
+.options {
+   display: flex;
+   gap: 10px;
+}
+
+h1 {
+   color: #333;
+}
+
+.info-section {
+   padding: 10px;
+}
+
+/* Boutons */
+.premium-button,
+.event-button,
+.action-button {
+   padding: 8px 16px;
+   border: none;
+   cursor: pointer;
+   border-radius: 4px;
+   font-weight: bold;
+}
+
+.premium-button {
+   background-color: #007bff;
+   color: #fff;
+}
+
+.event-button {
+   background-color: #28a745;
+   color: #fff;
+}
+
+.action-button {
+   margin-top: 10px;
+   background-color: #ffc107;
+   color: #333;
+   border: 1px solid #ccc;
+}
+
+.action-button:hover {
+   background-color: #e0a800;
+}
+
+/* Premium et Event Sections */
+
+
+#event-info , #premium-info {
+   background-color: #fafff5;
+}
