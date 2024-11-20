@@ -32,12 +32,12 @@
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/alert-triangle.svg'; echo "</div>"; ?>
 	</a>
 <?php else: ?>
-	<a href="#" class="quicklinks--item edit_post_main">
-		Update my post
+	<a href="<?php echo esc_url($args["post_permalink"]) ;?>" class="quicklinks--item edit_post_main">
+		Update  post
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 	</a>
-	<a href="" class="quicklinks--item">
-		Promote my profile
+	<a href="/manageslate/?post=<?php echo $args["id"]; ?>" class="quicklinks--item">
+		Promote post
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 	</a>
 

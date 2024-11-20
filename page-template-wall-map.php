@@ -18,6 +18,7 @@
 				'role' => 'Subscriber',
 				'orderby' => 'display_name'
 			);
+
 			$posts_args = array(
 				"post_type" => "homes",
 				//"post_status" => "publish",

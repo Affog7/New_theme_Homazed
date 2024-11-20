@@ -435,6 +435,7 @@
 				'first_name' => $args["first_name"],
 				'last_name' => $args["last_name"],
 				"id" => $args["id"],
+				'post_permalink' => $post_permalink,
 				"user_id" => $args["user_id"]
 			)
 		); ?>
