@@ -68,11 +68,11 @@ const MapLaunch = (data) => {
 			this.buildings = [];
 
 			this.leaflet_map = L.map(this.map, {
-				center: [50.4629, 4.5817],
-				zoom: 9,
+				center: [ 4.5817,50.4629],
+				zoom: 2,
 				pixelRatio: 1,
 				maxZoom: 18,
-				minZoom: 6,
+				minZoom: 2,
 				zoomControl: true,
 			});
 
@@ -82,7 +82,7 @@ const MapLaunch = (data) => {
 		displayMap = (buildingsData) => {
 			// Create a map layer
 			L.tileLayer('https://api.mapbox.com/styles/v1/marcelpirnay01/clxbkdvdz026p01qx2whgeoiw/tiles/512/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFyY2VscGlybmF5MDEiLCJhIjoiY2tleWJwc2ZzMDh6ODJ4b2Nyb2V1NGt6bSJ9.AWwWSlKl8ectRbxP9fd6qg', {
-				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+				attribution: '&copy; <a  href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 				tileSize: 512,
 				zoomOffset: -1,
 			}).addTo(this.leaflet_map);
@@ -273,34 +273,34 @@ const MapLaunch = (data) => {
           if (!response.ok) {
             throw new Error("Erreur lors de la récupération des détails du post");
           }
-        // Get all the fields
-        let link = this.popup.querySelector(".map-slate--link");
-        let title = this.popup.querySelector(".title");
-        // let price = this.popup.querySelector(".post-details__price .value");
-        let address = this.popup.querySelector(".post-location");
-        let bedroom = this.popup.querySelector(".post-details__bedroom .value");
-        let bathroom = this.popup.querySelector(".post-details__bathroom .value");
-        let house = this.popup.querySelector(".post-details__house .value");
-        let land = this.popup.querySelector(".post-details__land .value");
-        let image = this.popup.querySelector("img");
-        // Change the values of the fields
-        // linkTag.href = event.target.markerData.permalink;
+          // Get all the fields
+          let link = this.popup.querySelector(".map-slate--link");
+          let title = this.popup.querySelector(".title");
+          // let price = this.popup.querySelector(".post-details__price .value");
+          let address = this.popup.querySelector(".post-location");
+          let bedroom = this.popup.querySelector(".post-details__bedroom .value");
+          let bathroom = this.popup.querySelector(".post-details__bathroom .value");
+          let house = this.popup.querySelector(".post-details__house .value");
+          let land = this.popup.querySelector(".post-details__land .value");
+          let image = this.popup.querySelector("img");
+          // Change the values of the fields
+          // linkTag.href = event.target.markerData.permalink;
 
-        // json todo_augustin api map
-        const postData = await response.json();
+          // json todo_augustin api map
+          const postData = await response.json();
 
-        this.popup.classList.remove("users");
-        this.popup.classList.remove("real-estate");
-        this.popup.classList.add(postData.post_type_slug);
+          this.popup.classList.remove("users");
+          this.popup.classList.remove("real-estate");
+          this.popup.classList.add(postData.post_type_slug);
 
-        // todo_augustin map swipper
+          // todo_augustin map swipper
 
-        //  console.log(postData);
+          //  console.log(postData);
 
-        let images =  postData.card_gallery_images;
-        const imageContainer = this.popup.querySelector('.map-slate__image');
+          let images = postData.card_gallery_images;
+          const imageContainer = this.popup.querySelector('.map-slate__image');
 
-        // ---------
+          // ---------
           const shareBu = this.popup.querySelector('.shareButon');
           const favoriteButon = this.popup.querySelector('.favoriteButon');
           shareBu.innerHTML = postData.templates.bouton_share_template;
@@ -310,67 +310,70 @@ const MapLaunch = (data) => {
           Modals_Init(shareBu);
 
           var relationBtns = this.popup.querySelectorAll(".relation_btn");
-          if(relationBtns){
+          if (relationBtns) {
             relationBtns.forEach(relationBtn => {
               relationBtn.addEventListener("click", (e) => {
 
                 e.preventDefault();
                 e.stopPropagation();
-               // makeRelationBtw(this.current_user_id.getAttribute("data-u-id"), this.el.getAttribute("data-h-id"), this.el.getAttribute("data-post-type"), e.currentTarget);
+                // makeRelationBtw(this.current_user_id.getAttribute("data-u-id"), this.el.getAttribute("data-h-id"), this.el.getAttribute("data-post-type"), e.currentTarget);
 
                 makeRelationBtw(postData.user_id, postData.id, postData.post_type_slug, e.currentTarget);
               });
             });
           }
-
-          if (!images || images.length === 0) {
-            // Si imgs est vide ou null, insérer une image unique
-            const singleImage = document.createElement('img');
-            singleImage.src = image;
-            singleImage.alt = "Image unique";
-            singleImage.classList.add('single-image');
-            imageContainer.appendChild(singleImage);
-          } else {
-            // Si imgs contient des images, insérer un carrousel
-            imageContainer.innerHTML = `
-            <div class="swiper-container">
-
-                <div class="swiper-wrapper">
-                    ${images.map(src => `<div class="swiper-slide"><img src="${src}" alt="Image de carrousel"></div>`).join('')}
-
-				</div>
-						<!-- Ajout des boutons de navigation -->
-               <div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>
-					<!-- Ajout de la pagination -->
-					<div class="swiper-pagination"></div>
-				</div>
+          imageContainer.innerHTML = postData.templates.images_temp;
 
 
+            const sliderWrapper = document.querySelector(".slider-wrapper");
+            const slides = document.querySelectorAll(".slider-slide");
+            const prevButton = document.querySelector(".slider-control.prev");
+            const nextButton = document.querySelector(".slider-control.next");
 
-            </div>
-        `;
+            let currentIndex = 0;
+
+            function updateSlider() {
+
+            // Déplacer le wrapper vers l'image actuelle
+            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+
           }
-          //end
 
-          // Initialiser Swiper
-          const swiper = new Swiper('.swiper-container', {
-            loop: true, // Boucle infinie
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true,
-            },
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
+            function showNextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+          }
 
-          });
+            function showPrevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+          }
+
+            // Ajouter des événements aux boutons
+            nextButton.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+				showNextSlide()
+			});
+            prevButton.addEventListener("click", (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+				showPrevSlide()
+			});
+
+
+
+
+            // Initialiser le slider
+            updateSlider();
+
+
 
           // todo_augustin remplissage map info
           link.href = postData.post_permalink;//event.target.markerData.permalink;
           //image.src = ;//event.target.markerData.img;
-          title.innerHTML = postData.title;//event.target.markerData.title;
+          title.innerHTML = "<span style='color: #0b7439;text-transform: uppercase;'>"+postData.home_category+"</span>  "+postData.home_type ;//event.target.markerData.title;
           // price.innerHTML = ;//event.target.markerData.price;
           address.innerHTML = postData.price;//event.target.markerData.price;
           bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
@@ -378,54 +381,54 @@ const MapLaunch = (data) => {
           house.innerHTML = postData.home_size;//event.target.markerData.home_size;
           land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
         }
-      ,
+        ,
         400
       )
-        ;
+      ;
 
-        this.displayPopup();
+      this.displayPopup();
+    }
+
+    displayPopup = () => {
+
+      // Display the popup
+      this.tl.to(this.popup, {
+        autoAlpha: 1,
+        opacity: 1,
+        y: 0
+      });
+      // data.querySelector("#card-icon").addEventListener("click", this.closePopup);
+    }
+
+    closePopup = (event) => {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
       }
 
-		displayPopup = () => {
+      // Hide the popup
+      this.tl.to(this.popup, {
+        autoAlpha: 0,
+        opacity: 0,
+        y: 60
+      });
+    }
 
-			// Display the popup
-			this.tl.to(this.popup, {
-				autoAlpha: 1,
-				opacity: 1,
-				y: 0
-			});
-			// data.querySelector("#card-icon").addEventListener("click", this.closePopup);
-		}
+    updateMap() {
+      this.leaflet_map.off();
+      this.leaflet_map.remove();
+      this.init();
+    }
+  }
 
-		closePopup = (event) => {
-			if(event) {
-				event.preventDefault();
-				event.stopPropagation();
-			}
+  // Get the DOM element
+  const maps = data.querySelectorAll("#map-data");
 
-			// Hide the popup
-			this.tl.to(this.popup, {
-				autoAlpha: 0,
-				opacity: 0,
-				y: 60
-			});
-		}
-
-		updateMap() {
-			this.leaflet_map.off();
-			this.leaflet_map.remove();
-			this.init();
-		}
-	}
-
-	// Get the DOM element
-	const maps = data.querySelectorAll("#map-data");
-
-	// Check if the DOM element exists
-	if(maps.length) {
-		// If yes, call a new instance of the map
-		[...maps].map((map) => new Map(map));
-	}
+  // Check if the DOM element exists
+  if (maps.length) {
+    // If yes, call a new instance of the map
+    [...maps].map((map) => new Map(map));
+  }
 }
 
 export default MapLaunch;

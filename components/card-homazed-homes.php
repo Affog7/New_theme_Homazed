@@ -24,6 +24,11 @@
 	$i_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$current_user_id);
 	$him_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$args["user_id"]);
 	$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$args["user_id"]);
+
+	$is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $args['id']);
+	$post_comment_available = get_field("post_comment_available", $args['id']);
+
+
 ?>
 
 <div id="slate-<?php echo $args["id"]; ?>" class="card <?php if( is_array($args['img']) && count($args['img']) > 1 && $args['img_display'] !== "grid"){ echo "carrousel glide"; } ?>" data-h-id="<?php echo $args["id"]; ?>" data-post-type="<?php echo $args["post_type_slug"]; ?>">
@@ -53,9 +58,9 @@
 						<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> ; <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"];?></a><?php endif; ?>
 
 						<?php
-							if($args["user_id"] == $current_user_id) {
-								echo "<span style='background: #4b4235;padding: 5px;    font-size: x-small;;border-radius: 10px;font-weight: 600;color: white;'>".$args["post_status"]." </span>";
-							}
+//							if($args["user_id"] == $current_user_id) {
+//								echo "<span style='background: #4b4235; padding: 5px 10px;font-size: x-small; border-radius: 100%;font-weight: 600;color: white;'> </span>";
+//							}
 						?>
 					</div>
 			</div>
@@ -166,7 +171,7 @@
 								'disabled'  => false,
 								'icon-position' => 'left',
 								'icon' => 'hyperlink-2',
-								'additional-classes' => 'btn--small',
+								'additional-classes' => '',
 								'data-attribute' => '',
 								'theme' => "",
 							)
@@ -193,10 +198,13 @@
 				<?php if(count($args['img']) > 1  ): ?>
 					<?php
 
+				//todo_augustin limiter 7 pour les non premium
+					$firstSevenValues = array_slice($args['img'], 0, 7);
+
 					get_template_part("components/carrousel-card", null, array(
 						'post_id' => $args['id'],
-						'img' => $args['img'],
-						'video_' => $args['video_'],
+						'img' => $is_reniew_post_premium ? $args['img'] : $firstSevenValues,
+						'video_' =>  $args['video_'],
 						'post_creator_name' => $args["post_creator_name"],
 				)); ?>
 				<?php else: ?>
@@ -330,23 +338,32 @@
 					 <span class="count-like_">  </span>
 				<?php endif; ?>
 			</li>
-			<li class="post-footer__comment">
-				<?php get_template_part("components/btn", null,
-					array(
-						'label' => 'Add a comment',
-						'href' => "",
-						'target' => "_self",
-						'skin'  => 'transparent',
-						'icon-only'  => true,
-						'disabled'  => false,
-						'icon-position' => 'right', // left or right
-						'icon' => 'messages-bubble',
-						'additional-classes' => 'post-footer__button',
-						'data-attribute' => null,
-						'theme' => "",
-					)
-				); ?>
-			</li>
+
+			<?php
+			if($post_comment_available) { ?>
+				<li class="post-footer__comment">
+					<?php
+
+					get_template_part("components/btn", null,
+						array(
+							'label' => 'Add a comment',
+							'href' => "",
+							'target' => "_self",
+							'skin'  => 'transparent',
+							'icon-only'  => true,
+							'disabled'  => false,
+							'icon-position' => 'right', // left or right
+							'icon' => 'messages-bubble',
+							'additional-classes' => 'post-footer__button',
+							'data-attribute' => null,
+							'theme' => "",
+						)
+					);
+
+					?>
+				</li>
+			<?php } ?>
+
 
 		</ul>
 

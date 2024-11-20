@@ -147,6 +147,7 @@
 						$post_home_category_value = get_field("post_home_category", $post_id);
 						switch ($post_home_category_value) {
 							case "house": $post_home_category_translate = "House"; break;
+							case "student": $post_home_category_translate = "Student"; break;
 							case "apartment": $post_home_category_translate = "Apartment"; break;
 							case "new_construction": $post_home_category_translate = "New construction"; break;
 							case "land_plot": $post_home_category_translate = "Land/Plot"; break;

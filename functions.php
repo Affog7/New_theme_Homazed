@@ -1179,6 +1179,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 		'25' => 'post_home_price',
 		'113' => 'post_home_amenities',
 		'67' => 'post_home_year_built',
+		'92.1' => 'post_comment_available',
 		'114' => 'post_home_neighborhood_amenities',
 		'116' => 'post_home_transportation',
 		'115' => 'post_home_garages_parking',
@@ -1192,6 +1193,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 		'123' => 'post_author_link',
 		'124' => 'post_Add_my_webshop_link',
 		'131' => 'post_home_event_text_1',
+		'132' => 'post_home_event_text_2',
 		'105.1' => 'post_premium',
 		'107' => 'post_voucher',
 		'108.1' => 'post_Is_Automatic_Renewal'
@@ -1234,53 +1236,6 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 			update_post_meta($post_id, 'post_duration', $post_duration);
 		}
 	}
-
-	// todo_augustin Ajout de la vidéo au post
-// Ajout de la vidéo au post
-
-//	if (!empty($entry['138'])) { // Remplacez '138' par l'ID du champ de fichier vidéo dans Gravity Forms
-//		$video_url = esc_url_raw($entry['138']); // URL temporaire du fichier téléchargé
-//		error_log("Vidéo URL : " . $video_url); // Journalisation de l'URL de la vidéo
-//
-//		// Télécharge le fichier vidéo et ajoute-le à la bibliothèque de médias de WordPress
-//		$tmp_file = download_url($video_url);
-//
-//		// Vérification de l'erreur de téléchargement
-//		if (is_wp_error($tmp_file)) {
-//			error_log("Erreur lors du téléchargement du fichier vidéo : " . $tmp_file->get_error_message());
-//		} else {
-//			// Préparer le tableau pour l'attachement
-//			$file_array = [
-//				'name' => basename($video_url),  // Nom du f ichier vidéo
-//				'tmp_name' => $tmp_file, // Emplacement temporaire du fichier téléchargé
-//			];
-//
-//			// Vérifie si le fichier est un type de fichier vidéo valide
-//			$file_type = wp_check_filetype($file_array['name']);
-//			error_log("Type de fichier vidéo : " . $file_type['ext']); // Journalisation du type de fichier
-//
-//			if (in_array($file_type['ext'], ['mp4', 'mov', 'avi', 'mkv', 'webm', 'wmv'])) {
-//				// Si le fichier est une vidéo valide, l'ajouter à la bibliothèque de médias
-//				$attachment_id = media_handle_sideload($file_array, $post_id);
-//
-//				// Vérification de l'ID de l'attachement
-//				if (is_wp_error($attachment_id)) {
-//					error_log("Erreur lors de l'ajout de la vidéo au post ID $post_id : " . $attachment_id->get_error_message());
-//				} else {
-//					// Assigner l'ID de l'attachement vidéo aux métadonnées du post
-//					update_post_meta($post_id, 'post_video', $attachment_id);
-//					error_log("Vidéo ajoutée avec succès au post ID $post_id : " . $attachment_id);
-//				}
-//			} else {
-//				error_log("Le fichier téléchargé n'est pas une vidéo valide : " . $file_array['name']);
-//			}
-//
-//			// Supprime le fichier temporaire après le traitement
-//			@unlink($tmp_file);
-//		}
-//	}
-
-
 
 
 }

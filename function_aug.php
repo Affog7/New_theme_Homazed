@@ -42,7 +42,6 @@ function afficher_carte_openstreetmap_statique($atts) {
 			'height' => '400px',     // Hauteur de la carte
 			'width' => '100%',       // Largeur de la carte
 			'zoom' => '15',          // Niveau de zoom par défaut
-			// Niveau de zoom par défaut
 		),
 		$atts,
 		'osm_map'
@@ -55,21 +54,32 @@ function afficher_carte_openstreetmap_statique($atts) {
 	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="" crossorigin=""></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			var map = L.map('osm-map').setView([<?php echo esc_js($atts['latitude']); ?>, <?php echo esc_js($atts['longitude']); ?>], <?php echo esc_js($atts['zoom']); ?>);
+			// Initialisation de la carte avec zoomControl désactivé
+			var map = L.map('osm-map', {
+				zoomControl: false // Désactiver le contrôle de zoom par défaut
+			}).setView([<?php echo esc_js($atts['latitude']); ?>, <?php echo esc_js($atts['longitude']); ?>], <?php echo esc_js($atts['zoom']); ?>);
+
+			// Ajouter les tuiles OpenStreetMap
 			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				maxZoom: 19,
 				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			}).addTo(map);
 
+			// Ajouter un marqueur à la position donnée
 			L.marker([<?php echo esc_js($atts['latitude']); ?>, <?php echo esc_js($atts['longitude']); ?>]).addTo(map)
 				.bindPopup("<?php echo esc_js($atts['address']); ?>")
 				.openPopup();
 
+			// Ajouter un contrôle de zoom en bas à droite
+			L.control.zoom({
+				position: 'bottomright' // Position du contrôle de zoom
+			}).addTo(map);
 		});
 	</script>
 	<?php
 	return ob_get_clean();
 }
+
 
 // Enregistrement du shortcode
 add_shortcode('osm_map', 'afficher_carte_openstreetmap_statique');
@@ -231,3 +241,7 @@ function custom_api_register_routes() {
 }
 add_action('rest_api_init', 'custom_api_register_routes');
 // fin chaché et signalé
+
+
+
+

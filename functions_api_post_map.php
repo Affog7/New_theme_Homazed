@@ -127,6 +127,42 @@ function get_post_details_api( $request ) {
 	$like_favorite_template = ob_get_clean();
 
 // end template
+	$images_temp = '<div class="map-slate__image  ">';
+	$images_temp .= '<div class="card__img  ">';
+	$images_temp .= '<div class=" carrousel glide glide--swipeable glide--ltr glide--carousel">';
+
+
+  if($post_gallery_image_ids_array) {
+
+	  ob_start(); ?>
+	  <div class="image-slider">
+		  <div class="slider-container">
+			  <div class="slider-wrapper">
+				  <!-- Les images dynamiques sont insérées ici via PHP -->
+				  <?php foreach ($image_urls as $url): ?>
+					  <div class="slider-slide">
+						  <img src="<?php echo esc_url($url); ?>" alt="Image">
+					  </div>
+				  <?php endforeach; ?>
+			  </div>
+		  </div>
+		  <!-- Contrôles gauche/droite -->
+		  <?php if (count($image_urls)>1): ?>
+			  <button class="slider-control prev" style="display: none" aria-label="Previous slide"><</button>
+			  <button class="slider-control next" aria-label="Next slide">></button>
+		  <?php endif; ?>
+
+
+
+	  </div>
+
+	  <?php
+	  $images_temp .=ob_get_clean();
+  }
+
+	$images_temp .="</div>";
+	$images_temp .="</div>";
+	$images_temp .="</div>";
 
 
 	// Préparer les données pour la réponse
@@ -165,6 +201,7 @@ function get_post_details_api( $request ) {
 		"templates" => [
 			"like_favorite_template" => $like_favorite_template,
 			"bouton_share_template" =>$bouton_share_template,
+			"images_temp"=>$images_temp
 		]
 	];
 

@@ -50,7 +50,7 @@ class Post {
 // todo_augustin: edit
 afterEnter = data => {
     var edit_post_main = data.next.container.querySelector(".edit_post_main");
-
+    var status_notif_ = data.next.container.querySelector("#status_notif_");
     if (edit_post_main) {
         var edit_post_btns = data.next.container.querySelectorAll(".edit-area");
 
@@ -72,6 +72,7 @@ afterEnter = data => {
 
           const adminAjaxUrl = document.querySelector('.main').getAttribute('data-admin-ajax');
           jQuery.post(adminAjaxUrl, datad, function(response) {
+            status_notif_.innerHTML = response.data.message;
             console.log(response); // Réponse du serveur (en cas de succès ou d'erreur)
           });
         }

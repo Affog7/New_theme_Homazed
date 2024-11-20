@@ -1,11 +1,11 @@
-	
+
 	<div class="user__actions">
 		<div class="user__actions__container">
 			<div class="flex flex--justify-between flex--vertical-center" data-barba-prevent="all">
 				<?php if(is_page(604)){ $is_wall = " active"; }else{ $is_wall = ""; } ?>
 				<?php if(is_page(1290)){ $is_map__wall = " active"; }else{ $is_map__wall = ""; } ?>
 				<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Wall view',
 							'href' => get_permalink("604"),
 							'target' => "_self",
@@ -20,7 +20,7 @@
 						)
 				); ?>
 				<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Map view',
 							'href' => get_permalink("1290"),
 							'target' => "_self",
@@ -35,7 +35,7 @@
 						)
 				); ?>
 				<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Share',
 							'href' => "/",
 							'target' => "_self",
@@ -50,7 +50,7 @@
 						)
 				); ?>
 				<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Share',
 							'href' => "/",
 							'target' => "_self",
@@ -65,7 +65,7 @@
 						)
 				); ?>
 				<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Publish',
 							'href' => "/",
 							'target' => "_self",
@@ -79,12 +79,12 @@
 							'theme' => "",
 						)
 				); ?>
-				
+
 					<div class="tooltip" id="tooltip-publish" role="tooltip">
 						<div class="popover__content">
 							<div class="flex flex--vertical">
 								<?php get_template_part( 'components/btn', null,
-										array( 
+										array(
 										'label' => 'Publish home',
 										'href' => "/",
 										'target' => "_self",
@@ -99,7 +99,7 @@
 										)
 								); ?>
 							</div>
-								
+
 						</div>
 						<div class="arrow"></div>
 					</div>
@@ -120,16 +120,16 @@
 					<?php
 					   $account_type = get_field("user_account_type", "user_".get_current_user_id());
 					/**
-					 * todo_augustin
+					 * todo_augustin type de compte
 					 * */
 					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
 					// var_dump($account_type);
-					   if($account_type && $account_type["value"] == "individual_user" ) {
+//					   if($account_type && $account_type["value"] == "individual_user" ) {
 						echo do_shortcode( '[gravityform id="1" ajax="true" title="false"]' );
-					   } else {
-						echo do_shortcode( '[gravityform id="16" ajax="true" title="false"]' );
-					   }
-						
+//					   } else {
+//						echo do_shortcode( '[gravityform id="16" ajax="true" title="false"]' );
+//					   }
+
 
 					?>
 				</main>
@@ -137,12 +137,12 @@
 		</div>
 	</div>
 
-	
+
 	</div>
-	
 
 
-	
+
+
 
 	<?php wp_footer(); ?>
 <!-- Swiper CSS -->
@@ -150,7 +150,7 @@
 
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-			 
+
 	<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
 </body>
 </html>

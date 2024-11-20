@@ -301,8 +301,7 @@ $post_id = get_the_ID();
 				 <div id="status-options" class="dropdown-content">
 					 <a href="#" onclick="setStatus('publish', <?php echo $post_id; ?>)">Active</a>
 					 <a href="#" onclick="setStatus('private', <?php echo $post_id; ?>)">Inactive</a>
-					 <a href="#" onclick="setStatus('draft', <?php echo $post_id; ?>)">Draft</a>
-					 <a href="#" onclick="setStatus('trash', <?php echo $post_id; ?>)">Erase</a>
+					 <a href="#" onclick="setStatus('draft', <?php echo $post_id; ?>)">Erase</a>
 				 </div>
 			 </div>
 
@@ -378,6 +377,10 @@ $post_id = get_the_ID();
          <span id="step-count">0 / 6</span>
          <button id="nextBtn" onclick="navigateSteps(1)">Next</button>
       </div>
+		<div>
+			<p class="active-status" id="status_notif_"></p>
+		</div>
+
    </div>
 </div>
 
@@ -682,7 +685,7 @@ $post_id = get_the_ID();
 
 				<?php
 					// todo_augustin
-					limiterLignes($post_main_content); ?>
+					limiterLignes($post_main_content,32); ?>
 			</div>
 			<?php if ($author_data): ?>
 				<div class="post-page__section bt-2">
@@ -697,31 +700,69 @@ $post_id = get_the_ID();
 				<div class="post-page__section bt-2 content">
 					<ul class="contact__list">
 						<?php if($author_email_address): ?>
-								<li class="contact__list__item"><a href="<?php echo "mailto:" . $author_email_address; ?>" target="_blank">Send an email</a></li>
+							<li class="contact__list__item">
+								<a href="<?php echo "mailto:" . $author_email_address; ?>" target="_blank">
+									<svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M256,0C114.609,0,0,114.609,0,256s114.609,256,256,256s256-114.609,256-256S397.391,0,256,0z M256,472 c-119.297,0-216-96.703-216-216S136.703,40,256,40s216,96.703,216,216S375.297,472,256,472z"></path> <g> <path d="M368,234.375v74.438l-54.5-59.422l16.719-11.312c-5.984-1.531-11.641-3.922-16.688-7.203L256,271.75L166.281,208H256 h37.625c-2.391-4.984-4-10.344-4.812-16H256H128v160h128h128V223.062C379.422,227.75,373.969,231.531,368,234.375z M144,212.531 l54.5,36.859L144,308.812V212.531z M256,336h-92.406l45.562-79.422L256,288.25l46.844-31.672L348.406,336H256z"></path> </g> <path d="M344,144c-22.094,0-40,17.906-40,40s17.906,40,40,40s40-17.906,40-40S366.094,144,344,144z M344,214.406L324.797,192H336 v-32h16v32h11.203L344,214.406z"></path> </g> </g></svg>
+									Send a message
+								</a>
+							</li>
 						<?php endif; ?>
+
 						<?php if($author_phone_number && in_array("phone_calls_available", $author_connections_settings)): ?>
-							<li class="contact__list__item"><a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">Call</a></li>
+							<li class="contact__list__item">
+								<a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">
+									<svg viewBox="0 0 24 24" height="20" width="20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 8H8.44444C8.2 8 8 8.2 8 8.44444C8 12.6178 11.3822 16 15.5556 16C15.8 16 16 15.8 16 15.5556V14.0044C16 13.76 15.8 13.56 15.5556 13.56C15.0044 13.56 14.4667 13.4711 13.9689 13.3067C13.9244 13.2889 13.8756 13.2844 13.8311 13.2844C13.7156 13.2844 13.6044 13.3289 13.5156 13.4133L12.5378 14.3911C11.28 13.7467 10.2489 12.72 9.60889 11.4622L10.5867 10.4844C10.7111 10.36 10.7467 10.1867 10.6978 10.0311C10.5333 9.53333 10.4444 9 10.4444 8.44444C10.4444 8.2 10.2444 8 10 8ZM9.77333 10.04C9.66667 9.67111 9.6 9.28444 9.57333 8.88889H8.90222C8.94222 9.47556 9.05778 10.04 9.24 10.5733L9.77333 10.04ZM15.1111 14.4311C14.72 14.4044 14.3333 14.3378 13.9556 14.2311L13.4222 14.76C13.96 14.9378 14.5244 15.0533 15.1111 15.0933V14.4311Z" fill="#000000"></path> <path d="M13.2216 9.52112V9.10456H15.3044V11.1874H14.8879V9.81568L12.9376 11.766L12.643 11.4714L14.5933 9.52112H13.2216Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="#000000"></path> </g></svg>
+									Call
+								</a>
+							</li>
 						<?php endif; ?>
+
 						<?php if($author_website_link && in_array("add_website_link", $author_connections_settings)): ?>
-							<li class="contact__list__item"><a href="<?php echo $author_website_link; ?>" target="_blank">Website</a></li>
+							<li class="contact__list__item">
+								<a href="<?php echo esc_url($author_website_link); ?>" target="_blank">
+									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
+									Website
+								</a>
+							</li>
 						<?php endif; ?>
+
 						<?php if($author_online_shop_link && in_array("add_online_shop_link", $author_connections_settings)): ?>
-							<li class="contact__list__item"><a href="<?php echo $author_online_shop_link; ?>" target="_blank">Online shop</a></li>
+							<li class="contact__list__item">
+								<a href="<?php echo $author_online_shop_link; ?>" target="_blank">
+									<svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.52 491.52" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M491.52,419.84V0H0v419.84h153.6v51.2h-40.96v20.48h266.24v-20.48h-40.96v-51.2H491.52z M20.48,20.48h450.56v317.44H20.48 V20.48z M317.44,471.04H174.08v-51.2h143.36V471.04z M20.48,399.36V358.4h450.56v40.96H20.48z"></path> </g> </g> <g> <g> <path d="M386.67,128.24l-23.88-66.8h-53.555H288.43H256h-20.48h-32.43h-20.805H128.73l-23.88,66.8 c-4.605,12.9-2.715,26.74,5.2,37.96c3.427,4.869,7.843,8.833,12.83,11.842V296.96h245.76V178.042 c4.987-3.01,9.402-6.973,12.83-11.842C389.385,154.98,391.275,141.14,386.67,128.24z M348.36,81.92l14.639,40.96h-42.779 L312.9,81.92H348.36z M256,81.92h36.091l7.323,40.96H256V81.92z M302.506,143.36c-0.225,4.526-1.904,8.841-4.951,12.48 c-4.255,5.08-10.565,8-17.315,8h-1.94c-11.892,0-21.556-9.099-22.181-20.48H302.506z M199.429,81.92h36.091v40.96h-43.414 L199.429,81.92z M235.401,143.36c-0.626,11.381-10.289,20.48-22.181,20.48h-1.94c-6.75,0-13.06-2.92-17.315-8 c-3.047-3.639-4.726-7.954-4.951-12.48H235.401z M143.16,81.92h35.46l-7.319,40.96h-42.783L143.16,81.92z M126.79,154.41 c-2.357-3.349-3.53-7.161-3.738-11.05h44.589l-0.456,2.55c-1.86,10.39-11.1,17.93-21.975,17.93 C137.725,163.84,131.015,160.4,126.79,154.41z M348.16,276.48h-204.8v-92.271c0.619,0.026,1.228,0.111,1.85,0.111 c13.2,0,25.123-5.917,33.022-15.373c0.009,0.011,0.014,0.022,0.023,0.033c8.16,9.75,20.195,15.34,33.025,15.34h1.94 c13.094,0,24.687-5.945,32.54-15.093c7.853,9.148,19.446,15.093,32.54,15.093h1.94c12.83,0,24.865-5.59,33.025-15.34 c0.009-0.011,0.014-0.022,0.022-0.033c7.899,9.456,19.823,15.373,33.023,15.373c0.622,0,1.231-0.085,1.85-0.111V276.48z M364.73,154.41c-4.225,5.99-10.935,9.43-18.42,9.43c-10.875,0-20.115-7.54-21.975-17.93l-0.456-2.55h44.588 C368.261,147.249,367.088,151.061,364.73,154.41z"></path> </g> </g> </g></svg>
+									Online shop
+								</a>
+							</li>
 						<?php endif; ?>
 
 						<?php if($post_home_event_privacy): ?>
-							<li class="contact__list__item"><a href="<?php echo $post_home_event_privacy; ?>" target="_blank">Privacy</a></li>
+							<li class="contact__list__item">
+								<a href="<?php echo $post_home_event_privacy; ?>" target="_blank">
+									<svg viewBox="0 0 192 192" height="20" width="20" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="none" stroke="#000000" stroke-width="12"> <path stroke-linecap="round" d="M151.8 144.5a74 74 0 0 1-85.59 19.21A74 74 0 0 1 22.42 87.7a74 74 0 0 1 59.55-64.42m28.03.06a74 74 0 0 1 50.06 35.61 74 74 0 0 1 5.915 61.15"></path> <path d="M76 92h40c4.432 0 8 3.568 8 8v22c0 4.432-3.568 8-8 8H76c-4.432 0-8-3.568-8-8v-22c0-4.432 3.568-8 8-8zm4 0V77.7C80 69.029 87.163 62 96 62s16 7.029 16 15.7V92"></path> </g> </g></svg>
+									Privacy
+								</a>
+							</li>
 						<?php endif; ?>
 
 						<?php if($post_author_link): ?>
-							<li class="contact__list__item"><a href="<?php echo $post_author_link; ?>" target="_blank">Post Author Link</a></li>
+<!--							<li class="contact__list__item">-->
+<!--								<a href="--><?php //echo $post_author_link; ?><!--" target="_blank">-->
+<!--									<svg fill="#000000" height="20" width="20" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 463 463" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="18.520000000000003"> <g> <path d="M436.675,200.432c-6.565-43.506-27.166-84.373-58.449-115.656c-10.71-10.71-22.549-20.158-35.226-28.231V15.5 C343,6.953,336.047,0,327.5,0h-192C126.953,0,120,6.953,120,15.5v41.045c-12.675,8.072-24.512,17.519-35.22,28.226 c-31.286,31.284-51.889,72.153-58.455,115.661C11.41,202.909,0,215.894,0,231.5s11.41,28.591,26.325,31.068 c6.565,43.507,27.167,84.374,58.451,115.658c7.972,7.972,16.57,15.244,25.671,21.774H95.5c-8.547,0-15.5,6.953-15.5,15.5v32 c0,8.547,6.953,15.5,15.5,15.5h272c8.547,0,15.5-6.953,15.5-15.5v-32c0-8.547-6.953-15.5-15.5-15.5h-14.948 c9.101-6.53,17.7-13.803,25.672-21.774c31.284-31.284,51.886-72.151,58.451-115.658C451.59,260.091,463,247.106,463,231.5 C463,215.894,451.59,202.909,436.675,200.432z M367.619,95.383c28.384,28.384,47.294,65.264,53.809,104.617H387.89 c-5.671-28.4-18.842-54.382-38.429-75.854l6.137-6.137c2.929-2.929,2.929-7.678,0-10.606c-2.929-2.929-7.678-2.929-10.606,0 l-6.137,6.137C317.382,93.952,291.4,80.781,263,75.11V41.572C302.354,48.087,339.235,66.998,367.619,95.383z M164.584,175.19 c-6.187,7.341-11.191,15.709-14.715,24.81H90.466c5.389-24.337,16.899-46.623,33.705-65.223L164.584,175.19z M134.777,124.17 c18.6-16.805,40.886-28.316,65.223-33.705v59.403c-9.101,3.524-17.469,8.528-24.81,14.715L134.777,124.17z M164.584,287.81 l-40.413,40.413c-16.806-18.6-28.316-40.886-33.705-65.223h59.403C153.393,272.101,158.397,280.469,164.584,287.81z M175.19,298.416c7.341,6.187,15.709,11.191,24.81,14.715v59.403c-24.337-5.389-46.623-16.899-65.223-33.705L175.19,298.416z M159,231.5c0-39.977,32.523-72.5,72.5-72.5s72.5,32.523,72.5,72.5S271.477,304,231.5,304S159,271.477,159,231.5z M263,149.869 V90.466c24.337,5.389,46.623,16.899,65.223,33.705l-40.414,40.414C280.469,158.397,272.101,153.393,263,149.869z M263,313.131 c9.101-3.524,17.469-8.528,24.81-14.715l40.414,40.414c-18.6,16.805-40.886,28.316-65.223,33.705V313.131z M298.416,287.81 c6.187-7.341,11.191-15.709,14.715-24.81h59.403c-5.389,24.337-16.899,46.623-33.705,65.223L298.416,287.81z M298.416,175.19 l40.414-40.414c16.806,18.6,28.316,40.886,33.705,65.223h-59.403C309.607,190.899,304.603,182.531,298.416,175.19z M327.5,15 c0.276,0,0.5,0.224,0.5,0.5v32.344c-20.409-10.731-42.554-18.066-65.432-21.519c-0.68-4.094-2.148-7.923-4.249-11.325H327.5z M215,31.5c0-9.098,7.402-16.5,16.5-16.5S248,22.402,248,31.5v114.067c-5.346-1.024-10.86-1.567-16.5-1.567 s-11.154,0.543-16.5,1.567V31.5z M135,15.5c0-0.276,0.224-0.5,0.5-0.5h69.181c-2.101,3.402-3.569,7.231-4.249,11.325 C177.554,29.778,155.408,37.113,135,47.844V15.5z M95.386,95.378C123.769,66.996,160.649,48.087,200,41.572V75.11 c-28.4,5.671-54.382,18.842-75.854,38.429l-6.137-6.137c-2.929-2.929-7.678-2.929-10.606,0c-2.929,2.929-2.929,7.678,0,10.606 l6.137,6.137C93.953,145.618,80.782,171.6,75.111,200H41.572C48.087,160.645,67,123.763,95.386,95.378z M15,231.5 c0-9.098,7.402-16.5,16.5-16.5h114.067c-1.024,5.346-1.567,10.86-1.567,16.5s0.543,11.154,1.567,16.5H31.5 C22.402,248,15,240.598,15,231.5z M95.383,367.619C66.998,339.235,48.087,302.354,41.572,263h33.538 c5.671,28.4,18.842,54.382,38.429,75.854l-6.137,6.137c-2.929,2.929-2.929,7.678,0,10.606c1.464,1.464,3.384,2.197,5.303,2.197 s3.839-0.732,5.303-2.197l6.137-6.137C145.618,369.048,171.6,382.218,200,387.89v33.538 C160.647,414.913,123.767,396.003,95.383,367.619z M95.5,448c-0.276,0-0.5-0.224-0.5-0.5v-32c0-0.276,0.224-0.5,0.5-0.5h39.203 c20.49,10.816,42.74,18.206,65.729,21.675c0.68,4.094,2.148,7.923,4.249,11.325H95.5z M248,431.5c0,9.098-7.402,16.5-16.5,16.5 s-16.5-7.402-16.5-16.5V317.433c5.346,1.024,10.86,1.567,16.5,1.567s11.154-0.543,16.5-1.567V431.5z M367.5,415 c0.276,0,0.5,0.224,0.5,0.5v32c0,0.276-0.224,0.5-0.5,0.5H258.319c2.101-3.402,3.569-7.231,4.249-11.325 c22.99-3.469,45.239-10.859,65.729-21.675H367.5z M367.617,367.619c-28.384,28.384-65.264,47.294-104.617,53.809V387.89 c28.4-5.671,54.382-18.842,75.854-38.429l6.137,6.137c1.464,1.464,3.384,2.197,5.303,2.197s3.839-0.732,5.303-2.197 c2.929-2.929,2.929-7.678,0-10.606l-6.137-6.137C369.048,317.382,382.218,291.4,387.89,263h33.538 C414.913,302.354,396.002,339.235,367.617,367.619z M431.5,248H317.433c1.024-5.346,1.567-10.86,1.567-16.5 s-0.543-11.154-1.567-16.5H431.5c9.098,0,16.5,7.402,16.5,16.5S440.598,248,431.5,248z"></path> <path d="M231.5,176c-30.603,0-55.5,24.897-55.5,55.5s24.897,55.5,55.5,55.5s55.5-24.897,55.5-55.5S262.103,176,231.5,176z M231.5,272c-22.332,0-40.5-18.168-40.5-40.5s18.168-40.5,40.5-40.5s40.5,18.168,40.5,40.5S253.832,272,231.5,272z"></path> <path d="M231.5,200c-17.369,0-31.5,14.131-31.5,31.5s14.131,31.5,31.5,31.5s31.5-14.131,31.5-31.5S248.869,200,231.5,200z M231.5,248c-9.098,0-16.5-7.402-16.5-16.5s7.402-16.5,16.5-16.5s16.5,7.402,16.5,16.5S240.598,248,231.5,248z"></path> </g> </g><g id="SVGRepo_iconCarrier"> <g> <path d="M436.675,200.432c-6.565-43.506-27.166-84.373-58.449-115.656c-10.71-10.71-22.549-20.158-35.226-28.231V15.5 C343,6.953,336.047,0,327.5,0h-192C126.953,0,120,6.953,120,15.5v41.045c-12.675,8.072-24.512,17.519-35.22,28.226 c-31.286,31.284-51.889,72.153-58.455,115.661C11.41,202.909,0,215.894,0,231.5s11.41,28.591,26.325,31.068 c6.565,43.507,27.167,84.374,58.451,115.658c7.972,7.972,16.57,15.244,25.671,21.774H95.5c-8.547,0-15.5,6.953-15.5,15.5v32 c0,8.547,6.953,15.5,15.5,15.5h272c8.547,0,15.5-6.953,15.5-15.5v-32c0-8.547-6.953-15.5-15.5-15.5h-14.948 c9.101-6.53,17.7-13.803,25.672-21.774c31.284-31.284,51.886-72.151,58.451-115.658C451.59,260.091,463,247.106,463,231.5 C463,215.894,451.59,202.909,436.675,200.432z M367.619,95.383c28.384,28.384,47.294,65.264,53.809,104.617H387.89 c-5.671-28.4-18.842-54.382-38.429-75.854l6.137-6.137c2.929-2.929,2.929-7.678,0-10.606c-2.929-2.929-7.678-2.929-10.606,0 l-6.137,6.137C317.382,93.952,291.4,80.781,263,75.11V41.572C302.354,48.087,339.235,66.998,367.619,95.383z M164.584,175.19 c-6.187,7.341-11.191,15.709-14.715,24.81H90.466c5.389-24.337,16.899-46.623,33.705-65.223L164.584,175.19z M134.777,124.17 c18.6-16.805,40.886-28.316,65.223-33.705v59.403c-9.101,3.524-17.469,8.528-24.81,14.715L134.777,124.17z M164.584,287.81 l-40.413,40.413c-16.806-18.6-28.316-40.886-33.705-65.223h59.403C153.393,272.101,158.397,280.469,164.584,287.81z M175.19,298.416c7.341,6.187,15.709,11.191,24.81,14.715v59.403c-24.337-5.389-46.623-16.899-65.223-33.705L175.19,298.416z M159,231.5c0-39.977,32.523-72.5,72.5-72.5s72.5,32.523,72.5,72.5S271.477,304,231.5,304S159,271.477,159,231.5z M263,149.869 V90.466c24.337,5.389,46.623,16.899,65.223,33.705l-40.414,40.414C280.469,158.397,272.101,153.393,263,149.869z M263,313.131 c9.101-3.524,17.469-8.528,24.81-14.715l40.414,40.414c-18.6,16.805-40.886,28.316-65.223,33.705V313.131z M298.416,287.81 c6.187-7.341,11.191-15.709,14.715-24.81h59.403c-5.389,24.337-16.899,46.623-33.705,65.223L298.416,287.81z M298.416,175.19 l40.414-40.414c16.806,18.6,28.316,40.886,33.705,65.223h-59.403C309.607,190.899,304.603,182.531,298.416,175.19z M327.5,15 c0.276,0,0.5,0.224,0.5,0.5v32.344c-20.409-10.731-42.554-18.066-65.432-21.519c-0.68-4.094-2.148-7.923-4.249-11.325H327.5z M215,31.5c0-9.098,7.402-16.5,16.5-16.5S248,22.402,248,31.5v114.067c-5.346-1.024-10.86-1.567-16.5-1.567 s-11.154,0.543-16.5,1.567V31.5z M135,15.5c0-0.276,0.224-0.5,0.5-0.5h69.181c-2.101,3.402-3.569,7.231-4.249,11.325 C177.554,29.778,155.408,37.113,135,47.844V15.5z M95.386,95.378C123.769,66.996,160.649,48.087,200,41.572V75.11 c-28.4,5.671-54.382,18.842-75.854,38.429l-6.137-6.137c-2.929-2.929-7.678-2.929-10.606,0c-2.929,2.929-2.929,7.678,0,10.606 l6.137,6.137C93.953,145.618,80.782,171.6,75.111,200H41.572C48.087,160.645,67,123.763,95.386,95.378z M15,231.5 c0-9.098,7.402-16.5,16.5-16.5h114.067c-1.024,5.346-1.567,10.86-1.567,16.5s0.543,11.154,1.567,16.5H31.5 C22.402,248,15,240.598,15,231.5z M95.383,367.619C66.998,339.235,48.087,302.354,41.572,263h33.538 c5.671,28.4,18.842,54.382,38.429,75.854l-6.137,6.137c-2.929,2.929-2.929,7.678,0,10.606c1.464,1.464,3.384,2.197,5.303,2.197 s3.839-0.732,5.303-2.197l6.137-6.137C145.618,369.048,171.6,382.218,200,387.89v33.538 C160.647,414.913,123.767,396.003,95.383,367.619z M95.5,448c-0.276,0-0.5-0.224-0.5-0.5v-32c0-0.276,0.224-0.5,0.5-0.5h39.203 c20.49,10.816,42.74,18.206,65.729,21.675c0.68,4.094,2.148,7.923,4.249,11.325H95.5z M248,431.5c0,9.098-7.402,16.5-16.5,16.5 s-16.5-7.402-16.5-16.5V317.433c5.346,1.024,10.86,1.567,16.5,1.567s11.154-0.543,16.5-1.567V431.5z M367.5,415 c0.276,0,0.5,0.224,0.5,0.5v32c0,0.276-0.224,0.5-0.5,0.5H258.319c2.101-3.402,3.569-7.231,4.249-11.325 c22.99-3.469,45.239-10.859,65.729-21.675H367.5z M367.617,367.619c-28.384,28.384-65.264,47.294-104.617,53.809V387.89 c28.4-5.671,54.382-18.842,75.854-38.429l6.137,6.137c1.464,1.464,3.384,2.197,5.303,2.197s3.839-0.732,5.303-2.197 c2.929-2.929,2.929-7.678,0-10.606l-6.137-6.137C369.048,317.382,382.218,291.4,387.89,263h33.538 C414.913,302.354,396.002,339.235,367.617,367.619z M431.5,248H317.433c1.024-5.346,1.567-10.86,1.567-16.5 s-0.543-11.154-1.567-16.5H431.5c9.098,0,16.5,7.402,16.5,16.5S440.598,248,431.5,248z"></path> <path d="M231.5,176c-30.603,0-55.5,24.897-55.5,55.5s24.897,55.5,55.5,55.5s55.5-24.897,55.5-55.5S262.103,176,231.5,176z M231.5,272c-22.332,0-40.5-18.168-40.5-40.5s18.168-40.5,40.5-40.5s40.5,18.168,40.5,40.5S253.832,272,231.5,272z"></path> <path d="M231.5,200c-17.369,0-31.5,14.131-31.5,31.5s14.131,31.5,31.5,31.5s31.5-14.131,31.5-31.5S248.869,200,231.5,200z M231.5,248c-9.098,0-16.5-7.402-16.5-16.5s7.402-16.5,16.5-16.5s16.5,7.402,16.5,16.5S240.598,248,231.5,248z"></path> </g> </g></svg>-->
+<!--									Post Author Link-->
+<!--								</a>-->
+<!--							</li>-->
 						<?php endif; ?>
+
 						<?php if($post_Add_my_webshop_link): ?>
-							<li class="contact__list__item"><a href="<?php echo $post_Add_my_webshop_link; ?>" target="_blank">Shop link</a></li>
+							<li class="contact__list__item">
+								<a href="<?php echo esc_url($post_Add_my_webshop_link); ?>" target="_blank">
+									<svg fill="#000000" height="20" width="20" viewBox="0 0 64 64" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M53.9,17.9l-20-11.3c-1.2-0.7-2.7-0.7-3.8,0l-20,11.3c-1.2,0.7-2,2-2,3.4V52c0,3.3,2.7,6,6,6h35.8c3.3,0,6-2.7,6-6V21.3 C55.9,19.9,55.1,18.6,53.9,17.9z M51.9,52c0,1.1-0.9,2-2,2H14.1c-1.1,0-2-0.9-2-2V21.3L32,10.1l19.9,11.3V52z"></path> <path d="M17.7,43.7c1.2,2.2,3.3,3.7,5.7,4.3c0.8,0.2,1.6,0.3,2.4,0.3c1.6,0,3.2-0.4,4.7-1.3l12.5-7.2c4.5-2.6,6-8.3,3.4-12.7 c-2.6-4.5-8.3-6-12.7-3.4L21.1,31C16.6,33.5,15.1,39.3,17.7,43.7z M35.6,27.2c0.8-0.5,1.8-0.7,2.7-0.7c1.8,0,3.6,1,4.6,2.7 c0.7,1.2,0.9,2.7,0.5,4c-0.4,1.4-1.3,2.5-2.5,3.2l-4.5,2.6l-5.3-9.2L35.6,27.2z M23.1,34.4l4.5-2.6l5.3,9.2l-4.5,2.6 c-1.2,0.7-2.7,0.9-4,0.5c-1.4-0.4-2.5-1.3-3.2-2.5c-0.7-1.2-0.9-2.7-0.5-4C21,36.3,21.9,35.1,23.1,34.4z"></path> </g> </g></svg>
+									Webshop link
+								</a>
+							</li>
 						<?php endif; ?>
-
-
 					</ul>
+
 				</div>
 			<?php endif; ?>
 
@@ -749,43 +790,43 @@ $post_id = get_the_ID();
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 				<?php if($post_home_year_built): ?>
-					<dl><dt class="-light">Year built:</dt><dd><?php limiterLignes($post_home_year_built); ?></dd></dl>
+					<dl><dt class="-light">Year built:</dt><dd><?php echo($post_home_year_built); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_home_amenities): ?>
-					<dl><dt class="-light">Home amenities:</dt><dd><?php limiterLignes($post_home_amenities); ?></dd></dl>
+					<dl><dt class="-light">Home amenities:</dt><dd><?php echo($post_home_amenities); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_neighborhood_amenities): ?>
-					<dl><dt class="-light">Neighborhood amenities:</dt><dd><?php limiterLignes($post_neighborhood_amenities); ?></dd></dl>
+					<dl><dt class="-light">Neighborhood amenities:</dt><dd><?php echo($post_neighborhood_amenities); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_transportation): ?>
-					<dl><dt class="-light">Transportation:</dt><dd><?php limiterLignes($post_transportation); ?></dd></dl>
+					<dl><dt class="-light">Transportation:</dt><dd><?php echo($post_transportation); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_garages_parking): ?>
-					<dl><dt class="-light">Nr of garages/parking:</dt><dd><?php limiterLignes($post_garages_parking); ?></dd></dl>
+					<dl><dt class="-light">Nr of garages/parking:</dt><dd><?php echo($post_garages_parking); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_schools): ?>
-					<dl><dt class="-light">Schools nearby:</dt><dd><?php limiterLignes($post_schools); ?></dd></dl>
+					<dl><dt class="-light">Schools nearby:</dt><dd><?php echo($post_schools); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_home_style_architecture): ?>
-					<dl><dt class="-light">Home style and architecture:</dt><dd><?php limiterLignes($post_home_style_architecture); ?></dd></dl>
+					<dl><dt class="-light">Home style and architecture:</dt><dd><?php echo($post_home_style_architecture); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_additional_features): ?>
-					<dl><dt class="-light">Additional home features:</dt><dd><?php limiterLignes($post_additional_features); ?></dd></dl>
+					<dl><dt class="-light">Additional home features:</dt><dd><?php echo($post_additional_features); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_taxes): ?>
-					<dl><dt class="-light">Property taxes:</dt><dd><?php limiterLignes($post_taxes); ?></dd></dl>
+					<dl><dt class="-light">Property taxes:</dt><dd><?php echo($post_taxes); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_fees): ?>
-					<dl><dt class="-light">Other property Fees:</dt><dd><?php limiterLignes($post_fees); ?></dd></dl>
+					<dl><dt class="-light">Other property Fees:</dt><dd><?php echo($post_fees); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_systems): ?>
-					<dl><dt class="-light">Heating / Cooling systems:</dt><dd><?php limiterLignes($post_systems); ?></dd></dl>
+					<dl><dt class="-light">Heating / Cooling systems:</dt><dd><?php echo($post_systems); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_energy_rating): ?>
-					<dl><dt class="-light">Energy rating:</dt><dd><?php limiterLignes($post_energy_rating); ?></dd></dl>
+					<dl><dt class="-light">Energy rating:</dt><dd><?php echo($post_energy_rating); ?></dd></dl>
 				<?php endif; ?>
 				<?php if($post_energy_consumption): ?>
-					<dl><dt class="-light">Energy rating and consumption:</dt><dd><?php limiterLignes($post_energy_consumption); ?></dd></dl>
+					<dl><dt class="-light">Energy rating and consumption:</dt><dd><?php echo($post_energy_consumption); ?></dd></dl>
 				<?php endif; ?>
 			</div>
 
@@ -847,7 +888,7 @@ $post_id = get_the_ID();
 				<div class="map map--single anim_els">
 					<div id="map"></div>
 				</div> -->
-				<div class="post-page__section post-page__section--footer mt-2 bt-2">
+				<div class="post-page__section post-page__section--footer mt-2 ">
 					<p class="post-footer__publish-date p-xs">
 						<?php echo get_time_ago(get_post_timestamp()); ?>
 					</p>
@@ -1217,7 +1258,7 @@ $post_id = get_the_ID();
 				<header class="modal__header">
 					<div class="flex flex--vertical">
 						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
+							<h2 class="resume__name card-form__title">SHARE POST</h2>
 						</div>
 					</div>
 					<?php get_template_part("components/btn", null,

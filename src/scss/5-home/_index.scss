@@ -8,17 +8,23 @@
     display: inline-block; /* Aligne les tags horizontalement */
 }
 
-.tag { 
+.tag {
     display: inline-block; /* Affiche chaque tag comme un bloc en ligne */
-    margin-right: 10px; /* Espacement entre les tags */
+    margin-right:0px; /* Espacement entre les tags */
     padding: 5px 10px; /* Espacement interne */
    /* background-color: #007bff; /* Couleur de fond des tags */
      border-radius: 5px; /* Coins arrondis */
     text-decoration: none; /* Pas de soulignement */
 }
 
+
+.tag-list p a:last-of-type{
+	  margin-right:40px;
+  }
+
+
 .tag:hover {
-    background-color: #0056b3; /* Couleur de fond au survol */
+    //background-color: #0056b3; /* Couleur de fond au survol */
 }
 
 
@@ -311,7 +317,7 @@
 .swiper-button-next,
 .swiper-button-prev {
    color: #007bff; /* Couleur des flèches */
-   top: 50%; /* Centré verticalement */
+   top: 90%; /* Centré verticalement */
    transform: translateY(-50%);
    width: 30px;
    height: 30px;
@@ -347,7 +353,7 @@
 
 /* Conteneur principal de la barre latérale */
 .sidebar-icons {
- 
+
    top: 50%;
    left: 10px;
    background-color: #ffffff;
@@ -417,7 +423,16 @@
 .tag-list-wrapper {
    overflow: hidden;
    width: 100%;
-   padding: 0 30px; /* Add padding to create space for the chevrons */
+   padding: 0  0 ; /* Add padding to create space for the chevrons */
+
+
+}
+.tag-list-container{
+	.chevron  {
+		display: block;
+		background: rgb(255, 255, 255);
+		padding: 3px;
+	}
 }
 
 .tag-list {
@@ -441,7 +456,7 @@
    color: #333;
 }
 
-// manage slate
+// todo_augustin manage slate
 
 .custom-checkbox {
    display: flex;
@@ -515,7 +530,6 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 10px 0;
 }
 
 .options {
@@ -569,3 +583,78 @@ h1 {
 #event-info , #premium-info {
    background-color: #fafff5;
 }
+
+
+// todo_augustin map slide
+
+.image-slider {
+   position: relative;
+   width: 100%;
+   max-width: 800px;
+   margin: auto;
+   overflow: hidden;
+   border: 1px solid #ccc;
+   border-radius: 8px;
+}
+
+.slider-container {
+   display: flex;
+   position: relative;
+}
+
+.slider-wrapper {
+   display: flex;
+   transition: transform 0.5s ease-in-out;
+   width: 100%;
+}
+
+.slider-slide {
+   flex: 0 0 100%;
+}
+
+.slider-slide img {
+   width: 85%;
+   height: 75%;
+   display: block;
+   border-radius: 8px;
+}
+
+.slider-control {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   color: #000;
+   background: white;
+   border: 2px solid;
+   padding: 5px 10px;
+   cursor: pointer;
+   z-index: 10;
+   border-radius: 50%;
+}
+
+.slider-control.prev {
+   left: 10px;
+}
+
+.slider-control.next {
+   right: 45px;
+}
+
+.contact__list__item {
+	a {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+
+		svg{
+			margin-right: 10px;
+		}
+
+	}
+}
+.profile-content__img{
+	.btn--ghost{
+		margin: 0 5px;
+	}
+}
+

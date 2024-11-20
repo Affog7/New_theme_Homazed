@@ -34,8 +34,8 @@ $user_permalink = get_permalink("602")."?user_id=".$user_id;
 ?>
 
 <div class="resume__data flex flex--vertical-center" style="justify-content: space-between; align-items: center;">
-    <div>
-        <h2 class="resume__name card-form__title"><?php echo $first_name . " " . $last_name; ?></h2>
+    <div style="display: contents">
+        <span class=""><?php echo $first_name . " " . $last_name; ?></span>
         <?php if ($account_type): ?>
             <p class="resume__account_type"><?php echo $account_type['label'] ?></p>
         <?php endif; ?>
@@ -50,8 +50,8 @@ $i_request_this_contact = (!empty($i_request_contactlist_users_relationships) &&
 
     <!-- Bouton Ajouter Contact uniquement si ce n'est pas mon post -->
     <?php if (!$is_own_post): ?>
-        <button class="btn btn--primary add-contact-btn_" data-c ="<?php var_dump($i_request_contactlist_users_relationships); ?>" data-request-contact-default="Add contact"  data-relation-him="<?php echo $post_author_id; ?>" data-u-id="<?php echo wp_get_current_user()->ID; ?>" >
-            Ajouter contact
+        <button class=" add-contact-btn_" data-c ="<?php var_dump($i_request_contactlist_users_relationships); ?>" data-request-contact-default="Add contact"  data-relation-him="<?php echo $post_author_id; ?>" data-u-id="<?php echo wp_get_current_user()->ID; ?>" >
+            Add contact
         </button>
     <?php endif; ?>
 </div>

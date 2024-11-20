@@ -13,8 +13,29 @@ $post_id = $_GET["post"];
 $user_id = wp_get_current_user()->ID;
 
 //post_type
-$post_type = get_post_type($post_id);
-$post_status = get_post_status($post_id);
+// Action (vente, location, etc.)
+$post_home_action_value = get_field("post_home_action",$post_id);
+$post_home_action_translate = match ($post_home_action_value) {
+	"sale" => "for Sale",
+	"rent" => "for Rent",
+	"sold" => "sold",
+	"rented" => "rented",
+	default => ""
+};
+
+// Traduction des catégories
+$post_home_category_value = get_field("post_home_category", $post_id);
+$post_home_category_translate = match ($post_home_category_value) {
+	"house" => "House",
+	"apartment" => "Apartment",
+	"new_construction" => "New construction",
+	"land_plot" => "Land/Plot",
+	"office" => "Office",
+	"commercial_industry" => "Commercial/Industry",
+	"garage_parking" => "Garage/Parking",
+	"other" => "Other",
+	default => ""
+};
 
 // Galerie d'images
 $post_gallery_image_ids = get_field("post_home_gallery_ids", $post_id);
@@ -35,6 +56,7 @@ $post_bathrooms = get_field("post_home_number_of_bathrooms", $post_id);
 
 $post_premium = get_field("post_premium", $post_id);
 $is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $post_id);
+$post_home_event_type = get_field("post_home_event_type", $post_id);
 
 //event tags
 $events_text_1 = get_field("post_home_event_text_1", $post_id);
@@ -49,7 +71,7 @@ $events_text_2 = get_field("post_home_event_text_2", $post_id);
 
 				<div class="post-container">
 					<div class="post-header">
-						<h1><?php echo esc_html($post_type."|".$post_status.($post_premium ? " - PREMIUM" : '' )); ?></h1>
+						<h1>HOME</h1>
 
 						<div class="options">
 							<button id="premium-toggle" class="premium-button">Premium</button>
@@ -59,13 +81,10 @@ $events_text_2 = get_field("post_home_event_text_2", $post_id);
 
 					<hr>
 					<div class="row">
-						<div><strong>Location:</strong> <?php echo esc_html($post_location); ?></div>
+						<div><strong></strong> <?php echo esc_html($post_home_category_translate)." ".$post_home_action_translate; ?></div>
 						<div><a href="<?php echo esc_url(get_post($post_id)->guid);	 ?>"><i>Go to Post Creation ></i></a></div>
 					</div>
-					<div class="row">
-						<p><strong>Price:</strong> <?php echo number_format($post_price, 2) ; ?>€</p>
-						<p><strong> <?php echo esc_html(get_the_title($post_id)); ?> </strong> </p>
-					</div>
+
 					<hr>
 
 					<!-- premium -->
@@ -123,12 +142,13 @@ $events_text_2 = get_field("post_home_event_text_2", $post_id);
 							<div class="info">
 								<p><?php echo $events_text_1; ?></p>
 								<p><?php echo $events_text_2; ?></p>
+
 							</div>
 						</div>
 						<hr>
 						<div class="row">
 							<label class="custom-checkbox">
-								<input type="checkbox" name="premium_auto_renewal" value="1"  >
+								<input type="checkbox" name="premium_auto_renewal" value="1" <?php if($post_home_event_type!='-1') echo "checked"; ?>  >
 								<span class="checkmark"></span> Active Event
 							</label>
 						</div>

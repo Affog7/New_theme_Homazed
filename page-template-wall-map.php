@@ -178,6 +178,8 @@
 						 switch ($post_home_category_value) {
 							 case "house": $post_home_category_translate = "House"; break;
 							 case "apartment": $post_home_category_translate = "Apartment"; break;
+							 case "student": $post_home_category_translate = "Student"; break;
+
 							 case "new_construction": $post_home_category_translate = "New construction"; break;
 							 case "land_plot": $post_home_category_translate = "Land/Plot"; break;
 							 case "office": $post_home_category_translate = "Office"; break;
