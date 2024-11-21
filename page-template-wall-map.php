@@ -189,7 +189,7 @@
 							 case "other": $post_home_category_translate = "Other"; break;
 						 }
 
-						 $post = [
+							 $post = [
 							 "id" => $post_id,
 							 "title" => get_the_title(),
 							 "content" => get_the_excerpt(),

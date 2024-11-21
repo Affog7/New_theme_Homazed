@@ -5681,7 +5681,7 @@ h1 {
   margin-right: 10px;
 }
 
-.profile-content__img .btn--ghost, .profile-content__img .acf-repeater .-minus, .acf-repeater .profile-content__img .-minus, .profile-content__img .acf-image-uploader .-cancel, .acf-image-uploader .profile-content__img .-cancel, .profile-content__img .acf-basic-uploader, .profile-content__img button.gfgeo-locator-button, .profile-content__img .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .profile-content__img .acf-icon.-minus, .profile-content__img .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .profile-content__img .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+.profile-content__img .btn--small, .floating-bar .btn--small {
   margin: 0 5px;
 }
 

@@ -171,7 +171,7 @@
 								'disabled'  => false,
 								'icon-position' => 'left',
 								'icon' => 'hyperlink-2',
-								'additional-classes' => '',
+								'additional-classes' => ' btn--small ',
 								'data-attribute' => '',
 								'theme' => "",
 							)

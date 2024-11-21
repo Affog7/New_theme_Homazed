@@ -652,8 +652,9 @@ h1 {
 
 	}
 }
-.profile-content__img{
-	.btn--ghost{
+
+.profile-content__img, .floating-bar {
+	.btn--small {
 		margin: 0 5px;
 	}
 }

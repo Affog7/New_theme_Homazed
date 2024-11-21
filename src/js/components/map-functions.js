@@ -35,7 +35,7 @@ const MapLaunch = (data) => {
 				this.initPopup();
 			}
 
-			if(this.page === "wall--map"){
+			if(this.page === "wall--map" || this.page === "post"){
 				// this.follow_click();
 				this.right_slates = document.querySelector(".right-slates");
 				this.right_slates__items = this.right_slates.querySelectorAll(".card");
@@ -56,7 +56,7 @@ const MapLaunch = (data) => {
       }else if(this.page === "single-post"){
         // La carte prend un peu moins de place
         this.map.style.height = ((this.wh / 2.5) - (this.headerH - 60)) + "px"; // 40% de la fenêtre
-      }else if(this.page === "wall--map"){
+      }else if(this.page === "wall--map" || this.page === "post"){
         // Si la carte est sur une page de type "wall--map", ajuster en fonction du layout
         document.querySelector(".left-map").style.height = (this.wh * 0.7) + "px"; // 70% de la hauteur de la fenêtre
         this.map.style.height = (this.wh * 0.7) + "px"; // 70% de la hauteur de la fenêtre
@@ -230,7 +230,7 @@ const MapLaunch = (data) => {
 			// On the marker clicked, add the class
 			event.target._icon.classList.add("marker--selected");
 
-			if(this.page === "wall--map"){
+			if(this.page === "wall--map" || this.page === "post"){
 				var slates = this.right_slates.querySelectorAll(".card");
 				var related_slate = document.querySelector("#slate-" + event.target.markerData.id);
 				const y = related_slate.getBoundingClientRect().top + window.scrollY;

@@ -864,24 +864,46 @@ $post_id = get_the_ID();
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 				<?php
+
+				$posts_args = array(
+					"post_type" => "homes",
+					//"post_status" => "publish",
+					"posts_per_page" => -1,
+					"orderby" => "date",
+					"order" => "DESC"
+				);
+
+ 				$posts_query = new WP_Query($posts_args);
+
+				wp_reset_postdata();
 				$post_content_for_map = [];
-				$post_for_map = [
-						"id" => $post_id,
-						"title" => $post_title, // house type
+				if(!empty($posts_query->have_posts())):
+				$posts = [];
+
+				while($posts_query->have_posts()):
+					$posts_query->the_post();
+					$post_id_ = get_the_ID();
+					$post_for_map = [
+						"id" => $post_id_,
+						"title" =>  get_field("post_home_title",$post_id_) ? get_field("post_home_title",$post_id_) : get_the_title(), // house type
 						"post_type_slug" => "real-estate",
-						"permalink" => get_the_permalink($post_id),
-						"lat" => $post_location_latitude,
-						"lng" => $post_location_longitude,
+						"permalink" => get_the_permalink($post_id_),
+						"lat" => get_field("post_location_latitude",$post_id_),
+						"lng" => get_field("post_location_longitude",$post_id_),
 						"account_type" => null,
-						"location" => $post_address,
-						"price" => $post_price,
-						"bedrooms" => $post_bedrooms,
-						"bathrooms" => $post_bathrooms,
-						"home_size" => $post_home_size,
-						"outdoor_size" => $post_outdoor_size,
+						"location" => get_field("post_location_address",$post_id_) ? get_field("post_location_address",$post_id_) . ", " . get_field("post_location_zip",$post_id_) . " " . get_field("post_location_city",$post_id_) : get_field("post_address",$post_id_),
+						"price" => get_field("post_home_price", $post_id_),
+						"bedrooms" => get_field("post_home_number_of_bedrooms", $post_id_),
+						"bathrooms" => get_field("post_home_number_of_bathrooms", $post_id_),
+						"home_size" => get_field("post_home_size", $post_id_),
+						"outdoor_size" => get_field("post_home_outdoor_size", $post_id_),
 						"img" => get_the_post_thumbnail()
 					];
 					array_push($post_content_for_map, $post_for_map);
+				endwhile;
+				endif;
+
+
 					?>
 
 				<!-- <div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
@@ -944,12 +966,17 @@ $post_id = get_the_ID();
 				));
 			?>
 		</div>
-		<div class="tab-content default-bckg post-page hide" data-barba-prevent="all" id="tabs-map">
+		<div class="tab-content default-bckg post-page hide " data-barba-prevent="all" id="tabs-map">
 			<h3 class="map"></h3>
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
-				<div id="map"></div>
+				<div id="map">
+
+					<?php get_template_part( 'components/map-popup', null ); ?>
+				</div>
+
 			</div>
+
 		</div>
 
 <?php if($current_user_id == $author_id): ?>
