@@ -124,3 +124,57 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(error => console.error("Error:", error));
   }
 });
+
+
+
+// choix unique premium MONTH CREATION POST TODO_AUGUSTIN
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Récupérer toutes les cases à cocher avec un nom spécifique
+  const checkboxes = document.querySelectorAll('input[name^="input_106"]');
+
+  // Ajouter un gestionnaire d'événements pour chaque case à cocher
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function () {
+      if (this.checked) {
+        // Décochez toutes les autres cases ayant le même nom de base
+        checkboxes.forEach(cb => {
+          if (cb !== this) {
+            cb.checked = false;
+          }
+        });
+      }
+    });
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const deleteButtons = document.querySelectorAll('.delete-image_a');
+
+  deleteButtons.forEach(button => {
+      button.addEventListener('click', function () {
+          const imageId = this.getAttribute('data-id');
+          const postId = this.closest('.gallery-item_a').getAttribute('data-id-post');
+          const parentDiv = this.closest('.gallery-item_a');
+
+          if (confirm('Are you sure you want to delete this image?')) {
+              fetch(ajaxurl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: `action=delete_gallery_image&image_id=${imageId}&post_id=${postId}`
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.success) {
+                          parentDiv.remove(); // Supprime l'élément du DOM
+                          alert('Image deleted successfully.');
+                      } else {
+                          alert(data.data || 'An error occurred.');
+                      }
+                  })
+                  .catch(err => console.error('Error:', err));
+          }
+      });
+  });
+});

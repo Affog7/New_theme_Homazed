@@ -325,10 +325,10 @@ const MapLaunch = (data) => {
           imageContainer.innerHTML = postData.templates.images_temp;
 
 
-            const sliderWrapper = document.querySelector(".slider-wrapper");
-            const slides = document.querySelectorAll(".slider-slide");
-            const prevButton = document.querySelector(".slider-control.prev");
-            const nextButton = document.querySelector(".slider-control.next");
+            const sliderWrapper = document.querySelector(".slider-wrapper_a");
+            const slides = document.querySelectorAll(".slider-slide_a");
+            const prevButton = document.querySelector(".slider-control_a.prev");
+            const nextButton = document.querySelector(".slider-control_a.next");
 
             let currentIndex = 0;
 

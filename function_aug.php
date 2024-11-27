@@ -99,22 +99,36 @@ function update_post_status_via_ajax() {
 		$status = sanitize_text_field($_POST['status']);
 
 		// Mettre à jour le statut du post
-		$valid_statuses = array('publish', 'draft', 'private', 'inactive'); // Inclure 'inactive' comme statut personnalisé si nécessaire
+		$valid_statuses = array('publish', 'erase', 'private', 'inactive'); // Inclure 'inactive' comme statut personnalisé si nécessaire
 		if (!in_array($status, $valid_statuses)) {
 			wp_send_json_error(array('message' => 'Invalid status.'));
 		}
 
-		// Mise à jour du statut du post
-		$result = wp_update_post(array(
-			'ID' => $post_id,
-			'post_status' => ($status == 'Inactive') ? 'private' : $status // 'Inactive' sera traduit en 'private'
-		));
+		if($status == 'erase') {
+			// Supprimer le post
+			$deleted = wp_delete_post($post_id, true); // Le deuxième paramètre "true" force la suppression définitive
 
-		if ($result) {
-			wp_send_json_success(array('message' => 'Post status updated successfully.'));
-		} else {
-			wp_send_json_error(array('message' => 'Failed to update post status.'));
+			// Vérifier si le post a bien été supprimé
+			if ($deleted) {
+				wp_send_json_success(array('message' => 'Post supprimé avec succès.'));
+			} else {
+				wp_send_json_error(array('message' => 'Échec de la suppression du post.'));
+			}
 		}
+		else {
+			// Mise à jour du statut du post
+			$result = wp_update_post(array(
+				'ID' => $post_id,
+				'post_status' => ($status == 'Inactive') ? 'private' : $status // 'Inactive' sera traduit en 'private'
+			));
+
+			if ($result) {
+				wp_send_json_success(array('message' => 'Post status updated successfully.'));
+			} else {
+				wp_send_json_error(array('message' => 'Failed to update post status.'));
+			}
+		}
+
 	} else {
 		wp_send_json_error(array('message' => 'Missing post_id or status.'));
 	}
@@ -176,6 +190,9 @@ function enqueue_custom_tag_script() {
 		true // Load in footer
 	);
 
+	wp_localize_script('custom-tags-js', 'ajaxurl', admin_url('admin-ajax.php'));
+
+
 	// Enqueue the script on specific pages or everywhere
 	if (is_page() || is_single()) { // Adjust to target specific pages or conditions
 		wp_enqueue_script('custom-tags-js');
@@ -185,6 +202,8 @@ function enqueue_custom_tag_script() {
 	wp_localize_script('custom-tags-js', 'customApi', array(
 		'nonce' => wp_create_nonce('wp_rest')
 	));
+
+
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_tag_script');
 
@@ -244,4 +263,7 @@ add_action('rest_api_init', 'custom_api_register_routes');
 
 
 
+
+
+include get_template_directory() . '/function_route.php';
 

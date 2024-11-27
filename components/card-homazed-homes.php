@@ -161,7 +161,7 @@
 				<?php endif; ?>
 
 				<?php if(!empty($args['video_']) && $args['video_']): ?>
-					<?php get_template_part( 'components/btn', null,
+					<?php get_template_part('components/btn', null,
 							array(
 								'label' => 'Video',
 								'href' => esc_url(stripslashes($args["video_"])),
@@ -227,7 +227,7 @@
 	<?php $him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false; ?>
 	<?php $him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false; ?>
 
-	<?php if($post_events_text_1): ?>
+	<?php if($post_events_text_1 && $post_events_type)  : ?>
 		<?php
 		$contact_classes = 'relation_btn relation_btn--contact-list';
 		$contact_text = $post_events_text_1;
@@ -279,7 +279,7 @@
 	 */
 	if($args["tags"]): ?>
 		<div class="card__header__item card__header__item--tags">
-			<div class="tag-list-container">
+			<div class="tag-list-container " style="display: inline-grid">
 				<span class="chevron left-chevron">&#9664;</span>
 				<div class="tag-list-wrapper">
 					<div class="tag-list">

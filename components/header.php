@@ -11,7 +11,7 @@
 			<?php if(is_page(468) || is_page(473)){ $is_active = " active"; }else{ $is_active = ""; } ?>
 			<?php if(!is_user_logged_in()): ?>
 				<?php get_template_part("components/btn", null,
-					array( 
+					array(
 						'label' => 'Login',
 						'href' => get_permalink("39"), // Login page
 						'target' => "_self",
@@ -27,7 +27,7 @@
 				); 	?>
 				<?php
 				get_template_part("components/btn", null,
-					array( 
+					array(
 						'label' => 'Register',
 						'href' => get_permalink("1793"),
 						'target' => "_self",
@@ -46,7 +46,7 @@
 				<?php $user = wp_get_current_user(); ?>
 				<?php $first_name = $user->user_firstname; ?>
 				<?php $last_name = $user->user_lastname; ?>
-				
+
 				<a href="<?php echo get_permalink("602")."?user=".$first_name."-".$last_name; ?>" class="owner__link--header flex flex--vertical-center">
 					<?php $profile_picture = get_field('user_profile_picture', "user_".$user->ID); ?>
 					<?php if($profile_picture): ?>
@@ -61,7 +61,7 @@
 					<?php endif; ?>
 				</a>
 				<?php get_template_part("components/btn", null,
-					array( 
+					array(
 						'label' => 'Messages',
 						'href' => "/",
 						'target' => "_self",
@@ -78,9 +78,9 @@
 				?>
 				<?php
 				get_template_part("components/btn", null,
-					array( 
+					array(
 						'label' => '',
-						'href' => "/",
+						'href' => "/manageslate/?post=-1",
 						'target' => "_self",
 						'skin'  => 'transparent',
 						'icon-only'  => true,
@@ -94,7 +94,7 @@
 				); ?>
 				<?php if(is_page(251) || is_page(240)){ $is_active = " active"; }else{ $is_active = ""; } ?>
 				<?php get_template_part("components/btn", null,
-					array( 
+					array(
 						'label' => 'Account',
 						'href' => get_permalink("251"), // Account resume page
 						'target' => "_self",
@@ -109,7 +109,7 @@
 					)
 				); ?>
 
-				<?php 
+				<?php
 					$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$user->ID);
 					$i_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$user->ID);
 					// $i_refused_contactlist_users_relationships = get_field("i_refused_contactlist_users_relationships", "user_".$user->ID);
@@ -140,7 +140,7 @@
 											</p>
 										</div>
 										<?php get_template_part( 'components/btn', null,
-											array( 
+											array(
 												'label' => 'Refuse',
 												'href' => "",
 												'target' => "_self",
@@ -155,7 +155,7 @@
 											)
 										); ?>
 										<?php get_template_part( 'components/btn', null,
-											array( 
+											array(
 												'label' => 'Accept',
 												'href' => "",
 												'target' => "_self",
@@ -172,7 +172,7 @@
 									</div>
 								<?php endforeach; ?>
 							</div>
-								
+
 						</div>
 						<div class="arrow"></div>
 					</div>

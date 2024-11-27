@@ -1180,6 +1180,8 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 		'113' => 'post_home_amenities',
 		'67' => 'post_home_year_built',
 		'92.1' => 'post_comment_available',
+		'93.1' => 'post_phone_calls_available',
+		'94.1' => 'post_add_my_website_link',
 		'114' => 'post_home_neighborhood_amenities',
 		'116' => 'post_home_transportation',
 		'115' => 'post_home_garages_parking',
@@ -1207,6 +1209,31 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 			}
 		}
 	}
+
+	// le titre et le lien todo_augustin
+	$city =$entry['62.3']; // Remplacez '1' par l'ID du champ de la ville
+	$postal_code = $entry['62.5'] ; // Remplacez '2' par l'ID du champ du code postal
+	$post_title = $entry['133'];   // Remplacez '3' par l'ID du champ du titre du post
+
+	// Nettoyer les valeurs et générer un slug unique
+	$city = sanitize_title($city ?: 'unknown-city');
+	$postal_code = sanitize_title($postal_code ?: '0000');
+	$random_number = rand(100000, 999999);
+
+	// Créer un slug unique basé sur le titre, la ville, le code postal et un numéro aléatoire
+	$custom_slug = sanitize_title($post_title . '-' . $city . '-' . $postal_code . '/' . $random_number);
+
+	// Mettre à jour le post existant avec ces informations
+	$post_data = array(
+		'ID'           => $post_id,           // L'ID du post à mettre à jour
+		'post_title'   => $post_title,        // Titre du post
+		'post_name'    => $custom_slug,       // Slug personnalisé
+		'post_status'  => 'publish',          // Définir le statut du post
+	);
+
+	// Mettre à jour le post
+	$updated_post_id = wp_update_post($post_data);
+
 
 	// Gestion des champs de sélection multiple pour `post_choice`
 	$post_choice = [];

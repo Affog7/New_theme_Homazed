@@ -57,7 +57,7 @@ function get_post_details_api( $request ) {
 	}
 
 	// Action (vente, location, etc.)
-	$post_home_action_value = get_field("post_home_action",$post_id);
+	$post_home_action_value = get_field("post_home_action", $post_id);
 	$post_home_action_translate = match ($post_home_action_value) {
 		"sale" => "for Sale",
 		"rent" => "for Rent",
@@ -135,12 +135,12 @@ function get_post_details_api( $request ) {
   if($post_gallery_image_ids_array) {
 
 	  ob_start(); ?>
-	  <div class="image-slider">
-		  <div class="slider-container">
-			  <div class="slider-wrapper">
+	  <div class="image-slider_a">
+		  <div class="slider-container_a">
+			  <div class="slider-wrapper_a">
 				  <!-- Les images dynamiques sont insérées ici via PHP -->
 				  <?php foreach ($image_urls as $url): ?>
-					  <div class="slider-slide">
+					  <div class="slider-slide_a">
 						  <img src="<?php echo esc_url($url); ?>" alt="Image">
 					  </div>
 				  <?php endforeach; ?>
@@ -148,8 +148,8 @@ function get_post_details_api( $request ) {
 		  </div>
 		  <!-- Contrôles gauche/droite -->
 		  <?php if (count($image_urls)>1): ?>
-			  <button class="slider-control prev" style="display: none" aria-label="Previous slide"><</button>
-			  <button class="slider-control next" aria-label="Next slide">></button>
+			  <button class="slider-control_a prev" style="display: none" aria-label="Previous slide"><</button>
+			  <button class="slider-control_a next" aria-label="Next slide">></button>
 		  <?php endif; ?>
 
 
