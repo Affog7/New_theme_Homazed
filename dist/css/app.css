@@ -4907,6 +4907,10 @@ a.quicklinks--item:hover {
   text-decoration: none; /* Pas de soulignement */
 }
 
+.btn--small {
+  margin: 2px;
+}
+
 .tag-list p a:last-of-type {
   margin-right: 40px;
 }

@@ -25,6 +25,10 @@ $post_id = get_the_ID();
 
 			$author_website_link = get_field("user_website_link", "user_".$author_id);
 
+			// checkbox  todo_augustin
+			$post_comment_available = get_field("post_comment_available", $post_id);
+			$post_phone_calls_available = get_field("post_phone_calls_available", $post_id);
+			$post_add_my_website_link = get_field("post_add_my_website_link", $post_id);
 
 			$author_online_shop_link = get_field("user_online_shop_link", "user_".$author_id);
 
@@ -345,7 +349,7 @@ $post_id = get_the_ID();
       <div class="form-step" id="step2" style="display:none;">
          <h3>Location</h3>
 		  <main class="modal__content contact__form contact__form--light">
-			  <?php echo do_shortcode( '[gravityform id="19" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+			  <?php echo do_shortcode( '[gravityform id="17" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 		  </main>
       </div>
       <div class="form-step" id="step3" style="display:none;">
@@ -377,8 +381,9 @@ $post_id = get_the_ID();
       </div>
       <div class="form-step" id="step6" style="display:none;">
          <h3>Premium</h3>
-         <!-- Champs relatifs à Premium -->
-      </div>
+		  <?php echo do_shortcode( '[gravityform id="20" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+
+	  </div>
 
       <!-- Contrôles de navigation -->
       <div class="form-navigation">
@@ -717,7 +722,9 @@ $post_id = get_the_ID();
 							</li>
 						<?php endif; ?>
 
-						<?php if($author_phone_number && in_array("phone_calls_available", $author_connections_settings)): ?>
+
+
+						<?php if($author_phone_number && $post_phone_calls_available && in_array("phone_calls_available", $author_connections_settings)): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">
 									<svg viewBox="0 0 24 24" height="20" width="20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 8H8.44444C8.2 8 8 8.2 8 8.44444C8 12.6178 11.3822 16 15.5556 16C15.8 16 16 15.8 16 15.5556V14.0044C16 13.76 15.8 13.56 15.5556 13.56C15.0044 13.56 14.4667 13.4711 13.9689 13.3067C13.9244 13.2889 13.8756 13.2844 13.8311 13.2844C13.7156 13.2844 13.6044 13.3289 13.5156 13.4133L12.5378 14.3911C11.28 13.7467 10.2489 12.72 9.60889 11.4622L10.5867 10.4844C10.7111 10.36 10.7467 10.1867 10.6978 10.0311C10.5333 9.53333 10.4444 9 10.4444 8.44444C10.4444 8.2 10.2444 8 10 8ZM9.77333 10.04C9.66667 9.67111 9.6 9.28444 9.57333 8.88889H8.90222C8.94222 9.47556 9.05778 10.04 9.24 10.5733L9.77333 10.04ZM15.1111 14.4311C14.72 14.4044 14.3333 14.3378 13.9556 14.2311L13.4222 14.76C13.96 14.9378 14.5244 15.0533 15.1111 15.0933V14.4311Z" fill="#000000"></path> <path d="M13.2216 9.52112V9.10456H15.3044V11.1874H14.8879V9.81568L12.9376 11.766L12.643 11.4714L14.5933 9.52112H13.2216Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="#000000"></path> </g></svg>
@@ -726,7 +733,7 @@ $post_id = get_the_ID();
 							</li>
 						<?php endif; ?>
 
-						<?php if($author_website_link && in_array("add_website_link", $author_connections_settings)): ?>
+						<?php if($author_website_link && $post_add_my_website_link && in_array("add_website_link", $author_connections_settings)): ?>
 <!--							<li class="contact__list__item">-->
 <!--								<a href="--><?php //echo esc_url($author_website_link); ?><!--" target="_blank">-->
 <!--									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>-->
@@ -753,7 +760,7 @@ $post_id = get_the_ID();
 							</li>
 						<?php endif; ?>
 
-						<?php if($post_author_link): ?>
+						<?php if( $post_author_link): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo esc_url($post_author_link); ?>" target="_blank">
 									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
@@ -762,7 +769,7 @@ $post_id = get_the_ID();
 							</li>
 						<?php endif; ?>
 
-						<?php if($post_Add_my_webshop_link): ?>
+						<?php if($post_Add_my_webshop_link  && $post_add_my_website_link): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo esc_url($post_Add_my_webshop_link); ?>" target="_blank">
 									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>

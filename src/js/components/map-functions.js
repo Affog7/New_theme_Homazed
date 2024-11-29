@@ -350,17 +350,20 @@ const MapLaunch = (data) => {
             updateSlider();
           }
 
+          if(nextButton && prevButton) {
             // Ajouter des événements aux boutons
             nextButton.addEventListener("click", (e) => {
               e.preventDefault();
               e.stopPropagation();
-				showNextSlide()
-			});
+              showNextSlide()
+            });
             prevButton.addEventListener("click", (e) => {
               e.preventDefault();
               e.stopPropagation();
-				showPrevSlide()
-			});
+              showPrevSlide()
+            });
+          }
+
 
 
 

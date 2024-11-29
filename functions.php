@@ -1179,9 +1179,9 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 		'25' => 'post_home_price',
 		'113' => 'post_home_amenities',
 		'67' => 'post_home_year_built',
-		'92.1' => 'post_comment_available',
-		'93.1' => 'post_phone_calls_available',
-		'94.1' => 'post_add_my_website_link',
+		'92.1' => 'post_comment_available', //checkbox comments available
+		'93.1' => 'post_phone_calls_available', // checkbox Phone calls available
+		'94.1' => 'post_add_my_website_link', //checkbox
 		'114' => 'post_home_neighborhood_amenities',
 		'116' => 'post_home_transportation',
 		'115' => 'post_home_garages_parking',
@@ -1243,6 +1243,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 			$post_choice[] = sanitize_text_field($entry[$input_key]);
 		}
 	}
+
 	if (!empty($post_choice)) {
 		if (!add_post_meta($post_id, 'post_choice', $post_choice, true)) {
 			update_post_meta($post_id, 'post_choice', $post_choice);
@@ -1258,6 +1259,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 			break; // Prend la première valeur non nulle
 		}
 	}
+
 	if ($post_duration !== null) {
 		if (!add_post_meta($post_id, 'post_duration', $post_duration, true)) {
 			update_post_meta($post_id, 'post_duration', $post_duration);
