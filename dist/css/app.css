@@ -1960,9 +1960,9 @@ a.post-header:hover .owner {
           box-shadow: var(--box-shadow-card);
   background-color: white;
   position: fixed;
-  left: 32%;
+  left: 40%;
   bottom: 25%;
-  width: 36%;
+  width: 20%;
   z-index: 10001;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;

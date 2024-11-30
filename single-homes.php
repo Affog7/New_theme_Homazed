@@ -341,48 +341,54 @@ $post_id = get_the_ID();
          <main class="modal__content contact__form contact__form--light">
 
 
-				<?php	echo do_shortcode('[post_gallery_edit ids="'.$post_gallery_image_ids.'" post_id="' . $post_id . '"]');
+
+
+				<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 				; ?>
-				<?php	echo do_shortcode( '[gravityform id="4" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+
+<!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 		 </main>
       </div>
       <div class="form-step" id="step2" style="display:none;">
          <h3>Location</h3>
 		  <main class="modal__content contact__form contact__form--light">
 			  <?php echo do_shortcode( '[gravityform id="17" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+
+
 		  </main>
       </div>
       <div class="form-step" id="step3" style="display:none;">
          <h3>Texts & Key Info</h3>
 		<main class="modal__content contact__form contact__form--light">
 
-		<?php echo do_shortcode( '[gravityform id="3" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+<!--		--><?php //echo do_shortcode( '[gravityform id="3" ajax="true" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+<!---->
+<!--		--><?php //echo do_shortcode( '[gravityform id="13" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+<!---->
+<!--		--><?php //echo do_shortcode( '[gravityform id="14" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+<!---->
+<!--		 --><?php //echo do_shortcode( '[gravityform id="7" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
-		<?php echo do_shortcode( '[gravityform id="13" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-
-		<?php echo do_shortcode( '[gravityform id="14" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-
-		 <?php echo do_shortcode( '[gravityform id="7" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-
-		 <?php echo do_shortcode( '[gravityform id="8" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+		 <?php echo do_shortcode( '[gravityform id="8" ajax="true" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
 		</main>
       </div>
       <div class="form-step" id="step4" style="display:none;">
          <h3>Connections</h3>
 		 <main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="11" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					<?php echo do_shortcode( '[gravityform id="11" ajax="true" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 		</main>      </div>
       <div class="form-step" id="step5" style="display:none;">
          <h3>Event</h3>
          <main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="15" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="true" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
       </div>
       <div class="form-step" id="step6" style="display:none;">
          <h3>Premium</h3>
-		  <?php echo do_shortcode( '[gravityform id="20" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-
+		  <main class="modal__content contact__form contact__form--light">
+		  <?php echo do_shortcode( '[gravityform id="20" ajax="true" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+		  </main>
 	  </div>
 
       <!-- Contrôles de navigation -->
