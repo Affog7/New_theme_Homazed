@@ -341,10 +341,9 @@ $post_id = get_the_ID();
          <main class="modal__content contact__form contact__form--light">
 
 
-				<?php	echo do_shortcode('[post_gallery_edit ids="'.$post_gallery_image_ids.'" post_id="' . $post_id . '"]');
-				; ?>
 
-				<?php	echo do_shortcode('[add_images_with_params  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
+
+				<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 				; ?>
 
 <!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
