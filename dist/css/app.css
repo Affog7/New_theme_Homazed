@@ -2418,7 +2418,7 @@ input[type=text]::-webkit-input-placeholder, input[type=url]::-webkit-input-plac
 }
 
 .gf_progressbar_wrapper {
-  margin-top: -3rem;
+  margin-top: -1rem;
 }
 
 .gform_wrapper.gravity-theme .gf_progressbar_percentage.percentbar_blue {
@@ -5219,6 +5219,36 @@ a.quicklinks--item:hover {
           justify-content: space-between;
 }
 
+/* Conteneur de la grille */
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Aligne les colonnes horizontalement */
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; /* Permet le retour à la ligne si nécessaire */
+  gap: 16px; /* Espacement entre les colonnes */
+}
+
+/* Colonne de base (taille par défaut) */
+.col {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1; /* Prend une part égale de l'espace disponible */
+  min-width: 100px; /* Largeur minimale pour garder des colonnes lisibles */
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+/* Media Query pour les écrans moyens (équivalent à `md`) */
+@media (min-width: 768px) {
+  .col {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(33.3333333333% - 16px);
+            flex: 0 0 calc(33.3333333333% - 16px); /* 3 colonnes par ligne avec un espace entre elles */
+  }
+}
 /* Conteneur principal du carrousel */
 .map-slate__image {
   max-width: 300px; /* Largeur du carrousel */
@@ -5567,10 +5597,6 @@ h1 {
   color: #333;
 }
 
-.info-section {
-  padding: 10px;
-}
-
 /* Boutons */
 .premium-button,
 .event-button,
@@ -5679,7 +5705,6 @@ hr {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 6px;
-  padding: 20px;
   margin-top: 20px;
 }
 
@@ -5688,12 +5713,8 @@ hr {
   margin-right: 15px;
 }
 
-.info p {
-  margin: 5px 0 0 5px;
-  font-size: 1.2rem;
-}
-
 .custom-checkbox {
+  margin-left: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5710,6 +5731,7 @@ hr {
 
 .see-stats {
   color: #007bff;
+  margin-left: 5px;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;

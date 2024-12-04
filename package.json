@@ -94,7 +94,7 @@
     "filepond-plugin-image-transform": "^3.8.7",
     "glide": "^0.2.0",
     "glightbox": "^3.3.0",
-    "gsap": "^3.11.3",
+    "gsap": "^3.11.5",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^4.0.0",
     "leaflet.markercluster": "^1.5.3",

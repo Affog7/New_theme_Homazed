@@ -1193,6 +1193,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 		'118' => 'post_heating_cooling_systems',
 		'122' => 'post_home_estimated_energy_rating_energy_consumption',
 		'123' => 'post_author_link',
+		'95.1' => 'Is_Add_my_webshop_link',
 		'124' => 'post_Add_my_webshop_link',
 		'131' => 'post_home_event_text_1',
 		'132' => 'post_home_event_text_2',
@@ -1431,42 +1432,8 @@ function delete_media_by_id( $media_id ) {
 }
 
 
-function enqueue_custom_script() {
-	// Enregistrez un script vide pour pouvoir utiliser `wp_localize_script`
-	wp_register_script('custom-congratulations-script', false);
-
-	// Déterminez l'URL de la page à rediriger
-	$welcome_page = site_url('/welcome/');
-
-	// Localisez le script uniquement pour le modèle `page-template-congratulations.php`
-	if (is_page_template('page-template-congrats.php')) {
-		wp_localize_script('custom-congratulations-script', 'pageData', array(
-			'welcomePageUrl' => $welcome_page,
-		));
-		// Chargez le script localisé sur la page
-		wp_enqueue_script('custom-congratulations-script');
-	}
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_script');
-
-
-function enqueue_custom_script_complete_profil() {
-	// Enregistrez un script vide pour pouvoir utiliser `wp_localize_script`
-	wp_register_script('custom-welcome-script', false);
-
-	// Déterminez l'URL de la page à rediriger
-	$connect_page = get_permalink("39");
-
-	// Localisez le script uniquement pour le modèle `page-template-congratulations.php`
-	if (is_page_template('page-template-welcome.php')) {
-		wp_localize_script('custom-welcome-script', 'pageData', array(
-			'connect' => $connect_page,
-		));
-		// Chargez le script localisé sur la page
-		wp_enqueue_script('custom-welcome-script');
-	}
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_script_complete_profil');
 
 //todo_augustin
 include get_template_directory() . '/function_aug.php';
+include get_template_directory() . '/function_al.php';
+

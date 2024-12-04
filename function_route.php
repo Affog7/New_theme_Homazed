@@ -174,11 +174,14 @@ add_shortcode('gallery_manager', 'shortcode_gallery_manager');
 function ajax_add_gallery_images() {
 	if (isset($_POST['post_id']) && !empty($_FILES['images'])) {
 		$post_id = intval($_POST['post_id']);
+
 		if (!current_user_can('edit_post', $post_id)) {
 			wp_send_json_error('Permission refusée.');
 		}
 
 		$uploaded_ids = [];
+		$image_data = []; // Nouveau tableau pour stocker les URLs et les IDs des images ajoutées
+
 		foreach ($_FILES['images']['tmp_name'] as $index => $tmp_name) {
 			$file = [
 				'name' => $_FILES['images']['name'][$index],
@@ -201,22 +204,35 @@ function ajax_add_gallery_images() {
 
 				require_once(ABSPATH . 'wp-admin/includes/image.php');
 				wp_update_attachment_metadata($attachment_id, wp_generate_attachment_metadata($attachment_id, $upload['file']));
+
 				$uploaded_ids[] = $attachment_id;
+
+				// Ajouter les données de l'image (ID et URL) au tableau $image_data
+				$image_data[] = [
+					'id' => $attachment_id,
+					'url' => wp_get_attachment_image_url($attachment_id, 'thumbnail'),
+				];
 			}
 		}
 
 		if ($uploaded_ids) {
+			// Mettre à jour les métadonnées du post avec les nouveaux IDs
 			$current_images = get_post_meta($post_id, 'post_home_gallery_ids', true);
 			$current_images_array = $current_images ? explode(',', $current_images) : [];
 			$updated_images_array = array_unique(array_merge($current_images_array, $uploaded_ids));
 			update_post_meta($post_id, 'post_home_gallery_ids', implode(',', $updated_images_array));
 
-			wp_send_json_success('Images ajoutées avec succès.');
+			// Renvoyer les données des images ajoutées
+			wp_send_json_success([
+				'message' => 'Images ajoutées avec succès.',
+				'images' => $image_data,
+			]);
 		}
 	}
 
 	wp_send_json_error('Aucune image valide trouvée.');
 }
+
 add_action('wp_ajax_add_gallery_images', 'ajax_add_gallery_images');
 
 // AJAX : Supprimer une image

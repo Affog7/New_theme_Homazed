@@ -257,6 +257,11 @@
        transform: translateY(0);
     }
  }
+//Footer
+.user__actions {
+
+}
+
 
  /* */
 
@@ -265,6 +270,31 @@
     margin: 30px -15px;
     justify-content: space-between;
  }
+
+/* Conteneur de la grille */
+.row {
+	display: flex; /* Aligne les colonnes horizontalement */
+	flex-wrap: wrap; /* Permet le retour à la ligne si nécessaire */
+	gap: 16px; /* Espacement entre les colonnes */
+}
+
+/* Colonne de base (taille par défaut) */
+.col {
+	flex: 1; /* Prend une part égale de l'espace disponible */
+	min-width: 100px; /* Largeur minimale pour garder des colonnes lisibles */
+	text-align: center;
+	padding: 10px;
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+}
+
+/* Media Query pour les écrans moyens (équivalent à `md`) */
+@media (min-width: 768px) {
+	.col {
+		flex: 0 0 calc(100% / 3 - 16px); /* 3 colonnes par ligne avec un espace entre elles */
+	}
+}
+
 
 /* Conteneur principal du carrousel */
 .map-slate__image {
@@ -547,7 +577,7 @@ h1 {
 }
 
 .info-section {
-   padding: 10px;
+  // padding: 10px;
 }
 
 /* Boutons */
@@ -649,7 +679,7 @@ hr {
 	background-color: #f9f9f9;
 	border: 1px solid #ddd;
 	border-radius: 6px;
-	padding: 20px;
+	//padding: 20px;
 	margin-top: 20px;
 }
 
@@ -659,11 +689,12 @@ hr {
 }
 
 .info p {
-	margin: 5px 0 0 5px;
-	font-size: 1.2rem;
+	//margin: 5px 0 0 5px;
+	//font-size: 1.2rem;
 }
 
 .custom-checkbox {
+	margin-left: 5px;
 	display: flex;
 	align-items: center;
 	font-size: 1.5rem;
@@ -672,10 +703,12 @@ hr {
 
 .custom-checkbox input {
 	margin-right: 8px;
+
 }
 
 .see-stats {
 	color: #007bff;
+	margin-left: 5px;
 	font-weight: bold;
 	cursor: pointer;
 	text-decoration: none;

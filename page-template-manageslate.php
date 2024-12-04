@@ -83,6 +83,7 @@ function load_post_data($post_id) {
 
 	// Autres informations
 	$post_location = get_field("post_location_address", $post_id);
+	$post_premium_duration = get_field("post_duration", $post_id);
 	$post_price = get_field("post_home_price", $post_id);
 	$post_bedrooms = get_field("post_home_number_of_bedrooms", $post_id);
 	$post_bathrooms = get_field("post_home_number_of_bathrooms", $post_id);
@@ -100,6 +101,7 @@ function load_post_data($post_id) {
 		'avatar' => $post_avatar_picture,
 		'location' => $post_location,
 		'price' => $post_price,
+		'post_premium_duration' => is_array($post_premium_duration) ? $post_premium_duration[0] : $post_premium_duration,
 		'bedrooms' => $post_bedrooms,
 		'bathrooms' => $post_bathrooms,
 		'premium' => $post_premium,
@@ -155,7 +157,7 @@ get_footer();
 										<img width="165" height="135" src="<?php echo esc_url($post_data['avatar']); ?>" alt="Main Picture">
 									</div>
 									<div class="info">
-										<p>Premium duration: <span id="premium-duration"><b>1 Month(s)</b></span></p>
+										<p>Premium duration: <span id="premium-duration"><b> <?php echo($post_data['post_premium_duration']); ?> </b></span></p>
 										<p>Premium from: <span id="premium-start-date"><b>28 AUG 2025</b></span></p>
 										<p>Remaining time: <span id="premium-remaining-time"><b>12 days 13 hours</b></span></p>
 									</div>
@@ -200,11 +202,13 @@ get_footer();
 									<div>
 										<img width="165" HEIGHT="135" src="<?php echo esc_url($post_data['avatar']); ?>" alt="Main Picture">
 									</div>
+
 									<div class="info">
 										<p><b><?php echo esc_html($post_data['event_text_1']); ?></b></p>
 										<p><?php echo esc_html($post_data['event_text_2']); ?></p>
-										<p><br></p>
+
 									</div>
+
 								</div>
 								<hr>
 								<div class="row">

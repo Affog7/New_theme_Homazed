@@ -35,6 +35,7 @@ $post_id = get_the_ID();
 			// todo_augustin champs link
 			$post_author_link = get_field("post_author_link",$post_id);
 			$post_Add_my_webshop_link = get_field("post_Add_my_webshop_link", $post_id);
+			$Is_Add_my_webshop_link = get_field("Is_Add_my_webshop_link", $post_id);
 
 
 			$post_home_event_privacy = get_field("home_event_privacy", $post_id);
@@ -126,7 +127,7 @@ $post_id = get_the_ID();
 						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
 					</div>
 
-					<p style="float: right;"><?php echo $post_home_category_translate; ?> <?php echo $post_home_action_translate; ?></p>
+					<p style=""><?php echo $post_home_category_translate; ?> <?php echo $post_home_action_translate; ?></p>
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -282,7 +283,7 @@ $post_id = get_the_ID();
 
 <!-- todo_augustin -->
 <!-- Popup Structure with Multi-Step Form -->
-<div id="editPostPopup" class="popup" style="display: none;">
+<div id="editPostPopup" class="popup" style="display: none;    background: #6c6c64b5;">
    <div class="popup-content">
    	  <div class="popup-header">
          <h2>Home Post</h2>
@@ -309,12 +310,27 @@ $post_id = get_the_ID();
     </span>
 				 <div id="status-options" class="dropdown-content">
 					 <a href="#" onclick="setStatus('publish', <?php echo $post_id; ?>)">Active</a>
-					 <a href="#" onclick="setStatus('private', <?php echo $post_id; ?>)">Private</a>
+					 <a href="#" onclick="setStatus('private', <?php echo $post_id; ?>)">Inactive</a>
 					 <a href="#" onclick="setStatus('erase', <?php echo $post_id; ?>)">Erase</a>
 				 </div>
 			 </div>
 
-            <button id="update-button" class="button-update">Update</button>
+<!--			 --><?php //get_template_part( 'components/btn', null,
+//				 array(
+//					 'label' => 'Update',
+//					 'href' => "$post_link",
+//					 'target' => "_self",
+//					 'skin'  => 'ghost',
+//					 'icon-only'  => false,
+//					 'disabled'  => false,
+//					 'icon-position' => '', // left or right
+//					 'icon' => '',
+//					 'additional-classes' => 'square',
+//					 'data-attribute' => '',
+//					 'theme' => "",
+//				 )
+//			 ); ?>
+
             <span class="close-btn-circle">&times;</span>
          </div>
       </div>
@@ -339,10 +355,6 @@ $post_id = get_the_ID();
       <div class="form-step" id="step1" style="display:none;">
          <h3>Media</h3>
          <main class="modal__content contact__form contact__form--light">
-
-
-
-
 				<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 				; ?>
 
@@ -352,9 +364,7 @@ $post_id = get_the_ID();
       <div class="form-step" id="step2" style="display:none;">
          <h3>Location</h3>
 		  <main class="modal__content contact__form contact__form--light">
-			  <?php echo do_shortcode( '[gravityform id="17" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-
-
+			  <?php echo do_shortcode( '[gravityform id="17" title="false" ajax="true" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 		  </main>
       </div>
       <div class="form-step" id="step3" style="display:none;">
@@ -376,13 +386,13 @@ $post_id = get_the_ID();
       <div class="form-step" id="step4" style="display:none;">
          <h3>Connections</h3>
 		 <main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="11" ajax="true" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+				<?php echo do_shortcode( '[gravityform id="11" ajax="true" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 		</main>      </div>
       <div class="form-step" id="step5" style="display:none;">
          <h3>Event</h3>
          <main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="true" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
+				<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="true" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+		 </main>
       </div>
       <div class="form-step" id="step6" style="display:none;">
          <h3>Premium</h3>
@@ -526,7 +536,7 @@ $post_id = get_the_ID();
 											'disabled'  => false,
 											'icon-position' => 'left',
 											'icon' => 'hyperlink-2',
-											'additional-classes' => '',
+											'additional-classes' => 'btn--small',
 											'data-attribute' => '',
 											'theme' => "",
 										)
@@ -766,7 +776,7 @@ $post_id = get_the_ID();
 							</li>
 						<?php endif; ?>
 
-						<?php if( $post_author_link): ?>
+						<?php if( $post_author_link && $post_add_my_website_link): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo esc_url($post_author_link); ?>" target="_blank">
 									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
@@ -775,7 +785,7 @@ $post_id = get_the_ID();
 							</li>
 						<?php endif; ?>
 
-						<?php if($post_Add_my_webshop_link  && $post_add_my_website_link): ?>
+						<?php if($post_Add_my_webshop_link  && $Is_Add_my_webshop_link): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo esc_url($post_Add_my_webshop_link); ?>" target="_blank">
 									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
@@ -909,17 +919,17 @@ $post_id = get_the_ID();
 						"id" => $post_id_,
 						"title" =>  get_field("post_home_title",$post_id_) ? get_field("post_home_title",$post_id_) : get_the_title(), // house type
 						"post_type_slug" => "real-estate",
-						"permalink" => get_the_permalink($post_id_),
+						//"permalink" => get_the_permalink($post_id_),
 						"lat" => get_field("post_location_latitude",$post_id_),
 						"lng" => get_field("post_location_longitude",$post_id_),
-						"account_type" => null,
+						//"account_type" => null,
 						"location" => get_field("post_location_address",$post_id_) ? get_field("post_location_address",$post_id_) . ", " . get_field("post_location_zip",$post_id_) . " " . get_field("post_location_city",$post_id_) : get_field("post_address",$post_id_),
-						"price" => get_field("post_home_price", $post_id_),
-						"bedrooms" => get_field("post_home_number_of_bedrooms", $post_id_),
-						"bathrooms" => get_field("post_home_number_of_bathrooms", $post_id_),
-						"home_size" => get_field("post_home_size", $post_id_),
-						"outdoor_size" => get_field("post_home_outdoor_size", $post_id_),
-						"img" => get_the_post_thumbnail()
+//						"price" => get_field("post_home_price", $post_id_),
+//						"bedrooms" => get_field("post_home_number_of_bedrooms", $post_id_),
+//						"bathrooms" => get_field("post_home_number_of_bathrooms", $post_id_),
+//						"home_size" => get_field("post_home_size", $post_id_),
+//						"outdoor_size" => get_field("post_home_outdoor_size", $post_id_),
+						//"img" => get_the_post_thumbnail()
 					];
 					array_push($post_content_for_map, $post_for_map);
 				endwhile;
@@ -993,7 +1003,6 @@ $post_id = get_the_ID();
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
 				<div id="map">
-
 					<?php get_template_part( 'components/map-popup', null ); ?>
 				</div>
 

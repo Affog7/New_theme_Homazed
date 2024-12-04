@@ -111,6 +111,8 @@ function update_post_status_via_ajax() {
 			// Vérifier si le post a bien été supprimé
 			if ($deleted) {
 				wp_send_json_success(array('message' => 'Post supprimé avec succès.'));
+
+
 			} else {
 				wp_send_json_error(array('message' => 'Échec de la suppression du post.'));
 			}

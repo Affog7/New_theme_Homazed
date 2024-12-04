@@ -73,6 +73,9 @@ afterEnter = data => {
           const adminAjaxUrl = document.querySelector('.main').getAttribute('data-admin-ajax');
           jQuery.post(adminAjaxUrl, datad, function(response) {
             status_notif_.innerHTML = response.data.message;
+
+            if(status === 'erase') window.location.href  = '/';
+
             console.log(response); // Réponse du serveur (en cas de succès ou d'erreur)
           });
         }
@@ -131,6 +134,9 @@ afterEnter = data => {
     const popup = data.next.container.querySelector('#editPostPopup');
     const closeButton = popup.querySelector('.close-btn-circle');
     let currentStep = 0;
+  const popupContent = popup.querySelector('.popup-content'); // Cible le contenu du popup
+
+  // Cible le contenu du popup
 
     // Show popup on edit button click
     if (editButton) {
@@ -139,7 +145,12 @@ afterEnter = data => {
             popup.style.display = "flex"; // Center using flex display
         });
     }
+// Empêcher la fermeture si on clique dans le contenu du popup
+  if (popup) {
+    popup.addEventListener("click", function(event) {
 
+    });
+  }
     // Close popup on close button click
     if (closeButton) {
         closeButton.addEventListener("click", function() {
