@@ -4967,10 +4967,11 @@ a.quicklinks--item:hover {
 }
 
 .popup-content {
-  background: white;
   padding: 30px;
+  display: ruby;
   border-radius: 12px;
-  width: 40%;
+  width: 100%;
+  height: 100%;
   -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -4979,6 +4980,17 @@ a.quicklinks--item:hover {
           transform: translateY(-10px);
   -webkit-animation: slideIn 0.4s ease forwards;
           animation: slideIn 0.4s ease forwards;
+}
+
+.body-popup {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 40%;
+  -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
 }
 
 .popup-header {
