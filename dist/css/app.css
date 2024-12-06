@@ -5505,6 +5505,7 @@ a.quicklinks--item:hover {
 }
 
 .custom-checkbox {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5512,56 +5513,41 @@ a.quicklinks--item:hover {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
-  position: relative;
-  padding-left: 35px; /* Décalage pour la case */
-  margin-bottom: 12px;
-  font-size: 16px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none; /* Empêche la sélection du texte */
+  font-size: 14px;
+  color: #333;
 }
 
 .custom-checkbox input {
   position: absolute;
-  opacity: 0; /* Masque la case native */
+  opacity: 0;
   cursor: pointer;
-  height: 0;
-  width: 0;
 }
 
 .custom-checkbox .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
   width: 20px;
-  background-color: #ccc;
-  border-radius: 4px; /* Coin arrondi */
-  -webkit-transition: background-color 0.2s ease;
-  transition: background-color 0.2s ease;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+  background-color: #fff;
 }
 
-.custom-checkbox input:checked ~ .checkmark {
-  background-color: #4CAF50; /* Couleur pour case cochée */
+.custom-checkbox input:checked + .checkmark {
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
-.custom-checkbox .checkmark:after {
+.custom-checkbox input:checked + .checkmark:after {
   content: "";
   position: absolute;
-  display: none;
-  left: 6px;
-  top: 3px;
+  left: 7px;
+  top: 4px;
   width: 5px;
   height: 10px;
   border: solid white;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
-}
-
-.custom-checkbox input:checked ~ .checkmark:after {
-  display: block;
 }
 
 .row {
@@ -5713,6 +5699,55 @@ hr {
 }
 
 /* Info Sections */
+.premium-info, .event-info {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.premium-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.premium-image {
+  width: 150px;
+  height: 100px;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.premium-details p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+hr {
+  border: 0.5px solid #ddd;
+  margin: 20px 0;
+}
+
+.premium-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .info-section {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -5747,25 +5782,34 @@ hr {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .see-stats:hover {
   text-decoration: underline;
 }
 
-/* Statistics Container */
 .statistics-container {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 15px;
-  font-size: 0.9rem;
+  margin-top: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  font-size: 14px;
+  display: none;
 }
 
-/* Buttons */
-button, .see-stats {
-  -webkit-transition: background-color 0.3s ease, color 0.3s ease;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.statistics-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.statistics-container li {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.see-stats:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* Premium et Event Sections */

@@ -139,7 +139,7 @@ get_footer();
 
 							<div class="row">
 								<div>
-									<strong><?php echo esc_html($post_data['category'])." "; ?></strong>
+									<strong><?php echo esc_html($post_data['category'])."   "; ?></strong>
 									<?php echo esc_html($post_data['action']); ?>
 								</div>
 								<div>
@@ -151,92 +151,99 @@ get_footer();
 							<hr>
 
 							<!-- Premium Info -->
-							<div id="" class="premium-info info-section" style="display: none;">
-								<div class="row">
-									<div>
-										<img width="165" height="135" src="<?php echo esc_url($post_data['avatar']); ?>" alt="Main Picture">
-									</div>
-									<div class="info">
-										<p>Premium duration: <span id="premium-duration"><b> <?php echo($post_data['post_premium_duration']); ?> </b></span></p>
-										<p>Premium from: <span id="premium-start-date"><b>28 AUG 2025</b></span></p>
-										<p>Remaining time: <span id="premium-remaining-time"><b>12 days 13 hours</b></span></p>
-									</div>
+					<div class="premium-info">
+						<div class="premium-header">
+							<img
+								class="premium-image"
+								src="<?php echo esc_url($post_data['avatar']); ?>"
+								alt="Main Picture"
+							/>
+							<div class="premium-details">
+								<p>Premium duration: <span><b><?php echo($post_data['post_premium_duration']); ?></b></span></p>
+								<p>Premium from: <span><b>28 AUG 2025</b></span></p>
+								<p>Remaining time: <span><b>12 days 13 hours</b></span></p>
+							</div>
+						</div>
+						<hr />
+						<div class="premium-options">
+							<label class="custom-checkbox">
+								<input type="checkbox" name="premium_auto_renewal" value="1" <?php echo $post_data['renewal'] ? "checked" : ""; ?> />
+								<span class="checkmark"></span> <b>Premium Post - Automatic Renewal</b>
+							</label>
+						</div>
+						<hr />
+						<div class="premium-footer">
+							<a class="see-stats" href="#">See statistics</a>
+							<div class="statistics-container" style="display: none;" >
+								<h3>Statistics</h3>
+								<div id="view-count">
+									<p><strong>Number of views on this post:</strong> <span>0</span></p>
 								</div>
-								<hr>
-								<div class="row">
-									<label class="custom-checkbox">
-										<input type="checkbox" name="premium_auto_renewal" value="1" <?php echo $post_data['renewal'] ? "checked" : ""; ?>>
-										<span class="checkmark"></span> <b>Premium Post - Automatic Renewal</b>
-									</label>
+								<div id="event-info-stats">
+									<p><strong>Event Stats:</strong></p>
+									<ul>
+										<li>Event Start Date: <span id="event-start-date"></span></li>
+										<li>Event End Date: <span id="event-end-date"></span></li>
+										<li>Number of people attended: <span id="event-attendees">0</span></li>
+									</ul>
 								</div>
-								<hr>
-								<div class="row">
-									<div>
-										<a class="see-stats" href="#">See statistics</a>
-										<!-- Statistics (hidden by default) -->
-										<div class="statistics-container" style="display: none; margin-top: 20px; border-top: 2px solid #ccc; padding-top: 20px;">
-											<h3>Statistics</h3>
-											<div id="view-count">
-												<p><strong>Number of views on this post:</strong> <span id="post-views">0</span></p>
-											</div>
-											<div id="event-info-stats" style="display: ;">
-												<p><strong>Event Stats:</strong></p>
-												<ul>
-													<li>Event Start Date: <span id="event-start-date"></span></li>
-													<li>Event End Date: <span id="event-end-date"></span></li>
-													<li>Number of people attended: <span id="event-attendees">0</span></li>
-												</ul>
-											</div>
-											<div id="follow-us-stats">
-												<p><strong>Follow Us Clicks:</strong> <span id="follow-us-clicks">0</span></p>
-											</div>
-										</div>
-									</div>
+								<div id="follow-us-stats">
+									<p><strong>Follow Us Clicks:</strong> <span>0</span></p>
 								</div>
 							</div>
+						</div>
+					</div>
 							<!-- End Premium Info -->
 
-							<!-- Event Info -->
-							<div id="" class="event-info info-section" style="display: none;">
-								<div class="row">
-									<div>
-										<img width="165" HEIGHT="135" src="<?php echo esc_url($post_data['avatar']); ?>" alt="Main Picture">
-									</div>
+					<!-- Event Info -->
+					<div id="" class="event-info info-section" style="display: none;">
 
-									<div class="info">
-										<p><b><?php echo esc_html($post_data['event_text_1']); ?></b></p>
-										<p><?php echo esc_html($post_data['event_text_2']); ?></p>
+						<div class="premium-header">
+							<img
+								class="premium-image"
+								src="<?php echo esc_url($post_data['avatar']); ?>"
+								alt="Main Picture"
+							/>
+							<div class="premium-details">
+								<p><span><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
+								<p><span><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
+							</div>
+						</div>
 
-									</div>
+						<hr>
+						<div class="premium-options">
+							<label class="custom-checkbox">
+								<input type="checkbox" name="premium_auto_renewal" value="1" <?php echo !empty($post_data['event_type']) ? "checked" : ""; ?>>
+								<span class="checkmark"></span> <b>Active Event</b>
+							</label>
+						</div>
 
+						<hr>
+						<div class="row">
+							<div>
+
+							</div>
+						</div>
+
+
+						<div class="premium-footer">
+							<a class="see-stats" href="#">See statistics</a>
+							<!-- Statistics (hidden by default) -->
+							<div class="statistics-container" style="display: none; margin-top: 20px; border-top: 2px solid #ccc; padding-top: 20px;">
+								<h3>Statistics</h3>
+								<div id="view-count">
+									<p><strong>Number of views on this event:</strong> <span id="post-views">0</span></p>
 								</div>
-								<hr>
-								<div class="row">
-									<label class="custom-checkbox">
-										<input type="checkbox" name="premium_auto_renewal" value="1" <?php echo !empty($post_data['event_type']) ? "checked" : ""; ?>>
-										<span class="checkmark"></span> <b>Active Event</b>
-									</label>
-								</div>
-								<hr>
-								<div class="row">
-									<div>
-										<a class="see-stats" href="#">See statistics</a>
-										<!-- Statistics (hidden by default) -->
-										<div class="statistics-container" style="display: none; margin-top: 20px; border-top: 2px solid #ccc; padding-top: 20px;">
-											<h3>Statistics</h3>
-											<div id="view-count">
-												<p><strong>Number of views on this event:</strong> <span id="post-views">0</span></p>
-											</div>
-											<div id="follow-us-stats">
-												<p><strong>Event Clicks:</strong> <span id="follow-us-clicks">0</span></p>
-											</div>
-										</div>
-									</div>
+								<div id="follow-us-stats">
+									<p><strong>Event Clicks:</strong> <span id="follow-us-clicks">0</span></p>
 								</div>
 							</div>
-							<!-- End Event Info -->
+						</div>
 
-							<hr>
+					</div>
+					<!-- End Event Info -->
+
+					<hr>
 
 				</div>
 					<?php endforeach; ?>
@@ -301,7 +308,7 @@ get_footer();
 			seeStatsLinks.forEach(link => {
 				link.addEventListener('click', function (event) {
 					event.preventDefault(); // Empêche l'action par défaut du lien
-					const statisticsContainer = link.closest('.row').querySelector('.statistics-container');
+					const statisticsContainer = link.closest('.premium-footer').querySelector('.statistics-container');
 					if (statisticsContainer) {
 						statisticsContainer.style.display = 'block'; // Affiche la zone des statistiques
 					}

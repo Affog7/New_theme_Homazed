@@ -316,21 +316,21 @@ $post_id = get_the_ID();
 						</div>
 					</div>
 
-					<!--			 --><?php //get_template_part( 'components/btn', null,
-					//				 array(
-					//					 'label' => 'Update',
-					//					 'href' => "$post_link",
-					//					 'target' => "_self",
-					//					 'skin'  => 'ghost',
-					//					 'icon-only'  => false,
-					//					 'disabled'  => false,
-					//					 'icon-position' => '', // left or right
-					//					 'icon' => '',
-					//					 'additional-classes' => 'square',
-					//					 'data-attribute' => '',
-					//					 'theme' => "",
-					//				 )
-					//			 ); ?>
+								 <?php get_template_part( 'components/btn', null,
+									 array(
+										 'label' => 'Update',
+										 'href' => "$post_link",
+										 'target' => "_self",
+										 'skin'  => 'ghost',
+										 'icon-only'  => false,
+										 'disabled'  => false,
+										 'icon-position' => '', // left or right
+										 'icon' => '',
+										 'additional-classes' => 'square',
+										 'data-attribute' => '',
+										 'theme' => "",
+									 )
+								 ); ?>
 
 					<span class="close-btn-circle">&times;</span>
 				</div>
@@ -672,6 +672,7 @@ $post_id = get_the_ID();
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
 				<?php /* todo_augustin  tags */
+
 				if($post_post_tags): ?>
 					<div class="tag-list-container">
 						<span class="chevron left-chevron">&#9664;</span>
@@ -902,9 +903,11 @@ $post_id = get_the_ID();
 
 				$posts_args = array(
 					"post_type" => "homes",
+					"p" => $post_id,
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
 					"orderby" => "date",
+
 					"order" => "DESC"
 				);
 
