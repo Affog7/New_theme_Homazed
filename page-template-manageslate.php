@@ -128,7 +128,7 @@ get_footer();
 				<?php if (!empty($data)) : ?>
 				<?php foreach ($data as $post_data) : ?>
 
-						<div class="card-form" >
+						<div class="card-form"  style="border: 2px solid #7e7c804d">
 					<div class="post-container">
 					<div class="post-header">
 						<h1>HOME</h1>

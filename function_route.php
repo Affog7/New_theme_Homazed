@@ -112,10 +112,12 @@ function shortcode_gallery_manager($atts) {
 					.then(response => response.json())
 					.then(data => {
 						if (data.success) {
+							document.getElementById('gallery-upload').value = '';
+
 							alert('Images added.');
 
 							// Charger dynamiquement les nouvelles images
-							data.images.forEach(image => {
+							data.data.images.forEach(image => {
 								const galleryContainer = document.querySelector('.custom-gallery_a');
 								const imageElement = document.createElement('div');
 								imageElement.classList.add('gallery-item_a');
@@ -126,7 +128,7 @@ function shortcode_gallery_manager($atts) {
 
 								// Ajouter l'image
 								imageElement.innerHTML = `
-						<img src="${image.url}" style="border: 1px solid #ddd; border-radius: 5px;">
+						<img src="${image.url}" width="300" height="200" style="border: 1px solid #ddd; border-radius: 5px;">
 						<button class="delete-image_a" data-id="${image.id}" style="position: absolute; top: -5px; right: -5px; background: #ff5f5f; color: white; border: none; border-radius: 50%; padding: 5px; cursor: pointer;">
 							&times;
 						</button>

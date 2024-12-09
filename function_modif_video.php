@@ -37,6 +37,7 @@ function shortcode_video_manager_url($atts) {
 
 		<form id="video-upload-form" data-post-id="<?php echo esc_attr($post_id); ?>" style="margin-top: 20px;">
 			<input type="file" id="video-upload" accept=".<?php echo str_replace(',', ',.', esc_attr($atts['allowed_extensions'])); ?>" style="padding: 5px;">
+			<br>
 			<button type="button" id="video-upload-button" style="margin-left: 10px; padding: 10px; background: #0073aa; color: white; border: none; border-radius: 5px; cursor: pointer;">Add or Replace Video</button>
 			<p style="font-size: 12px; color: #888; margin-top: 10px;">Extensions allowed: <?php echo esc_html($atts['allowed_extensions']); ?>.</p>
 		</form>
