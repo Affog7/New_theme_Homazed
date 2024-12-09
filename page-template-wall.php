@@ -115,11 +115,11 @@
 						 * todo_augustin : trier les tags
 						 */
 						$post_init_terms = get_the_terms($post_id, 'posttags');
-//						if (!is_wp_error($post_init_terms) && !empty($post_init_terms)) {
-//							usort($post_init_terms, function($a, $b) {
-//								return $a->term_id - $b->term_id; // Tri en ordre croissant selon l'ID
-//							});
-//						}
+						if (!is_wp_error($post_init_terms) && !empty($post_init_terms)) {
+							usort($post_init_terms, function($a, $b) {
+								return $a->term_id - $b->term_id; // Tri en ordre croissant selon l'ID
+							});
+						}
 
 
 						//$post_init_terms = get_the_terms($post_id, 'posttags');

@@ -92,6 +92,12 @@ $post_id = get_the_ID();
 			$post_location_latitude = get_field("post_location_latitude");
 			$post_location_longitude = get_field("post_location_longitude");
 			$post_post_tags = get_the_terms($post_id, 'posttags');
+			if (!is_wp_error($post_post_tags) && !empty($post_post_tags)) {
+				usort($post_post_tags, function($a, $b) {
+					return $a->term_id - $b->term_id; // Tri en ordre croissant selon l'ID
+				});
+			}
+
 			$post_join_file_id = get_field("post_home_join_file");
 			$post_join_file = wp_get_attachment_url($post_join_file_id);
 
