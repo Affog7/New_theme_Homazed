@@ -23,7 +23,6 @@ function shortcode_gallery_manager($atts) {
 	ob_start();
 	?>
 	<div class="custom-gallery-wrapper">
-		<h4 style="font-family: Arial, sans-serif; color: #333; text-align: center; margin-bottom: 20px;">Gérer la Galerie</h4>
 
 		<!-- Affichage des images existantes avec boutons de suppression -->
 		<div class="custom-gallery_a" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
@@ -37,12 +36,12 @@ function shortcode_gallery_manager($atts) {
 					</div>
 				<?php endforeach; ?>
 			<?php else: ?>
-				<p style="color: #888;">Aucune image dans la galerie.</p>
+				<p style="color: #888;">No images in the gallery.</p>
 			<?php endif; ?>
 		</div>
 
 		<!-- Formulaire pour ajouter de nouvelles images -->
-		<h4 style="font-family: Arial, sans-serif; color: #333; text-align: center; margin: 20px 0;">Ajouter des Images</h4>
+		<h4 style="font-family: Arial, sans-serif; color: #333; text-align: center; margin: 20px 0;">Add Images</h4>
 		<form id="gallery-upload-form" data-post-id="<?php echo esc_attr($post_id); ?>" style="text-align: center; margin-bottom: 20px;">
 			<input
 				type="file"
@@ -56,13 +55,13 @@ function shortcode_gallery_manager($atts) {
 				id="gallery-upload-button"
 				style="margin-top: 15px; padding: 10px 20px; background-color: #0073aa; color: white; border: none; border-radius: 5px; font-size: 14px; cursor: pointer;"
 			>
-				Ajouter les images
+				Add Images
 			</button>
 			<p style="margin-top: 10px; font-size: 12px; color: #888;">
-				Extensions autorisées : <?php echo esc_html($atts['allowed_extensions']); ?>.
+				Extensions allowed : <?php echo esc_html($atts['allowed_extensions']); ?>.
 			</p>
 			<p style="font-size: 12px; color: #888;">
-				Nombre maximal d'images : <?php echo esc_html($atts['max_images']); ?>.
+				Maximum number of images : <?php echo esc_html($atts['max_images']); ?>.
 			</p>
 		</form>
 	</div>
@@ -113,7 +112,7 @@ function shortcode_gallery_manager($atts) {
 					.then(response => response.json())
 					.then(data => {
 						if (data.success) {
-							alert('Images ajoutées.');
+							alert('Images added.');
 
 							// Charger dynamiquement les nouvelles images
 							data.images.forEach(image => {

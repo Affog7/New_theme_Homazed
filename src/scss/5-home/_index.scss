@@ -66,7 +66,7 @@
 /* popup form edit*/
 .popup {
    position: fixed;
-   z-index: 1200;
+   z-index: 5000;
    top: 0;
    left: 0;
    width: 100%;
@@ -926,4 +926,63 @@ hr {
 
 .gallery-item_a:hover img {
 	border-color: #007bff;
+}
+
+/*fichier modif*/
+.manage-post-media {
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+}
+
+.manage-post-media p {
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+
+.manage-post-media .form-group {
+	margin-bottom: 20px;
+}
+
+.manage-post-media .btn {
+	display: inline-flex;
+	align-items: center;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #fff;
+	text-decoration: none;
+}
+
+.manage-post-media .btn i {
+	margin-right: 5px;
+}
+
+.btn-primary {
+	background-color: #007bff;
+}
+
+.btn-danger {
+	background-color: #dc3545;
+}
+
+.btn-success {
+	background-color: #28a745;
+}
+
+.success-message {
+	color: #28a745;
+	font-weight: bold;
+}
+
+.error-message {
+	color: #dc3545;
+	font-weight: bold;
+}
+
+
+/***/
+.pac-container{
+	z-index: 5000 !important;
 }

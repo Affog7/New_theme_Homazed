@@ -4834,7 +4834,7 @@ a.quicklinks--item:hover {
   left: 0.9rem;
   width: calc(100% - 1.8rem);
   height: 132px;
-  z-index: 5000;
+  z-index: 700;
   border-radius: var(--border-radius--small);
   -webkit-box-shadow: var(--box-shadow-card--big);
           box-shadow: var(--box-shadow-card--big);
@@ -4949,7 +4949,7 @@ a.quicklinks--item:hover {
 /* popup form edit*/
 .popup {
   position: fixed;
-  z-index: 1200;
+  z-index: 5000;
   top: 0;
   left: 0;
   width: 100%;
@@ -5970,6 +5970,68 @@ hr {
   border-color: #007bff;
 }
 
+/*fichier modif*/
+.manage-post-media {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.manage-post-media p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.manage-post-media .form-group {
+  margin-bottom: 20px;
+}
+
+.manage-post-media .btn, .manage-post-media .card-form .login-submit input[type=submit], .card-form .login-submit .manage-post-media input[type=submit], .manage-post-media input.button, .manage-post-media .acf-repeater .-minus, .acf-repeater .manage-post-media .-minus, .manage-post-media .acf-image-uploader .-cancel, .acf-image-uploader .manage-post-media .-cancel, .manage-post-media .acf-basic-uploader, .manage-post-media button.gfgeo-locator-button, .manage-post-media .af-field-type-open-street-map .tools .acf-icon.-minus, .af-field-type-open-street-map .tools .manage-post-media .acf-icon.-minus, .manage-post-media .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon, .acf-osm-above .manage-post-media .leaflet-control-geocoder > .leaflet-control-geocoder-icon {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+}
+
+.manage-post-media .btn i, .manage-post-media .card-form .login-submit input[type=submit] i, .card-form .login-submit .manage-post-media input[type=submit] i, .manage-post-media input.button i, .manage-post-media .acf-repeater .-minus i, .acf-repeater .manage-post-media .-minus i, .manage-post-media .acf-image-uploader .-cancel i, .acf-image-uploader .manage-post-media .-cancel i, .manage-post-media .acf-basic-uploader i, .manage-post-media button.gfgeo-locator-button i, .manage-post-media .af-field-type-open-street-map .tools .acf-icon.-minus i, .af-field-type-open-street-map .tools .manage-post-media .acf-icon.-minus i, .manage-post-media .acf-osm-above .leaflet-control-geocoder > .leaflet-control-geocoder-icon i, .acf-osm-above .manage-post-media .leaflet-control-geocoder > .leaflet-control-geocoder-icon i {
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.success-message {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/***/
+.pac-container {
+  z-index: 5000 !important;
+}
+
 .reset-password {
   display: block; /* Transforme le lien en élément de bloc */
   text-align: center; /* Centre le texte à l'intérieur */
@@ -6010,4 +6072,19 @@ hr {
   height: 2px;
   background-color: #ddd;
   margin: 10px 0;
+}
+
+.gform_wrapper.gravity-theme .gf_progressbar_percentage span {
+  display: none !important;
+  float: right;
+  font-size: 13px;
+  line-height: 21px;
+  margin-left: 8px;
+  margin-right: 8px;
+  min-width: 2em;
+  width: auto;
+}
+
+.gform_wrapper.gravity-theme .gfield textarea.small {
+  height: 60px !important;
 }

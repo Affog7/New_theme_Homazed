@@ -110,8 +110,9 @@ $post_id = get_the_ID();
 			$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
 			$post_avatar_picture_id = ($main_picture_image_ids_array[0]) ? $main_picture_image_ids_array[0] : $post_gallery_image_ids_array[0];
 
-			$id_entry = get_field("_gravityformsadvancedpostcreation_entry_id", $post_id);
-			$video_ =  do_shortcode( '[gf_entry_meta entry_id='.$id_entry.' meta_key="139"]');
+//			$id_entry = get_field("_gravityformsadvancedpostcreation_entry_id", $post_id);
+//			$video_ =  do_shortcode( '[gf_entry_meta entry_id='.$id_entry.' meta_key="139"]');
+			$video_ =  get_field("post_home_video", $post_id);;
 		?>
 
 		<!-- Post resume -->
@@ -358,6 +359,15 @@ $post_id = get_the_ID();
 				<main class="modal__content contact__form contact__form--light">
 					<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 					; ?>
+
+					<?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
+					; ?>
+
+
+
+					<?php	echo do_shortcode('[video_manager_url    post_id="' . $post_id . '"]');
+					; ?>
+
 
 					<!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
@@ -870,7 +880,7 @@ $post_id = get_the_ID();
 			<dl><dt class="-light">Address Map:</dt> </dl>
 			<?php
 			// todo_augustin : show map
-			$location = get_field( 'post_address', $post_id); // Récupérer la géolocalisation
+			$location = get_field( 'post_location_address', $post_id); // Récupérer la géolocalisation
 			$post_location_longitude = get_field( 'post_location_longitude', $post_id);
 			$post_location_latitude = get_field( 'post_location_latitude', $post_id);
 			echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
@@ -1316,7 +1326,7 @@ $post_id = get_the_ID();
 	</div>
 <?php endif; ?>
 
-	<div class="modal micromodal-slide" id="share-post" aria-hidden="true">
+	<div class="modal micromodal-slide" id="share-post" aria-hidden="true" style = "z-index: 1000">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 			<div class="modal__container" style="overflow: hidden" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">
 				<header class="modal__header">
@@ -1355,3 +1365,4 @@ $post_id = get_the_ID();
 </main>
 
 <?php get_footer(); ?>
+

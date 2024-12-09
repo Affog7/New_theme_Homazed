@@ -165,30 +165,34 @@ afterEnter = data => {
         }
     });
 
-    // Navigate steps with "Previous" and "Next" buttons
-    window.navigateSteps = function(step) {
-        const steps = data.next.container.querySelectorAll(".form-step");
-        steps[currentStep].style.display = "none"; // Hide current step
-        currentStep += step;
+  // Navigate steps with "Previous" and "Next" buttons
+  window.navigateSteps = function(step) {
+    const steps = data.next.container.querySelectorAll(".form-step");
+    steps[currentStep].style.display = "none"; // Hide current step
 
-        // Ensure currentStep remains in valid range
-        if (currentStep < 0) currentStep = 0;
-        if (currentStep >= steps.length) currentStep = steps.length - 1;
+    currentStep += step;
 
-        steps[currentStep].style.display = "block"; // Show new step
-        data.next.container.querySelector("#step-count").textContent = `${currentStep} / 6`;
-    };
+    // Ensure currentStep remains in valid range
+    if (currentStep < 0) {
+      currentStep = 0; // Don't go below step 0
+    } else if (currentStep >= steps.length) {
+      currentStep = 0; // Reset to step 0 if maximum step is reached
+    }
 
-    // Go to a specific step directly from summary
-    window.goToStep = function(stepNumber) {
-        const steps = data.next.container.querySelectorAll(".form-step");
-        steps[currentStep].style.display = "none"; // Hide current step
-        currentStep = stepNumber;
-        steps[currentStep].style.display = "block"; // Show selected step
-        data.next.container.querySelector("#step-count").textContent = `${currentStep} / 6`;
-    };
+    steps[currentStep].style.display = "block"; // Show new step
+    data.next.container.querySelector("#step-count").textContent = `${currentStep } / ${steps.length- 1}`; // Adjusted to show 1-based index
+  };
 
- // makeRelationBtw(current_user_id.getAttribute("data-u-id"), e.currentTarget.getAttribute("data-relation-him"), "request-contact-list", e.currentTarget);
+// Go to a specific step directly from summary
+  window.goToStep = function(stepNumber) {
+    const steps = data.next.container.querySelectorAll(".form-step");
+    steps[currentStep].style.display = "none"; // Hide current step
+    currentStep = stepNumber;
+    steps[currentStep].style.display = "block"; // Show selected step
+    data.next.container.querySelector("#step-count").textContent = `${currentStep } / ${steps.length- 1}`; // Adjusted to show 1-based index
+  };
+
+  // makeRelationBtw(current_user_id.getAttribute("data-u-id"), e.currentTarget.getAttribute("data-relation-him"), "request-contact-list", e.currentTarget);
 
 
 

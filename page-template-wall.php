@@ -157,8 +157,9 @@
 							case "other": $post_home_category_translate = "Other"; break;
 						}
 						// todo_augustin :  post_title, affichage home post, id_entry,video
-						$id_entry = get_field("_gravityformsadvancedpostcreation_entry_id", $post_id);
-						$video_ =  do_shortcode( '[gf_entry_meta entry_id='.$id_entry.' meta_key="139"]');
+//						$id_entry = get_field("_gravityformsadvancedpostcreation_entry_id", $post_id);
+//						$video_ =  do_shortcode( '[gf_entry_meta entry_id='.$id_entry.' meta_key="139"]');
+						 $video_ =  get_field("post_home_video", $post_id);;
 						$post = [
 							"id" => $post_id,
 							"title" => get_the_title(),

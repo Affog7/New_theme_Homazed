@@ -270,4 +270,6 @@ add_action('rest_api_init', 'custom_api_register_routes');
 
 
 include get_template_directory() . '/function_route.php';
+include get_template_directory() . '/function_file_edit.php';
+include get_template_directory() . '/function_modif_video.php';
 

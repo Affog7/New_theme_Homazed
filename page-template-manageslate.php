@@ -124,10 +124,12 @@ get_footer();
 
 
 		<div class="container container--default">
-			<div class="card-form" data-barba-prevent="all">
+
 				<?php if (!empty($data)) : ?>
 				<?php foreach ($data as $post_data) : ?>
-				<div class="post-container">
+
+						<div class="card-form" >
+					<div class="post-container">
 					<div class="post-header">
 						<h1>HOME</h1>
 						<div class="options">
@@ -153,16 +155,19 @@ get_footer();
 							<!-- Premium Info -->
 					<div class="premium-info">
 						<div class="premium-header">
+
 							<img
 								class="premium-image"
 								src="<?php echo esc_url($post_data['avatar']); ?>"
 								alt="Main Picture"
 							/>
-							<div class="premium-details">
-								<p>Premium duration: <span><b><?php echo($post_data['post_premium_duration']); ?></b></span></p>
-								<p>Premium from: <span><b>28 AUG 2025</b></span></p>
-								<p>Remaining time: <span><b>12 days 13 hours</b></span></p>
+
+							<div class="premium-details" style="display: ruby">
+								<p>Premium duration: <span style="font-weight: 800;"><b><?php echo($post_data['post_premium_duration']); ?></b></span></p>
+								<p>Premium from: <span  style="font-weight: 800;"><b>28 AUG 2025</b></span></p>
+								<p>Remaining time: <span  style="font-weight: 800;"><b>12 days 13 hours</b></span></p>
 							</div>
+
 						</div>
 						<hr />
 						<div class="premium-options">
@@ -172,7 +177,7 @@ get_footer();
 							</label>
 						</div>
 						<hr />
-						<div class="premium-footer">
+						<div class="premium-footer"  style="display: none">
 							<a class="see-stats" href="#">See statistics</a>
 							<div class="statistics-container" style="display: none;" >
 								<h3>Statistics</h3>
@@ -204,9 +209,9 @@ get_footer();
 								src="<?php echo esc_url($post_data['avatar']); ?>"
 								alt="Main Picture"
 							/>
-							<div class="premium-details">
-								<p><span><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
-								<p><span><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
+							<div class="premium-details" style="display: ruby">
+								<p><span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
+								<p><span ><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
 							</div>
 						</div>
 
@@ -226,7 +231,7 @@ get_footer();
 						</div>
 
 
-						<div class="premium-footer">
+						<div class="premium-footer" style="display: none">
 							<a class="see-stats" href="#">See statistics</a>
 							<!-- Statistics (hidden by default) -->
 							<div class="statistics-container" style="display: none; margin-top: 20px; border-top: 2px solid #ccc; padding-top: 20px;">
@@ -241,16 +246,14 @@ get_footer();
 						</div>
 
 					</div>
-					<!-- End Event Info -->
 
-					<hr>
 
 				</div>
-					<?php endforeach; ?>
+				</div>		<?php endforeach; ?>
 				<?php else : ?>
 					<p>No posts found for the current user.</p>
 				<?php endif; ?>
-			</div>
+
 		</div>
 
 	</main>
