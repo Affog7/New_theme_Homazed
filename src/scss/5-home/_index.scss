@@ -4,8 +4,8 @@
     scrollbar-width: thin;
 }
 
-.tag-list {
-    display: inline-block; /* Aligne les tags horizontalement */
+.tag-list { 
+   display: inline-block; /* Aligne les tags horizontalement */
 }
 
 .tag {
@@ -563,7 +563,7 @@
    font-family: Arial, sans-serif;
 }
 
-.post-header {
+.main_manage_slate .post-header {
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -633,7 +633,7 @@ hr {
 }
 
 /* Post Header */
-.post-header {
+.main_manage_slate .post-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -641,7 +641,7 @@ hr {
 	padding-bottom: 10px;
 }
 
-.post-header h1 {
+.main_manage_slate .post-header h1 {
 	margin: 0;
 }
 
@@ -704,6 +704,7 @@ hr {
 	margin: 5px 0;
 	font-size: 14px;
 	color: #333;
+   text-align: justify;
 }
 
 hr {

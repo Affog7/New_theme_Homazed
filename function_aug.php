@@ -41,7 +41,7 @@ function afficher_carte_openstreetmap_statique($atts) {
 			'longitude' => '2.3522', // Longitude par défaut (ici Paris)
 			'height' => '400px',     // Hauteur de la carte
 			'width' => '100%',       // Largeur de la carte
-			'zoom' => '15',          // Niveau de zoom par défaut
+			'zoom' => '5',          // Niveau de zoom par défaut
 		),
 		$atts,
 		'osm_map'

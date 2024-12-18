@@ -22,7 +22,7 @@
 		)
 	); ?>
 </div>
-<p>Share on social medias</p> <br>
+<p>Share on social media</p> <br>
 <?php /**
  * todo_augustin share
  *

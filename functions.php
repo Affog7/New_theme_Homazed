@@ -1437,3 +1437,59 @@ function delete_media_by_id( $media_id ) {
 include get_template_directory() . '/function_aug.php';
 include get_template_directory() . '/function_al.php';
 
+// Personnaliser l'email d'activation des utilisateurs
+add_filter('wp_mail', 'custom_activation_email_with_link');
+
+function custom_activation_email_with_link($args) {
+    // Vérifie si l'email concerne l'activation de compte
+    if (strpos($args['message'], 'To activate your user') !== false) {
+        // Récupère dynamiquement le lien d'activation
+        preg_match('/https?:\/\/[^\s]+gfur_activation=[^\s]+/', $args['message'], $matches);
+        $activation_link = $matches[0] ?? '';
+
+        // Définit le sujet et le contenu de l'email personnalisé
+        $args['subject'] = 'Activate Your Account - Homazed';
+        $args['message'] = "Hello Dear User,\n\n";
+        $args['message'] .= "Thank you for joining us.\n";
+        $args['message'] .= "To activate your account, please click the following link:\n\n";
+        $args['message'] .= "$activation_link\n\n";
+        $args['message'] .= "After you activate your account, you will receive *another email* with your login details.\n\n";
+        $args['message'] .= "Thank you.\n";
+        $args['message'] .= "Best regards,\n";
+        $args['message'] .= "Homazed Team.";
+    }
+
+    return $args;
+}
+
+add_filter('wp_mail', 'custom_user_details_email');
+
+function custom_user_details_email($args) {
+    // Vérifie si l'e-mail contient le message par défaut de connexion
+    if (strpos($args['message'], 'Use the password you set at registration to login.') !== false) {
+        // Extraction des informations dynamiques
+        preg_match('/Username: ([^\s]+)/', $args['message'], $username_match);
+
+        $username = $username_match[1] ?? 'User';
+        $login_url = 'https://homazed.oasiscrea.com/log-in'; // Lien de connexion personnalisé
+
+        // Ajouter l'en-tête pour l'email texte brut
+        $args['headers'] = array('Content-Type: text/plain; charset=UTF-8');
+
+        // Redéfinir le sujet et le contenu de l'email en texte brut
+        $args['subject'] = 'Welcome to Homazed';
+        $args['message'] = "Hello $username,\n\n";
+        $args['message'] .= "Thank you for registering on Homazed! Here are your login details:\n\n";
+        $args['message'] .= "Username: $username\n";
+        $args['message'] .= "Password: Please use the password you set during registration to log in.\n\n";
+        $args['message'] .= "To access your account directly, click the following link:\n";
+        $args['message'] .= "$login_url\n\n";
+        $args['message'] .= "Thank you for joining us!\n";
+        $args['message'] .= "Best regards,\n";
+        $args['message'] .= "The Homazed Team.";
+    }
+
+    return $args;
+}
+
+add_filter('gfur_user_activation_enabled', '__return_false');

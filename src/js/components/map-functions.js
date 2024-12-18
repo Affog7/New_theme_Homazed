@@ -50,30 +50,31 @@ const MapLaunch = (data) => {
 			// Create the map
 			this.buildingsData = this.element.getAttribute('data-buildings');
 
-      if(this.page === "single-user"){
-        // La carte prend une hauteur "moyenne" en prenant une portion de la hauteur de la fenêtre
-        this.map.style.height = (this.wh * 0.6) + "px"; // 60% de la hauteur de la fenêtre
-      }else if(this.page === "single-post"){
-        // La carte prend un peu moins de place
-        this.map.style.height = ((this.wh / 2.5) - (this.headerH - 60)) + "px"; // 40% de la fenêtre
-      }else if(this.page === "wall--map" || this.page === "post"){
-        // Si la carte est sur une page de type "wall--map", ajuster en fonction du layout
-        document.querySelector(".left-map").style.height = (this.wh * 0.7) + "px"; // 70% de la hauteur de la fenêtre
-        this.map.style.height = (this.wh * 0.7) + "px"; // 70% de la hauteur de la fenêtre
-      }else{
-        // Si aucune page spécifique, définir une taille par défaut
-        this.map.style.height = (this.wh * 0.5) + "px"; // Par défaut, 50% de la fenêtre
-      }
+			if(this.page === "single-user"){
+				// La carte prend une hauteur "moyenne" en prenant une portion de la hauteur de la fenêtre
+				this.map.style.height = (this.wh * 0.6) + "px"; // 60% de la hauteur de la fenêtre
+			}else if(this.page === "single-post"){
+				// La carte prend un peu moins de place
+				
+				this.map.style.height = ((this.wh / 1.8) - (this.headerH - 60)) + "px"; // 40% de la fenêtre
+			}else if(this.page === "wall--map" || this.page === "single-post"){
+				// Si la carte est sur une page de type "wall--map", ajuster en fonction du layout
+				document.querySelector(".left-map").style.height = (this.wh * 0.7) + "px"; // 70% de la hauteur de la fenêtre
+				this.map.style.height = (this.wh * 0.7) + "px"; // 70% de la hauteur de la fenêtre
+			}else{
+				// Si aucune page spécifique, définir une taille par défaut
+				this.map.style.height = (this.wh * 0.7) + "px"; // Par défaut, 50% de la fenêtre
+			}
 
-			this.buildings = [];
+					this.buildings = [];
 
 			this.leaflet_map = L.map(this.map, {
 				center: [ 4.5817,50.4629],
 				zoom: 2,
 				pixelRatio: 1,
-				maxZoom: 18,
-				minZoom: 2,
-				zoomControl: true,
+				maxZoom: 16,
+				minZoom: 1,
+				zoomControl: false,
 			});
 
 			this.displayMap(this.buildingsData);
@@ -85,6 +86,10 @@ const MapLaunch = (data) => {
 				attribution: '&copy; <a  href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 				tileSize: 512,
 				zoomOffset: -1,
+			}).addTo(this.leaflet_map);
+
+			L.control.zoom({
+				position: 'bottomright' // Position du contrôle de zoom
 			}).addTo(this.leaflet_map);
 
 			// Parse the data from the DOM
@@ -139,6 +144,8 @@ const MapLaunch = (data) => {
 			this.mutation_observer.observe(element, {
 				attributes: true
 			});
+
+			
 		}
 
 		addMarker = (building) => {
@@ -379,9 +386,15 @@ const MapLaunch = (data) => {
           title.innerHTML = "<span style='color: #0b7439;text-transform: uppercase;'>"+postData.home_category+"</span>  "+postData.home_type ;//event.target.markerData.title;
           // price.innerHTML = ;//event.target.markerData.price;
           address.innerHTML = postData.price;//event.target.markerData.price;
-          bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
-          bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
-          house.innerHTML = postData.home_size;//event.target.markerData.home_size;
+		  
+		  if(postData.bedrooms ==  0) this.popup.querySelector(".post-details__bedroom").style.display = 'none';
+		  bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
+         
+		  if(postData.bathrooms ==  0) this.popup.querySelector(".post-details__bathroom").style.display = 'none';
+		  
+		  bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
+         
+		  house.innerHTML = postData.home_size;//event.target.markerData.home_size;
           land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
         }
         ,

@@ -103,6 +103,51 @@ $post_id = get_the_ID();
 
 			$post_events_type = get_field("post_home_event_type");
 			$post_events_text_1 = get_field("post_home_event_text_1");
+		
+			$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
+			$i_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$current_user_id);
+			$him_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$author_id);
+			$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$author_id);
+
+	 
+ //______________todo augustin 15_12_2024
+			$i_request_this_contact = (!empty($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships)) ? true : false;
+			$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false; 
+			$him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false; 
+			$him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false; 
+
+			 
+		if($i_request_this_contact && $i_accept_this_contact && $him_request_me && !$him_accept_me){
+			// I request & him did not accept yet [GREEN1]";
+			$post_events_text_1 = 'Contact requested';
+			$contact_classes .= ' relation_btn--contact-requested';
+			$contact_icon = 'single-neutral-actions-refresh';
+			$relation_type = 'remove-request-contact-list';
+ 		}elseif($i_request_this_contact && $i_accept_this_contact && $him_request_me && $him_accept_me){
+			// relation done [RED]";
+			$post_events_text_1 = 'Contact accepted';
+			$contact_classes .= ' relation_btn--contact-relation-done';
+			$contact_icon = 'check-circle-1';
+			$relation_type = 'refuse-contact-list';
+ 			// alert(are your sure ?)
+		}elseif($i_request_this_contact  && !$i_accept_this_contact && $him_request_me && $him_accept_me){
+			// He request, I did not accept yet [GREEN2]";
+			$post_events_text_1 = 'Accept contact';
+			$contact_classes .= ' relation_btn--contact-him-requested';
+			$contact_icon = 'check-circle-1';
+			$relation_type = 'accept-contact-list';
+ 		}
+			if($i_request_this_contact && $i_accept_this_contact && $him_request_me && $him_accept_me){
+				// relation done [RED]";
+				$post_events_text_1 = 'Contact accepted';
+				$contact_classes .= ' relation_btn--contact-relation-done';
+				$contact_icon = 'check-circle-1';
+				$relation_type = 'refuse-contact-list';
+				// alert(are your sure ?)
+ 			}
+
+//________________ 15_12_2024
+
 			$post_events_text_2 = get_field("post_home_event_text_2");
 			$post_events_privacy = get_field("post_home_event_privacy");
 
@@ -665,7 +710,7 @@ $post_id = get_the_ID();
 				<?php endif; ?>
 			</div>
 
-			<div class="post-page__section bt-2">
+			<div class="<?php if($post_post_tags) echo "bt-2" ?>">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
 					<?php
@@ -737,8 +782,17 @@ $post_id = get_the_ID();
 					// todo_augustin
 					limiterLignes($post_main_content,32); ?>
 			</div>
+
+      <div class="post-page__section bt-2">
+		<dl>
+				
+			<dt class="-light">Contact Information :</dt>
+			
+			<dd> 
+
+
 			<?php if ($author_data): ?>
-				<div class="post-page__section bt-2">
+				<div class="post-page__section">
 					<?php get_template_part("components/user-resume-on-post", null, array(
 							"user" => $author_data,
 							'additional-classes' => '',
@@ -747,7 +801,7 @@ $post_id = get_the_ID();
 			<?php endif; ?>
 
 			<?php if($author_email_address || $author_phone_number || $author_website_link || $post_Add_my_webshop_link) : ?>
-				<div class="post-page__section bt-2 content">
+				<div class="post-page__section content">
 					<ul class="contact__list">
 						<?php if($author_email_address): ?>
 							<li class="contact__list__item">
@@ -817,7 +871,9 @@ $post_id = get_the_ID();
 
 				</div>
 			<?php endif; ?>
-
+			</dd>
+		</dl>
+		</div>
 
 
 			<div class="post-page__section bt-2 content">
@@ -883,7 +939,7 @@ $post_id = get_the_ID();
 			</div>
 
 			<br>
-			<dl><dt class="-light">Address Map:</dt> </dl>
+			<dl><dt class="-light"></dt> </dl>
 			<?php
 			// todo_augustin : show map
 			$location = get_field( 'post_location_address', $post_id); // Récupérer la géolocalisation

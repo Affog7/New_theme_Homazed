@@ -48,14 +48,14 @@
 						<span class="card__title flex flex--vertical-center">
 							<?php
 								if($args["title_post"]) {
-									echo ucfirst(strtolower($args["title_post"]));
+									echo ucfirst(strtolower($args["title_post"]))." ;";
 								} else {
-									echo ucfirst(strtolower($args["title"]));
+									echo ucfirst(strtolower($args["title"]))." ;";
 								}
 							?>
 						</span>
 
-						<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> ; <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"];?></a><?php endif; ?>
+						<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"];?></a><?php endif; ?>
 
 						<?php
 //							if($args["user_id"] == $current_user_id) {
@@ -259,7 +259,7 @@
 			// No request for now [Default & BLACK]";
 		}
 		?>
-		<div class="card__body">
+		<div class="card__body" style="max-height: unset">
 			<?php get_template_part( 'components/event', null,
 				array(
 					'event_type' => $post_events_type,
@@ -378,8 +378,8 @@
 						'disabled'  => false,
 						'icon-position' => 'right', // left or right
 						'icon' => 'navigation-menu-horizontal', // nom du fichier svg
-						'additional-classes' => 'post-footer__button card-popup-fire',
-						'data-attribute' => 'data-card-popup-id=\'user-card-popup-links-' . $args["id"] . '\'',
+						'additional-classes' => 'post-footer__button ',
+						'data-attribute' => 'data-open-modal=\'user-card-popup-links-' . $args["id"] . '\'',
 						'theme' => "",
 					)
 				); ?>

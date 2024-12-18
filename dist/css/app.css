@@ -1990,7 +1990,7 @@ a.post-header:hover .owner {
 }
 .card-form {
   background-color: var(--color-white);
-  padding: 1.8rem;
+  padding: 1.2rem;
   border-radius: var(--border-radius);
   -webkit-box-shadow: var(--box-shadow-card);
           box-shadow: var(--box-shadow-card);
@@ -4834,7 +4834,7 @@ a.quicklinks--item:hover {
   left: 0.9rem;
   width: calc(100% - 1.8rem);
   height: 132px;
-  z-index: 700;
+  z-index: 1000;
   border-radius: var(--border-radius--small);
   -webkit-box-shadow: var(--box-shadow-card--big);
           box-shadow: var(--box-shadow-card--big);
@@ -5572,7 +5572,7 @@ a.quicklinks--item:hover {
   font-family: Arial, sans-serif;
 }
 
-.post-header {
+.main_manage_slate .post-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5644,7 +5644,7 @@ hr {
 }
 
 /* Post Header */
-.post-header {
+.main_manage_slate .post-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -5658,7 +5658,7 @@ hr {
   padding-bottom: 10px;
 }
 
-.post-header h1 {
+.main_manage_slate .post-header h1 {
   margin: 0;
 }
 
@@ -5729,6 +5729,7 @@ hr {
   margin: 5px 0;
   font-size: 14px;
   color: #333;
+  text-align: justify;
 }
 
 hr {

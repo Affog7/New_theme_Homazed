@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template Name: Manage Slate
+ *
+ */
+
 get_header();
 
 
@@ -162,7 +167,7 @@ get_footer();
 								alt="Main Picture"
 							/>
 
-							<div class="premium-details" style="display: ruby">
+							<div class="premium-details" style="display: ">
 								<p>Premium duration: <span style="font-weight: 800;"><b><?php echo($post_data['post_premium_duration']); ?></b></span></p>
 								<p>Premium from: <span  style="font-weight: 800;"><b>28 AUG 2025</b></span></p>
 								<p>Remaining time: <span  style="font-weight: 800;"><b>12 days 13 hours</b></span></p>
@@ -209,9 +214,10 @@ get_footer();
 								src="<?php echo esc_url($post_data['avatar']); ?>"
 								alt="Main Picture"
 							/>
-							<div class="premium-details" style="display: ruby">
-								<p><span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
-								<p><span ><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
+							<div class="premium-details" style="display: ">
+								<p>Event Type : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
+								<p>Title 1 : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
+								<p>Title 2 : <span ><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
 							</div>
 						</div>
 
