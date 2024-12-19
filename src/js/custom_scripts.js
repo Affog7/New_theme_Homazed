@@ -180,18 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// zoomer le map de single-post
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Après la création de la carte
-  const mapPane = document.querySelector('#map');
-
-  // Forcer une nouvelle transformation avec translate3d
-  if (mapPane) {
-      mapPane.style.transform = 'translate3d(100px, 50px, 0px)';
-  }
  
-});
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -228,37 +217,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // edit map
 
+// document.addEventListener('DOMContentLoaded', function () {
+//   var form = document.querySelector('#gform_17');
+ 
+ 
+//     console.log(13131)
+//       form.addEventListener('submit', function (event) {
+//       event.preventDefault(); // Empêche le rechargement de la page
 
+//       const formData = new FormData(form); // Collecte les données du formulaire
 
+//       // Envoie les données via AJAX
+//       fetch(form.action, {
+//           method: 'POST',
+//           body: formData,
+//       })
+//           .then((response) => response.json())
+//           .then((data) => {
+//               // Vérifiez la réponse de Gravity Forms
+//               if (data.is_valid) {
+//                   alert('Formulaire soumis avec succès !');
+//                   form.reset(); // Réinitialise le formulaire si nécessaire
+//               } else {
+//                   alert('Erreur lors de la soumission du formulaire.');
+//               }
+//           })
+//           .catch((error) => {
+//               console.error('Erreur AJAX :', error);
+//               alert('Une erreur est survenue lors de la soumission.');
+//           });
+//   });
+ 
 
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.querySelector('#gform_17');
-  gform_ajax_frame_17
-  form.addEventListener('submit', function (event) {
-      event.preventDefault(); // Empêche le rechargement de la page
-
-      const formData = new FormData(form); // Collecte les données du formulaire
-
-      // Envoie les données via AJAX
-      fetch(form.action, {
-          method: 'POST',
-          body: formData,
-      })
-          .then((response) => response.json())
-          .then((data) => {
-              // Vérifiez la réponse de Gravity Forms
-              if (data.is_valid) {
-                  alert('Formulaire soumis avec succès !');
-                  form.reset(); // Réinitialise le formulaire si nécessaire
-              } else {
-                  alert('Erreur lors de la soumission du formulaire.');
-              }
-          })
-          .catch((error) => {
-              console.error('Erreur AJAX :', error);
-              alert('Une erreur est survenue lors de la soumission.');
-          });
-  });
-});
+// });
