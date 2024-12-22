@@ -1273,6 +1273,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 
 
 
+
 add_action('gform_after_submission', 'add_tags_from_input65', 10, 2);
 function add_tags_from_input65($entry, $form) {
 	// ID du champ Gravity Forms pour les tags

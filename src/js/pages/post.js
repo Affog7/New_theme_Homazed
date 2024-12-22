@@ -11,7 +11,7 @@ class Post {
 
 		var current_user_id = data.next.container.querySelector(".current_user_id");
 		var relationBtns = data.next.container.querySelectorAll(".relation_btn");
-		if(relationBtns){
+		if(relationBtns) {
 			relationBtns.forEach(relationBtn => {
 				relationBtn.addEventListener("click", (e) => {
 					e.preventDefault();
@@ -35,13 +35,9 @@ class Post {
 					//makeRelationBtw(current_user_id.getAttribute("data-u-id"), e.currentTarget.getAttribute("data-relation-him"), "real-estate", e.currentTarget);
 				});
 			});
-		}
+	}
 
-
-
-
-
-  };
+};
 
 
 
@@ -52,46 +48,7 @@ afterEnter = data => {
     var edit_post_main = data.next.container.querySelector(".edit_post_main");
     var status_notif_ = data.next.container.querySelector("#status_notif_");
     if (edit_post_main) {
-        var edit_post_btns = data.next.container.querySelectorAll(".edit-area");
-
-        // Toggle the dropdown visibility
-        window.toggleDropdown = function () {
-            data.next.container.querySelector("#status-options").classList.toggle("show");
-        }
-
-        // Set the status text and close dropdown
-        window.setStatus = function (status,post_id) {
-            data.next.container.querySelector("#post-status").textContent = status + " ▼";
-            data.next.container.querySelector("#status-options").classList.remove("show");
-
-          var datad = {
-            action: 'update_post_status', // Nom de l'action qui sera utilisée dans le PHP
-            post_id: post_id,
-            status: status,
-          };
-
-          const adminAjaxUrl = document.querySelector('.main').getAttribute('data-admin-ajax');
-          jQuery.post(adminAjaxUrl, datad, function(response) {
-            status_notif_.innerHTML = response.data.message;
-
-            if(status === 'erase') window.location.href  = '/';
-
-            console.log(response); // Réponse du serveur (en cas de succès ou d'erreur)
-          });
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('#post-status')) {
-                var dropdowns = data.next.container.querySelector(".dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        };
+       
 
         // Toggle visibility of edit areas when clicking edit_post_main
         edit_post_main.addEventListener('click', (e) => {
@@ -103,6 +60,49 @@ afterEnter = data => {
             });
         });
     }
+
+    var edit_post_btns = data.next.container.querySelectorAll(".edit-area");
+    if(edit_post_btns) {
+              // Toggle the dropdown visibility
+            window.toggleDropdown = function () {
+              data.next.container.querySelector("#status-options").classList.toggle("show");
+          }
+
+          // Set the status text and close dropdown
+          window.setStatus = function (status,post_id) {
+              data.next.container.querySelector("#post-status").textContent = status + " ▼";
+              data.next.container.querySelector("#status-options").classList.remove("show");
+
+            var datad = {
+              action: 'update_post_status', // Nom de l'action qui sera utilisée dans le PHP
+              post_id: post_id,
+              status: status,
+            };
+
+            const adminAjaxUrl = document.querySelector('.main').getAttribute('data-admin-ajax');
+            jQuery.post(adminAjaxUrl, datad, function(response) {
+              status_notif_.innerHTML = response.data.message;
+
+              if(status === 'erase') window.location.href  = '/';
+
+              console.log(response); // Réponse du serveur (en cas de succès ou d'erreur)
+            });
+          }
+
+          // Close the dropdown if the user clicks outside of it
+          window.onclick = function(event) {
+              if (!event.target.matches('#post-status')) {
+                  var dropdowns = data.next.container.querySelector(".dropdown-content");
+                  for (var i = 0; i < dropdowns.length; i++) {
+                      var openDropdown = dropdowns[i];
+                      if (openDropdown.classList.contains('show')) {
+                          openDropdown.classList.remove('show');
+                      }
+                  }
+              }
+          };
+    }
+   
 
   // todo_augustin: read_more functionality
   var readMoreBtns = data.next.container.querySelectorAll(".read-more-btn_");

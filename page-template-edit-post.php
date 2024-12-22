@@ -2,22 +2,35 @@
 /**
 * Template Name: Edit post
 *
-* by hellomarcel.be
-* -> hello@marcel-pirnay.be
 */
 
-get_header(); ?>
+$post_id = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
+if (!$post_id || get_post_status($post_id) === false) {
+    wp_die("Invalid post or not found.");
+}
+
+add_filter('body_class', function ($classes) use ($post_id) {
+    if ($post_id) {
+        $classes[] = 'postid-' . $post_id;
+    }
+    return $classes;
+});
+
+get_header();
+
+
+?>
 
 <?php
 $current_user_id = get_current_user_id();
 global $post;
 
 $post_id = htmlspecialchars($_GET["post_id"]);
-$user_id = htmlspecialchars($_GET["user_id"]);
-// $post = get_post($post_id);
+$post = get_post($post_id);
+$author_id = get_post_field( 'post_author', $post_id );
 
-if($user_id != $current_user_id){
-	die("not allowed");
+if($author_id != $current_user_id){
+	dd("not allowed");
 }
 
 ?>
@@ -125,7 +138,7 @@ if($user_id != $current_user_id){
 				<main class="modal__content contact__form contact__form--light">
 
 					 
-					<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+				<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="ID=' . $post_id . '&current_post_id=' . $post_id . '&post_retrieved_id=' . $post_id . '"]' ); ?>
 
 				</main>
 			</div>

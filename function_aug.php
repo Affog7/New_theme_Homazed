@@ -140,6 +140,7 @@ function update_post_status_via_ajax() {
 add_action('wp_ajax_update_post_status', 'update_post_status_via_ajax'); // Pour les utilisateurs connectés
 add_action('wp_ajax_nopriv_update_post_status', 'update_post_status_via_ajax'); // Pour les utilisateurs non connectés (si nécessaire)
 
+ 
 
 // Fonction pour récupérer la valeur d'une métadonnée spécifique d'une entrée Gravity Forms
 function gf_entry_meta_shortcode($atts) {

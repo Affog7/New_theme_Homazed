@@ -23,7 +23,8 @@ if ($post_id != -1) {
 	// Vérifier que le post existe et appartient à l'utilisateur
 	$post = get_post($post_id);
 	if ($post && (int)$post->post_author === $user_id) {
-		$data[] = load_post_data($post_id);
+		$d_ = load_post_data($post_id);
+		if($d_["premium"]) $data[] = $d_;
 	} else {
 		echo "<p>Post non trouvé ou vous n'avez pas l'autorisation d'y accéder.</p>";
 	}
@@ -39,7 +40,8 @@ if ($post_id != -1) {
 	// Charger les données pour chaque post
 	if (!empty($user_posts)) {
 		foreach ($user_posts as $post) {
-			$data[] = load_post_data($post->ID);
+			$d_ = load_post_data($post->ID);
+			if($d_["premium"]) $data[] = $d_; 
 		}
 	} else {
 		echo "<p>Aucun post trouvé pour cet utilisateur.</p>";
@@ -83,7 +85,7 @@ function load_post_data($post_id) {
 
 	$main_picture_image_ids = get_field("post_home_main_picture_ids", $post_id);
 	$main_picture_image_ids_array = $main_picture_image_ids ? explode(',', $main_picture_image_ids) : [];
-	$post_avatar_picture_id = ($main_picture_image_ids_array[0]) ? $main_picture_image_ids_array[0] : ($post_gallery_image_ids_array[0] ?? null);
+	$post_avatar_picture_id = ($main_picture_image_ids_array) ? $main_picture_image_ids_array[0] : ($post_gallery_image_ids_array[0] ?? null);
 	$post_avatar_picture = $post_avatar_picture_id ? wp_get_attachment_url($post_avatar_picture_id, 'thumbnail') : '';
 
 	// Autres informations
@@ -118,9 +120,6 @@ function load_post_data($post_id) {
 }
 
 // Afficher les données
-
-
-get_footer();
 ?>
 
 
@@ -132,7 +131,7 @@ get_footer();
 
 				<?php if (!empty($data)) : ?>
 				<?php foreach ($data as $post_data) : ?>
-
+ 
 						<div class="card-form"  style="border: 2px solid #7e7c804d">
 					<div class="post-container">
 					<div class="post-header">
