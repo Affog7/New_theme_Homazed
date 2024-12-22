@@ -58,8 +58,8 @@
 }
 
 .quicklinks{
-    padding: 22px;
-    background: #e6e6e6;
+   background: #f7f7f7;
+   border-radius: 15px;
 }
 
 
@@ -477,7 +477,7 @@
 }
 .tag-list-container{
 	.chevron  {
-		display: block;
+		display: none;
 		background: rgb(255, 255, 255);
 		padding: 3px;
 	}

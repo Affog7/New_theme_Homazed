@@ -368,6 +368,8 @@
 		</ul>
 
 		<div class="flex flex--justify-center flex--vertical-center">
+				 
+
 				<?php get_template_part("components/btn", null,
 					array(
 						'label' => 'More...',
@@ -378,8 +380,8 @@
 						'disabled'  => false,
 						'icon-position' => 'right', // left or right
 						'icon' => 'navigation-menu-horizontal', // nom du fichier svg
-						'additional-classes' => 'post-footer__button ',
-						'data-attribute' => 'data-open-modal=\'user-card-popup-links-' . $args["id"] . '\'',
+						'additional-classes' => 'post-footer__button card-popup-fire',
+						'data-attribute' => 'data-card-popup-id=\'user-card-popup-links-' . $args["id"] . '\'',
 						'theme' => "",
 					)
 				); ?>

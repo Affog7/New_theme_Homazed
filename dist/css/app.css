@@ -1956,9 +1956,11 @@ a.post-header:hover .owner {
 .card-popup {
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
-  -webkit-box-shadow: var(--box-shadow-card);
-          box-shadow: var(--box-shadow-card);
-  background-color: white;
+  border: unset;
+  border-radius: -8px;
+  /* -webkit-box-shadow: var(--box-shadow-card); */
+  /* box-shadow: var(--box-shadow-card); */
+  /* background: #00000000; */
   position: fixed;
   left: 40%;
   bottom: 25%;
@@ -4834,7 +4836,7 @@ a.quicklinks--item:hover {
   left: 0.9rem;
   width: calc(100% - 1.8rem);
   height: 132px;
-  z-index: 1000;
+  z-index: 1001;
   border-radius: var(--border-radius--small);
   -webkit-box-shadow: var(--box-shadow-card--big);
           box-shadow: var(--box-shadow-card--big);
@@ -4942,8 +4944,8 @@ a.quicklinks--item:hover {
 }
 
 .quicklinks {
-  padding: 22px;
-  background: #e6e6e6;
+  background: #f7f7f7;
+  border-radius: 15px;
 }
 
 /* popup form edit*/
@@ -5471,7 +5473,7 @@ a.quicklinks--item:hover {
 }
 
 .tag-list-container .chevron {
-  display: block;
+  display: none;
   background: rgb(255, 255, 255);
   padding: 3px;
 }

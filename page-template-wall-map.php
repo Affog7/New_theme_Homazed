@@ -189,6 +189,7 @@
 							 case "other": $post_home_category_translate = "Other"; break;
 						 }
 
+						 $video_ =  get_field("post_home_video", $post_id);
 							 $post = [
 							 "id" => $post_id,
 							 "title" => get_the_title(),
@@ -198,6 +199,7 @@
 							 "post_status" => $post_status,
 							 "main_picture" => $main_picture_image_ids_array,
 							 "card_gallery" => $gallery_image_ids_array,
+							 "video_" => $video_,
 							 "card_gallery_display" => get_field("post_home_pictures_display"),
 							 "home_type" => $post_home_action_translate,
 							 "home_category" => $post_home_category_translate,
@@ -248,6 +250,7 @@
 									"title" => $content["title"],
 									"user_id" => $content["user_id"],
 									"post_status" => $content["post_status"],
+									"video_" => $content["video_"],
 									'type' => null, // null or compact
 									'home_category' => $content["home_category"],
 									'home_type' => $content["home_type"],

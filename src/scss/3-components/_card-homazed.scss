@@ -513,21 +513,24 @@ a.post-header{
 		}
 	}
 }
+ 
+
 // todo_augustin
 .card-popup{
 	border-top-left-radius: var(--border-radius);
-	border-top-right-radius: var(--border-radius);
-	box-shadow: var(--box-shadow-card);
-	background-color: white;
-	position: fixed;
-	left: 40%;
+    border-top-right-radius: var(--border-radius);
+    border: unset;
+    border-radius: -8px;
+    /* -webkit-box-shadow: var(--box-shadow-card); */
+    /* box-shadow: var(--box-shadow-card); */
+    /* background: #00000000; */
+    position: fixed;
+    left: 40%;
     bottom: 25%;
     width: 20%;
-	// bottom: 6rem;
-	// left: 0;
-	// width: 100%;
-	z-index: 10001;
-	transition: all .2s ease;
+    z-index: 10001;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 	.quicklinks--item{
 		@extend .h-p;
 		max-width: calc(60rem + 3.2rem);

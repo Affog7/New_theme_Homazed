@@ -378,8 +378,8 @@ $show = $post_id == $post_id_presenece;
 
 								 <?php get_template_part( 'components/btn', null,
 									 array(
-										 'label' => 'back',
-										 'href' => "$post_link",
+										 'label' => 'close',
+										 'href' => $post_link ,
 										 'target' => "_self",
 										 'skin'  => 'ghost',
 										 'icon-only'  => false,
@@ -392,7 +392,8 @@ $show = $post_id == $post_id_presenece;
 									 )
 								 ); ?>
 
-					<span class="close-btn-circle">&times;</span>
+ 
+					<!-- <span class="close-btn-circle">&times;</span> -->
 				</div>
 			</div>
 
@@ -448,8 +449,7 @@ $show = $post_id == $post_id_presenece;
 			<div class="form-step" id="step4" style="display:none;">
 				<h3>Connections</h3>
 				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="11" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-					<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+ 					<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>      </div>
 			<div class="form-step" id="step5" style="display:none;">
 				<h3>Event</h3>
@@ -1389,7 +1389,7 @@ $show = $post_id == $post_id_presenece;
 	</div>
 <?php endif; ?>
 
-	<div class="modal micromodal-slide" id="share-post" aria-hidden="true" style = "z-index: 1000">
+	<div class="modal micromodal-slide" id="share-post" aria-hidden="true" style = "z-index: 1001">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 			<div class="modal__container" style="overflow: hidden" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">
 				<header class="modal__header">
