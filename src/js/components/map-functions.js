@@ -395,6 +395,8 @@ const MapLaunch = (data) => {
 		  bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
          
 		  house.innerHTML = postData.home_size;//event.target.markerData.home_size;
+
+		  if(postData.outdoor_size ==  0) this.popup.querySelector(".post-details__land").style.display = 'none';
           land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
         }
         ,

@@ -138,7 +138,7 @@ function load_post_data($post_id) {
 						<h1>HOME</h1>
 						<div class="options">
 							<button id="" class="premium-toggle premium-button">Premium</button>
-							<button id="" class="event-toggle event-button">Event</button>
+							<button id="" style="display : <?php  echo ($post_data['event_text_1'] ?  "block" :  "none") ; ?>" class="event-toggle event-button">Event</button>
 						</div>
 					</div>
 
@@ -204,6 +204,7 @@ function load_post_data($post_id) {
 					</div>
 							<!-- End Premium Info -->
 
+							
 					<!-- Event Info -->
 					<div id="" class="event-info info-section" style="display: none;">
 
@@ -214,7 +215,7 @@ function load_post_data($post_id) {
 								alt="Main Picture"
 							/>
 							<div class="premium-details" style="display: ">
-								<p>Event Type : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
+								<p>Event Type : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_type']); ?></b></span></p>
 								<p>Title 1 : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
 								<p>Title 2 : <span ><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
 							</div>
