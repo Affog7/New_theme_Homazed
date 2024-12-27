@@ -402,21 +402,20 @@ $show = $post_id == $post_id_presenece;
 
 			<!-- Sommaire (Step 0) -->
 			<div class="form-step" id="step0">
-				<h3>Sommaire des étapes</h3>
-				<ul class="step-list">
-					<li><a href="#" onclick="goToStep(1)">Media</a></li>
-					<li><a href="#" onclick="goToStep(2)">Location</a></li>
-					<li><a href="#" onclick="goToStep(3)">Texts & Key Info</a></li>
-					<li><a href="#" onclick="goToStep(4)">Connections</a></li>
-					<li><a href="#" onclick="goToStep(5)">Event</a></li>
-					<li><a href="#" onclick="goToStep(6)">Premium</a></li>
+ 				<ul class="step-list">
+					<li><a href="#" onclick="goToStep(1)">Media ></a></li>
+					<li><a href="#" onclick="goToStep(2)">Location ></a></li>
+					<li><a href="#" onclick="goToStep(3)">Texts & Key Info ></a></li>
+					<li><a href="#" onclick="goToStep(4)">Connections ></a></li>
+					<li><a href="#" class="premium" onclick="goToStep(5)">add Event</a></li>
+					<li><a href="#" class="premium" onclick="goToStep(6)">add Premium</a></li>
 				</ul>
 			</div>
 
 			<!-- Autres étapes du formulaire -->
 			<div class="form-step" id="step1" style="display:none;">
 				<h3>Media</h3>
-				<main class="modal__content contact__form contact__form--light">
+				<main class="modal__content contact__form contact__form--light" >
 					<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 					; ?>
 
@@ -434,13 +433,12 @@ $show = $post_id == $post_id_presenece;
 			</div>
 			<div class="form-step" id="step2" style="display:none;">
 				<h3>Location</h3>
-				<main class="modal__content contact__form contact__form--light">
+				<main class="modal__content contact__form contact__form--light" style="text-align: justify;"> 
 					<?php echo do_shortcode( '[gravityform id="17" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
 			</div>
 			<div class="form-step" id="step3" style="display:none;">
-				<h3>Texts & Key Info</h3>
-				<main class="modal__content contact__form contact__form--light">
+				<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
 					
 					<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
@@ -448,18 +446,18 @@ $show = $post_id == $post_id_presenece;
 			</div>
 			<div class="form-step" id="step4" style="display:none;">
 				<h3>Connections</h3>
-				<main class="modal__content contact__form contact__form--light">
+				<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
  					<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>      </div>
 			<div class="form-step" id="step5" style="display:none;">
 				<h3>Event</h3>
-				<main class="modal__content contact__form contact__form--light">
+				<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
 					<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
 			</div>
 			<div class="form-step" id="step6" style="display:none;">
 				<h3>Premium</h3>
-				<main class="modal__content contact__form contact__form--light">
+				<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
 					<?php echo do_shortcode( '[gravityform id="20" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
 			</div>

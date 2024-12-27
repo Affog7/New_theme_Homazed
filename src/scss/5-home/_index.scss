@@ -209,7 +209,7 @@
     margin: 12px 0;
  }
  .step-list a {
-    color: #007bff;
+    color: #1d1e1f;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
@@ -218,6 +218,15 @@
     display: inline-block;
     transition: background 0.2s ease;
  }
+
+ .step-list a.premium {
+   border: 1px solid;
+    border-radius: 20px;
+    padding: 10px 50px;
+    max-width: 250px;
+    width: 40%;
+ } 
+
  .step-list a:hover {
     background: #f0f0f0;
  }

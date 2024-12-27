@@ -13,7 +13,7 @@ $data = []; // Liste pour stocker les posts de l'utilisateur
 
 // Récupération de l'utilisateur actuel
 $current_user = wp_get_current_user();
-$user_id = $current_user->ID;
+$user_id = get_current_user_id();
 
 // Vérifier si $_GET["post"] est défini
 $post_id = isset($_GET["post"]) ? intval($_GET["post"]) : -1;
@@ -30,12 +30,13 @@ if ($post_id != -1) {
 	}
 } else {
 	// Cas : Charger tous les posts de l'utilisateur
-	$args = [
+	$query = new WP_Query([
 		'post_author' => $user_id,
-		"post_type" => "homes",
-		'posts_per_page' => -1, // Récupérer tous les posts
-	];
-	$user_posts = get_posts($args);
+		'post_type' => 'homes',
+		'posts_per_page' => -1,
+	]);
+	$user_posts = $query->posts;
+	
 
 	// Charger les données pour chaque post
 	if (!empty($user_posts)) {

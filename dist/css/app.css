@@ -5130,7 +5130,7 @@ a.quicklinks--item:hover {
 }
 
 .step-list a {
-  color: #007bff;
+  color: #1d1e1f;
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
@@ -5139,6 +5139,14 @@ a.quicklinks--item:hover {
   display: inline-block;
   -webkit-transition: background 0.2s ease;
   transition: background 0.2s ease;
+}
+
+.step-list a.premium {
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 10px 50px;
+  max-width: 250px;
+  width: 40%;
 }
 
 .step-list a:hover {
