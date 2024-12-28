@@ -341,8 +341,8 @@ $post_id = get_the_ID();
  <?php 
 $post_id_presenece = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
 $show = $post_id == $post_id_presenece;
- 
- ?>
+?>
+
 <div id="editPostPopup" class="popup" style="display: <?php if(!$show) echo 'none'  ?> ;    background: #6c6c64b5;">
 	<div class=" popup-content">
 		<div class="body-popup">
@@ -431,42 +431,154 @@ $show = $post_id == $post_id_presenece;
 					<!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
 			</div>
-			<div class="form-step" id="step2" style="display:none;">
-				<h3>Location</h3>
-				<main class="modal__content contact__form contact__form--light" style="text-align: justify;"> 
-					<?php echo do_shortcode( '[gravityform id="17" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-			<div class="form-step" id="step3" style="display:none;">
-				<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
-					
-					<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
-				</main>
+			<!--  -->
+			<div class="form-step" id="step2" style="display:none;height:450px">
+				<div style="height: 400px; overflow: auto;">
+					<h3>Location</h3>
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;"> 
+						<?php echo do_shortcode( '[gravityform id="17" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					</main>
+				</div>
+				<div>
+							<?php get_template_part( 'components/btn', null,
+									 array(
+										 'label' => 'SAVE updates',
+										 'href' => "#" ,
+										 'target' => "_self",
+										 'skin'  => 'ghost',
+										 'icon-only'  => false,
+										 'disabled'  => false,
+										 'icon-position' => '', // left or right
+										 'icon' => '',
+										 'additional-classes' => 'square',
+										 'data-attribute' => 'id="submit_" data-form_id="17" data-step="2"',
+										 'theme' => "",
+									 )
+								 ); ?>
+			
+				</div>
 			</div>
-			<div class="form-step" id="step4" style="display:none;">
-				<h3>Connections</h3>
-				<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
- 					<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>      </div>
-			<div class="form-step" id="step5" style="display:none;">
-				<h3>Event</h3>
-				<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-					<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
+
+			<!--  -->
+			<div class="form-step" id="step3" style="display:none; height:450px">
+				<div style="height: 400px; overflow: auto;">
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
+						
+						<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+
+					</main>		
+				</div>
+				<div>
+							<?php get_template_part( 'components/btn', null,
+									 array(
+										 'label' => 'SAVE updates',
+										 'href' => "#" ,
+										 'target' => "_self",
+										 'skin'  => 'ghost',
+										 'icon-only'  => false,
+										 'disabled'  => false,
+										 'icon-position' => '', // left or right
+										 'icon' => '',
+										 'additional-classes' => 'square',
+										 'data-attribute' => 'id="submit_" data-form_id="8" data-step="3"',
+										 'theme' => "",
+									 )
+								 ); ?>
+			
+				</div>						
+ 
 			</div>
-			<div class="form-step" id="step6" style="display:none;">
-				<h3>Premium</h3>
-				<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-					<?php echo do_shortcode( '[gravityform id="20" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
+			
+			<!--  -->
+			<div class="form-step" id="step4" style="display:none;height:450px">
+				<div style="height: 400px; overflow: auto;">
+					<h3>Connections</h3>
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+						<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					</main>     
+				</div>
+				<div>
+							<?php get_template_part( 'components/btn', null,
+									 array(
+										 'label' => 'SAVE updates',
+										 'href' => "#" ,
+										 'target' => "_self",
+										 'skin'  => 'ghost',
+										 'icon-only'  => false,
+										 'disabled'  => false,
+										 'icon-position' => '', // left or right
+										 'icon' => '',
+										 'additional-classes' => 'square',
+										 'data-attribute' => 'id="submit_" data-form_id="22" data-step="4"',
+										 'theme' => "",
+									 )
+								 ); ?>
+			
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="form-step" id="step5" style="display:none;height:450px">
+				<div style="height: 400px; overflow: auto;">
+					<h3>Event</h3>
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+						<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					</main>
+				</div>
+				<div>
+							<?php get_template_part( 'components/btn', null,
+									 array(
+										 'label' => 'SAVE updates',
+										 'href' => "#" ,
+										 'target' => "_self",
+										 'skin'  => 'ghost',
+										 'icon-only'  => false,
+										 'disabled'  => false,
+										 'icon-position' => '', // left or right
+										 'icon' => '',
+										 'additional-classes' => 'square',
+										 'data-attribute' => 'id="submit_" data-form_id="15" data-step="5"',
+										 'theme' => "",
+									 )
+								 ); ?>
+			
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="form-step" id="step6" style="display:none;height:450px">
+				<div style="height: 400px; overflow: auto;">
+					<h3>Premium</h3>
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+						<?php echo do_shortcode( '[gravityform id="20" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					</main>
+				</div>
+				<div>
+							<?php get_template_part( 'components/btn', null,
+									 array(
+										 'label' => 'SAVE updates',
+										 'href' => "#" ,
+										 'target' => "_self",
+										 'skin'  => 'ghost',
+										 'icon-only'  => false,
+										 'disabled'  => false,
+										 'icon-position' => '', // left or right
+										 'icon' => '',
+										 'additional-classes' => 'square',
+										 'data-attribute' => 'id="submit_" data-form_id="20" data-step="6"',
+										 'theme' => "",
+									 )
+								 ); ?>
+			
+				</div>
 			</div>
 
 			<!-- Contrôles de navigation -->
-			<div class="form-navigation">
-				<button id="prevBtn" onclick="navigateSteps(-1)">Previous</button>
-				<span id="step-count">0 / 6</span>
-				<button id="nextBtn" onclick="navigateSteps(1)">Next</button>
+			<div class="form-navigation" style="display : none">
+				<button id="prevBtn" onclick="navigateSteps(-1)">Previous</button> 
+				 <span id="step-count">0 / 6</span> 
+			 	<button id="nextBtn" onclick="navigateSteps(1)">Next</button>
 			</div>
 			<div>
 				<p class="active-status" id="status_notif_"></p>
@@ -476,6 +588,45 @@ $show = $post_id == $post_id_presenece;
 	</div>
 
 </div>
+<?php if(isset($_GET["premium"])) : ?>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		navigateSteps(6)	
+		})
+	</script>
+ 
+<?php endif ;?>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Sélectionner tous les boutons dont l'ID est 'submit_' et comportant l'attribut 'data-form_id'
+    const buttons = document.querySelectorAll('a#submit_');
+
+    // Parcourir chaque bouton et ajouter un gestionnaire d'événements
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            // Récupérer l'ID du formulaire depuis l'attribut 'data-form_id'
+            const formId = button.getAttribute("data-form_id");
+            const idStep = button.getAttribute("data-step");
+
+            // Trouver le formulaire et le bouton de soumission associé
+            const form = document.querySelector(`#step${idStep} form#gform_${formId}`);
+            const submitButton = form.querySelector(`#gform_submit_button_${formId}`);
+
+            if (form && submitButton) {
+                // Simuler le clic sur le bouton de soumission du formulaire
+                submitButton.click();
+            } else {
+                // Afficher une notification d'erreur si le formulaire n'existe pas
+                const statusNotification = document.querySelector("#status_notif_");
+                if (statusNotification) {
+                    statusNotification.textContent = `Erreur : Formulaire pour l'ID ${formId} non trouvé.`;
+                    statusNotification.style.color = "red";
+                }
+            }
+        });
+    });
+});
+</script>
 
 
 
@@ -698,6 +849,7 @@ $show = $post_id == $post_id_presenece;
 				</div>
 
 				 
+				<?php if($post_events_text_1): ?>
 					<?php get_template_part( 'components/event', null,
 						array(
 							'event_type' => $post_events_type,
@@ -706,6 +858,7 @@ $show = $post_id == $post_id_presenece;
 							'text_2' => $post_events_text_2,
 						)
 					); ?>
+				<?php endif; ?>
 				 
 			</div>
 

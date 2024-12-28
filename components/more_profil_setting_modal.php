@@ -36,7 +36,7 @@
 		Update  post
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 	</a>
-	<a href="/manageslate/?post=<?php echo $args["id"]; ?>" class="quicklinks--item">
+	<a href="<?php echo esc_url($args["post_permalink"])."/?post_id=".$args["id"]."&premium=1" ;?>" class="quicklinks--item">
 		Promote post
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 	</a>

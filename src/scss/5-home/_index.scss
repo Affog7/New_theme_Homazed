@@ -996,3 +996,9 @@ hr {
 .pac-container{
 	z-index: 5000 !important;
 }
+
+// cacher le button
+#editPostPopup .gform_button {
+   background-color: white;
+   border: unset;
+} 

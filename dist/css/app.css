@@ -6039,6 +6039,11 @@ hr {
   z-index: 5000 !important;
 }
 
+#editPostPopup .gform_button {
+  background-color: white;
+  border: unset;
+}
+
 .reset-password {
   display: block; /* Transforme le lien en élément de bloc */
   text-align: center; /* Centre le texte à l'intérieur */
