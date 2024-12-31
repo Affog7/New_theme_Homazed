@@ -49,10 +49,10 @@ function manage_post_media_shortcode($atts) {
         <form method="post" enctype="multipart/form-data" class="manage-media-form">
             <div class="form-group">
 
-                <input type="file" name="replace_file" id="replace_file" >
+                <input type="file" name="replace_file" id="replace_file" style="margin: 0 auto; padding: 5px; border: 1px solid #ccc; border-radius: 5px; display: block; width: 80%; max-width: 400px;">
             </div>
             <div class="form-group">
-                <button type="submit" name="replace_file_submit"   style="background-color: #0073aa ;    padding: 10px 20px;color: white;    border: none; border-radius: 5px;font-size: 14px;cursor: pointer;">
+                <button type="submit" name="replace_file_submit" class="btn btn--ghost"  style="background-color: #0073aa ;    padding: 10px 20px;color: white;    border: none;  font-size: 14px;cursor: pointer;">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
                         <path d="M5 12H19M12 5L19 12L12 19" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                     </svg>

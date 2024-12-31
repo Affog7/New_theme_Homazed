@@ -31,7 +31,7 @@ if ($post_id != -1) {
 } else {
 	// Cas : Charger tous les posts de l'utilisateur
 	$query = new WP_Query([
-		'post_author' => $user_id,
+		'post_author' => "$user_id",
 		'post_type' => 'homes',
 		'posts_per_page' => -1,
 	]);
@@ -41,13 +41,19 @@ if ($post_id != -1) {
 	// Charger les données pour chaque post
 	if (!empty($user_posts)) {
 		foreach ($user_posts as $post) {
-			$d_ = load_post_data($post->ID);
-			if($d_["premium"]) $data[] = $d_; 
+			
+			if($post->post_author == $user_id) {
+				$d_ = load_post_data($post->ID);
+				if($d_["premium"]) $data[] = $d_; 
+			}
+			
 		}
+
 	} else {
 		echo "<p>Aucun post trouvé pour cet utilisateur.</p>";
 	}
-}
+
+ }
 
 // Fonction pour charger les données d'un post
 function load_post_data($post_id) {
@@ -129,7 +135,7 @@ function load_post_data($post_id) {
 
 
 		<div class="container container--default">
-
+<span id="status_notif_"></span>
 				<?php if (!empty($data)) : ?>
 				<?php foreach ($data as $post_data) : ?>
  
@@ -139,7 +145,7 @@ function load_post_data($post_id) {
 						<h1>HOME</h1>
 						<div class="options">
 							<button id="" class="premium-toggle premium-button">Premium</button>
-							<button id="" style="display : <?php  echo ($post_data['event_text_1'] ?  "block" :  "none") ; ?>" class="event-toggle event-button">Event</button>
+							<button id="" style="display : <?php  echo (($post_data['event_type']  != "None")  ?  "block" :  "none") ; ?>" class="event-toggle event-button">Event</button>
 						</div>
 					</div>
 
@@ -177,7 +183,7 @@ function load_post_data($post_id) {
 						<hr />
 						<div class="premium-options">
 							<label class="custom-checkbox">
-								<input type="checkbox" name="premium_auto_renewal" value="1" <?php echo $post_data['renewal'] ? "checked" : ""; ?> />
+								<input type="checkbox" class="premium_renewal" data-null="" data-id="<?php echo  $post_data['id'] ; ?>"  name="post_Is_Automatic_Renewal" value="Automatic Renewal" <?php echo $post_data['renewal'] ? "checked" : ""; ?> />
 								<span class="checkmark"></span> <b>Premium Post - Automatic Renewal</b>
 							</label>
 						</div>
@@ -225,7 +231,7 @@ function load_post_data($post_id) {
 						<hr>
 						<div class="premium-options">
 							<label class="custom-checkbox">
-								<input type="checkbox" name="premium_auto_renewal" value="1" <?php echo !empty($post_data['event_type']) ? "checked" : ""; ?>>
+								<input type="checkbox" name="post_home_event_type" class="premium_renewal"  data-null="None"  data-id="<?php echo  $post_data['id'] ; ?>" value="<?php echo ($post_data['event_type']); ?>" <?php echo ($post_data['event_type']  != "None")  ? "checked" : ""; ?>>
 								<span class="checkmark"></span> <b>Active Event</b>
 							</label>
 						</div>
@@ -334,6 +340,54 @@ function load_post_data($post_id) {
 			}
 		});
 	</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Sélectionner tous les checkboxes avec la classe .premium_renewal
+    const premiumCheckboxes = document.querySelectorAll('.premium_renewal');
+    const statusNotif = document.querySelector("#status_notif_");
+
+    premiumCheckboxes.forEach(function(checkbox) {
+        // Ajouter un événement onchange à chaque checkbox
+        checkbox.addEventListener("change", function () {
+            const postId = checkbox.getAttribute('data-id'); // Utiliser data-id pour récupérer l'ID du post
+            const metaKey = checkbox.name; // Utiliser le nom du checkbox comme meta_key
+            const metaValue = checkbox.checked ? checkbox.value : checkbox.getAttribute('data-null'); // La valeur est 1 si checked, sinon 0
+
+            // Envoi de la requête à l'API REST pour chaque changement de checkbox
+            fetch('<?php echo esc_url(rest_url('custom/v1/update-meta/')); ?>', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-WP-Nonce': '<?php echo wp_create_nonce('wp_rest'); ?>', // Utilisation du nonce de sécurité WordPress
+                },
+                body: JSON.stringify({
+                    post_id: postId,
+                    meta_key: metaKey,
+                    meta_value: metaValue
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusNotif.textContent = data.message;
+                    statusNotif.style.color = "green";
+                } else {
+                    statusNotif.textContent = "Erreur : Impossible de mettre à jour.";
+                    statusNotif.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                statusNotif.textContent = "Erreur : Une erreur s'est produite.";
+                statusNotif.style.color = "red";
+            });
+        });
+    });
+
+});
+</script>
 
 
 

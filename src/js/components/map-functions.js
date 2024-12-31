@@ -387,18 +387,19 @@ const MapLaunch = (data) => {
           // price.innerHTML = ;//event.target.markerData.price;
           address.innerHTML = postData.price;//event.target.markerData.price;
 		  
-		  if(postData.bedrooms ==  0) this.popup.querySelector(".post-details__bedroom").style.display = 'none';
+		  this.popup.querySelector(".post-details__bedroom").style.display = (postData.bedrooms ==  0) ? 'none' : 'block';
 		  bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
          
-		  if(postData.bathrooms ==  0) this.popup.querySelector(".post-details__bathroom").style.display = 'none';
+		  this.popup.querySelector(".post-details__bathroom").style.display = (postData.bathrooms ==  0) ? 'none' : 'block';
 		  
 		  bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
          
-		  house.innerHTML = postData.home_size+" m2";//event.target.markerData.home_size;
+		  house.innerHTML = postData.home_size;//event.target.markerData.home_size;
 
-		  if(postData.outdoor_size ==  0) this.popup.querySelector(".post-details__land").style.display = 'none';
-          land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
-        }
+		  this.popup.querySelector(".post-details__land").style.display = (postData.outdoor_size ==  0) ? 'none' : 'block';
+		  land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
+        
+		}
         ,
         400
       )

@@ -20,7 +20,7 @@
                     </li>
                     <li class="post-details__house">
                         <span class="post-details__prefix p-xs">H</span>
-                        <span class="value">X</span>
+                        <span class="value">X</span><span class="post-details__suffix p-xs">m2</span>
                     </li>
                     <li class="post-details__land">
                         <span class="post-details__prefix p-xs">L</span>

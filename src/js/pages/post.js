@@ -70,7 +70,13 @@ afterEnter = data => {
 
           // Set the status text and close dropdown
           window.setStatus = function (status,post_id) {
-              data.next.container.querySelector("#post-status").textContent = status + " ▼";
+            var status_labels = {
+              'publish': 'Active',
+              'private': 'Inactive',
+              'erase': 'Erase'
+          };
+          
+              data.next.container.querySelector("#post-status").textContent = status_labels[status] + " ▼";
               data.next.container.querySelector("#status-options").classList.remove("show");
 
             var datad = {

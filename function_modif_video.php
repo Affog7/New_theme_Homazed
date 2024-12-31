@@ -27,18 +27,18 @@ function shortcode_video_manager_url($atts) {
 			<div class="video-preview" style="margin-bottom: 20px;">
 				<video controls style="max-width: 100%; border: 1px solid #ccc; border-radius: 5px;">
 					<source src="<?php echo esc_url($video_url); ?>" type="video/mp4">
-					Your browser does not support video playback.
+					<i>Your browser does not support video playback.</i>
 				</video>
-				<button class="delete-video" data-post-id="<?php echo esc_attr($post_id); ?>" style="margin-top: 10px; padding: 10px; background: #ff5f5f; color: white; border: none; border-radius: 5px; cursor: pointer;">Delete Video</button>
+				<button class="delete-video"class="btn btn--ghost" data-post-id="<?php echo esc_attr($post_id); ?>" style="margin-top: 10px; padding: 10px; background: #ff5f5f; color: white; border: none; cursor: pointer;">Delete Video</button>
 			</div>
 		<?php else: ?>
-			<p>There is no video associated with this recording.</p>
+			<i>There is no video associated with this recording.</i>
 		<?php endif; ?>
 
 		<form id="video-upload-form" data-post-id="<?php echo esc_attr($post_id); ?>" style="margin-top: 20px;">
-			<input type="file" id="video-upload" accept=".<?php echo str_replace(',', ',.', esc_attr($atts['allowed_extensions'])); ?>" style="padding: 5px;">
+			<input type="file" id="video-upload" accept=".<?php echo str_replace(',', ',.', esc_attr($atts['allowed_extensions'])); ?>" style="margin: 0 auto; padding: 5px; border: 1px solid #ccc; border-radius: 5px; display: block; width: 80%; max-width: 400px;">
 			<br>
-			<button type="button" id="video-upload-button" style="margin-left: 10px; padding: 10px; background: #0073aa; color: white; border: none; border-radius: 5px; cursor: pointer;">Add or Replace Video</button>
+			<button type="button" id="video-upload-button" class="btn btn--ghost" style="margin-left: 10px; padding: 10px; background: #0073aa; color: white; border: none;   cursor: pointer;">Save video</button>
 			<p style="font-size: 12px; color: #888; margin-top: 10px;">Extensions allowed: <?php echo esc_html($atts['allowed_extensions']); ?>.</p>
 		</form>
 	</div>

@@ -356,7 +356,7 @@ $show = $post_id == $post_id_presenece;
 					// Définir un libellé pour chaque statut
 					$status_labels = array(
 						'publish'  => 'Active',
-						'private'  => 'Private',
+						'private'  => 'Inactive',
 						'erase'    => 'Erase',
 					);
 
@@ -418,11 +418,15 @@ $show = $post_id == $post_id_presenece;
 				<main class="modal__content contact__form contact__form--light" >
 					<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 					; ?>
+<hr>
 
+					<?php	echo do_shortcode('[main_picture_manager   post_id="' . $post_id . '"]');
+					; ?>
+<hr>
 					<?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
 					; ?>
 
-
+<hr>
 
 					<?php	echo do_shortcode('[video_manager_url    post_id="' . $post_id . '"]');
 					; ?>
@@ -849,7 +853,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				</div>
 
 				 
-				<?php if($post_events_text_1): ?>
+				<?php if($post_events_text_1 && $post_events_type != "None"): ?>
 					<?php get_template_part( 'components/event', null,
 						array(
 							'event_type' => $post_events_type,

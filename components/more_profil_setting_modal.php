@@ -24,11 +24,11 @@
 
 <?php if(get_current_user_id() != $args["user_id"]): ?>
 	<a href="" class="quicklinks--item hide-post-button" data-post-id="<?php echo $args["id"]; ?>">
-		Hide this profile from me
+		Hide this post from me
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 	</a>
 	<a href="" class="quicklinks--item report-post-button" data-post-id="<?php echo $args["id"]; ?>">
-		Signal this profile
+		Signal this post
 		<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/alert-triangle.svg'; echo "</div>"; ?>
 	</a>
 <?php else: ?>
