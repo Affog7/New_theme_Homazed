@@ -17,6 +17,7 @@ import ScrollTo from './components/scrollTo';
 import Maps_Init from './components/maps';
 import Tabs_Init from './components/tabs';
 import Carrousel_Init from './components/carrousel';
+import Jobs_Init from './components/pages/jobs';
 import Tags_Init from './components/tags';
 import Modals_Init from './components/modal';
 import Card_popup_link_Init from './components/card-popup-links';
@@ -69,31 +70,7 @@ barba.init({
 				animationEnter(next.container);
 			}
 		},
-		// todo_augustin
-		// {
-		// 	name: 'fade-transition',
-		// 	to: {
-		// 		namespace: ['post']
-		// 	},
-		// 	once(data) {
-		// 		// Initialisation des expanders de contenu
-		// 		initContentExpanders();
-		// 	},
-		// 	leave(data) {
-		// 		return new Promise((resolve) => {
-		// 			data.current.container.classList.add("fade-out");
-		// 			setTimeout(resolve, 500); // Durée de l'animation de sortie
-		// 		});
-		// 	},
-		// 	enter(data) {
-		// 		return new Promise((resolve) => {
-		// 			// Réinitialise et applique la classe ContentExpander à chaque nouvel élément
-		// 			initContentExpanders();
-		// 			data.next.container.classList.add("fade-in");
-		// 			setTimeout(resolve, 500); // Durée de l'animation d'entrée
-		// 		});
-		// 	}
-		// }, // end
+		
 		{
             name: 'home',
             to: {
@@ -107,6 +84,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -120,6 +98,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -138,6 +117,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Maps_Init();
@@ -160,6 +140,7 @@ barba.init({
 			},
 			afterEnter: ({ next }) => {
 				ScrollTo(next);
+				Jobs_Init(next);
 				Tags_Init();
 			}
         },
@@ -176,6 +157,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -190,6 +172,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -212,6 +195,7 @@ barba.init({
 				CopyBtn_Init();
 				Tooltip_Init(next);
 				Init_Header();
+				Jobs_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -228,6 +212,7 @@ barba.init({
 				CopyBtn_Init();
 				Tooltip_Init(next);
 				Init_Header();
+				Jobs_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -243,6 +228,7 @@ barba.init({
 				animationEnter(next.container);
 				Tabs_Init(next);
 				Carrousel_Init(next);
+				Jobs_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -259,6 +245,7 @@ barba.init({
                 animationEnter(next.container);
 				Tabs_Init(next);
 				Carrousel_Init(next);
+				Jobs_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -282,6 +269,7 @@ barba.init({
 				ScrollTo(next);
 				FileUploadInit();
 				Maps_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -296,6 +284,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				FileUploadInit();
 				Maps_Init();
+				Jobs_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);

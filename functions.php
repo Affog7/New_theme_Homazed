@@ -1134,7 +1134,8 @@ function link_acf_images_ids_to_user_when_updated($user_id, $feed, $entry, $user
 	}
 }
 
-add_action( 'gform_advancedpostcreation_post_after_creation_1', 'populate_images_array', 10, 4 );
+add_action( 'gform_advancedpostcreation_post_after_creation_1', 'populate_images_array', 10, 4 ); //homes
+add_action( 'gform_advancedpostcreation_post_after_creation_24', 'populate_images_array', 10, 4 ); //jobs
 // Form ID 1: Create home post
 function populate_images_array( $post_id, $feed, $entry, $form ){
 

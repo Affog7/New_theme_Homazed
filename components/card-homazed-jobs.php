@@ -28,7 +28,6 @@ $him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_us
 $is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $args['id']);
 $post_comment_available = get_field("post_comment_available", $args['id']);
 
-
 ?>
 
 <div id="slate-<?php echo $args["id"]; ?>" class="card <?php if( is_array($args['img']) && count($args['img']) > 1 && $args['img_display'] !== "grid"){ echo "carrousel glide"; } ?>" data-h-id="<?php echo $args["id"]; ?>" data-post-type="<?php echo $args["post_type_slug"]; ?>">
@@ -57,23 +56,21 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 
                     <?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"];?></a><?php endif; ?>
 
-                    <?php
-                    //							if($args["user_id"] == $current_user_id) {
-                    //								echo "<span style='background: #4b4235; padding: 5px 10px;font-size: x-small; border-radius: 100%;font-weight: 600;color: white;'> </span>";
-                    //							}
-                    ?>
+                 
                 </div>
             </div>
 
             <!-- Post type -->
             <?php if($args["post_type"] && $args["post_type_slug"]): ?>
                 <div class="post-type flex flex--vertical-center">
+                    
 					<span class="post-type__name post-type__name--<?php echo $args["post_type_slug"]; ?>">
 							<?php switch ($args["post_type"]) {
-                                case "homes": echo __('Homes', 'homazed'); break;
+                                case "jobs": echo __('JOBS', 'homazed'); break;
                                 case "Services": echo __('Services', 'homazed'); break;
                             } ?>
 					</span>
+
                     <?php echo file_get_contents(get_stylesheet_directory().'/src/images/icons/post-type-'.$args["post_type_slug"].'.svg'); ?>
                 </div>
             <?php endif; ?>
@@ -82,7 +79,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
         <div class="flex flex--justify-between card__header__item">
             <div class="flex flex--vertical-center owner_by">
 				<span class="post-category post_type">
-					<?php echo $args["home_category"]; ?> <?php echo $args["home_type"]; ?>
+					<?php echo $args["post_home_Jobs_title"]; ?> <?php echo $args["post_home_sector_activity"]; ?>
 				</span>
             </div>
             <?php if($args["address_name"]): ?>
@@ -95,46 +92,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             </a>
         </div>
 
-        <!-- Post price and bedrooms and bathrooms and house and land -->
-        <?php if($args["price"] || $args["bedrooms"] || $args["bathrooms"] || $args["house"] || $args["land"]): ?>
-            <div class="post-details card__header__item flex flex--justify-between">
-                <?php if($args["price"]): ?>
-                    <div class="post-details__price">
-                        <?php get_template_part( 'components/price', null, array(
-                                'price' =>  $args["price"], )
-                        ); ?>
-                    </div>
-                <?php endif; ?>
-                <?php if($args["bedrooms"] || $args["bathrooms"] || $args["house"] || $args["land"]): ?>
-                    <ul class="post-details__caracteristics flex flex--vertical-center">
-                        <?php if($args["bedrooms"]): ?>
-                            <li class="post-details__bedroom">
-                                <span class="post-details__prefix p-xs"><abbr title="<?php _e("Bedroom", "homazed"); ?>"><?php _e("BDR", "homazed"); ?></abbr></span>
-                                <?php echo str_replace(' ', '', $args["bedrooms"]); ?>
-                            </li>
-                        <?php endif; ?>
-                        <?php if($args["bathrooms"]): ?>
-                            <li class="post-details__bathroom">
-                                <span class="post-details__prefix p-xs"><abbr title="<?php _e("Bathroom", "homazed"); ?>"><?php _e("BTH", "homazed"); ?></abbr></span>
-                                <?php echo str_replace(' ', '', $args["bathrooms"]); ?>
-                            </li>
-                        <?php endif; ?>
-                        <?php if($args["house"]): ?>
-                            <li class="post-details__house">
-                                <span class="post-details__prefix p-xs"><abbr title="<?php _e("House", "homazed"); ?>"><?php _e("H", "homazed"); ?></abbr></span>
-                                <?php echo str_replace(' ', '', $args["house"]); ?><span class="post-details__suffix p-xs"><abbr title="<?php _e("Square feet meters", "homazed"); ?>"><?php _e("m2", "homazed"); ?></abbr></span>
-                            </li>
-                        <?php endif; ?>
-                        <?php if($args["land"]): ?>
-                            <li class="post-details__land">
-                                <span class="post-details__prefix p-xs">L</span>
-                                <?php echo str_replace(' ', '', $args["land"]); ?><span class="post-details__suffix p-xs"><abbr title="<?php _e("Square feet meters", "homazed"); ?>"><?php _e("m2", "homazed"); ?></abbr></span>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
+         
     </button>
 
     <!-- Post image -->
@@ -211,8 +169,6 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
                     <?php get_template_part("components/carrousel-single-image", null, array(
                         'post_id' => $args['id'],
                         'img' => $args['img'],
-                        //'video_' => $args['video_'],
-
                         'post_creator_name' => $args["post_creator_name"],
                     )); ?>
                 <?php endif; ?>

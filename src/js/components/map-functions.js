@@ -175,19 +175,7 @@ const MapLaunch = (data) => {
 			// Prepare the data
 			let markerData = {
 				id: building.id,
- // todo_augustin map
-				// title: building.title,
-				// permalink: building.permalink,
-				// post_type_slug: building.post_type_slug,
-				// price: building.price,
-				// bathrooms: building.bathrooms,
-				// bedrooms: building.bedrooms,
-				// home_size: building.home_size,
-				// outdoor_size: building.outdoor_size,
-				// location: building.location,
-				// permalink: building.permalink,
-				// img: building.img,
-				// card_gallery: building.card_gallery,
+
 			};
 
 

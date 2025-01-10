@@ -43,24 +43,10 @@ $post_id = get_the_ID();
 
 			$post_home_event_privacy = get_field("home_event_privacy", $post_id);
 
-			$post_home_action_value = get_field("post_home_action", $post_id);
-			switch ($post_home_action_value) {
-				case "sale": $post_home_action_translate = "for Sale"; break;
-				case "rent": $post_home_action_translate = "for Rent"; break;
-				case "sold": $post_home_action_translate = "sold"; break;
-				case "rented": $post_home_action_translate = "rented"; break;
-			}
-			$post_home_category_value = get_field("post_home_category", $post_id);
-			switch ($post_home_category_value) {
-				case "house": $post_home_category_translate = "House"; break;
-				case "apartment": $post_home_category_translate = "Apartment"; break;
-				case "new_construction": $post_home_category_translate = "New construction"; break;
-				case "land_plot": $post_home_category_translate = "Land/Plot"; break;
-				case "office": $post_home_category_translate = "Office"; break;
-				case "commercial_industry": $post_home_category_translate = "Commercial/Industry"; break;
-				case "garage_parking": $post_home_category_translate = "Garage/Parking"; break;
-				case "other": $post_home_category_translate = "Other"; break;
-			}
+		 
+			$post_home_sector_activity = get_field("post_home_sector_activity",$post_id);
+			$post_home_Jobs_title = get_field("post_home_Jobs_title",$post_id);
+
 			$post_title = get_field("post_home_title") ? get_field("post_home_title") : get_the_title();
 			$post_link = get_the_permalink($post_id);;
 			$post_imgs = get_field("post_home_gallery", $post_id);
@@ -68,25 +54,29 @@ $post_id = get_the_ID();
 			$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
 			$post_main_content = get_the_content();
 			$post_main_content_excerpt = get_the_excerpt();
+
 			$post_price = get_field("post_home_price", $post_id);
 			$post_bedrooms = get_field("post_home_number_of_bedrooms", $post_id);
 			$post_bathrooms = get_field("post_home_number_of_bathrooms", $post_id);
 			$post_home_size = get_field("post_home_size", $post_id);
 			$post_outdoor_size = get_field("post_home_outdoor_size", $post_id);
-			$post_home_amenities = get_field("post_home_amenities", $post_id);
-			$post_home_year_built = get_field("post_home_year_built", $post_id);
-			$post_neighborhood_amenities = get_field("post_home_neighborhood_amenities", $post_id);
-			$post_transportation = get_field("post_home_transportation", $post_id);
-			$post_garages_parking = get_field("post_home_garages_parking", $post_id);
-			$post_schools = get_field("post_home_schools_nearby", $post_id);
-			$post_home_style_architecture = get_field("post_home_style_and_architecture", $post_id);
-			$post_additional_features = get_field("post_home_additional_home_features", $post_id);
-			$post_taxes = get_field("post_home_property_taxes", $post_id);
-			$post_fees = get_field("post_home_other_property_fees", $post_id);
-			$post_systems = get_field("post_heating_cooling_systems", $post_id);
-			$post_energy_rating = get_field("post_home_energy_rating", $post_id);
 
-			$post_energy_consumption = get_field("post_home_estimated_energy_rating_energy_consumption", $post_id);
+
+			$post_job_type = get_field("post_job_type", $post_id);
+			$post_main_work_location = get_field("post_main_work_location", $post_id);
+			$post_key_roles = get_field("post_key_roles", $post_id);
+			$post_requirements = get_field("post_requirements", $post_id);
+			$post_preferred_qualifications = get_field("post_preferred_qualifications", $post_id);
+			$post_career_growth = get_field("post_career_growth", $post_id);
+			$post_company_culture = get_field("post_company_culture", $post_id);
+			$post_reporting_structure = get_field("post_reporting_structure", $post_id);
+			$post_work_hours = get_field("post_work_hours", $post_id);
+			$post_compensation = get_field("post_compensation", $post_id);
+			$post_benefits = get_field("post_benefits", $post_id);
+
+			$post_application_process = get_field("post_application_process", $post_id);
+			$post_job_application_deadline = get_field("post_job_application_deadline", $post_id);
+			$post_other = get_field("post_other", $post_id);
 
 			//$post_address = get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city");
 			$post_address = get_field("post_location_address") ? get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city") : get_field("post_address");
@@ -182,7 +172,7 @@ $post_id = get_the_ID();
 						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
 					</div>
 
-					<p style=""><?php echo $post_home_category_translate; ?> <?php echo $post_home_action_translate; ?></p>
+					<p style=""><?php echo $post_home_Jobs_title; ?> &nbsp; &nbsp; <?php echo $post_home_sector_activity; ?></p>
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -637,87 +627,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- fin todo_augustin -->
 		<div class="tab-content default-bckg post-page <?php if(isset($post_gallery_image_ids_array) && count($post_gallery_image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" data-barba-prevent="all" id="tabs-home">
-			<div class="post-page__section">
-				<?php if($post_price || $post_bedrooms || $post_bathrooms || $post_home_size || $post_outdoor_size): ?>
-					<div class="flex flex--justify-between">
-						<?php if($post_price): ?>
-							<?php if($current_user_id == $author_id): ?>
-								<div class="flex">
-									<div class="flex edit-area hide">
-										<?php
-										// get_template_part( 'components/btn', null,
-										// 	array(
-										// 		'label' => 'Edit price',
-										// 		'href' => "/",
-										// 		'target' => "_self",
-										// 		'skin'  => 'highlight',
-										// 		'icon-only'  => true,
-										// 		'disabled'  => false,
-										// 		'icon-position' => '',
-										// 		'icon' => 'pencil-write',
-										// 		'additional-classes' => 'btn--xsmall btn--inline edit_post_btn mg-r-1',
-										// 		'data-attribute' => 'data-open-modal=\'edit-post--price\'',
-										// 		'theme' => "",
-										// 	)
-										// ); ?>
-									</div>
-								<?php endif; ?>
-								<?php get_template_part( 'components/price', null, array(
-									'price' => $post_price, )
-								); ?>
-								<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
-						<?php endif; ?>
-						<?php if($post_bedrooms || $post_bathrooms || $post_home_size || $post_outdoor_size): ?>
-							<ul class="post-details__caracteristics flex flex--vertical-center">
-								<?php if($current_user_id == $author_id): ?>
-									<li class="edit-area hide">
-										<?php
-										// get_template_part( 'components/btn', null,
-										// 	array(
-										// 		'label' => 'Edit details',
-										// 		'href' => "/",
-										// 		'target' => "_self",
-										// 		'skin'  => 'highlight',
-										// 		'icon-only'  => true,
-										// 		'disabled'  => false,
-										// 		'icon-position' => '',
-										// 		'icon' => 'pencil-write',
-										// 		'additional-classes' => 'btn--xsmall btn--inline edit_post_btn mg-r-1',
-										// 		'data-attribute' => 'data-open-modal=\'edit-post--details-sizes\'',
-										// 		'theme' => "",
-										// 	)
-										// ); ?>
-									</li>
-								<?php endif; ?>
-								<?php if($post_bedrooms): ?>
-									<li class="post-details__bedroom">
-										<span class="post-details__prefix p-xs">BDR</span>
-										<?php echo str_replace(' ', '', $post_bedrooms); ?>
-									</li>
-								<?php endif; ?>
-								<?php if($post_bathrooms): ?>
-								<li class="post-details__bathroom">
-									<span class="post-details__prefix p-xs">BTH</span>
-									<?php echo str_replace(' ', '', $post_bathrooms); ?>
-								</li>
-								<?php endif; ?>
-								<?php if($post_home_size): ?>
-								<li class="post-details__house">
-									<span class="post-details__prefix p-xs">H</span>
-									<?php echo str_replace(' ', '', $post_home_size); ?><span class="post-details__suffix p-xs">m2</span>
-								</li>
-								<?php endif; ?>
-								<?php if($post_outdoor_size): ?>
-								<li class="post-details__land">
-									<span class="post-details__prefix p-xs">L</span>
-									<?php echo str_replace(' ', '', $post_outdoor_size); ?><span class="post-details__suffix p-xs">m2</span>
-								</li>
-								<?php endif; ?>
-							</ul>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
-			</div>
+			 
 			<div class="post-page__section bt-2">
 				<?php if(isset($post_gallery_image_ids_array) ): ?>
 					<div class="profile-content__img glide">
@@ -803,22 +713,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 					<?php if($current_user_id == $author_id): ?>
 						<div class="edit-area hide">
-							<?php
-							//  get_template_part( 'components/btn', null,
-							// 		array(
-							// 			'label' => 'Edit images',
-							// 			'href' => "/",
-							// 			'target' => "_self",
-							// 			'skin'  => 'highlight',
-							// 			'icon-only'  => false,
-							// 			'disabled'  => false,
-							// 			'icon-position' => 'left',
-							// 			'icon' => 'pencil-write',
-							// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-							// 			'data-attribute' => 'data-open-modal=\'edit-post--images\'',
-							// 			'theme' => "",
-							// 		)
-							// 	); ?>
+							 
 						</div>
 					<?php endif; ?>
 				<?php endif; ?>
@@ -827,28 +722,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div class="post-page__section bt-2">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
-					<?php
-					//  get_template_part( 'components/btn', null,
-					// 		array(
-					// 			'label' => 'Edit events',
-					// 			'href' => "/",
-					// 			'target' => "_self",
-					// 			'skin'  => 'highlight',
-					// 			'icon-only'  => false,
-					// 			'disabled'  => false,
-					// 			'icon-position' => 'left',
-					// 			'icon' => 'pencil-write',
-					// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 			'data-attribute' => 'data-open-modal=\'edit-post--events\'',
-					// 			'theme' => "",
-					// 		)
-					// 	); ?>
+					 
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
 				<div class="event event--tour">
 					<div class="event__frame">
-						<a class="event__frame__link" href="/?">Schedule my tour</a>
+						<a class="event__frame__link" href="/?">Apply now</a>
 					</div>
 				</div>
 
@@ -870,21 +750,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
 					<?php
-					// get_template_part( 'components/btn', null,
-					// 	array(
-					// 		'label' => 'Edit tags',
-					// 		'href' => "/",
-					// 		'target' => "_self",
-					// 		'skin'  => 'highlight',
-					// 		'icon-only'  => false,
-					// 		'disabled'  => false,
-					// 		'icon-position' => 'left',
-					// 		'icon' => 'pencil-write',
-					// 		'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 		'data-attribute' => 'data-open-modal=\'edit-post--tags\'',
-					// 		'theme' => "",
-					// 	)
-					// ); ?>
+				  ?>
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
@@ -915,22 +781,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div class="post-page__section bt-2">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
-					<?php
-					// get_template_part( 'components/btn', null,
-					// 		array(
-					// 			'label' => 'Edit description',
-					// 			'href' => "/",
-					// 			'target' => "_self",
-					// 			'skin'  => 'highlight',
-					// 			'icon-only'  => false,
-					// 			'disabled'  => false,
-					// 			'icon-position' => 'left',
-					// 			'icon' => 'pencil-write',
-					// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 			'data-attribute' => 'data-open-modal=\'edit-post--description\'',
-					// 			'theme' => "",
-					// 		)
-					// 	); ?>
+					 
+					 
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
@@ -981,21 +833,11 @@ document.addEventListener("DOMContentLoaded", function () {
 						<?php endif; ?>
 
 						<?php if($author_website_link && $post_add_my_website_link && in_array("add_website_link", $author_connections_settings)): ?>
-<!--							<li class="contact__list__item">-->
-<!--								<a href="--><?php //echo esc_url($author_website_link); ?><!--" target="_blank">-->
-<!--									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>-->
-<!--									Website-->
-<!--								</a>-->
-<!--							</li>-->
+ 						 
 						<?php endif; ?>
 
 						<?php if($author_online_shop_link && in_array("add_online_shop_link", $author_connections_settings)): ?>
-<!--							<li class="contact__list__item">-->
-<!--								<a href="--><?php //echo $author_online_shop_link; ?><!--" target="_blank">-->
-<!--									<svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.52 491.52" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M491.52,419.84V0H0v419.84h153.6v51.2h-40.96v20.48h266.24v-20.48h-40.96v-51.2H491.52z M20.48,20.48h450.56v317.44H20.48 V20.48z M317.44,471.04H174.08v-51.2h143.36V471.04z M20.48,399.36V358.4h450.56v40.96H20.48z"></path> </g> </g> <g> <g> <path d="M386.67,128.24l-23.88-66.8h-53.555H288.43H256h-20.48h-32.43h-20.805H128.73l-23.88,66.8 c-4.605,12.9-2.715,26.74,5.2,37.96c3.427,4.869,7.843,8.833,12.83,11.842V296.96h245.76V178.042 c4.987-3.01,9.402-6.973,12.83-11.842C389.385,154.98,391.275,141.14,386.67,128.24z M348.36,81.92l14.639,40.96h-42.779 L312.9,81.92H348.36z M256,81.92h36.091l7.323,40.96H256V81.92z M302.506,143.36c-0.225,4.526-1.904,8.841-4.951,12.48 c-4.255,5.08-10.565,8-17.315,8h-1.94c-11.892,0-21.556-9.099-22.181-20.48H302.506z M199.429,81.92h36.091v40.96h-43.414 L199.429,81.92z M235.401,143.36c-0.626,11.381-10.289,20.48-22.181,20.48h-1.94c-6.75,0-13.06-2.92-17.315-8 c-3.047-3.639-4.726-7.954-4.951-12.48H235.401z M143.16,81.92h35.46l-7.319,40.96h-42.783L143.16,81.92z M126.79,154.41 c-2.357-3.349-3.53-7.161-3.738-11.05h44.589l-0.456,2.55c-1.86,10.39-11.1,17.93-21.975,17.93 C137.725,163.84,131.015,160.4,126.79,154.41z M348.16,276.48h-204.8v-92.271c0.619,0.026,1.228,0.111,1.85,0.111 c13.2,0,25.123-5.917,33.022-15.373c0.009,0.011,0.014,0.022,0.023,0.033c8.16,9.75,20.195,15.34,33.025,15.34h1.94 c13.094,0,24.687-5.945,32.54-15.093c7.853,9.148,19.446,15.093,32.54,15.093h1.94c12.83,0,24.865-5.59,33.025-15.34 c0.009-0.011,0.014-0.022,0.022-0.033c7.899,9.456,19.823,15.373,33.023,15.373c0.622,0,1.231-0.085,1.85-0.111V276.48z M364.73,154.41c-4.225,5.99-10.935,9.43-18.42,9.43c-10.875,0-20.115-7.54-21.975-17.93l-0.456-2.55h44.588 C368.261,147.249,367.088,151.061,364.73,154.41z"></path> </g> </g> </g></svg>-->
-<!--									Online shop-->
-<!--								</a>-->
-<!--							</li>-->
+ 							 
 						<?php endif; ?>
 
 						<?php if($post_home_event_privacy): ?>
@@ -1037,61 +879,54 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
 					<?php
-					// get_template_part( 'components/btn', null,
-					// 		array(
-					// 			'label' => 'Edit home features',
-					// 			'href' => "/",
-					// 			'target' => "_self",
-					// 			'skin'  => 'highlight',
-					// 			'icon-only'  => false,
-					// 			'disabled'  => false,
-					// 			'icon-position' => 'left',
-					// 			'icon' => 'pencil-write',
-					// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 			'data-attribute' => 'data-open-modal=\'edit-post--features\'',
-					// 			'theme' => "",
-					// 		)
-					// 	); ?>
+					  ?>
+
+
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
-				<?php if($post_home_year_built): ?>
-					<dl><dt class="-light">Year built:</dt><dd><?php echo($post_home_year_built); ?></dd></dl>
+
+				<?php if($post_job_type): ?>
+					<dl><dt class="-light">Job Type:</dt><dd><?php echo($post_job_type); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_home_amenities): ?>
-					<dl><dt class="-light">Home amenities:</dt><dd><?php echo($post_home_amenities); ?></dd></dl>
+
+				<?php if($post_main_work_location): ?>
+					<dl><dt class="-light">Main work location:</dt><dd><?php echo($post_main_work_location); ?></dd></dl>
+				<?php endif; ?>	 
+				<?php if($post_key_roles): ?>
+					<dl><dt class="-light">Key Roles:</dt><dd><?php echo($post_key_roles); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_neighborhood_amenities): ?>
-					<dl><dt class="-light">Neighborhood amenities:</dt><dd><?php echo($post_neighborhood_amenities); ?></dd></dl>
+				<?php if($post_requirements): ?>
+					<dl><dt class="-light">Requirements:</dt><dd><?php echo($post_requirements); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_transportation): ?>
-					<dl><dt class="-light">Transportation:</dt><dd><?php echo($post_transportation); ?></dd></dl>
+				<?php if($post_preferred_qualifications): ?>
+					<dl><dt class="-light">Preferred Qualifications:</dt><dd><?php echo($post_preferred_qualifications); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_garages_parking): ?>
-					<dl><dt class="-light">Nr of garages/parking:</dt><dd><?php echo($post_garages_parking); ?></dd></dl>
+				<?php if($post_career_growth): ?>
+					<dl><dt class="-light">Career Growth:</dt><dd><?php echo($post_career_growth); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_schools): ?>
-					<dl><dt class="-light">Schools nearby:</dt><dd><?php echo($post_schools); ?></dd></dl>
+				<?php if($post_company_culture): ?>
+					<dl><dt class="-light">Company Culture:</dt><dd><?php echo($post_company_culture); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_home_style_architecture): ?>
-					<dl><dt class="-light">Home style and architecture:</dt><dd><?php echo($post_home_style_architecture); ?></dd></dl>
+				<?php if($post_reporting_structure): ?>
+					<dl><dt class="-light">Reporting Structure:</dt><dd><?php echo($post_reporting_structure); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_additional_features): ?>
-					<dl><dt class="-light">Additional home features:</dt><dd><?php echo($post_additional_features); ?></dd></dl>
+				<?php if($post_work_hours): ?>
+					<dl><dt class="-light">Work Hours:</dt><dd><?php echo($post_work_hours); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_taxes): ?>
-					<dl><dt class="-light">Property taxes:</dt><dd><?php echo($post_taxes); ?></dd></dl>
+				<?php if($post_compensation): ?>
+					<dl><dt class="-light">Compensation:</dt><dd><?php echo($post_compensation); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_fees): ?>
-					<dl><dt class="-light">Other property Fees:</dt><dd><?php echo($post_fees); ?></dd></dl>
+				<?php if($post_benefits): ?>
+					<dl><dt class="-light">Benefits:</dt><dd><?php echo($post_benefits); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_systems): ?>
-					<dl><dt class="-light">Heating / Cooling systems:</dt><dd><?php echo($post_systems); ?></dd></dl>
+				<?php if($post_application_process): ?>
+					<dl><dt class="-light">Application Process:</dt><dd><?php echo($post_application_process); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_energy_rating): ?>
-					<dl><dt class="-light">Energy rating:</dt><dd><?php echo($post_energy_rating); ?></dd></dl>
+				<?php if($post_job_application_deadline): ?>
+					<dl><dt class="-light">Job Application Deadline:</dt><dd><?php echo($post_job_application_deadline); ?></dd></dl>
 				<?php endif; ?>
-				<?php if($post_energy_consumption): ?>
-					<dl><dt class="-light">Energy rating and consumption:</dt><dd><?php echo($post_energy_consumption); ?></dd></dl>
+				<?php if($post_other): ?>
+					<dl><dt class="-light">Other:</dt><dd><?php echo($post_other); ?></dd></dl>
 				<?php endif; ?>
 			</div>
 
@@ -1111,27 +946,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
 					<?php
-//					get_template_part( 'components/btn', null,
-//							array(
-//								'label' => 'Edit location',
-//								'href' => "/",
-//								'target' => "_self",
-//								'skin'  => 'highlight',
-//								'icon-only'  => false,
-//								'disabled'  => false,
-//								'icon-position' => 'left',
-//								'icon' => 'pencil-write',
-//								'additional-classes' => 'btn--small edit_post_btn btn--inline',
-//								'data-attribute' => 'data-open-modal=\'edit-post--location\'',
-//								'theme' => "",
-//							)
-//						); ?>
+			  ?>
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 				<?php
 
 				$posts_args = array(
-					"post_type" => "homes",
+					"post_type" => "jobs",
 					"p" => $post_id,
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
@@ -1154,17 +975,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						"id" => $post_id_,
 						"title" =>  get_field("post_home_title",$post_id_) ? get_field("post_home_title",$post_id_) : get_the_title(), // house type
 						"post_type_slug" => "real-estate",
-						//"permalink" => get_the_permalink($post_id_),
 						"lat" => get_field("post_location_latitude",$post_id_),
 						"lng" => get_field("post_location_longitude",$post_id_),
-						//"account_type" => null,
-						"location" => get_field("post_location_address",$post_id_) ? get_field("post_location_address",$post_id_) . ", " . get_field("post_location_zip",$post_id_) . " " . get_field("post_location_city",$post_id_) : get_field("post_address",$post_id_),
-//						"price" => get_field("post_home_price", $post_id_),
-//						"bedrooms" => get_field("post_home_number_of_bedrooms", $post_id_),
-//						"bathrooms" => get_field("post_home_number_of_bathrooms", $post_id_),
-//						"home_size" => get_field("post_home_size", $post_id_),
-//						"outdoor_size" => get_field("post_home_outdoor_size", $post_id_),
-						//"img" => get_the_post_thumbnail()
+ 						"location" => get_field("post_location_address",$post_id_) ? get_field("post_location_address",$post_id_) . ", " . get_field("post_location_zip",$post_id_) . " " . get_field("post_location_city",$post_id_) : get_field("post_address",$post_id_),
+ 
 					];
 					array_push($post_content_for_map, $post_for_map);
 				endwhile;
@@ -1173,10 +987,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					?>
 
-				<!-- <div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
-				<div class="map map--single anim_els">
-					<div id="map"></div>
-				</div> -->
+			 
 				<div class="post-page__section post-page__section--footer mt-2 ">
 					<p class="post-footer__publish-date p-xs">
 						<?php echo get_time_ago(get_post_timestamp()); ?>
@@ -1197,13 +1008,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 		<div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list">
 			<?php
-				get_template_part("components/card-homazed-homes", null, array(
+				get_template_part("components/card-homazed-jobs", null, array(
 					"id" => $post_id,
 					"title" => $post_title,
 					"user_id" => $author_id,
 					'type' => null, // null or compact
-					'home_category' => $post_home_category_translate,
-					'home_type' => $post_home_action_translate,
+					'home_type' => $post_home_sector_activity,
 					'post_creator_link' => get_permalink("602")."?user_id=".$author_id,
 					'post_creator_name' => $author_first_name."&nbsp;".$author_last_name,
 					'first_name' => $author_first_name,
@@ -1219,11 +1029,10 @@ document.addEventListener("DOMContentLoaded", function () {
 					'address_name' => "post_address",
 					'address_link' => null,
 					'content' => $post_main_content_excerpt,
-					'price' => $post_price,
-					'bedrooms' => $post_bedrooms,
-					'bathrooms' => $post_bathrooms,
-					'house' => $post_home_size,
-					'land' => $post_outdoor_size,
+					
+					"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
+					"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+
 					'tags' => $post_post_tags,
 					"events_type" => $post_events_type,
 					"events_text_1" => $post_events_text_1,
@@ -1238,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
 				<div id="map">
-					<?php get_template_part( 'components/map-popup', null ); ?>
+					<?php get_template_part( 'components/map-popup-jobs', null ); ?>
 				</div>
 
 			</div>
@@ -1582,6 +1391,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	</div>
 
 </main>
+<?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id="5186"]' ); ?>
+<?php
 
+
+?>
 <?php get_footer(); ?>
 
