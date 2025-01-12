@@ -387,6 +387,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             </ul>
         </div>
 
+        <?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id='.$args["id"].']' ); ?>
         <?php //todo_augustin gestion component share et profile ?>
         <?php ?>
         <?php get_template_part("components/more_profil_setting_modal", null, array(

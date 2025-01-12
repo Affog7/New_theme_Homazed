@@ -1,15 +1,19 @@
-<div id="map-popup" class="default-bckg map-slate">
+<div id="map-popup-jobs" class="other_popup-type default-bckg map-slate">
     <a href="#" class="map-slate--link flex">
         <div class="map-slate__image">
             <!-- <img src="" alt=""> -->
         </div>
         <div class="map-slate__content">
             <div class="post-details card__header__item flex flex--justify-between">
-                <h2 class="h4 title">JOBS</h2>
+                <h2 class="h4 category">JOBS</h2>
             </div>
-            <div class="post-location card__header__item flex flex--justify-between">Address</div>
+            <div class="post-profile card__header__item flex flex--justify-between">Address</div>
             <div class="post-details card__header__item flex flex--justify-between">
-                 
+                <ul class="post-details__caracteristics flex flex--vertical-center">
+                        <li class="post-details_jobs_title">
+                            <span class="value">X</span>
+                        </li>
+                </ul>       
             </div>
         </div>
 

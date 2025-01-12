@@ -454,12 +454,12 @@ $show = $post_id == $post_id_presenece;
 				</div>
 			</div>
 
-			<!--  -->
+			<!-- feaatures -->
 			<div class="form-step" id="step3" style="display:none; height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
 						
-						<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="28" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
 					</main>		
 				</div>
@@ -475,7 +475,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="8" data-step="3"',
+										 'data-attribute' => 'id="submit_" data-form_id="28" data-step="3"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -1047,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
 				<div id="map">
-					<?php get_template_part( 'components/map-popup-jobs', null ); ?>
+					<?php get_template_part( 'components/map-popup-jobs', null ); ?> 
 				</div>
 
 			</div>
@@ -1389,9 +1389,9 @@ document.addEventListener("DOMContentLoaded", function () {
 			</div>
 		</div>
 	</div>
-
+	<?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id='.$post_id.']' ); ?>
 </main>
-<?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id="5186"]' ); ?>
+
 <?php
 
 

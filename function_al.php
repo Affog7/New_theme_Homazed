@@ -149,8 +149,7 @@ function enqueue_profile_name_validation_script() {
             var messageContainer = document.createElement('div');
             messageContainer.style.marginTop = '10px';
             messageContainer.style.fontSize = '12px';
-
-            if(profileInput) profileInput.parentNode.appendChild(messageContainer);
+            profileInput.parentNode.appendChild(messageContainer);
 
             // Fonction pour valider le profil name
             function validateProfileName(profileName) {
@@ -183,27 +182,24 @@ function enqueue_profile_name_validation_script() {
                 }
             }
 
-            if(profileInput) {
-                    // Vérification initiale si le champ contient déjà une valeur
-                if (profileInput.value.length > 0) {
-                    validateProfileName(profileInput.value);
-                }
-
-                // Observer les changements dynamiques
-                var lastValue = profileInput.value;
-                setInterval(function () {
-                    if (profileInput.value !== lastValue) {
-                        lastValue = profileInput.value;
-                        validateProfileName(lastValue);
-                    }
-                }, 500); // Vérification toutes les 500 ms
-
-                // Ajouter un écouteur pour les modifications manuelles
-                profileInput.addEventListener('input', function () {
-                    validateProfileName(profileInput.value);
-                });
+            // Vérification initiale si le champ contient déjà une valeur
+            if (profileInput.value.length > 0) {
+                validateProfileName(profileInput.value);
             }
-            
+
+            // Observer les changements dynamiques
+            var lastValue = profileInput.value;
+            setInterval(function () {
+                if (profileInput.value !== lastValue) {
+                    lastValue = profileInput.value;
+                    validateProfileName(lastValue);
+                }
+            }, 500); // Vérification toutes les 500 ms
+
+            // Ajouter un écouteur pour les modifications manuelles
+            profileInput.addEventListener('input', function () {
+                validateProfileName(profileInput.value);
+            });
         });
     </script>
     <?php
@@ -275,3 +271,5 @@ function validate_matching_fields_before_submit() {
     <?php
 }
 */
+
+include get_template_directory() . '/function_comment.php';

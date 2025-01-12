@@ -32,7 +32,7 @@ if ($post_id != -1) {
 	// Cas : Charger tous les posts de l'utilisateur
 	$query = new WP_Query([
 		'post_author' => "$user_id",
-		'post_type' => 'homes',
+		'post_type' => ['homes','jobs'],
 		'posts_per_page' => -1,
 	]);
 	$user_posts = $query->posts;
@@ -102,6 +102,7 @@ function load_post_data($post_id) {
 	$post_bedrooms = get_field("post_home_number_of_bedrooms", $post_id);
 	$post_bathrooms = get_field("post_home_number_of_bathrooms", $post_id);
 	$post_premium = get_field("post_premium", $post_id);
+	$type_post = get_post_type($post_id);
 	$is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $post_id);
 	$post_home_event_type = get_field("post_home_event_type", $post_id);
 	$events_text_1 = get_field("post_home_event_text_1", $post_id);
@@ -114,11 +115,17 @@ function load_post_data($post_id) {
 		'category' => $post_home_category_translate,
 		'avatar' => $post_avatar_picture,
 		'location' => $post_location,
+		
+		// jobs post
+ 		"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+		//------
+
 		'price' => $post_price,
 		'post_premium_duration' => is_array($post_premium_duration) ? $post_premium_duration[0] : $post_premium_duration,
 		'bedrooms' => $post_bedrooms,
 		'bathrooms' => $post_bathrooms,
 		'premium' => $post_premium,
+		'type_post' => $type_post,
 		'renewal' => $is_reniew_post_premium,
 		'event_type' => $post_home_event_type,
 		'event_text_1' => $events_text_1,
@@ -137,132 +144,10 @@ function load_post_data($post_id) {
 		<div class="container container--default">
 <span id="status_notif_"></span>
 				<?php if (!empty($data)) : ?>
-				<?php foreach ($data as $post_data) : ?>
- 
-						<div class="card-form"  style="border: 2px solid #7e7c804d">
-					<div class="post-container">
-					<div class="post-header">
-						<h1>HOME</h1>
-						<div class="options">
-							<button id="" class="premium-toggle premium-button">Premium</button>
-							<button id="" style="display : <?php  echo (($post_data['event_type']  != "None")  ?  "block" :  "none") ; ?>" class="event-toggle event-button">Event</button>
-						</div>
-					</div>
-
-
-							<div class="row">
-								<div>
-									<strong><?php echo esc_html($post_data['category'])."   "; ?></strong>
-									<?php echo esc_html($post_data['action']); ?>
-								</div>
-								<div>
-									<a href="<?php echo esc_url(get_permalink($post_data['id'])); ?>">
-										<i>Go to Post Creation ></i>
-									</a>
-								</div>
-							</div>
-							<hr>
-
-							<!-- Premium Info -->
-					<div class="premium-info">
-						<div class="premium-header">
-
-							<img
-								class="premium-image"
-								src="<?php echo esc_url($post_data['avatar']); ?>"
-								alt="Main Picture"
-							/>
-
-							<div class="premium-details" style="display: ">
-								<p>Premium duration: <span style="font-weight: 800;"><b><?php echo($post_data['post_premium_duration']); ?></b></span></p>
-								<p>Premium from: <span  style="font-weight: 800;"><b>28 AUG 2025</b></span></p>
-								<p>Remaining time: <span  style="font-weight: 800;"><b>12 days 13 hours</b></span></p>
-							</div>
-
-						</div>
-						<hr />
-						<div class="premium-options">
-							<label class="custom-checkbox">
-								<input type="checkbox" class="premium_renewal" data-null="" data-id="<?php echo  $post_data['id'] ; ?>"  name="post_Is_Automatic_Renewal" value="Automatic Renewal" <?php echo $post_data['renewal'] ? "checked" : ""; ?> />
-								<span class="checkmark"></span> <b>Premium Post - Automatic Renewal</b>
-							</label>
-						</div>
-						<hr />
-						<div class="premium-footer"  style="display: none">
-							<a class="see-stats" href="#">See statistics</a>
-							<div class="statistics-container" style="display: none;" >
-								<h3>Statistics</h3>
-								<div id="view-count">
-									<p><strong>Number of views on this post:</strong> <span>0</span></p>
-								</div>
-								<div id="event-info-stats">
-									<p><strong>Event Stats:</strong></p>
-									<ul>
-										<li>Event Start Date: <span id="event-start-date"></span></li>
-										<li>Event End Date: <span id="event-end-date"></span></li>
-										<li>Number of people attended: <span id="event-attendees">0</span></li>
-									</ul>
-								</div>
-								<div id="follow-us-stats">
-									<p><strong>Follow Us Clicks:</strong> <span>0</span></p>
-								</div>
-							</div>
-						</div>
-					</div>
-							<!-- End Premium Info -->
-
-							
-					<!-- Event Info -->
-					<div id="" class="event-info info-section" style="display: none;">
-
-						<div class="premium-header">
-							<img
-								class="premium-image"
-								src="<?php echo esc_url($post_data['avatar']); ?>"
-								alt="Main Picture"
-							/>
-							<div class="premium-details" style="display: ">
-								<p>Event Type : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_type']); ?></b></span></p>
-								<p>Title 1 : <span  style="font-weight: 800;"><b><?php echo esc_html($post_data['event_text_1']); ?></b></span></p>
-								<p>Title 2 : <span ><b><?php echo esc_html($post_data['event_text_2']); ?></b></span></p>
-							</div>
-						</div>
-
-						<hr>
-						<div class="premium-options">
-							<label class="custom-checkbox">
-								<input type="checkbox" name="post_home_event_type" class="premium_renewal"  data-null="None"  data-id="<?php echo  $post_data['id'] ; ?>" value="<?php echo ($post_data['event_type']); ?>" <?php echo ($post_data['event_type']  != "None")  ? "checked" : ""; ?>>
-								<span class="checkmark"></span> <b>Active Event</b>
-							</label>
-						</div>
-
-						<hr>
-						<div class="row">
-							<div>
-
-							</div>
-						</div>
-
-
-						<div class="premium-footer" style="display: none">
-							<a class="see-stats" href="#">See statistics</a>
-							<!-- Statistics (hidden by default) -->
-							<div class="statistics-container" style="display: none; margin-top: 20px; border-top: 2px solid #ccc; padding-top: 20px;">
-								<h3>Statistics</h3>
-								<div id="view-count">
-									<p><strong>Number of views on this event:</strong> <span id="post-views">0</span></p>
-								</div>
-								<div id="follow-us-stats">
-									<p><strong>Event Clicks:</strong> <span id="follow-us-clicks">0</span></p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-				</div>
-				</div>		<?php endforeach; ?>
+				<?php foreach ($data as $post_data) : 
+ 					get_template_part("components/manage-slate-".$post_data['type_post'], null, $post_data);	
+				?>
+				<?php endforeach; ?>
 				<?php else : ?>
 					<p>No posts found for the current user.</p>
 				<?php endif; ?>

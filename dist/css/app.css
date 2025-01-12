@@ -4830,7 +4830,7 @@ a.quicklinks--item:hover {
   position: relative;
 }
 
-#map-popup {
+#map-popup, .other_popup-type {
   position: absolute;
   bottom: 0.9rem;
   left: 0.9rem;

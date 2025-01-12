@@ -10,6 +10,9 @@ const MapLaunch = (data) => {
 			this.element = el;
 			this.map = data.querySelector("#map");
 			this.popup = data.querySelector("#map-popup");
+
+		 
+
 			this.fitBounds = this.element.getAttribute('data-fit-bounds');
 			this.page = this.element.getAttribute('data-page');
 			this.leaflet_map = null;
@@ -45,8 +48,20 @@ const MapLaunch = (data) => {
 		// follow_click = () => {
 		// }
 
-
 		init = () => {
+
+			//fermer par défaut
+			document.querySelectorAll(".other_popup-type").forEach((element) => {
+				  
+				this.tl.set(element, {
+					autoAlpha: 0,
+					opacity: 0,
+					y: 100
+				});
+			  });
+			  
+
+
 			// Create the map
 			this.buildingsData = this.element.getAttribute('data-buildings');
 
@@ -144,7 +159,6 @@ const MapLaunch = (data) => {
 			this.mutation_observer.observe(element, {
 				attributes: true
 			});
-
 			
 		}
 
@@ -242,11 +256,21 @@ const MapLaunch = (data) => {
 			}
 
 			// If a hidden popup exists, show it
-			if(this.popup) {
+			 
 				this.changePopupContent(event)
 				this.displayPopup();
-			}
+			 
+
+			 
+
+
 		}
+
+
+
+
+
+
 
 		initPopup = () => {
 			// Initially hide the popup
@@ -268,21 +292,27 @@ const MapLaunch = (data) => {
           if (!response.ok) {
             throw new Error("Erreur lors de la récupération des détails du post");
           }
-          // Get all the fields
-          let link = this.popup.querySelector(".map-slate--link");
-          let title = this.popup.querySelector(".title");
-          // let price = this.popup.querySelector(".post-details__price .value");
-          let address = this.popup.querySelector(".post-location");
-          let bedroom = this.popup.querySelector(".post-details__bedroom .value");
-          let bathroom = this.popup.querySelector(".post-details__bathroom .value");
-          let house = this.popup.querySelector(".post-details__house .value");
-          let land = this.popup.querySelector(".post-details__land .value");
+
+		  // json todo_augustin api map
+          const postData = await response.json();
+
+ //----// init les popup
+ 				
+				if(postData.post_type == "homes" ) {
+					
+					this.popup = data.querySelector("#map-popup");		
+				} else {
+					this.popup = data.querySelector("#map-popup-"+postData.post_type);
+				}		   
+				if(this.popup) this.displayPopup();
+// fin
+
           let image = this.popup.querySelector("img");
           // Change the values of the fields
           // linkTag.href = event.target.markerData.permalink;
 
-          // json todo_augustin api map
-          const postData = await response.json();
+          
+
 
           this.popup.classList.remove("users");
           this.popup.classList.remove("real-estate");
@@ -317,6 +347,7 @@ const MapLaunch = (data) => {
               });
             });
           }
+
           imageContainer.innerHTML = postData.templates.images_temp;
 
 
@@ -328,22 +359,19 @@ const MapLaunch = (data) => {
             let currentIndex = 0;
 
             function updateSlider() {
-
-            // Déplacer le wrapper vers l'image actuelle
-            sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-
-          }
+				// Déplacer le wrapper vers l'image actuelle
+				sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+          	}
 
             function showNextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateSlider();
-          }
+				currentIndex = (currentIndex + 1) % slides.length;
+				updateSlider();
+			}
 
             function showPrevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            updateSlider();
-          }
+				currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+				updateSlider();
+			}
 
           if(nextButton && prevButton) {
             // Ajouter des événements aux boutons
@@ -361,40 +389,88 @@ const MapLaunch = (data) => {
 
 
 
-
-
             // Initialiser le slider
             updateSlider();
 
 
 
-          // todo_augustin remplissage map info
-          link.href = postData.post_permalink;//event.target.markerData.permalink;
-          //image.src = ;//event.target.markerData.img;
-          title.innerHTML = "<span style='color: #0b7439;text-transform: uppercase;'>"+postData.home_category+"</span>  "+postData.home_type ;//event.target.markerData.title;
-          // price.innerHTML = ;//event.target.markerData.price;
-          address.innerHTML = postData.price;//event.target.markerData.price;
-		  
-		  this.popup.querySelector(".post-details__bedroom").style.display = (postData.bedrooms ==  0) ? 'none' : 'block';
-		  bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
-         
-		  this.popup.querySelector(".post-details__bathroom").style.display = (postData.bathrooms ==  0) ? 'none' : 'block';
-		  
-		  bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
-         
-		  house.innerHTML = postData.home_size;//event.target.markerData.home_size;
 
-		  this.popup.querySelector(".post-details__land").style.display = (postData.outdoor_size ==  0) ? 'none' : 'block';
-		  land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
+		// homes
+		if(postData.post_type === "homes" ) {
+			// Get all the fields
+			let link = this.popup.querySelector(".map-slate--link");
+			
+			
+			let title = this.popup.querySelector(".title");
+
+			let address = this.popup.querySelector(".post-location");
+
+			let bedroom = this.popup.querySelector(".post-details__bedroom .value");
+			let bathroom = this.popup.querySelector(".post-details__bathroom .value");
+			let house = this.popup.querySelector(".post-details__house .value");
+			let land = this.popup.querySelector(".post-details__land .value");
+
+
+			// todo_augustin remplissage map info
+			link.href = postData.post_permalink;//event.target.markerData.permalink;
+			//image.src = ;//event.target.markerData.img;
+			title.innerHTML = "<span style='color: #0b7439;text-transform: uppercase;'>"+postData.home_category+"</span>  "+postData.home_type ;//event.target.markerData.title;
+			// price.innerHTML = ;//event.target.markerData.price;
+			address.innerHTML = postData.price;//event.target.markerData.price;
+			
+			this.popup.querySelector(".post-details__bedroom").style.display = (postData.bedrooms ==  0) ? 'none' : 'block';
+			bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
+		   
+			this.popup.querySelector(".post-details__bathroom").style.display = (postData.bathrooms ==  0) ? 'none' : 'block';
+			
+			bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
+		   
+			house.innerHTML = postData.home_size;//event.target.markerData.home_size;
+  
+			this.popup.querySelector(".post-details__land").style.display = (postData.outdoor_size ==  0) ? 'none' : 'block';
+			land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
+
+			} else if(postData.post_type == "jobs" ) {
+				let category = this.popup.querySelector(".category");
+				category.innerHTML = "JOBS";
+
+				let postProfile = this.popup.querySelector(".post-profile");
+				postProfile.innerHTML = postData.profile_name;
+
+				let postDetailsJobsTitle = this.popup.querySelector(".post-details_jobs_title .value");
+
+				postDetailsJobsTitle.innerHTML = postData.post_home_Jobs_title;
+			}
+
         
 		}
-        ,
-        400
+        , 400
       )
       ;
 
       this.displayPopup();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     displayPopup = () => {
 

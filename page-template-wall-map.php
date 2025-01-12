@@ -20,7 +20,7 @@
 			);
 
 			$posts_args = array(
-				"post_type" => "homes",
+				"post_type" => ["homes"],
 				//"post_status" => "publish",
 				"posts_per_page" => -1,
 				"orderby" => "date",
@@ -38,7 +38,7 @@
 					'include' => $users_with_tag
 				);
 				$posts_args = array(
-					"post_type" => "homes",
+					"post_type" => ["homes"],
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
 					"orderby" => "date",
@@ -192,33 +192,44 @@
 						 $video_ =  get_field("post_home_video", $post_id);
 							 $post = [
 							 "id" => $post_id,
-							 "title" => get_the_title(),
-							 "content" => get_the_excerpt(),
-							 "post_type" => "Homes",
-							 "post_type_slug" => "real-estate",
-							 "post_status" => $post_status,
-							 "main_picture" => $main_picture_image_ids_array,
-							 "card_gallery" => $gallery_image_ids_array,
-							 "video_" => $video_,
-							 "card_gallery_display" => get_field("post_home_pictures_display"),
-							 "home_type" => $post_home_action_translate,
-							 "home_category" => $post_home_category_translate,
-							 "first_name" => $first_name,
-							 "last_name" => $last_name,
-							 "user_id" => get_the_author_meta('ID'),
-							 "work_position" => get_field("user_current_work_position", "user_".get_the_author_meta('ID')),
-							 "price" => $post_price,
-							 "bedrooms" => $post_bedrooms,
-							 "bathrooms" => $post_bathrooms,
-							 "home_size" => $post_home_size,
-							 "outdoor_size" => $post_outdoor_size,
-							 "tags" => $post_init_terms,
-							 "events_type" => get_field("post_home_event_type"),
-							 "events_text_1" => get_field("post_home_event_text_1"),
-							 "events_text_2" => get_field("post_home_event_text_2"),
-							 "events_privacy" => get_field("post_home_event_privacy"),
-							 "location" => get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city"),
-							 "publish_date" => get_post_timestamp()
+							"title" => get_the_title(),
+							"content" => get_the_excerpt(),
+							"post_type" => get_post_type($post_id),
+							"post_status" => $post_status,
+							"post_type_slug" => "real-estate",
+							"main_picture" => $main_picture_image_ids_array,
+							"card_gallery" => $gallery_image_ids_array,
+							"video_" => $video_,
+							"card_gallery_display" => get_field("post_home_pictures_display"),
+														
+							"first_name" => ucfirst($first_name),
+							"last_name" => ucfirst($last_name),
+							"user_id" => get_the_author_meta('ID'),
+							"work_position" => get_field("user_current_work_position", "user_".get_the_author_meta('ID')),
+							"title_post" => get_field("post_home_title"),
+							
+							// homes post
+							"home_type" => $post_home_action_translate,
+							"price" => get_field("post_home_price"),
+							"home_category" => $post_home_category_translate,
+							"bedrooms" => get_field("post_home_number_of_bedrooms"),
+							"bathrooms" => get_field("post_home_number_of_bathrooms"),
+							"home_size" => get_field("post_home_size"),
+							"outdoor_size" => get_field("post_home_outdoor_size"),
+							//------
+
+							// // jobs post
+							// "post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
+							// "post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+							// //------
+
+							"tags" => $post_init_terms,
+							"events_type" => get_field("post_home_event_type"),
+							"events_text_1" => get_field("post_home_event_text_1"),
+							"events_text_2" => get_field("post_home_event_text_2"),
+							"events_privacy" => get_field("post_home_event_privacy"),
+							"location" => get_field("post_location_address") ? get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city") : get_field("post_address"),
+							"publish_date" => get_post_timestamp()
 						 ];
 
 						 array_push($wall_content_for_map, $post_for_map);
@@ -240,22 +251,38 @@
 						<div id="map"></div>
 					</div>
 					<?php get_template_part( 'components/map-popup', null ); ?>
-				</div>
+ 				</div>
 				<div class="right-slates grid-col-7 hide--mobile">
 					<?php
 						foreach($wall_content as $content) :
 							if($content["post_type_slug"] === "real-estate") :
-								get_template_part("components/card-homazed-homes", null, array(
+								get_template_part("components/card-homazed-".$content['post_type'], null, array(
 									"id" => $content["id"],
 									"title" => $content["title"],
-									"user_id" => $content["user_id"],
-									"post_status" => $content["post_status"],
 									"video_" => $content["video_"],
+									"post_status" => $content["post_status"],
+									"title_post" => $content["title_post"],
+									"user_id" => $content["user_id"],
 									'type' => null, // null or compact
-									'home_category' => $content["home_category"],
+									'content' => $content["content"],
+			
+									//homes post						
 									'home_type' => $content["home_type"],
+									'home_category' => $content["home_category"],						
+									'price' => $content["price"],
+									'bedrooms' => $content["bedrooms"],
+									'bathrooms' => $content["bathrooms"],
+									'house' => $content["home_size"],
+									'land' => $content["outdoor_size"],
+									//-----
+			
+									// //jobs post
+									// "post_home_sector_activity" =>  $content["post_home_sector_activity"],
+									// "post_home_Jobs_title" =>  $content["post_home_Jobs_title"],
+			
+			
 									'post_creator_link' => get_permalink("602")."?user_id=".$content["user_id"],
-									'post_creator_name' => $content["first_name"]." ".$content["last_name"],
+									'post_creator_name' => $content["first_name"]."&nbsp;".$content["last_name"],
 									'first_name' => $content["first_name"],
 									'last_name' => $content["last_name"],
 									'work_position' => $content["work_position"],
@@ -266,13 +293,7 @@
 									'post_type' => $content["post_type"],
 									'post_type_slug' => $content["post_type_slug"],
 									'address_name' => $content["location"],
-									'address_link' => null,
-									'price' => $content["price"],
-									'content' => $content["content"],
-									'bedrooms' => $content["bedrooms"],
-									'bathrooms' => $content["bathrooms"],
-									'house' => $content["home_size"],
-									'land' => $content["outdoor_size"],
+									'address_link' => null,						
 									'tags' => $content["tags"],
 									"events_type" => $content["events_type"],
 									"events_text_1" => $content["events_text_1"],

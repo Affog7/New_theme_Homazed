@@ -262,6 +262,7 @@
 						'publish_date' => get_time_ago($content["publish_date"])
 					));
 
+					
 				endif;
 			endforeach;
 			?>
