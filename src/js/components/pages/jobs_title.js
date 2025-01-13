@@ -48,8 +48,15 @@ class JobTitle {
         if (!tagExists) {
             const tag = document.createElement("div");
             tag.className = "tag";
-            tag.innerHTML = `${tagText} <span class="remove-tag" onclick="this.parentElement.remove(); this.updateHiddenTags();">x</span>`;
+            tag.innerHTML = `${tagText} <span class="remove-tag">x</span>`;
             this.tagsContainer.appendChild(tag);
+
+            // Attacher un événement pour supprimer le tag et mettre à jour les tags cachés
+            tag.querySelector(".remove-tag").addEventListener("click", () => {
+                tag.remove();
+                this.updateHiddenTags();
+            });
+
             this.input.value = '';
             this.closeDropdown();
             this.updateHiddenTags(); // Mettre à jour les tags dans le champ caché

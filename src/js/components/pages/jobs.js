@@ -9,7 +9,6 @@ const Jobs_Init = (data) => {
     document.addEventListener('DOMContentLoaded', function () {
         if (window.jQuery) {
 
-
             // activity
           jQuery(document).on('gform_page_loaded', function (event, form_id, current_page) {
             const dropdowns = document.querySelectorAll(".dropdown-group-jobs");    
@@ -18,7 +17,12 @@ const Jobs_Init = (data) => {
               }
           });
 
-
+          //edit job
+          const dropdownsJ = document.querySelectorAll(".dropdown-group-jobs");    
+            if (dropdownsJ.length) {
+                [...dropdownsJ].map((dropdownJ) => new JobActivity(dropdownJ));
+              }
+              
           // title
           jQuery(document).on('gform_page_loaded', function (event, form_id, current_page) {
             const dropdowns = document.querySelectorAll(".dropdown-group-jobs-title");    
@@ -27,13 +31,13 @@ const Jobs_Init = (data) => {
               }
           }); 
 
-
+          // edit job
+            const dropdowns = document.querySelectorAll(".dropdown-group-jobs-title");    
+            if (dropdowns.length) {
+                [...dropdowns].map((ele) => new JobTitle(ele));
+              }
           // Jobs keys
           
-
-         
-           
-      
         
         }
       });

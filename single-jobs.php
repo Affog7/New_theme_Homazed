@@ -337,7 +337,7 @@ $show = $post_id == $post_id_presenece;
 	<div class=" popup-content">
 		<div class="body-popup">
 			<div class="popup-header">
-				<h2>Home Post</h2>
+				<h2>Job Post</h2>
 				<div class="popup-controls">
 					<?php
 					// Récupérer le statut actuel du post
