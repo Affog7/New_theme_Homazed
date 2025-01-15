@@ -167,14 +167,14 @@ add_action('admin_init', function () {
     // Garder les commentaires pour les articles mais pas pour les autres types de contenu
     foreach (get_post_types() as $post_type) {
         if ($post_type !== 'post' && post_type_supports($post_type, 'comments')) {
-            remove_post_type_support($post_type, 'comments');
-            remove_post_type_support($post_type, 'trackbacks');
+            //remove_post_type_support($post_type, 'comments');
+            //remove_post_type_support($post_type, 'trackbacks');
         }
     }
 });
 
 // Restaurer les commentaires sur le front-end
-add_filter('comments_open', function ($open, $post_id) {
+/*add_filter('comments_open', function ($open, $post_id) {
     $post = get_post($post_id);
 
     // Autoriser les commentaires uniquement pour les articles
@@ -182,10 +182,10 @@ add_filter('comments_open', function ($open, $post_id) {
         return true;
     }
     return $open;
-}, 20, 2);
+}, 20, 2);*/
 
 // Ne pas masquer les commentaires existants
-remove_filter('comments_array', '__return_empty_array', 10);
+/*remove_filter('comments_array', '__return_empty_array', 10);
 
 // Rétablir les commentaires dans le menu
 add_action('admin_menu', function () {
@@ -198,7 +198,7 @@ add_action('admin_menu', function () {
         'dashicons-admin-comments',
         25
     );
-});
+});*/
 
 // Rétablir l'icône des commentaires dans la barre d'administration
 add_action('init', function () {

@@ -1580,7 +1580,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			</div>
 		</div>
 	</div>
-	<?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id='.$post_id.']' ); ?>
+	
+	
 </main>
 
 <?php get_footer(); ?>
