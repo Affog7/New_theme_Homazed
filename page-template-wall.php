@@ -2,8 +2,8 @@
 /**
 * Template Name: Wall
 *
-* by hellomarcel.be
-* -> hello@marcel-pirnay.be
+* by oasiscrea.com
+* 
 */
 ?>
 
@@ -19,7 +19,7 @@
 			// 	'orderby' => 'display_name'
 			// );
 			$posts_args = array(
-				"post_type" => ["homes","jobs"],
+				"post_type" => ["homes","jobs","projects"],
 				//"post_status" => "publish",
 				"posts_per_page" => -1,
 				"orderby" => "date",
@@ -37,7 +37,7 @@
 					// 	'include' => $users_with_tag
 					// );
 					$posts_args = array(
-						"post_type" => ["homes","jobs"],
+						"post_type" => ["homes","jobs","projects"],
 						//"post_status" => "publish",
 						"posts_per_page" => -1,
 						"orderby" => "date",
@@ -193,6 +193,14 @@
 							"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
 							//------
 
+							// projects post
+							"post_projects-status" => get_field("post_projects-status",$post_id),
+							"post_projects-category" => get_field("post_projects-category",$post_id),
+							"post_projects-year" => get_field("post_projects-year",$post_id),
+							//------
+
+							
+
 							"tags" => $post_init_terms,
 							"events_type" => get_field("post_home_event_type"),
 							"events_text_1" => get_field("post_home_event_text_1"),
@@ -238,6 +246,12 @@
 						//jobs post
 						"post_home_sector_activity" =>  $content["post_home_sector_activity"],
 						"post_home_Jobs_title" =>  $content["post_home_Jobs_title"],
+						
+						
+						//project post
+						"post_projects-category" =>  $content["post_projects-category"],
+						"post_projects-year" =>  $content["post_projects-year"],
+						"post_projects-status" =>  $content["post_projects-status"],
 
 
 						'post_creator_link' => get_permalink("602")."?user_id=".$content["user_id"],

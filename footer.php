@@ -102,7 +102,7 @@
 							<div class="flex flex--vertical">
 								<?php get_template_part( 'components/btn', null,
 										array(
-										'label' => 'Publish Jobs',
+										'label' => 'Publish Job',
 										'href' => "/",
 										'target' => "_self",
 										'skin'  => 'transparent',
@@ -112,6 +112,23 @@
 										'icon' => 'add-square',
 										'additional-classes' => '',
 										'data-attribute' => 'data-open-modal=\'publish-jobs\'',
+										'theme' => "",
+										)
+								); ?>
+							</div>
+							<div class="flex flex--vertical">
+								<?php get_template_part( 'components/btn', null,
+										array(
+										'label' => 'Publish Project',
+										'href' => "/",
+										'target' => "_self",
+										'skin'  => 'transparent',
+										'icon-only'  => false,
+										'disabled'  => false,
+										'icon-position' => 'right', // left or right
+										'icon' => 'add-square',
+										'additional-classes' => '',
+										'data-attribute' => 'data-open-modal=\'publish-projects\'',
 										'theme' => "",
 										)
 								); ?>
@@ -162,7 +179,7 @@
 			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-jobs-title">
 				<header class="modal__header">
 					<div class="flex flex--vertical">
-						<h2 class="modal__title h2" id="publish-jobs-title">Share your JOBS post</h2>
+						<h2 class="modal__title h2" id="publish-jobs-title">Share your JOB post</h2>
 					</div>
 					<?php get_template_part("components/btn", null, array( 'label' => 'Close this modal window', 'href' => "", 'target' => "_self", 'skin'  => 'transparent', 'icon-only'  => true, 'disabled'  => false, 'icon-position' => 'right', 'icon' => 'close', 'additional-classes' => '', 'data-attribute' => 'data-close-modal', 'theme' => "", )); ?>
 				</header>
@@ -173,12 +190,8 @@
 					 * todo_augustin type de compte
 					 * */
 					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
-					// var_dump($account_type);
-//					   if($account_type && $account_type["value"] == "individual_user" ) {
-						echo do_shortcode( '[gravityform id="24" ajax="true" title="false"]' );
-//					   } else {
-//						echo do_shortcode( '[gravityform id="16" ajax="true" title="false"]' );
-//					   }
+	 
+						echo do_shortcode( '[gravityform id="24" ajax="true" title="false"]' ); 
 
 
 					?>
@@ -188,7 +201,38 @@
 	</div>
 <!-- Jobs -->
 
+
+<!-- Project -->
+	<div class="modal micromodal-slide modal--publish" id="publish-projects" aria-hidden="true">
+		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-projects-title">
+				<header class="modal__header">
+					<div class="flex flex--vertical">
+						<h2 class="modal__title h2" id="publish-projects-title">Share your Project post</h2>
+					</div>
+					<?php get_template_part("components/btn", null, array( 'label' => 'Close this modal window', 'href' => "", 'target' => "_self", 'skin'  => 'transparent', 'icon-only'  => true, 'disabled'  => false, 'icon-position' => 'right', 'icon' => 'close', 'additional-classes' => '', 'data-attribute' => 'data-close-modal', 'theme' => "", )); ?>
+				</header>
+				<main class="modal__content contact__form contact__form--light" id="publish-projects-content">
+					<?php
+					   $account_type = get_field("user_account_type", "user_".get_current_user_id());
+					/**
+					 * todo_augustin type de compte
+					 * */
+					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
+	 
+						echo do_shortcode( '[gravityform id="30" ajax="true" title="false"]' ); 
+
+
+					?>
+				</main>
+			</div>
+		</div>
 	</div>
+<!-- Project -->
+
+
+
+</div>
 
 
 

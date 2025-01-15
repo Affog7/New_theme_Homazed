@@ -9,9 +9,9 @@ function manage_post_media_shortcode($atts) {
 	);
 
 	$post_id = intval($atts['post_id']);
-	if (!$post_id || get_post_type($post_id) !== 'homes') {
-		return '<p class="error-message">Invalid post or missing ID.</p>';
-	}
+	// if (!$post_id || get_post_type($post_id) !== 'homes') {
+	// 	return '<p class="error-message">Invalid post or missing ID.</p>';
+	// }
 
 	$output = '<div class="manage-post-media"> <h4>File</h4>';
 

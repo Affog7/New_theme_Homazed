@@ -32,7 +32,7 @@ if ($post_id != -1) {
 	// Cas : Charger tous les posts de l'utilisateur
 	$query = new WP_Query([
 		'post_author' => "$user_id",
-		'post_type' => ['homes','jobs'],
+		'post_type' => ['homes','jobs','projects'],
 		'posts_per_page' => -1,
 	]);
 	$user_posts = $query->posts;
@@ -118,6 +118,14 @@ function load_post_data($post_id) {
 		
 		// jobs post
  		"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+		//------
+
+		// projects post
+		"title" => get_the_title($post_id),
+
+		"post_projects-status" => get_field("post_projects-status",$post_id),
+		"post_projects-category" => get_field("post_projects-category",$post_id),
+		"post_projects-year" => get_field("post_projects-year",$post_id),
 		//------
 
 		'price' => $post_price,

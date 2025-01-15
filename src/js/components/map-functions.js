@@ -432,7 +432,7 @@ const MapLaunch = (data) => {
 
 			} else if(postData.post_type == "jobs" ) {
 				let category = this.popup.querySelector(".category");
-				category.innerHTML = "JOBS";
+				category.innerHTML = "JOB";
 
 				let postProfile = this.popup.querySelector(".post-profile");
 				postProfile.innerHTML = postData.profile_name;
@@ -440,7 +440,18 @@ const MapLaunch = (data) => {
 				let postDetailsJobsTitle = this.popup.querySelector(".post-details_jobs_title .value");
 
 				postDetailsJobsTitle.innerHTML = postData.post_home_Jobs_title;
-			}
+			   
+			} else if(postData.post_type == "projects" ) {
+				let category = this.popup.querySelector(".category");
+				category.innerHTML = "PROJECT";
+
+				let postProfile = this.popup.querySelector(".post-profile");
+				postProfile.innerHTML = postData.profile_name;
+
+				let postDetails = this.popup.querySelector(".post-details_project_category .value");
+
+				postDetails.innerHTML = postData.post_projects_category;
+			}  
 
         
 		}

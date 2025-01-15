@@ -171,9 +171,19 @@ function get_post_details_api( $request ) {
 		"title" => get_the_title($post_id),
 		"content" => get_the_excerpt($post_id),
 		"post_type" => get_post_type($post_id),
+
+		// jobs
 		"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
 		"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+
+
 		"profile_name" =>   get_user_meta( get_post_field( 'post_author', $post_id ) , 'profile_name', true ),
+
+		//projects
+		// projects post
+		"post_projects_category" => get_field("post_projects-category",$post_id),
+
+
 		"post_type_slug" => "real-estate",
 		"main_picture" => $main_picture_image_ids_array,
 		"card_gallery" => $post_gallery_image_ids_array,

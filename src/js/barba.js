@@ -18,6 +18,7 @@ import Maps_Init from './components/maps';
 import Tabs_Init from './components/tabs';
 import Carrousel_Init from './components/carrousel';
 import Jobs_Init from './components/pages/jobs';
+import Projects_Init  from './components/pages/project';
 import Tags_Init from './components/tags';
 import Modals_Init from './components/modal';
 import Card_popup_link_Init from './components/card-popup-links';
@@ -85,6 +86,7 @@ barba.init({
 				Modals_Init(next);
 				Cards_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -99,6 +101,7 @@ barba.init({
 				Modals_Init(next);
 				Cards_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -118,6 +121,7 @@ barba.init({
 				Modals_Init(next);
 				Cards_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Maps_Init();
@@ -141,6 +145,7 @@ barba.init({
 			afterEnter: ({ next }) => {
 				ScrollTo(next);
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 			}
         },
@@ -158,6 +163,7 @@ barba.init({
 				Modals_Init(next);
 				Cards_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -173,6 +179,7 @@ barba.init({
 				Modals_Init(next);
 				Cards_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -196,6 +203,7 @@ barba.init({
 				Tooltip_Init(next);
 				Init_Header();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -213,6 +221,7 @@ barba.init({
 				Tooltip_Init(next);
 				Init_Header();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -229,6 +238,7 @@ barba.init({
 				Tabs_Init(next);
 				Carrousel_Init(next);
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -246,6 +256,7 @@ barba.init({
 				Tabs_Init(next);
 				Carrousel_Init(next);
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -270,6 +281,7 @@ barba.init({
 				FileUploadInit();
 				Maps_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);
@@ -285,6 +297,7 @@ barba.init({
 				FileUploadInit();
 				Maps_Init();
 				Jobs_Init(next);
+				Projects_Init(next);
 				Tags_Init();
 				CopyBtn_Init();
 				Tooltip_Init(next);

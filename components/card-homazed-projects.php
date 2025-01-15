@@ -66,7 +66,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
                     
 					<span class="post-type__name post-type__name--<?php echo $args["post_type_slug"]; ?>">
 							<?php switch ($args["post_type"]) {
-                                case "jobs": echo __('JOB', 'homazed'); break;
+                                case "projects": echo __('PROJECT', 'homazed'); break;
                                 case "Services": echo __('Services', 'homazed'); break;
                             } ?>
 					</span>
@@ -79,7 +79,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
         <div class="flex flex--justify-between card__header__item">
             <div class="flex flex--vertical-center owner_by">
 				<span class="post-category post_type">
-					<?php echo $args["post_home_Jobs_title"]; ?> <?php echo $args["post_home_sector_activity"]; ?>
+					<?php echo $args["post_projects-category"]; ?> <?php echo $args["post_projects-status"]; ?>
 				</span>
             </div>
             <?php if($args["address_name"]): ?>

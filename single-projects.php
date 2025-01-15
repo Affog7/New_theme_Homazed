@@ -44,8 +44,11 @@ $post_id = get_the_ID();
 			$post_home_event_privacy = get_field("home_event_privacy", $post_id);
 
 		 
-			$post_home_sector_activity = get_field("post_home_sector_activity",$post_id);
-			$post_home_Jobs_title = get_field("post_home_Jobs_title",$post_id);
+			// projects post
+			$post_projects_status = get_field("post_projects-status",$post_id);
+			$post_projects_category = get_field("post_projects-category",$post_id);
+			$post_projects_year = get_field("post_projects-year",$post_id);
+			//------
 
 			$post_title = get_field("post_home_title") ? get_field("post_home_title") : get_the_title();
 			$post_link = get_the_permalink($post_id);;
@@ -171,8 +174,8 @@ $post_id = get_the_ID();
 					<div class="flex flex--vertical-center">
 						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
 					</div>
-
-					<p style=""><?php echo $post_home_Jobs_title; ?> &nbsp; &nbsp; <?php echo $post_home_sector_activity; ?></p>
+	 
+ 					<p style=""><?php echo $post_projects_category; ?> &nbsp; &nbsp; <?php echo $post_projects_status; ?></p>
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -337,7 +340,7 @@ $show = $post_id == $post_id_presenece;
 	<div class=" popup-content">
 		<div class="body-popup">
 			<div class="popup-header">
-				<h2>Job Post</h2>
+				<h2>Project Post</h2>
 				<div class="popup-controls">
 					<?php
 					// Récupérer le statut actuel du post
@@ -454,12 +457,12 @@ $show = $post_id == $post_id_presenece;
 				</div>
 			</div>
 
-			<!-- feaatures -->
+			<!-- features -->
 			<div class="form-step" id="step3" style="display:none; height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
 						
-						<?php echo do_shortcode( '[gravityform id="28" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="32" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
 					</main>		
 				</div>
@@ -475,7 +478,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="28" data-step="3"',
+										 'data-attribute' => 'id="submit_" data-form_id="32" data-step="3"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -876,9 +879,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 			<div class="post-page__section bt-2 content">
-
-			<dt class="-light">Additional Information :</dt>
-	 
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
 					<?php
@@ -888,49 +888,11 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
-				<?php if($post_job_type): ?>
-					<dl><dt class="-light">Job Type:</dt><dd><?php echo($post_job_type); ?></dd></dl>
+				<?php if($post_projects_year): ?>
+					<dl><dt class="-light">Project year:</dt><dd><?php echo($post_projects_year); ?></dd></dl>
 				<?php endif; ?>
 
-				<?php if($post_main_work_location): ?>
-					<dl><dt class="-light">Main work location:</dt><dd><?php echo($post_main_work_location); ?></dd></dl>
-				<?php endif; ?>	 
-				<?php if($post_key_roles): ?>
-					<dl><dt class="-light">Key Roles:</dt><dd><?php echo($post_key_roles); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_requirements): ?>
-					<dl><dt class="-light">Requirements:</dt><dd><?php echo($post_requirements); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_preferred_qualifications): ?>
-					<dl><dt class="-light">Preferred Qualifications:</dt><dd><?php echo($post_preferred_qualifications); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_career_growth): ?>
-					<dl><dt class="-light">Career Growth:</dt><dd><?php echo($post_career_growth); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_company_culture): ?>
-					<dl><dt class="-light">Company Culture:</dt><dd><?php echo($post_company_culture); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_reporting_structure): ?>
-					<dl><dt class="-light">Reporting Structure:</dt><dd><?php echo($post_reporting_structure); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_work_hours): ?>
-					<dl><dt class="-light">Work Hours:</dt><dd><?php echo($post_work_hours); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_compensation): ?>
-					<dl><dt class="-light">Compensation:</dt><dd><?php echo($post_compensation); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_benefits): ?>
-					<dl><dt class="-light">Benefits:</dt><dd><?php echo($post_benefits); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_application_process): ?>
-					<dl><dt class="-light">Application Process:</dt><dd><?php echo($post_application_process); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_job_application_deadline): ?>
-					<dl><dt class="-light">Job Application Deadline:</dt><dd><?php echo($post_job_application_deadline); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_other): ?>
-					<dl><dt class="-light">Other:</dt><dd><?php echo($post_other); ?></dd></dl>
-				<?php endif; ?>
+				 
 			</div>
 
 			<br>
@@ -955,7 +917,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php
 
 				$posts_args = array(
-					"post_type" => "jobs",
+					"post_type" => "projects",
 					"p" => $post_id,
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
@@ -1011,7 +973,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 		<div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list">
 			<?php
-				get_template_part("components/card-homazed-jobs", null, array(
+				get_template_part("components/card-homazed-projects", null, array(
 					"id" => $post_id,
 					"title" => $post_title,
 					"user_id" => $author_id,
@@ -1033,8 +995,16 @@ document.addEventListener("DOMContentLoaded", function () {
 					'address_link' => null,
 					'content' => $post_main_content_excerpt,
 					
+					//jobs
 					"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
 					"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+
+
+					//projects
+					"post_projects-status" => get_field("post_projects-status",$post_id),
+					"post_projects-category" => get_field("post_projects-category",$post_id),
+					"post_projects-year" => get_field("post_projects-year",$post_id),
+
 
 					'tags' => $post_post_tags,
 					"events_type" => $post_events_type,
@@ -1050,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
 				<div id="map">
-					<?php get_template_part( 'components/map-popup-jobs', null ); ?> 
+					<?php get_template_part( 'components/map-popup-projects', null ); ?> 
 				</div>
 
 			</div>
