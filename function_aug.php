@@ -27,6 +27,16 @@ function limiterLignes($texte, $maxLignes = 12) {
 add_action( 'limiterLignes', 'limiterLignes' );
 
 
+// Fonction get_first_element
+function get_first_element($string) {
+    $array = explode(',', $string);
+    echo trim($array[0]);
+}
+
+//todo_augustin
+add_action( 'get_first_element', 'get_first_element' );
+
+
 
 
 

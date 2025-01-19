@@ -156,22 +156,22 @@ function init_remove_support(){
 /**
  * Personnaliser la gestion des commentaires
  */
-add_action('admin_init', function () {
-    global $pagenow;
+// add_action('admin_init', function () {
+//     global $pagenow;
 
-    // Autoriser l'accès à la page des commentaires
-    if ($pagenow === 'edit-comments.php') {
-        // Ne pas rediriger
-    }
+//     // Autoriser l'accès à la page des commentaires
+//     if ($pagenow === 'edit-comments.php') {
+//         // Ne pas rediriger
+//     }
 
-    // Garder les commentaires pour les articles mais pas pour les autres types de contenu
-    foreach (get_post_types() as $post_type) {
-        if ($post_type !== 'post' && post_type_supports($post_type, 'comments')) {
-            //remove_post_type_support($post_type, 'comments');
-            //remove_post_type_support($post_type, 'trackbacks');
-        }
-    }
-});
+//     // Garder les commentaires pour les articles mais pas pour les autres types de contenu
+//     foreach (get_post_types() as $post_type) {
+//         if ($post_type !== 'post' && post_type_supports($post_type, 'comments')) {
+//             //remove_post_type_support($post_type, 'comments');
+//             //remove_post_type_support($post_type, 'trackbacks');
+//         }
+//     }
+// });
 
 // Restaurer les commentaires sur le front-end
 /*add_filter('comments_open', function ($open, $post_id) {
@@ -201,11 +201,11 @@ add_action('admin_menu', function () {
 });*/
 
 // Rétablir l'icône des commentaires dans la barre d'administration
-add_action('init', function () {
-    if (is_admin_bar_showing()) {
-        add_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
-    }
-});
+// add_action('init', function () {
+//     if (is_admin_bar_showing()) {
+//         add_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
+//     }
+// });
 
 
 /**

@@ -79,7 +79,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
         <div class="flex flex--justify-between card__header__item">
             <div class="flex flex--vertical-center owner_by">
 				<span class="post-category post_type">
-					<?php echo $args["post_home_Jobs_title"]; ?> <?php echo $args["post_home_sector_activity"]; ?>
+					<?php get_first_element($args["post_home_Jobs_title"]); ?> <?php get_first_element($args["post_home_sector_activity"]); ?>
 				</span>
             </div>
             <?php if($args["address_name"]): ?>
@@ -387,7 +387,6 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             </ul>
         </div>
 
-        <?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id='.$args["id"].']' ); ?>
         <?php //todo_augustin gestion component share et profile ?>
         <?php ?>
         <?php get_template_part("components/more_profil_setting_modal", null, array(
@@ -408,5 +407,6 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
         ); ?>
         <?php // end todo_augustin gestion component share et profile ?>
 
+ 
     </button>
 </div>

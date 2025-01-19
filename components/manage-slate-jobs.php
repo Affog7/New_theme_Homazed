@@ -11,7 +11,7 @@
 
         <div class="row">
             <div>
-                <strong><?php echo esc_html($args['post_home_Jobs_title']) ; ?></strong>
+                <strong><?php echo esc_html($args['title']) ; ?></strong>
             </div>
             <div>
                 <a href="<?php echo esc_url(get_permalink($args['id'])); ?>">

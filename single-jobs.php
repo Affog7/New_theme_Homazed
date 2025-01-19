@@ -172,7 +172,7 @@ $post_id = get_the_ID();
 						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
 					</div>
 
-					<p style=""><?php echo $post_home_Jobs_title; ?> &nbsp; &nbsp; <?php echo $post_home_sector_activity; ?></p>
+					<p style=""><?php get_first_element($post_home_Jobs_title); ?> &nbsp; &nbsp; <?php get_first_element($post_home_sector_activity); ?></p>
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -431,7 +431,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Location</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;"> 
-						<?php echo do_shortcode( '[gravityform id="17" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="40" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -446,7 +446,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="17" data-step="2"',
+										 'data-attribute' => 'id="submit_" data-form_id="40" data-step="2"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -489,7 +489,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Connections</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="33" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>     
 				</div>
 				<div>
@@ -504,7 +504,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="22" data-step="4"',
+										 'data-attribute' => 'id="submit_" data-form_id="33" data-step="4"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -517,7 +517,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Event</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="35" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -532,7 +532,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="15" data-step="5"',
+										 'data-attribute' => 'id="submit_" data-form_id="35" data-step="5"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -545,7 +545,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Premium</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="20" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="37" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -560,7 +560,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="20" data-step="6"',
+										 'data-attribute' => 'id="submit_" data-form_id="37" data-step="6"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -823,7 +823,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-						<?php if($author_phone_number && $post_phone_calls_available &&  $author_connections_settings && in_array("phone_calls_available", $author_connections_settings)): ?>
+						<?php 
+				 
+						if(($author_phone_number && $post_phone_calls_available) ||($author_phone_number &&  $author_connections_settings && in_array("phone_calls_available", $author_connections_settings))): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">
 									<svg viewBox="0 0 24 24" height="20" width="20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 8H8.44444C8.2 8 8 8.2 8 8.44444C8 12.6178 11.3822 16 15.5556 16C15.8 16 16 15.8 16 15.5556V14.0044C16 13.76 15.8 13.56 15.5556 13.56C15.0044 13.56 14.4667 13.4711 13.9689 13.3067C13.9244 13.2889 13.8756 13.2844 13.8311 13.2844C13.7156 13.2844 13.6044 13.3289 13.5156 13.4133L12.5378 14.3911C11.28 13.7467 10.2489 12.72 9.60889 11.4622L10.5867 10.4844C10.7111 10.36 10.7467 10.1867 10.6978 10.0311C10.5333 9.53333 10.4444 9 10.4444 8.44444C10.4444 8.2 10.2444 8 10 8ZM9.77333 10.04C9.66667 9.67111 9.6 9.28444 9.57333 8.88889H8.90222C8.94222 9.47556 9.05778 10.04 9.24 10.5733L9.77333 10.04ZM15.1111 14.4311C14.72 14.4044 14.3333 14.3378 13.9556 14.2311L13.4222 14.76C13.96 14.9378 14.5244 15.0533 15.1111 15.0933V14.4311Z" fill="#000000"></path> <path d="M13.2216 9.52112V9.10456H15.3044V11.1874H14.8879V9.81568L12.9376 11.766L12.643 11.4714L14.5933 9.52112H13.2216Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="#000000"></path> </g></svg>
@@ -877,6 +879,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			<div class="post-page__section bt-2 content">
 
+			<b>Jobs Title :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_Jobs_title)) ?></dt>
+			
+			<br> 
+
+			<b>Jobs Sectors :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_sector_activity)) ?></dt>
+			
+
+			<br> 
 			<dt class="-light">Additional Information :</dt>
 	 
 				<?php if($current_user_id == $author_id): ?>
@@ -889,7 +899,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
 				<?php if($post_job_type): ?>
-					<dl><dt class="-light">Job Type:</dt><dd><?php echo($post_job_type); ?></dd></dl>
+					<dl><dt class="-light">Job Type:</dt><dd><?php echo(  $post_job_type); ?></dd></dl>
 				<?php endif; ?>
 
 				<?php if($post_main_work_location): ?>
@@ -1045,6 +1055,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				));
 			?>
 		</div>
+
 		<div class="tab-content default-bckg post-page hide " data-barba-prevent="all" id="tabs-map">
 			<h3 class="map"></h3>
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
@@ -1391,13 +1402,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				</main>
 			</div>
 		</div>
+			
 	</div>
-	<?php echo do_shortcode( '[wpdiscuz_comments   form_id="5186" post_id='.$post_id.']' ); ?>
+
+<?php comments_template(); ?>
+
 </main>
 
-<?php
-
-
-?>
 <?php get_footer(); ?>
 
