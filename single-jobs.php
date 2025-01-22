@@ -686,6 +686,7 @@ document.addEventListener("DOMContentLoaded", function () {
 										'theme' => "",
 									)
 								); ?>
+								
 							<?php endif; ?>
 								<span class="gallery__size flex flex--vertical-center flex--horizontal-center">
 									<b><?php echo count($post_gallery_image_ids_array); ?></b>
@@ -879,11 +880,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			<div class="post-page__section bt-2 content">
 
-			<b>Jobs Title :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_Jobs_title)) ?></dt>
+			<!-- <b>Jobs Title :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_Jobs_title)) ?></dt>
 			
-			<br> 
+			<br>  -->
 
-			<b>Jobs Sectors :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_sector_activity)) ?></dt>
+			<b>Job Sectors :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_sector_activity)) ?></dt>
 			
 
 			<br> 
@@ -1042,7 +1043,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					'address_name' => "post_address",
 					'address_link' => null,
 					'content' => $post_main_content_excerpt,
-					
+					'video_' => $video_,
 					"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
 					"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
 

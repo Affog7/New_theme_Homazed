@@ -133,6 +133,23 @@
 										)
 								); ?>
 							</div>
+							<div class="flex flex--vertical">
+								<?php get_template_part( 'components/btn', null,
+										array(
+										'label' => 'Publish News',
+										'href' => "/",
+										'target' => "_self",
+										'skin'  => 'transparent',
+										'icon-only'  => false,
+										'disabled'  => false,
+										'icon-position' => 'right', // left or right
+										'icon' => 'add-square',
+										'additional-classes' => '',
+										'data-attribute' => 'data-open-modal=\'publish-news\'',
+										'theme' => "",
+										)
+								); ?>
+							</div>
 						</div>
 						<div class="arrow"></div>
 					</div>
@@ -229,6 +246,34 @@
 		</div>
 	</div>
 <!-- Project -->
+
+<!-- News -->
+	<div class="modal micromodal-slide modal--publish" id="publish-news" aria-hidden="true">
+		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-news-title">
+				<header class="modal__header">
+					<div class="flex flex--vertical">
+						<h2 class="modal__title h2" id="publish-news-title">Share your News post</h2>
+					</div>
+					<?php get_template_part("components/btn", null, array( 'label' => 'Close this modal window', 'href' => "", 'target' => "_self", 'skin'  => 'transparent', 'icon-only'  => true, 'disabled'  => false, 'icon-position' => 'right', 'icon' => 'close', 'additional-classes' => '', 'data-attribute' => 'data-close-modal', 'theme' => "", )); ?>
+				</header>
+				<main class="modal__content contact__form contact__form--light" id="publish-news-content">
+					<?php
+					   $account_type = get_field("user_account_type", "user_".get_current_user_id());
+					/**
+					 * todo_augustin type de compte
+					 * */
+					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
+	 
+						echo do_shortcode( '[gravityform id="43" ajax="true" title="false"]' ); 
+
+
+					?>
+				</main>
+			</div>
+		</div>
+	</div>
+<!-- News -->
 
 
 

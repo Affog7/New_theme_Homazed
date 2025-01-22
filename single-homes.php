@@ -1224,6 +1224,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					'bathrooms' => $post_bathrooms,
 					'house' => $post_home_size,
 					'land' => $post_outdoor_size,
+					'video_' => $video_,
 					'tags' => $post_post_tags,
 					"events_type" => $post_events_type,
 					"events_text_1" => $post_events_text_1,

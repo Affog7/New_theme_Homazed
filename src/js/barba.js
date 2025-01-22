@@ -18,6 +18,7 @@ import Maps_Init from './components/maps';
 import Tabs_Init from './components/tabs';
 import Carrousel_Init from './components/carrousel';
 import Jobs_Init from './components/pages/jobs';
+import News_Init from './components/pages/news';
 import Projects_Init  from './components/pages/project';
 import Tags_Init from './components/tags';
 import Modals_Init from './components/modal';
@@ -85,6 +86,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -100,6 +102,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -120,6 +123,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -137,6 +141,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+News_Init();
 				CopyBtn_Init();
 				Maps_Init();
 				Tooltip_Init(next);
@@ -162,6 +167,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -178,6 +184,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				Modals_Init(next);
 				Cards_Init();
+News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -258,6 +265,7 @@ barba.init({
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
+				News_Init();
 				Checkbox_And_Radios_Init();
 
 				// Card_popup_link_Init(next);
@@ -280,6 +288,7 @@ barba.init({
 				ScrollTo(next);
 				FileUploadInit();
 				Maps_Init();
+				News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -296,6 +305,7 @@ barba.init({
 				Checkbox_And_Radios_Init();
 				FileUploadInit();
 				Maps_Init();
+				News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();

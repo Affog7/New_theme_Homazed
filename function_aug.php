@@ -284,4 +284,5 @@ include get_template_directory() . '/function_route.php';
 include get_template_directory() . '/function_file_edit.php';
 include get_template_directory() . '/function_modif_video.php';
 include get_template_directory() . '/function_meta_post.php';
+include get_template_directory() . '/function_news_search.php';
 

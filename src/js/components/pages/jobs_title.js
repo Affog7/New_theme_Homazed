@@ -43,23 +43,25 @@ class JobTitle {
 
     addTag(tagText) {
         const existingTags = this.tagsContainer.querySelectorAll(".tag");
-        const tagExists = Array.from(existingTags).some(tag => tag.textContent.trim() === tagText);
 
-        if (!tagExists) {
+        // Vérifier s'il y a déjà un tag et ne pas permettre l'ajout de plus d'un tag
+        if (existingTags.length === 0) {
             const tag = document.createElement("div");
             tag.className = "tag";
             tag.innerHTML = `${tagText} <span class="remove-tag">x</span>`;
             this.tagsContainer.appendChild(tag);
 
-            // Attacher un événement pour supprimer le tag et mettre à jour les tags cachés
+            // Attacher un événement pour supprimer le tag et réactiver l'entrée
             tag.querySelector(".remove-tag").addEventListener("click", () => {
                 tag.remove();
                 this.updateHiddenTags();
+                this.input.disabled = false; // Réactiver l'entrée
             });
 
             this.input.value = '';
+            this.input.disabled = true; // Désactiver l'entrée après l'ajout d'un tag
             this.closeDropdown();
-            this.updateHiddenTags(); // Mettre à jour les tags dans le champ caché
+            this.updateHiddenTags();
         }
     }
 
@@ -79,15 +81,13 @@ class JobTitle {
     updateHiddenTags() {
         const tags = [];
         this.tagsContainer.querySelectorAll(".tag").forEach(tag => {
-            tags.push(tag.textContent.trim().replace("x", "").trim()); // Nettoyer le "x"
+            tags.push(tag.textContent.trim().replace("x", "").trim());
         });
 
-        // Mettre à jour la valeur du champ caché avec les tags
-        this.hiddenTagsInput.value = tags.join(","); // Les tags seront séparés par des virgules
+        this.hiddenTagsInput.value = tags.join(",");
     }
 
     loadTags() {
-        // Charger les tags depuis le champ caché si présents
         const savedTags = this.hiddenTagsInput.value.split(",").filter(tag => tag.trim() !== "");
         savedTags.forEach(tagText => {
             this.addTag(tagText);
