@@ -1,3 +1,4 @@
+import Modals_Init from "../modal";
 
 const News_Init = () => {
 
@@ -55,6 +56,9 @@ const News_Init = () => {
                   <p><strong>Type de post:</strong> ${post.type}</p>
               `;
               resultsContainer.appendChild(postElement);
+
+              // mettre à jour les modals
+              Modals_Init(resultsContainer)
           });
       }
          

@@ -84,8 +84,8 @@ function get_post_details_api( $request ) {
 
 
 	ob_start();
-	  get_template_part("components/btn", null,
-		array(
+	  get_template_part("components/btn", null, 
+	  array(
 			'label' => '',
 			'href' => "",
 			'target' => "_self",
@@ -98,6 +98,7 @@ function get_post_details_api( $request ) {
 			'data-attribute' => 'data-open-modal=\'share-slate-' .$post_id . '\'' ,
 			'theme' => "",
 		)
+
 	);
 	$bouton_share_template = ob_get_clean();
 
