@@ -3,6 +3,7 @@ import "leaflet.markercluster";
 import gsap from "gsap";
 import Modals_Init from "./modal";
 import {makeRelationBtw} from "../functional/relations";
+import Slider_map_search_init from "./Slider_map_search_Init";
 
 const MapLaunch = (data) => {
 	class Map {
@@ -11,7 +12,7 @@ const MapLaunch = (data) => {
 			this.map = data.querySelector("#map");
 			this.popup = data.querySelector("#map-popup");
 
-		 
+
 
 			this.fitBounds = this.element.getAttribute('data-fit-bounds');
 			this.page = this.element.getAttribute('data-page');
@@ -52,14 +53,14 @@ const MapLaunch = (data) => {
 
 			//fermer par défaut
 			document.querySelectorAll(".other_popup-type").forEach((element) => {
-				  
+
 				this.tl.set(element, {
 					autoAlpha: 0,
 					opacity: 0,
 					y: 100
 				});
 			  });
-			  
+
 
 
 			// Create the map
@@ -70,7 +71,7 @@ const MapLaunch = (data) => {
 				this.map.style.height = (this.wh * 0.6) + "px"; // 60% de la hauteur de la fenêtre
 			}else if(this.page === "single-post"){
 				// La carte prend un peu moins de place
-				
+
 				this.map.style.height = ((this.wh / 1.8) - (this.headerH - 60)) + "px"; // 40% de la fenêtre
 			}else if(this.page === "wall--map" || this.page === "single-post"){
 				// Si la carte est sur une page de type "wall--map", ajuster en fonction du layout
@@ -159,7 +160,7 @@ const MapLaunch = (data) => {
 			this.mutation_observer.observe(element, {
 				attributes: true
 			});
-			
+
 		}
 
 		addMarker = (building) => {
@@ -256,12 +257,12 @@ const MapLaunch = (data) => {
 			}
 
 			// If a hidden popup exists, show it
-			 
+
 				this.changePopupContent(event)
 				this.displayPopup();
-			 
 
-			 
+
+
 
 
 		}
@@ -297,13 +298,13 @@ const MapLaunch = (data) => {
           const postData = await response.json();
 
  //----// init les popup
- 				
+
 				if(postData.post_type == "homes" ) {
-					
-					this.popup = data.querySelector("#map-popup");		
+
+					this.popup = data.querySelector("#map-popup");
 				} else {
 					this.popup = data.querySelector("#map-popup-"+postData.post_type);
-				}		   
+				}
 				if(this.popup) this.displayPopup();
 // fin
 
@@ -311,7 +312,7 @@ const MapLaunch = (data) => {
           // Change the values of the fields
           // linkTag.href = event.target.markerData.permalink;
 
-          
+
 
 
           this.popup.classList.remove("users");
@@ -351,46 +352,7 @@ const MapLaunch = (data) => {
           imageContainer.innerHTML = postData.templates.images_temp;
 
 
-            const sliderWrapper = document.querySelector(".slider-wrapper_a");
-            const slides = document.querySelectorAll(".slider-slide_a");
-            const prevButton = document.querySelector(".slider-control_a.prev");
-            const nextButton = document.querySelector(".slider-control_a.next");
-
-            let currentIndex = 0;
-
-            function updateSlider() {
-				// Déplacer le wrapper vers l'image actuelle
-				sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-          	}
-
-            function showNextSlide() {
-				currentIndex = (currentIndex + 1) % slides.length;
-				updateSlider();
-			}
-
-            function showPrevSlide() {
-				currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-				updateSlider();
-			}
-
-          if(nextButton && prevButton) {
-            // Ajouter des événements aux boutons
-            nextButton.addEventListener("click", (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              showNextSlide()
-            });
-            prevButton.addEventListener("click", (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              showPrevSlide()
-            });
-          }
-
-
-
-            // Initialiser le slider
-            updateSlider();
+          Slider_map_search_init();
 
 
 
@@ -399,8 +361,8 @@ const MapLaunch = (data) => {
 		if(postData.post_type === "homes" ) {
 			// Get all the fields
 			let link = this.popup.querySelector(".map-slate--link");
-			
-			
+
+
 			let title = this.popup.querySelector(".title");
 
 			let address = this.popup.querySelector(".post-location");
@@ -417,16 +379,16 @@ const MapLaunch = (data) => {
 			title.innerHTML = "<span style='color: #0b7439;text-transform: uppercase;'>"+postData.home_category+"</span>  "+postData.home_type ;//event.target.markerData.title;
 			// price.innerHTML = ;//event.target.markerData.price;
 			address.innerHTML = postData.price;//event.target.markerData.price;
-			
+
 			this.popup.querySelector(".post-details__bedroom").style.display = (postData.bedrooms ==  0) ? 'none' : 'block';
 			bedroom.innerHTML = postData.bedrooms;//event.target.markerData.bedrooms;
-		   
+
 			this.popup.querySelector(".post-details__bathroom").style.display = (postData.bathrooms ==  0) ? 'none' : 'block';
-			
+
 			bathroom.innerHTML = postData.bathrooms;//event.target.markerData.bathrooms;
-		   
+
 			house.innerHTML = postData.home_size;//event.target.markerData.home_size;
-  
+
 			this.popup.querySelector(".post-details__land").style.display = (postData.outdoor_size ==  0) ? 'none' : 'block';
 			land.innerHTML = postData.outdoor_size;//event.target.markerData.outdoor_size;
 
@@ -440,7 +402,7 @@ const MapLaunch = (data) => {
 				let postDetailsJobsTitle = this.popup.querySelector(".post-details_jobs_title .value");
 
 				postDetailsJobsTitle.innerHTML = postData.post_home_Jobs_title;
-			   
+
 			} else if(postData.post_type == "projects" ) {
 				let category = this.popup.querySelector(".category");
 				category.innerHTML = "PROJECT";
@@ -451,9 +413,9 @@ const MapLaunch = (data) => {
 				let postDetails = this.popup.querySelector(".post-details_project_category .value");
 
 				postDetails.innerHTML = postData.post_projects_category;
-			}  
+			}
 
-        
+
 		}
         , 400
       )

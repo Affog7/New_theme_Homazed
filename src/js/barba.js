@@ -152,6 +152,7 @@ News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
+				News_Init();
 			}
         },
 		{
@@ -248,7 +249,7 @@ News_Init();
 				Projects_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
-
+				News_Init();	
 				// Card_popup_link_Init(next);
 				MapLaunch(next.container);
 				Modals_Init(next);

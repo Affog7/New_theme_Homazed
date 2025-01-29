@@ -21,10 +21,6 @@ const Projects_Init = (data) => {
             if (dropdownsJ.length) {
                 [...dropdownsJ].map((dropdownJ) => new ProjectsCategory(dropdownJ));
               }
-              
-         
-    
-          
         
         }
       });

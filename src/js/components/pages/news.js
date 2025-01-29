@@ -1,70 +1,25 @@
-import Modals_Init from "../modal";
+import News_V1 from "./news_v1";
+import Slider_map_search_init from "../Slider_map_search_Init";
 
 const News_Init = () => {
 
-             
-         
 
-            let searchTimeout;
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.jQuery) {
 
-          document.querySelector('#searchInputNews').addEventListener('input', function() {
-              clearTimeout(searchTimeout); // Efface le délai précédent
-  
-              const query = this.value;
-  
-              // Ne lance la recherche que si l'utilisateur a tapé au moins 3 caractères
-              if (query.length >= 3) {
-                  searchTimeout = setTimeout(() => {
-                      fetchTemplates(query);
-                  }, 300); // Délai de 300 ms pour éviter trop de requêtes
-              } else {
-                  document.querySelector('#results_news_selectors').innerHTML = '';
+            //
+          jQuery(document).on('gform_page_loaded', function (event, form_id, current_page) {
+            const s_inps = document.querySelectorAll(".searchInputNews_v1");
+            if (s_inps.length) {
+                [...s_inps].map((s_inp) => new News_V1(s_inp));
               }
           });
-          
-   
- 
-      
-        function fetchTemplates(query) {
-          const apiUrl = `/wp-json/custom/v1/posts?search=${encodeURIComponent(query)}`;
 
-          fetch(apiUrl)
-              .then(response => {
-                  if (!response.ok) {
-                      throw new Error('Aucun post trouvé.');
-                  }
-                  return response.json();
-              })
-              .then(data => {
-                  displayResults(data);
-              })
-              .catch(error => {
-                  document.querySelector('#results_news_selectors').innerHTML = `<p>${error.message}</p>`;
-              });
-      }
 
-      function displayResults(posts) {
-          const resultsContainer = document.querySelector('#results_news_selectors');
-          resultsContainer.innerHTML = ''; // Vider les résultats précédents
+        }
+      });
 
-          posts.forEach(post => {
-              const postElement = document.createElement('div');
-              postElement.classList.add('post-template');
-              postElement.innerHTML = `
-                  <h2>${post.title}</h2>
-                  <div>${post.content}</div>
-                  <p><strong>Type de post:</strong> ${post.type}</p>
-              `;
-              resultsContainer.appendChild(postElement);
-
-              // mettre à jour les modals
-              Modals_Init(resultsContainer)
-          });
-      }
-         
-   
 
   };
-  
+
   export default News_Init;
-  
