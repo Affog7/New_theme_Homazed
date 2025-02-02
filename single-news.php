@@ -44,8 +44,9 @@ $post_id = get_the_ID();
 			$post_home_event_privacy = get_field("home_event_privacy", $post_id);
 
 
-			$post_home_sector_activity = get_field("post_home_sector_activity",$post_id);
-			$post_home_Jobs_title = get_field("post_home_Jobs_title",$post_id);
+			//$post_home_sector_activity = get_field("post_home_sector_activity",$post_id);
+			//$post_home_Jobs_title = get_field("post_home_Jobs_title",$post_id);
+			$post_w_linked = get_field("post_w_linked",$post_id);
 
 			$post_title = get_field("post_home_title") ? get_field("post_home_title") : get_the_title();
 			$post_link = get_the_permalink($post_id);;
@@ -172,7 +173,8 @@ $post_id = get_the_ID();
 						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
 					</div>
 
-					<p style=""><?php get_first_element($post_home_Jobs_title); ?> &nbsp; &nbsp; <?php get_first_element($post_home_sector_activity); ?></p>
+					<?php // Todo gerer les posts liés $post_w_linked  ?>
+<!--					<p style="">--><?php //get_first_element($post_home_Jobs_title); ?><!-- &nbsp; &nbsp; --><?php //get_first_element($post_home_sector_activity); ?><!--</p>-->
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -880,11 +882,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			<div class="post-page__section bt-2 content">
 
-			<!-- <b>Jobs Title :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_Jobs_title)) ?></dt>
+			<!-- <b>Jobs Title :</b><dt class="-light"> <?php //echo (str_replace(",", ", ", $post_home_Jobs_title)) ?></dt>
 
 			<br>  -->
 
-			<b>Job Sectors :</b><dt class="-light"> <?php echo (str_replace(",", ", ", $post_home_sector_activity)) ?></dt>
+			<b>Job Sectors :</b><dt class="-light"> <?php //echo (str_replace(",", ", ", $post_home_sector_activity)) ?></dt>
 
 
 			<br>
@@ -966,7 +968,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php
 
 				$posts_args = array(
-					"post_type" => "jobs",
+					"post_type" => "news",
 					"p" => $post_id,
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
@@ -1022,7 +1024,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 		<div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list">
 			<?php
-				get_template_part("components/card-homazed-jobs", null, array(
+				get_template_part("components/card-homazed-news", null, array(
 					"id" => $post_id,
 					"title" => $post_title,
 					"user_id" => $author_id,
@@ -1044,8 +1046,10 @@ document.addEventListener("DOMContentLoaded", function () {
 					'address_link' => null,
 					'content' => $post_main_content_excerpt,
 					'video_' => $video_,
-					"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
-					"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
+
+					"post_w_linked" => $post_w_linked ,
+					//"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
+					//"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
 
 					'tags' => $post_post_tags,
 					"events_type" => $post_events_type,
@@ -1056,50 +1060,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				));
 
 
-			// ajouter les news
-			$linked_posts = get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
-
-			if (!empty($linked_posts)) {
-
-				foreach ($linked_posts as $post) {
-					$author_id_ = get_post_field('post_author', $post["ID"]);
-
-					get_template_part("components/card-homazed-news", null, array(
-						"id" => $post["ID"],
-						"title" => $post["title"],
-						"content" => get_the_excerpt($post["ID"]),
-						"post_type" => get_post_type($post["ID"]),
-						"card_gallery" => get_field("post_home_gallery_ids", $post["ID"]),
-						"video_" =>  get_field("post_home_video", $post["ID"]),
-						"card_gallery_display" => get_field("post_home_pictures_display", $post["ID"]),
-
-						"first_name"=> get_field("user_first_name", "user_".$author_id_),
-						"last_name" =>get_field("user_last_name", "user_".$author_id_),
-
-						"user_id" => $author_id_,
-						"work_position" => get_field("user_current_work_position", "user_".$author_id_),
-						"title_post" => get_field("post_home_title",$post["ID"]),
-						"post_type_slug" => "real-estate",
-						"img" => explode(',', get_field("post_home_gallery_ids", $post["ID"])),
-
-
-						// news post
-						"post_w_linked" => get_field("post_w_linked",$post["ID"]),
-						//------
-
-						"tags" => get_the_terms($post["ID"], 'posttags'),
-						"events_type" => get_field("post_home_event_type",$post["ID"]),
-						"events_text_1" => get_field("post_home_event_text_1",$post["ID"]),
-						"events_text_2" => get_field("post_home_event_text_2",$post["ID"]),
-						"events_privacy" => get_field("post_home_event_privacy",$post["ID"]),
-						"location" => get_field("post_location_address",$post["ID"]) ? get_field("post_location_address",$post["ID"]) . ", " . get_field("post_location_zip",$post["ID"]) . " " . get_field("post_location_city",$post["ID"]) : get_field("post_address",$post["ID"]),
-						"publish_date" => get_post_timestamp($post)
-					));
-				}
-
-			}
-
-			// fin
 			?>
 		</div>
 
@@ -1108,7 +1068,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
 				<div id="map">
-					<?php get_template_part( 'components/map-popup-jobs', null ); ?>
+					<?php get_template_part( 'components/map-popup-news', null ); ?>
 				</div>
 
 			</div>

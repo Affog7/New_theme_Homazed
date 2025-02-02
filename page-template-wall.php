@@ -3,7 +3,7 @@
 * Template Name: Wall
 *
 * by oasiscrea.com
-* 
+*
 */
 ?>
 
@@ -19,7 +19,7 @@
 			// 	'orderby' => 'display_name'
 			// );
 			$posts_args = array(
-				"post_type" => ["homes","jobs","projects"],
+				"post_type" => ["homes","jobs","projects","news"],
 				//"post_status" => "publish",
 				"posts_per_page" => -1,
 				"orderby" => "date",
@@ -37,7 +37,7 @@
 					// 	'include' => $users_with_tag
 					// );
 					$posts_args = array(
-						"post_type" => ["homes","jobs","projects"],
+						"post_type" => ["homes","jobs","projects","news"],
 						//"post_status" => "publish",
 						"posts_per_page" => -1,
 						"orderby" => "date",
@@ -171,13 +171,13 @@
 							"card_gallery" => $gallery_image_ids_array,
 							"video_" => $video_,
 							"card_gallery_display" => get_field("post_home_pictures_display"),
-														
+
 							"first_name" => ucfirst($first_name),
 							"last_name" => ucfirst($last_name),
 							"user_id" => get_the_author_meta('ID'),
 							"work_position" => get_field("user_current_work_position", "user_".get_the_author_meta('ID')),
 							"title_post" => get_field("post_home_title"),
-							
+
 							// homes post
 							"home_type" => $post_home_action_translate,
 							"price" => get_field("post_home_price"),
@@ -193,13 +193,17 @@
 							"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
 							//------
 
+							// news post
+							"post_w_linked" => get_field("post_w_linked",$post_id),
+							//------
+
 							// projects post
 							"post_projects-status" => get_field("post_projects-status",$post_id),
 							"post_projects-category" => get_field("post_projects-category",$post_id),
 							"post_projects-year" => get_field("post_projects-year",$post_id),
 							//------
 
-							
+
 
 							"tags" => $post_init_terms,
 							"events_type" => get_field("post_home_event_type"),
@@ -233,9 +237,9 @@
 						'type' => null, // null or compact
 						'content' => $content["content"],
 
-						//homes post						
+						//homes post
 						'home_type' => $content["home_type"],
-						'home_category' => $content["home_category"],						
+						'home_category' => $content["home_category"],
 						'price' => $content["price"],
 						'bedrooms' => $content["bedrooms"],
 						'bathrooms' => $content["bathrooms"],
@@ -246,8 +250,10 @@
 						//jobs post
 						"post_home_sector_activity" =>  $content["post_home_sector_activity"],
 						"post_home_Jobs_title" =>  $content["post_home_Jobs_title"],
-						
-						
+
+						// news post
+						"post_w_linked" => $content["post_w_linked"],
+
 						//project post
 						"post_projects-category" =>  $content["post_projects-category"],
 						"post_projects-year" =>  $content["post_projects-year"],
@@ -266,7 +272,7 @@
 						'post_type' => $content["post_type"],
 						'post_type_slug' => $content["post_type_slug"],
 						'address_name' => $content["location"],
-						'address_link' => null,						
+						'address_link' => null,
 						'tags' => $content["tags"],
 						"events_type" => $content["events_type"],
 						"events_text_1" => $content["events_text_1"],
@@ -275,8 +281,8 @@
 						"location" => $content["location"],
 						'publish_date' => get_time_ago($content["publish_date"])
 					));
-					
-					
+
+
 				endif;
 			endforeach;
 			?>

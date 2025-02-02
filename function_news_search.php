@@ -33,11 +33,11 @@ function get_prepopulated_templates_by_title(WP_REST_Request $request) {
         ob_start();
 
         // Inclure le template approprié en fonction du type de post
-       
+
         get_template_part('components/news/map-popup-'.$post_type,null, array(
             'id' => $post->ID
         ));
-        
+
 
         $template_content = ob_get_clean(); // Récupérer le contenu du buffer
 
@@ -45,7 +45,8 @@ function get_prepopulated_templates_by_title(WP_REST_Request $request) {
         $templates[] = array(
             'title' => get_the_title($post),
             'content' => $template_content,
-            'type' => $post_type
+            'type' => $post_type,
+            'id' => $post->ID,
         );
     }
 

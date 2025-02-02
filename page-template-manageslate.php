@@ -32,21 +32,21 @@ if ($post_id != -1) {
 	// Cas : Charger tous les posts de l'utilisateur
 	$query = new WP_Query([
 		'post_author' => "$user_id",
-		'post_type' => ['homes','jobs','projects'],
+		'post_type' => ['homes','jobs','projects','news'],
 		'posts_per_page' => -1,
 	]);
 	$user_posts = $query->posts;
-	
+
 
 	// Charger les données pour chaque post
 	if (!empty($user_posts)) {
 		foreach ($user_posts as $post) {
-			
+
 			if($post->post_author == $user_id) {
 				$d_ = load_post_data($post->ID);
-				if($d_["premium"]) $data[] = $d_; 
+				if($d_["premium"]) $data[] = $d_;
 			}
-			
+
 		}
 
 	} else {
@@ -115,7 +115,7 @@ function load_post_data($post_id) {
 		'category' => $post_home_category_translate,
 		'avatar' => $post_avatar_picture,
 		'location' => $post_location,
-		
+
 		// jobs post
  		"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
 		//------
@@ -152,8 +152,8 @@ function load_post_data($post_id) {
 		<div class="container container--default">
 <span id="status_notif_"></span>
 				<?php if (!empty($data)) : ?>
-				<?php foreach ($data as $post_data) : 
- 					get_template_part("components/manage-slate-".$post_data['type_post'], null, $post_data);	
+				<?php foreach ($data as $post_data) :
+ 					get_template_part("components/manage-slate-".$post_data['type_post'], null, $post_data);
 				?>
 				<?php endforeach; ?>
 				<?php else : ?>

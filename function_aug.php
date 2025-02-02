@@ -150,7 +150,7 @@ function update_post_status_via_ajax() {
 add_action('wp_ajax_update_post_status', 'update_post_status_via_ajax'); // Pour les utilisateurs connectés
 add_action('wp_ajax_nopriv_update_post_status', 'update_post_status_via_ajax'); // Pour les utilisateurs non connectés (si nécessaire)
 
- 
+
 
 // Fonction pour récupérer la valeur d'une métadonnée spécifique d'une entrée Gravity Forms
 function gf_entry_meta_shortcode($atts) {
@@ -274,6 +274,43 @@ function custom_api_register_routes() {
 add_action('rest_api_init', 'custom_api_register_routes');
 // fin chaché et signalé
 
+
+
+
+
+function register_get_posts_by_post_w_linked() {
+	function get_posts_by_post_w_linked($linked_post_id, $post_type = 'news') {
+		$args = [
+			'post_type'      => $post_type,
+			'posts_per_page' => -1,
+			'meta_query'     => [
+				[
+					'key'     => 'post_w_linked',
+					'value'   => $linked_post_id,
+					'compare' => '='
+				]
+			]
+		];
+
+		$query = new WP_Query($args);
+		$posts = [];
+
+		if ($query->have_posts()) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$posts[] = [
+					'ID'    => get_the_ID(),
+					'title' => get_the_title(),
+					'link'  => get_permalink()
+				];
+			}
+			wp_reset_postdata();
+		}
+
+		return $posts;
+	}
+}
+add_action('init', 'register_get_posts_by_post_w_linked');
 
 
 //

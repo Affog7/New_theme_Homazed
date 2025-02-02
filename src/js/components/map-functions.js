@@ -413,6 +413,16 @@ const MapLaunch = (data) => {
 				let postDetails = this.popup.querySelector(".post-details_project_category .value");
 
 				postDetails.innerHTML = postData.post_projects_category;
+			}else if(postData.post_type == "news" ) {
+				let category = this.popup.querySelector(".category");
+				category.innerHTML = "NEWS";
+
+				let postProfile = this.popup.querySelector(".post-profile");
+				postProfile.innerHTML = postData.profile_name;
+
+				// let postDetails = this.popup.querySelector(".post-details_project_category .value");
+        //
+				// postDetails.innerHTML = postData.post_projects_category;
 			}
 
 

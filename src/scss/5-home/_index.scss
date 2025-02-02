@@ -4,7 +4,7 @@
     scrollbar-width: thin;
 }
 
-.tag-list { 
+.tag-list {
    display: inline-block; /* Aligne les tags horizontalement */
 }
 
@@ -225,7 +225,7 @@
     padding: 10px 50px;
     max-width: 250px;
     width: 40%;
- } 
+ }
 
  .step-list a:hover {
     background: #f0f0f0;
@@ -1001,4 +1001,33 @@ hr {
 #editPostPopup .gform_button {
    background-color: white;
    border: unset;
-} 
+}
+
+// news
+
+.post-template_news {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.post-content_news {
+	flex-grow: 1;
+	margin-right: 10px;
+}
+
+.post-checkbox-label_news {
+	display: flex;
+	align-items: center;
+	gap: 8px; /* Espace entre la checkbox et le texte */
+	cursor: pointer; /* Change le curseur en pointeur */
+}
+
+.post-checkbox_news {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
