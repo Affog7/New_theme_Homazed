@@ -15,6 +15,11 @@ const News_Init = () => {
               }
           });
 
+          // for edit
+          const s_inps = document.querySelectorAll(".searchInputNews_v1");
+          if (s_inps.length) {
+            [...s_inps].map((s_inp) => new News_V1(s_inp));
+          }
 
         }
       });

@@ -28,8 +28,8 @@ import Tooltip_Init from './components/tooltip';
 import CopyBtn_Init from './components/copy-paste';
 import MapLaunch from './components/map-functions';
 
-import Cards_Init from './assets/cards'; 
- 
+import Cards_Init from './assets/cards';
+
 
 // import FilePond from "./components/filepond";
 import FileUploadInit from "./components/dropzone";
@@ -72,7 +72,7 @@ barba.init({
 				animationEnter(next.container);
 			}
 		},
-		
+
 		{
             name: 'home',
             to: {
@@ -151,8 +151,9 @@ News_Init();
 				ScrollTo(next);
 				Jobs_Init(next);
 				Projects_Init(next);
+
 				Tags_Init();
-				News_Init();
+ News_Init();
 			}
         },
 		{
@@ -212,6 +213,7 @@ News_Init();
 				Init_Header();
 				Jobs_Init(next);
 				Projects_Init(next);
+        News_Init();
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -230,6 +232,7 @@ News_Init();
 				Init_Header();
 				Jobs_Init(next);
 				Projects_Init(next);
+        News_Init();
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -249,7 +252,7 @@ News_Init();
 				Projects_Init(next);
 				Tags_Init();
 				Checkbox_And_Radios_Init();
-				News_Init();	
+				News_Init();
 				// Card_popup_link_Init(next);
 				MapLaunch(next.container);
 				Modals_Init(next);

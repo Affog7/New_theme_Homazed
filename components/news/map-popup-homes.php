@@ -5,17 +5,17 @@
          <?php
             $post_id = $args["id"];
             $user_id = $author_id = get_post_field('post_author', $post_id);
-            
-            
+
+
             // Galerie d'images
             $post_gallery_image_ids = get_field("post_home_gallery_ids", $post_id);
-            
+
             $post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
-            
-            
+
+
             if($post_gallery_image_ids_array) {
-            
-              	// URL des images 
+
+              	// URL des images
             $image_urls = [];
             foreach ($post_gallery_image_ids_array as $id) {
                 $image_src = wp_get_attachment_image_src($id, 'thumbnail');
@@ -23,8 +23,13 @@
                 $image_urls[] = $image_src[0];
                 }
             }
-            
-            
+				// Informations additionnelles
+				$post_price = get_field("post_home_price",$post_id);
+				$post_bedrooms = get_field("post_home_number_of_bedrooms",$post_id);
+				$post_bathrooms = get_field("post_home_number_of_bathrooms",$post_id);
+				$post_home_size = get_field("post_home_size",$post_id);
+				$post_outdoor_size = get_field("post_home_outdoor_size",$post_id);
+
             ?>
          <div class="image-slider_a">
             <div class="slider-container_a">
@@ -47,45 +52,45 @@
             }?>
          <!--  F-->
       </div>
-      
+
       <div class="map-slate__content">
          <div class="post-details card__header__item flex flex--justify-between">
             <h2 class="h4 title">Home</h2>
          </div>
-         <div class="post-location card__header__item flex flex--justify-between">Address</div>
+         <div class="post-location card__header__item flex flex--justify-between"><?php echo $post_price." €"; ?></div>
          <div class="post-details card__header__item flex flex--justify-between">
             <ul class="post-details__caracteristics flex flex--vertical-center">
                <li class="post-details__bedroom">
                   <span class="post-details__prefix p-xs">BDR</span>
-                  <span class="value">X</span>
+                  <span class="value"> <?php echo $post_bedrooms; ?> </span>
                </li>
                <li class="post-details__bathroom">
                   <span class="post-details__prefix p-xs">BTH</span>
-                  <span class="value">X</span>
+                  <span class="value"><?php echo $post_bathrooms; ?></span>
                </li>
                <li class="post-details__house">
                   <span class="post-details__prefix p-xs">H</span>
-                  <span class="value">X</span><span class="post-details__suffix p-xs">m2</span>
+                  <span class="value"><?php echo $post_home_size; ?></span><span class="post-details__suffix p-xs">m2</span>
                </li>
                <li class="post-details__land">
                   <span class="post-details__prefix p-xs">L</span>
-                  <span class="value">X</span><span class="post-details__suffix p-xs">m2</span>
+                  <span class="value"><?php echo $post_outdoor_size; ?></span><span class="post-details__suffix p-xs">m2</span>
                </li>
             </ul>
          </div>
       </div>
-      
+
       <div class="sidebar-icons">
          <div class="icon"  >
-             
+
          </div>
          <div class="icon favoriteButon">
-            
+
          </div>
-         <div class="icon shareButon">     
-            
-          
-                 
+         <div class="icon shareButon">
+
+
+
          </div>
       </div>
    </a>

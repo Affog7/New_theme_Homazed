@@ -58,7 +58,12 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 				?>
 				<div class="card__wrapper__title flex">
 
-					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"].";";?></a><?php endif; ?>
+					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
+						<a href="<?php echo $user_link; ?>" class="card__title__owner">
+							<?php
+							echo $args["post_creator_name"].";";
+							?></a>
+					<?php endif; ?>
 					<span class="card__title flex flex--vertical-center">
 						<?php
 							 if($args["post_w_linked"]){

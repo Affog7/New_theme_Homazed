@@ -7,50 +7,52 @@ add_action('rest_api_init', function () {
 });
 
 function get_prepopulated_templates_by_title(WP_REST_Request $request) {
-    $search_query = $request->get_param('search'); // Récupérer le paramètre de recherche
+	$id_post = $request->get_param('id_post'); // Récupérer le paramètre id_post
+	$search_query = $request->get_param('search'); // Récupérer le paramètre de recherche
 
-    // Arguments de la requête pour les posts
-    $args = array(
-        'post_type' => ['homes', 'jobs', 'projects'],
-        's' => $search_query,
-        'posts_per_page' => -1,
-    );
+	// Définition des arguments de la requête
+	$args = array(
+		'post_type'      => ['homes', 'jobs', 'projects'],
+		'posts_per_page' => -1,
+	);
 
-    $posts = get_posts($args);
-    $templates = array();
+	// Vérifier si id_post est fourni
+	if (!empty($id_post)) {
+		$args['p'] = intval($id_post); // Recherche par ID précis
+	} elseif (!empty($search_query)) {
+		$args['s'] = $search_query; // Recherche par titre
+	}
 
-    if (empty($posts)) {
-        return new WP_Error('no_posts_found', 'No posts found for the given title.', array('status' => 404));
-    }
+	$posts = get_posts($args);
+	$templates = array();
 
-    foreach ($posts as $post) {
-        setup_postdata($post);
+	if (empty($posts)) {
+		return new WP_Error('no_posts_found', 'No posts found.', array('status' => 404));
+	}
 
-        // Déterminer le type de post
-        $post_type = get_post_type($post);
+	foreach ($posts as $post) {
+		setup_postdata($post);
 
-        // Buffer le contenu pour capturer le template rendu
-        ob_start();
+		// Déterminer le type de post
+		$post_type = get_post_type($post);
 
-        // Inclure le template approprié en fonction du type de post
+		// Buffer le contenu pour capturer le template rendu
+		ob_start();
+		get_template_part('components/news/map-popup-'.$post_type, null, array(
+			'id' => $post->ID
+		));
+		$template_content = ob_get_clean();
 
-        get_template_part('components/news/map-popup-'.$post_type,null, array(
-            'id' => $post->ID
-        ));
+		// Ajouter les informations du template au tableau
+		$templates[] = array(
+			'title'   => get_the_title($post),
+			'content' => $template_content,
+			'type'    => $post_type,
+			'id'      => $post->ID,
+		);
+	}
 
+	wp_reset_postdata();
 
-        $template_content = ob_get_clean(); // Récupérer le contenu du buffer
-
-        // Ajouter le contenu du template au tableau avec des informations supplémentaires
-        $templates[] = array(
-            'title' => get_the_title($post),
-            'content' => $template_content,
-            'type' => $post_type,
-            'id' => $post->ID,
-        );
-    }
-
-    wp_reset_postdata();
-
-    return $templates;
+	return $templates;
 }

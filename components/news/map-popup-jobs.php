@@ -12,6 +12,13 @@
 
 			$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
 
+			// Récupérer les informations de l'auteur
+
+			$first_name = get_field("user_first_name", "user_" . $user_id);
+			$last_name = get_field("user_last_name", "user_" . $user_id);
+			//
+			$post_home_sector_activity  =  get_field("post_home_sector_activity",$post_id);
+			$post_home_Jobs_title  =  get_field("post_home_Jobs_title",$post_id);
 
 			if($post_gallery_image_ids_array) {
 
@@ -51,11 +58,11 @@
             <div class="post-details card__header__item flex flex--justify-between">
                 <h2 class="h4 category">JOB</h2>
             </div>
-            <div class="post-profile card__header__item flex flex--justify-between">Address</div>
+            <div class="post-profile card__header__item flex flex--justify-between"><?php echo $first_name." ".$last_name; ?></div>
             <div class="post-details card__header__item flex flex--justify-between">
                 <ul class="post-details__caracteristics flex flex--vertical-center">
                         <li class="post-details_jobs_title">
-                            <span class="value">X</span>
+                            <span class="value"><?php echo $post_home_Jobs_title; ?></span>
                         </li>
                 </ul>
             </div>

@@ -7,9 +7,11 @@ class NewsV1 {
     this.resultsContainer = this.el.parentElement.querySelector("#results_news_selectors");
     this.resultsSelected = this.el.parentElement.querySelector("#results_selected");
     this.hiddenInput = this.el.parentElement.parentElement.querySelector(".link_w_post_hidden_173 input");
-    this.selectedPostIds = new Set(this.hiddenInput.value ? this.hiddenInput.value.split(",") : []);
 
-    this.loadSelectedPosts();
+    // Stocke uniquement un seul ID sélectionné (au lieu de Set pour plusieurs)
+    this.selectedPostId = this.hiddenInput.value ? this.hiddenInput.value.trim() : null;
+
+    this.loadSelectedPost();
     this.attachEventListeners();
   }
 
@@ -39,7 +41,7 @@ class NewsV1 {
     const apiUrl = `/wp-json/custom/v1/posts?search=${encodeURIComponent(query)}`;
 
     fetch(apiUrl)
-      .then(response => response.ok ? response.json() : Promise.reject("Aucun post trouvé."))
+      .then(response => response.ok ? response.json() : Promise.reject("No post found."))
       .then(data => {
         this.displayResults(data);
         Slider_map_search_init();
@@ -50,74 +52,105 @@ class NewsV1 {
   }
 
   displayResults(posts) {
-    this.resultsContainer.innerHTML = "";
+    this.resultsContainer.innerHTML = "<br> <h4>Latest Posts</h4> <hr>";
+
     posts.forEach(post => {
       const postElement = document.createElement("div");
       postElement.classList.add("post-template_news");
       postElement.innerHTML = `
-                <div class="post-content_news">
-                    <h2>${post.title}</h2>
-                    <div>${post.content}</div>
-                    <p><strong>Type de post:</strong> ${post.type}</p>
-                </div>
-                <label class="custom-checkbox">
-                    <input type="checkbox" class="premium_renewal" data-id="${post.id}" name="post_Is_Automatic_Renewal" ${this.selectedPostIds.has(post.id.toString()) ? "checked" : ""}>
-                    <span class="checkmark"></span>
-                    <b>Sélectionner ce post</b>
-                </label>
-            `;
+        <div class="post-content_news">
+            <div>${post.content}</div>
+        </div>
+        <label class="custom-checkbox">
+            <input type="checkbox" class="premium_renewal" data-id="${post.id}" name="" ${this.selectedPostId === post.id.toString() ? "checked" : ""}>
+            <span class="checkmark"></span>
+            <b>Select</b>
+        </label>
+      `;
+
       this.resultsContainer.appendChild(postElement);
 
       const checkbox = postElement.querySelector(".premium_renewal");
       checkbox.addEventListener("change", () => {
+
         if (checkbox.checked) {
-          this.selectedPostIds.add(post.id.toString());
-          this.addPostToSelected(post);
+          this.selectPost(post);
         } else {
-          this.selectedPostIds.delete(post.id.toString());
-          this.removePostFromSelected(post.id);
+          this.deselectPost();
         }
-        this.updateHiddenField();
+
       });
     });
 
     Modals_Init(this.resultsContainer);
   }
 
+  selectPost(post) {
+    // Désélectionner l'ancien post si un est déjà sélectionné
+    if (this.selectedPostId) {
+      this.deselectPost();
+    }
+
+    this.selectedPostId = post.id.toString();
+    this.updateHiddenField();
+    this.addPostToSelected(post);
+  }
+
+  deselectPost() {
+    if (!this.selectedPostId) return;
+
+    // Désélectionner l'ancien post
+    const oldCheckbox = this.resultsContainer.querySelector(`.premium_renewal[data-id="${this.selectedPostId}"]`);
+    if (oldCheckbox) {
+      oldCheckbox.checked = false;
+    }
+
+    this.removePostFromSelected(this.selectedPostId);
+    this.selectedPostId = null;
+    this.updateHiddenField();
+  }
+
   addPostToSelected(post) {
-    if (!this.resultsSelected || this.resultsSelected.querySelector(`[data-id="${post.id}"]`)) return;
-    const selectedPostElement = document.createElement("div");
-    selectedPostElement.classList.add("selected-post");
-    selectedPostElement.setAttribute("data-id", post.id);
-    selectedPostElement.innerHTML = `<h3>${post.title}</h3><div>${post.content}</div>`;
-    this.resultsSelected.appendChild(selectedPostElement);
+    this.displayResults([post])
+    if (!this.resultsSelected) return;
+
+    this.resultsSelected.innerHTML = `
+<br>
+<h4>Post Linked</h4>
+      <div class="selected-post" data-id="${post.id}">
+        <div>${post.content}</div>
+      </div>  `;
   }
 
   removePostFromSelected(postId) {
-    const selectedPostElement = this.resultsSelected.querySelector(`[data-id="${postId}"]`);
+    const selectedPostElement = this.resultsSelected.querySelector(`.selected-post[data-id="${postId}"]`);
     if (selectedPostElement) {
       selectedPostElement.remove();
     }
   }
 
   updateHiddenField() {
-    this.hiddenInput.value = Array.from(this.selectedPostIds).join(",");
+    this.hiddenInput.value = this.selectedPostId || "";
   }
 
   restoreHiddenField() {
-    this.hiddenInput.value = Array.from(this.selectedPostIds).join(",");
+    this.hiddenInput.value = this.selectedPostId || "";
   }
 
-  loadSelectedPosts() {
-    const storedIds = this.hiddenInput.value.split(",").filter(id => id.trim() !== "");
-    this.selectedPostIds = new Set(storedIds);
-    storedIds.forEach(id => {
-      fetch(`/wp-json/custom/v1/posts/${id}`)
-        .then(response => response.json())
-        .then(post => this.addPostToSelected(post))
-        .catch(error => console.error(`Erreur lors du chargement du post ${id}:`, error));
-    });
+  loadSelectedPost() {
+    if (!this.selectedPostId) return;
+
+    fetch(`/wp-json/custom/v1/posts?id_post=${encodeURIComponent(this.selectedPostId)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(post => this.addPostToSelected(post[0]))
+      .catch(error => console.error(`Error ${this.selectedPostId}:`, error));
   }
+
 }
 
 export default NewsV1;

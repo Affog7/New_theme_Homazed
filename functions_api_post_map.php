@@ -84,7 +84,7 @@ function get_post_details_api( $request ) {
 
 
 	ob_start();
-	  get_template_part("components/btn", null, 
+	  get_template_part("components/btn", null,
 	  array(
 			'label' => '',
 			'href' => "",
@@ -178,7 +178,7 @@ function get_post_details_api( $request ) {
 		"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
 
 
-		"profile_name" =>   get_user_meta( get_post_field( 'post_author', $post_id ) , 'profile_name', true ),
+		//"profile_name" =>   get_user_meta( get_post_field( 'post_author', $post_id ) , 'profile_name', true ),
 
 		//projects
 		// projects post
@@ -193,6 +193,7 @@ function get_post_details_api( $request ) {
 		"home_category" => $post_home_category_translate,
 		"first_name" => $first_name,
 		"last_name" => $last_name,
+		"profile_name" => $first_name." ".$last_name,
 		"user_id" => $user_id,
 		"work_position" => get_field("user_current_work_position", "user_" . $user_id),
 		"price" => $fmt->formatCurrency($post_price, "EUR")."\n",

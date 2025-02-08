@@ -13,6 +13,10 @@
 			$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
 
 
+			$first_name = get_field("user_first_name", "user_" . $user_id);
+			$last_name = get_field("user_last_name", "user_" . $user_id);
+			$post_projects_category  =  get_field("post_projects-category",$post_id);
+
 			if($post_gallery_image_ids_array) {
 
 				// URL des images
@@ -23,6 +27,7 @@
 						$image_urls[] = $image_src[0];
 					}
 				}
+
 
 
 				?>
@@ -51,11 +56,11 @@
             <div class="post-details card__header__item flex flex--justify-between">
                 <h2 class="h4 category">PROJECT</h2>
             </div>
-            <div class="post-profile card__header__item flex flex--justify-between">Address</div>
+			<div class="post-profile card__header__item flex flex--justify-between"><?php echo $first_name." ".$last_name; ?></div>
             <div class="post-details card__header__item flex flex--justify-between">
                 <ul class="post-details__caracteristics flex flex--vertical-center">
                         <li class="post-details_project_category">
-                            <span class="value">X</span>
+                            <span class="value"> <?php echo $post_projects_category; ?> </span>
                         </li>
                 </ul>
             </div>

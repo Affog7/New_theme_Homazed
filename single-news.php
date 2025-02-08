@@ -27,6 +27,7 @@ $post_id = get_the_ID();
 			$author_email_address = $author_data->user_email;
 
 			$author_website_link = get_field("user_website_link", "user_".$author_id);
+			$post_link_parsed = get_field("post_link_parsed", "user_".$author_id);
 
 			// checkbox  todo_augustin
 			$post_comment_available = get_field("post_comment_available", $post_id);
@@ -170,11 +171,18 @@ $post_id = get_the_ID();
 
 				<div class="resume__data">
 					<div class="flex flex--vertical-center">
-						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
+						<h2 class="resume__name card-form__title">
+							<?php echo $author_first_name."&nbsp;".$author_last_name;
+						if($post_w_linked){
+								echo "<a href=".get_permalink(intval($post_w_linked))."> ; ".get_the_title(intval($post_w_linked))." </a>";
+							}?></h2>
 					</div>
 
 					<?php // Todo gerer les posts liés $post_w_linked  ?>
-<!--					<p style="">--><?php //get_first_element($post_home_Jobs_title); ?><!-- &nbsp; &nbsp; --><?php //get_first_element($post_home_sector_activity); ?><!--</p>-->
+ 					<p style=""> <?php
+
+
+						?>   </p>
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -339,7 +347,7 @@ $show = $post_id == $post_id_presenece;
 	<div class=" popup-content">
 		<div class="body-popup">
 			<div class="popup-header">
-				<h2>Job Post</h2>
+				<h2>News Post</h2>
 				<div class="popup-controls">
 					<?php
 					// Récupérer le statut actuel du post
@@ -410,9 +418,9 @@ $show = $post_id == $post_id_presenece;
 				<main class="modal__content contact__form contact__form--light" >
 					<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
 					; ?>
-<hr>
 
-					<?php	echo do_shortcode('[main_picture_manager   post_id="' . $post_id . '"]');
+
+					<?php	//echo do_shortcode('[main_picture_manager   post_id="' . $post_id . '"]');
 					; ?>
 <hr>
 					<?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
@@ -433,7 +441,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Location</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="40" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="48" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -448,7 +456,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="40" data-step="2"',
+										 'data-attribute' => 'id="submit_" data-form_id="48" data-step="2"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -461,7 +469,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
 
-						<?php echo do_shortcode( '[gravityform id="28" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="47" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
 					</main>
 				</div>
@@ -477,7 +485,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="28" data-step="3"',
+										 'data-attribute' => 'id="submit_" data-form_id="47" data-step="3"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -491,7 +499,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Connections</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="33" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="49" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -506,7 +514,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="33" data-step="4"',
+										 'data-attribute' => 'id="submit_" data-form_id="49" data-step="4"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -519,7 +527,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Event</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="35" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="46" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -534,7 +542,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="35" data-step="5"',
+										 'data-attribute' => 'id="submit_" data-form_id="46" data-step="5"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -630,7 +638,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- fin todo_augustin -->
 		<div class="tab-content default-bckg post-page <?php if(isset($post_gallery_image_ids_array) && count($post_gallery_image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" data-barba-prevent="all" id="tabs-home">
 
-			<div class="post-page__section bt-2">
+			<div class="post-page__section ">
 				<?php if(isset($post_gallery_image_ids_array) ): ?>
 					<div class="profile-content__img glide">
 						<div class="post-page__section floating-bar flex flex--vertical-center">
@@ -798,6 +806,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		<dl>
 
 			<dt class="-light">Contact Information :</dt>
+			<dt class="-light">  <?php
+
+echo do_shortcode('[visual-link-preview type="external" url="'.$post_link_parsed.'"  ]');
+				?> </dt>
+
 			<br>
 
 			<dd>
