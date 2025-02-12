@@ -61,20 +61,7 @@ const News_Init = () => {
         }
       });
 
-  function showFields() {
-    // Liste des IDs des éléments à afficher
-    let fields = ['field_43_54', 'field_43_1', 'field_43_139'];
 
-    // Boucle pour afficher chaque élément
-    fields.forEach(id => {
-      let element = document.getElementById(id);
-      if (element) {
-        element.style.display = 'block'; // Rend l'élément visible
-      }
-    });
-    url = document.getElementById("field_43_176")
-    url.style.display = 'none'
-  }
   };
 
   export default News_Init;
