@@ -56,3 +56,24 @@ function get_prepopulated_templates_by_title(WP_REST_Request $request) {
 
 	return $templates;
 }
+
+// envoyer un preview
+add_action('rest_api_init', function () {
+	register_rest_route('custom/v1', '/link-preview_news/', [
+		'methods'  => 'POST',
+		'callback' => 'generate_link_preview_news',
+		'permission_callback' => '__return_true',
+	]);
+});
+
+function generate_link_preview_news(WP_REST_Request $request) {
+	$post_link_parsed = sanitize_text_field($request->get_param('url'));
+
+	if (empty($post_link_parsed)) {
+		return new WP_Error('missing_url', 'URL manquante', ['status' => 400]);
+	}
+
+	$shortcode = do_shortcode('[wplinkpreview url="' . esc_url($post_link_parsed) . '"]');
+
+	return new WP_REST_Response(['preview' => $shortcode], 200);
+}

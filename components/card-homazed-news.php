@@ -39,6 +39,8 @@ $him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_us
 $is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $args['id']);
 $post_comment_available = get_field("post_comment_available", $args['id']);
 
+
+$post_link_parsed =  get_field("post_link_parsed",$args['id']);
 ?>
 
 <div id="slate-<?php echo $args["id"]; ?>" class="card <?php if( is_array($args['img']) && count($args['img']) > 1 && $args['img_display'] !== "grid"){ echo "carrousel glide"; } ?>" data-h-id="<?php echo $args["id"]; ?>" data-post-type="<?php echo $args["post_type_slug"]; ?>">
@@ -109,6 +111,12 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 
 
 	</button>
+
+	<?php if($post_link_parsed) {
+
+		echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]');
+
+ 	} else { ?>
 
 	<!-- Post image -->
 
@@ -190,6 +198,9 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
+
+	<!-- End Post image -->
+	<?php } ?>
 
 	<button onclick="location.href='<?php echo $post_permalink; ?>'" class="card__header card__header--lower flex flex--vertical">
 

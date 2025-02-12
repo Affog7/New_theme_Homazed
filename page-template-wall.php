@@ -195,6 +195,7 @@
 
 							// news post
 							"post_w_linked" => get_field("post_w_linked",$post_id),
+
 							//------
 
 							// projects post

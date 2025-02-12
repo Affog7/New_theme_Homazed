@@ -27,7 +27,7 @@ $post_id = get_the_ID();
 			$author_email_address = $author_data->user_email;
 
 			$author_website_link = get_field("user_website_link", "user_".$author_id);
-			$post_link_parsed = get_field("post_link_parsed", "user_".$author_id);
+			$post_link_parsed = get_field("post_link_parsed", $post_id );
 
 			// checkbox  todo_augustin
 			$post_comment_available = get_field("post_comment_available", $post_id);
@@ -105,7 +105,9 @@ $post_id = get_the_ID();
 			$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$author_id);
 
 
- //______________todo augustin 15_12_2024
+			$user_avatar_id = get_field("user_avatar_ids", "user_".$author_id);
+
+		//______________todo augustin 15_12_2024
 			$i_request_this_contact = (!empty($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships)) ? true : false;
 			$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false;
 			$him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false;
@@ -141,6 +143,7 @@ $post_id = get_the_ID();
 				// alert(are your sure ?)
  			}
 
+
 //________________ 15_12_2024
 
 			$post_events_text_2 = get_field("post_home_event_text_2");
@@ -165,7 +168,7 @@ $post_id = get_the_ID();
 		<div class="card-form content" data-barba-prevent="all">
 			<div class="resume">
 				<?php get_template_part("components/post-avatar", null, array(
-						'post_main_picture' => wp_get_attachment_image_src($post_avatar_picture_id, 'large-img-medium'),
+						'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
 						'title' => $post_title,
 				) ); ?>
 
@@ -201,53 +204,6 @@ $post_id = get_the_ID();
 		<div class="profile-actions" data-barba-prevent="all">
 			<!-- Profile display -->
 			<div class="left">
-				<div class="btn-group btn-group--related">
-					<?php get_template_part( 'components/btn', null,
-						array(
-							'label' => 'List',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'ghost',
-							'icon-only'  => false,
-							'disabled'  => false,
-							'icon-position' => '', // left or right
-							'icon' => '',
-							'additional-classes' => 'tab-button',
-							'data-attribute' => 'data-tabs-id=\'tabs-list\'',
-							'theme' => "",
-						)
-					); ?>
-					<?php get_template_part( 'components/btn', null,
-							array(
-								'label' => 'Grid',
-								'href' => "",
-								'target' => "_self",
-								'skin'  => 'ghost',
-								'icon-only'  => false,
-								'disabled'  => false,
-								'icon-position' => '', // left or right
-								'icon' => '',
-								'additional-classes' => 'tab-button',
-								'data-attribute' => 'data-tabs-id=\'tabs-grid\'',
-								'theme' => "",
-							)
-						); ?>
-					<?php get_template_part( 'components/btn', null,
-							array(
-								'label' => 'Map',
-								'href' => "",
-								'target' => "_self",
-								'skin'  => 'ghost',
-								'icon-only'  => false,
-								'disabled'  => false,
-								'icon-position' => '', // left or right
-								'icon' => '',
-								'additional-classes' => 'tab-button',
-								'data-attribute' => 'data-tabs-id=\'tabs-map\'',
-								'theme' => "",
-							)
-						); ?>
-				</div>
 
 					<?php get_template_part( 'components/btn', null,
 						array(
@@ -639,6 +595,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		<div class="tab-content default-bckg post-page <?php if(isset($post_gallery_image_ids_array) && count($post_gallery_image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" data-barba-prevent="all" id="tabs-home">
 
 			<div class="post-page__section ">
+				<?php
+				if($post_link_parsed) {
+
+					echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]');
+
+				} else {
+				?>
 				<?php if(isset($post_gallery_image_ids_array) ): ?>
 					<div class="profile-content__img glide">
 						<div class="post-page__section floating-bar flex flex--vertical-center">
@@ -728,6 +691,8 @@ document.addEventListener("DOMContentLoaded", function () {
 						</div>
 					<?php endif; ?>
 				<?php endif; ?>
+				<?php } ?>
+
 			</div>
 
 			<div class="post-page__section bt-2">
@@ -737,11 +702,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
-				<div class="event event--tour">
-					<div class="event__frame">
-						<a class="event__frame__link" href="/?">Apply now</a>
-					</div>
-				</div>
+
 
 
 				<?php if($post_events_text_1 && $post_events_type != "None"): ?>
@@ -806,10 +767,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		<dl>
 
 			<dt class="-light">Contact Information :</dt>
-			<dt class="-light">  <?php
 
-echo do_shortcode('[visual-link-preview type="external" url="'.$post_link_parsed.'"  ]');
-				?> </dt>
 
 			<br>
 
@@ -895,15 +853,10 @@ echo do_shortcode('[visual-link-preview type="external" url="'.$post_link_parsed
 
 			<div class="post-page__section bt-2 content">
 
-			<!-- <b>Jobs Title :</b><dt class="-light"> <?php //echo (str_replace(",", ", ", $post_home_Jobs_title)) ?></dt>
-
-			<br>  -->
-
-			<b>Job Sectors :</b><dt class="-light"> <?php //echo (str_replace(",", ", ", $post_home_sector_activity)) ?></dt>
 
 
-			<br>
-			<dt class="-light">Additional Information :</dt>
+
+
 
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
@@ -1024,71 +977,13 @@ echo do_shortcode('[visual-link-preview type="external" url="'.$post_link_parsed
 				</div>
 			</div>
 		</div>
-		<div class="tab-content default-bckg profile-content__grid hide" id="tabs-grid">
-			<div class="grid-slate__list">
-				<?php foreach($post_gallery_image_ids_array as $post_gallery_id):
-					get_template_part("components/grid-slate", null, array(
-						"id" => "",
-						"post_link" => "",
-						"image" => wp_get_attachment_image_src($post_gallery_id, 'large-img-medium')[0]
-					));
-				endforeach; ?>
-			</div>
-		</div>
-		<div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list">
-			<?php
-				get_template_part("components/card-homazed-news", null, array(
-					"id" => $post_id,
-					"title" => $post_title,
-					"user_id" => $author_id,
-					'type' => null, // null or compact
-					'home_type' => $post_home_sector_activity,
-					'post_creator_link' => get_permalink("602")."?user_id=".$author_id,
-					'post_creator_name' => $author_first_name."&nbsp;".$author_last_name,
-					'first_name' => $author_first_name,
-					'last_name' => $author_last_name,
-					'work_position' => "",
-					'main_picture' => $main_picture_image_ids_array,
-					'img' => $post_gallery_image_ids_array,
-					'img_display' => get_field("post_home_pictures_display", $post_id),
-					"card_gallery" => $post_gallery_image_ids,
-					'img_size' => 'thumbnail-m',
-					"post_type" => get_post_type($post_id),
-					"post_type_slug" => "real-estate",
-					'address_name' => "post_address",
-					'address_link' => null,
-					'content' => $post_main_content_excerpt,
-					'video_' => $video_,
-
-					"post_w_linked" => $post_w_linked ,
-					//"post_home_sector_activity" => get_field("post_home_sector_activity",$post_id),
-					//"post_home_Jobs_title" => get_field("post_home_Jobs_title",$post_id),
-
-					'tags' => $post_post_tags,
-					"events_type" => $post_events_type,
-					"events_text_1" => $post_events_text_1,
-					"events_text_2" => $post_events_text_2,
-					"events_privacy" => $post_events_privacy,
-					'publish_date' =>  get_time_ago(get_post_timestamp())
-				));
 
 
-			?>
-		</div>
+<?php
 
-		<div class="tab-content default-bckg post-page hide " data-barba-prevent="all" id="tabs-map">
-			<h3 class="map"></h3>
-			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
-			<div class="map map--single anim_els">
-				<div id="map">
-					<?php get_template_part( 'components/map-popup-news', null ); ?>
-				</div>
+// ----------- Edit ---------------
 
-			</div>
-
-		</div>
-
-<?php if($current_user_id == $author_id): ?>
+if($current_user_id == $author_id): ?>
 
 	<div class="modal micromodal-slide" id="edit-post--price" aria-hidden="true">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>

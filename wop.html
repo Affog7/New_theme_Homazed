@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Recherche et Ajout d'Adresses sur OpenStreetMap</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+	<style>
+		body { font-family: Arial, sans-serif; }
+		#search-container { margin: 20px; }
+		#address-input { width: 300px; padding: 8px; }
+		#suggestions { border: 1px solid #ccc; max-width: 318px; background: white; position: absolute; z-index: 1000; }
+		.suggestion-item { padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; }
+		.suggestion-item:hover { background-color: #f0f0f0; }
+		#map { height: 500px; width: 100%; margin-top: 20px; }
+		#address-list { margin-top: 20px; padding: 0; list-style: none; }
+		.address-item { padding: 8px; background: #f9f9f9; margin-bottom: 5px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+		.remove-btn { background: red; color: white; border: none; padding: 5px; cursor: pointer; }
+	</style>
+</head>
+<body>
+
+<div id="search-container">
+	<input type="text" id="address-input" placeholder="Rechercher une adresse..." oninput="searchAddress()">
+	<div id="suggestions"></div>
+</div>
+
+<ul id="address-list"></ul> <!-- Liste des adresses ajoutées -->
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+	var map = L.map('map').setView([48.8566, 2.3522], 5); // Vue initiale sur la France
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; OpenStreetMap contributors'
+	}).addTo(map);
+
+	var markers = []; // Stocke tous les marqueurs
+
+	function searchAddress() {
+		var query = document.getElementById("address-input").value;
+		var suggestionsContainer = document.getElementById("suggestions");
+		suggestionsContainer.innerHTML = "";
+
+		if (query.length < 3) {
+			return; // Ne lance pas la recherche si moins de 3 caractères
+		}
+
+		fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
+			.then(response => response.json())
+			.then(data => {
+				data.forEach(place => {
+					var item = document.createElement("div");
+					item.classList.add("suggestion-item");
+					item.innerHTML = place.display_name;
+					item.onclick = function() {
+						addAddress(place);
+					};
+					suggestionsContainer.appendChild(item);
+				});
+			})
+			.catch(error => console.error(error));
+	}
+
+	function addAddress(place) {
+		var lat = place.lat;
+		var lon = place.lon;
+		var addressInput = document.getElementById("address-input");
+		addressInput.value = ""; // Efface le champ après sélection
+		document.getElementById("suggestions").innerHTML = ""; // Efface les suggestions
+
+		// Vérifie si l'adresse est déjà dans la liste
+		var existingItems = document.querySelectorAll('.address-item');
+		for (var i = 0; i < existingItems.length; i++) {
+			if (existingItems[i].dataset.lat == lat && existingItems[i].dataset.lon == lon) {
+				alert("Cette adresse est déjà ajoutée !");
+				return;
+			}
+		}
+
+		// Ajouter un marqueur sur la carte
+		var marker = L.marker([lat, lon]).addTo(map)
+			.bindPopup(`<b>${place.display_name}</b>`)
+			.openPopup();
+
+		markers.push({ marker, lat, lon }); // Ajoute le marqueur à la liste
+
+		// Ajouter l'adresse à la liste
+		var addressList = document.getElementById("address-list");
+		var listItem = document.createElement("li");
+		listItem.classList.add("address-item");
+		listItem.dataset.lat = lat;
+		listItem.dataset.lon = lon;
+		listItem.innerHTML = `<span>${place.display_name}</span> <button class="remove-btn" onclick="removeAddress(this)">X</button>`;
+
+		listItem.onclick = function() {
+			map.setView([lat, lon], 12); // Zoomer sur l'adresse sélectionnée
+		};
+
+		addressList.appendChild(listItem);
+	}
+
+	function removeAddress(button) {
+		var listItem = button.parentNode;
+		var lat = listItem.dataset.lat;
+		var lon = listItem.dataset.lon;
+
+		// Supprimer le marqueur correspondant
+		for (var i = 0; i < markers.length; i++) {
+			if (markers[i].lat == lat && markers[i].lon == lon) {
+				map.removeLayer(markers[i].marker);
+				markers.splice(i, 1);
+				break;
+			}
+		}
+
+		// Supprimer l'élément de la liste
+		listItem.remove();
+	}
+</script>
+
+</body>
+</html>
