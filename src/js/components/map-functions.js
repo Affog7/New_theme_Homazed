@@ -344,7 +344,7 @@ const MapLaunch = (data) => {
                 e.stopPropagation();
                 // makeRelationBtw(this.current_user_id.getAttribute("data-u-id"), this.el.getAttribute("data-h-id"), this.el.getAttribute("data-post-type"), e.currentTarget);
 
-                makeRelationBtw(postData.user_id, postData.id, postData.post_type_slug, e.currentTarget);
+                 makeRelationBtw(postData.user_id, postData.id, postData.post_type_slug, e.currentTarget);
               });
             });
           }

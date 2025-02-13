@@ -69,7 +69,7 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 					<span class="card__title flex flex--vertical-center">
 						<?php
 							 if($args["post_w_linked"]){
-								 echo "<a href=".get_permalink(intval($args["post_w_linked"]))."> ".get_the_title(intval($args["post_w_linked"]))." </a>";
+								 echo "<a href=".get_permalink(intval($args["post_w_linked"])).">".get_the_title(intval($args["post_w_linked"]))."</a>";
 							 }
 						?>
 					</span>

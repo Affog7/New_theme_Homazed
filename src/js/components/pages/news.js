@@ -7,7 +7,7 @@ const News_Init = () => {
     document.addEventListener('DOMContentLoaded', function () {
         if (window.jQuery) {
 
-            //
+        //
           jQuery(document).on('gform_page_loaded', function (event, form_id, current_page) {
             const s_inps = document.querySelectorAll(".searchInputNews_v1");
             if (s_inps.length) {
@@ -53,13 +53,11 @@ const News_Init = () => {
                 inputField.next('#link-preview-container').html('');
               }
             });
-      // end
-
-
-
+      // end url api
 
         }
       });
+
 
 
   };

@@ -80,9 +80,11 @@ class NewsV1 {
         }
 
       });
+
+      Modals_Init(postElement);
     });
 
-    Modals_Init(this.resultsContainer);
+
   }
 
   selectPost(post) {

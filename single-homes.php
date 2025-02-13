@@ -7,7 +7,7 @@ $post_id = get_the_ID();
 
 ?>
 
- 
+
 
 <main class="main" role="main" data-barba="container" data-barba-namespace="post" data-theme="theme-light" data-admin-ajax=<?php echo admin_url( 'admin-ajax.php' ); ?>>
 	<span class="hide current_user_id page_user_id" data-u-id="<?php echo $current_user_id; ?>"></span>
@@ -105,20 +105,20 @@ $post_id = get_the_ID();
 
 			$post_events_type = get_field("post_home_event_type");
 			$post_events_text_1 = get_field("post_home_event_text_1");
-		
+
 			$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
 			$i_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$current_user_id);
 			$him_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$author_id);
 			$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$author_id);
 
-	 
+
  //______________todo augustin 15_12_2024
 			$i_request_this_contact = (!empty($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships)) ? true : false;
-			$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false; 
-			$him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false; 
-			$him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false; 
+			$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false;
+			$him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false;
+			$him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false;
 
-			 
+
 		if($i_request_this_contact && $i_accept_this_contact && $him_request_me && !$him_accept_me){
 			// I request & him did not accept yet [GREEN1]";
 			$post_events_text_1 = 'Contact requested';
@@ -337,7 +337,7 @@ $post_id = get_the_ID();
 
 <!-- todo_augustin -->
 <!-- Popup Structure with Multi-Step Form -->
- <?php 
+ <?php
 $post_id_presenece = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
 $show = $post_id == $post_id_presenece;
 ?>
@@ -391,7 +391,7 @@ $show = $post_id == $post_id_presenece;
 									 )
 								 ); ?>
 
- 
+
 					<!-- <span class="close-btn-circle">&times;</span> -->
 				</div>
 			</div>
@@ -439,7 +439,7 @@ $show = $post_id == $post_id_presenece;
 			<div class="form-step" id="step2" style="display:none;height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<h3>Location</h3>
-					<main class="modal__content contact__form contact__form--light" style="text-align: justify;"> 
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
 						<?php echo do_shortcode( '[gravityform id="17" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
@@ -459,7 +459,7 @@ $show = $post_id == $post_id_presenece;
 										 'theme' => "",
 									 )
 								 ); ?>
-			
+
 				</div>
 			</div>
 
@@ -467,10 +467,10 @@ $show = $post_id == $post_id_presenece;
 			<div class="form-step" id="step3" style="display:none; height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
-						
+
 						<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
-					</main>		
+					</main>
 				</div>
 				<div>
 							<?php get_template_part( 'components/btn', null,
@@ -488,18 +488,18 @@ $show = $post_id == $post_id_presenece;
 										 'theme' => "",
 									 )
 								 ); ?>
-			
-				</div>						
- 
+
+				</div>
+
 			</div>
-			
+
 			<!--  -->
 			<div class="form-step" id="step4" style="display:none;height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<h3>Connections</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
 						<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-					</main>     
+					</main>
 				</div>
 				<div>
 							<?php get_template_part( 'components/btn', null,
@@ -517,7 +517,7 @@ $show = $post_id == $post_id_presenece;
 										 'theme' => "",
 									 )
 								 ); ?>
-			
+
 				</div>
 			</div>
 
@@ -545,7 +545,7 @@ $show = $post_id == $post_id_presenece;
 										 'theme' => "",
 									 )
 								 ); ?>
-			
+
 				</div>
 			</div>
 
@@ -573,14 +573,14 @@ $show = $post_id == $post_id_presenece;
 										 'theme' => "",
 									 )
 								 ); ?>
-			
+
 				</div>
 			</div>
 
 			<!-- Contrôles de navigation -->
 			<div class="form-navigation" style="display : none">
-				<button id="prevBtn" onclick="navigateSteps(-1)">Previous</button> 
-				 <span id="step-count">0 / 6</span> 
+				<button id="prevBtn" onclick="navigateSteps(-1)">Previous</button>
+				 <span id="step-count">0 / 6</span>
 			 	<button id="nextBtn" onclick="navigateSteps(1)">Next</button>
 			</div>
 			<div>
@@ -594,10 +594,10 @@ $show = $post_id == $post_id_presenece;
 <?php if(isset($_GET["premium"])) : ?>
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {
-		navigateSteps(6)	
+		navigateSteps(6)
 		})
 	</script>
- 
+
 <?php endif ;?>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -851,7 +851,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 				</div>
 
-				 
+
 				<?php if($post_events_text_1 && $post_events_type != "None"): ?>
 					<?php get_template_part( 'components/event', null,
 						array(
@@ -862,7 +862,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						)
 					); ?>
 				<?php endif; ?>
-				 
+
 			</div>
 
 			<div class="<?php if($post_post_tags) echo "bt-2" ?>">
@@ -940,11 +940,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       <div class="post-page__section bt-2">
 		<dl>
-				
+
 			<dt class="-light">Contact Information :</dt>
 			<br>
-			
-			<dd> 
+
+			<dd>
 
 
 			<?php if ($author_data): ?>
@@ -970,7 +970,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-						<?php 
+						<?php
 						if(($author_phone_number && $post_phone_calls_available) ||($author_phone_number &&  $author_connections_settings && in_array("phone_calls_available", $author_connections_settings))): ?>
 							<li class="contact__list__item">
 								<a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">
@@ -1232,6 +1232,9 @@ document.addEventListener("DOMContentLoaded", function () {
 					"events_privacy" => $post_events_privacy,
 					'publish_date' =>  get_time_ago(get_post_timestamp())
 				));
+
+			// ajouter les news
+			 get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
 			?>
 		</div>
 		<div class="tab-content default-bckg post-page hide " data-barba-prevent="all" id="tabs-map">
@@ -1581,7 +1584,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			</div>
 		</div>
 	</div>
-	
+
 	<?php comments_template(); ?>
 
 </main>
