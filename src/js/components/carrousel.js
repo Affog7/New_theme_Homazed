@@ -43,11 +43,16 @@ const Carrousel_Init = (data) => {
 			args = jsonConcat(args, SpecificArgs);
 
 			this.glide = new Glide(glide_el, args );
-	
-			this.glide.mount();
+
+      try {
+        this.glide.mount();
+      } catch (e) {
+
+      }
+
 
 			const observer = new IntersectionObserver((entries, _observer) => {
-				entries.forEach(entry => {    
+				entries.forEach(entry => {
 					if(entry.isIntersecting) {
 						this.glide.on('build.after', function() {
 							var slideHeight = glide_el.querySelector(".glide__slide--active").getBoundingClientRect().height;
@@ -57,7 +62,7 @@ const Carrousel_Init = (data) => {
 								glide_el.querySelector(".glide__track").style.height  = newHeight  + 'px';
 							}
 						});
-						
+
 						this.glide.on('run.after', function() {
 							var slideHeight = glide_el.querySelector(".glide__slide--active").getBoundingClientRect().height;
 							var glideTrack = glide_el.querySelector(".glide__track").getBoundingClientRect().height;
@@ -67,10 +72,10 @@ const Carrousel_Init = (data) => {
 							}
 						})
 						this.glide.update();
-					}  
+					}
 				});
 			});
-														
+
 			observer.observe(glide_el);
 
 			function jsonConcat(o1, o2) {
@@ -81,7 +86,7 @@ const Carrousel_Init = (data) => {
 			}
 		}
 	}
-	
+
 	const caroussels = data.container.querySelectorAll(".carrousel");
 
 	if (caroussels.length) {

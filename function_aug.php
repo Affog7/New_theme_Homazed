@@ -355,6 +355,51 @@ add_action('init', 'register_get_posts_by_post_w_linked');
 
 
 //
+//add_filter('gform_pre_render_50', 'prepopulate_gravity_hopper_images');
+//add_filter('gform_pre_submission_filter_50', 'prepopulate_gravity_hopper_images');
+//
+//function prepopulate_gravity_hopper_images($form) {
+//	if (!isset($_GET['post_id'])) {
+//		return $form; // Si pas de post_id, ne rien modifier
+//	}
+//
+//	$post_id = intval($_GET['post_id']);
+//
+//	// Récupérer les IDs des images stockées dans un champ ACF (par ex. 'post_gallery_ids')
+//	$image_ids = get_field('post_home_gallery_ids', $post_id);
+//
+//	if (!empty($image_ids)) {
+//		if (!is_array($image_ids)) {
+//			$image_ids = explode(',', $image_ids); // Convertir en tableau si stocké en string
+//		}
+//
+//
+//		// Formater les IDs comme attendu par Gravity Image Hopper
+//		$formatted_images = array_map(function($id) {
+//			return (string) $id; // Gravity Forms stocke souvent sous forme de string
+//		}, $image_ids);
+//		// Modifier le formulaire et ajouter les images dans le champ Image Hopper
+//		foreach ($form['fields'] as &$field) {
+//
+//
+//			if ($field->id == 1) { // Supposons que le champ Image Hopper a l'ID 1
+//
+//				$field->value = json_encode($formatted_images); // Format attendu par Gravity
+//				var_dump($field->value);
+//				error_log('Pre-populated Image Hopper IDs: ' . print_r($formatted_images, true));
+//			}
+//		}
+//
+//	}
+//
+//	return $form;
+//}
+
+
+
+
+
+//
 
 
 

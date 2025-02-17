@@ -20,7 +20,7 @@ const News_Init = () => {
           if (s_inps.length) {
             [...s_inps].map((s_inp) => new News_V1(s_inp));
           }
-
+        }
           // URL api preview
 
             $('.copy_paste_news_176  input').on('change', function () {
@@ -55,7 +55,7 @@ const News_Init = () => {
             });
       // end url api
 
-        }
+
       });
 
 

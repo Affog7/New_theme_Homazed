@@ -39,7 +39,6 @@ $him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_us
 $is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $args['id']);
 $post_comment_available = get_field("post_comment_available", $args['id']);
 
-
 $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 ?>
 
@@ -61,7 +60,7 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 				<div class="card__wrapper__title flex">
 
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
-						<a href="<?php echo $user_link; ?>" class="card__title__owner">
+						<a href="<?php echo $user_link; ?>" class="card__title__owner" style="margin-right: unset">
 							<?php
 							echo $args["post_creator_name"].";";
 							?></a>
@@ -112,9 +111,32 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 
 	</button>
 
-	<?php if($post_link_parsed) {
+	<?php if($post_link_parsed) { ?>
 
-		echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]');
+		<div style="position: relative">
+			<div class="floating-bar flex">
+				<?php if($post_join_file): ?>
+					<?php get_template_part( 'components/btn', null,
+						array(
+							'label' => 'File',
+							'href' => $post_join_file,
+							'target' => "_blank",
+							'skin'  => 'ghost',
+							'icon-only'  => false,
+							'disabled'  => false,
+							'icon-position' => 'left',
+							'icon' => 'hyperlink-2',
+							'additional-classes' => 'btn--small',
+							'data-attribute' => '',
+							'theme' => "",
+						)
+					); ?>
+				<?php endif; ?>
+			</div>
+			<?php echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]'); ?>
+		</div>
+<?php
+
 
  	} else { ?>
 

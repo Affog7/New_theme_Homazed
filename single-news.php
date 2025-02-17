@@ -362,6 +362,7 @@ $show = $post_id == $post_id_presenece;
 					<li><a href="#" onclick="goToStep(1)">Media ></a></li>
 					<li><a href="#" onclick="goToStep(2)">Location ></a></li>
 					<li><a href="#" onclick="goToStep(3)">Texts & Key Info ></a></li>
+					<li><a href="#" onclick="goToStep(7)">Linked ></a></li>
 					<li><a href="#" onclick="goToStep(4)">Connections ></a></li>
 					<li><a href="#" class="premium" onclick="goToStep(5)">add Event</a></li>
 					<li><a href="#" class="premium" onclick="goToStep(6)">add Premium</a></li>
@@ -372,7 +373,13 @@ $show = $post_id == $post_id_presenece;
 			<div class="form-step" id="step1" style="display:none;">
 				<h3>Media</h3>
 				<main class="modal__content contact__form contact__form--light" >
+					<?php echo do_shortcode( '[gravityform id="50" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+
+
 					<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
+					; ?>
+
+					<?php	echo do_shortcode('[video_manager_url    post_id="' . $post_id . '"]');
 					; ?>
 
 
@@ -382,17 +389,16 @@ $show = $post_id == $post_id_presenece;
 					<?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
 					; ?>
 
-<hr>
 
-					<?php	echo do_shortcode('[video_manager_url    post_id="' . $post_id . '"]');
-					; ?>
+
+
 
 
 					<!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 				</main>
 			</div>
 
-			<!--  -->
+			<!--  Location-->
 			<div class="form-step" id="step2" style="display:none;height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<h3>Location</h3>
@@ -419,6 +425,8 @@ $show = $post_id == $post_id_presenece;
 
 				</div>
 			</div>
+
+
 
 			<!-- feaatures -->
 			<div class="form-step" id="step3" style="display:none; height:450px">
@@ -534,10 +542,37 @@ $show = $post_id == $post_id_presenece;
 				</div>
 			</div>
 
+
+			<!--  Linked-->
+			<div class="form-step" id="step7" style="display:none;height:450px">
+				<div style="height: 400px; overflow: auto;">
+					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+						<?php echo do_shortcode( '[gravityform id="51" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+					</main>
+				</div>
+				<div>
+					<?php get_template_part( 'components/btn', null,
+						array(
+							'label' => 'SAVE updates',
+							'href' => "#" ,
+							'target' => "_self",
+							'skin'  => 'ghost',
+							'icon-only'  => false,
+							'disabled'  => false,
+							'icon-position' => '', // left or right
+							'icon' => '',
+							'additional-classes' => 'square',
+							'data-attribute' => 'id="submit_" data-form_id="51" data-step="7"',
+							'theme' => "",
+						)
+					); ?>
+
+				</div>
+			</div>
 			<!-- Contrôles de navigation -->
 			<div class="form-navigation" style="display : none">
 				<button id="prevBtn" onclick="navigateSteps(-1)">Previous</button>
-				 <span id="step-count">0 / 6</span>
+				 <span id="step-count">0 / 7</span>
 			 	<button id="nextBtn" onclick="navigateSteps(1)">Next</button>
 			</div>
 			<div>
@@ -596,9 +631,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			<div class="post-page__section ">
 				<?php
-				if($post_link_parsed) {
+				if($post_link_parsed) {?>
 
-					echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]');
+					<div style="position: relative">
+						<div class="floating-bar flex">
+							<?php if($post_join_file): ?>
+								<?php get_template_part( 'components/btn', null,
+									array(
+										'label' => 'File',
+										'href' => $post_join_file,
+										'target' => "_blank",
+										'skin'  => 'ghost',
+										'icon-only'  => false,
+										'disabled'  => false,
+										'icon-position' => 'left',
+										'icon' => 'hyperlink-2',
+										'additional-classes' => 'btn--small',
+										'data-attribute' => '',
+										'theme' => "",
+									)
+								); ?>
+							<?php endif; ?>
+						</div>
+						<?php echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]'); ?>
+					</div>
+					<?php
 
 				} else {
 				?>
@@ -608,22 +665,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 								<?php if($current_user_id == $author_id): ?>
 									<div class="edit-area hide">
-										<?php
-										//  get_template_part( 'components/btn', null,
-										// 	array(
-										// 		'label' => 'Edit file',
-										// 		'href' => "/",
-										// 		'target' => "_self",
-										// 		'skin'  => 'highlight',
-										// 		'icon-only'  => true,
-										// 		'disabled'  => false,
-										// 		'icon-position' => '',
-										// 		'icon' => 'pencil-write',
-										// 		'additional-classes' => 'btn--xsmall btn--inline edit_post_btn mg-r-1',
-										// 		'data-attribute' => 'data-open-modal=\'edit-post--files\'',
-										// 		'theme' => "",
-										// 	)
-										// ); ?>
+
 									</div>
 								<?php endif; ?>
 								<?php if($post_join_file): ?>

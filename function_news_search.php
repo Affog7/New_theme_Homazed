@@ -10,16 +10,36 @@ function get_prepopulated_templates_by_title(WP_REST_Request $request) {
 	$id_post = $request->get_param('id_post'); // Récupérer le paramètre id_post
 	$search_query = $request->get_param('search'); // Récupérer le paramètre de recherche
 
-	// Définition des arguments de la requête
-	$args = array(
-		'post_type'      => ['homes', 'jobs', 'projects'],
-		'posts_per_page' => -1,
-	);
+
+
+	// Récupérer l'ID de l'utilisateur connecté
+	wp_get_current_user();
+	$current_user_id = get_current_user_id();
+
+// Vérifier si un utilisateur est connecté
+	if ($current_user_id !=null && $search_query=='-1') {
+		// Arguments de la requête
+		$args = array(
+			'post_type' => ['homes', 'jobs', 'projects'],  // Type de contenu (articles)
+			'posts_per_page' => 3,       // Nombre de posts à récupérer
+			'author' => $current_user_id, // Filtrer par auteur connecté
+			'orderby' => 'date',  // Trier par date
+			'order' => 'DESC'   // Du plus récent au plus ancien
+		);
+	} else {
+		// Définition des arguments de la requête
+		$args = array(
+			'post_type'      => ['homes', 'jobs', 'projects'],
+			'posts_per_page' => 3,
+			'author' => $current_user_id,
+		);
+	}
+
 
 	// Vérifier si id_post est fourni
 	if (!empty($id_post)) {
 		$args['p'] = intval($id_post); // Recherche par ID précis
-	} elseif (!empty($search_query)) {
+	} elseif ($search_query !='-1' && !empty($search_query) ) {
 		$args['s'] = $search_query; // Recherche par titre
 	}
 

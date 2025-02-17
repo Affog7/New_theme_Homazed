@@ -12,6 +12,7 @@ class NewsV1 {
     this.selectedPostId = this.hiddenInput.value ? this.hiddenInput.value.trim() : null;
 
     this.loadSelectedPost();
+    this.loadSelatestPost();
     this.attachEventListeners();
   }
 
@@ -151,6 +152,21 @@ class NewsV1 {
       })
       .then(post => this.addPostToSelected(post[0]))
       .catch(error => console.error(`Error ${this.selectedPostId}:`, error));
+  }
+  loadSelatestPost() {
+    if (!this.selectedPostId) {
+      fetch(`/wp-json/custom/v1/posts?search=-1`)
+        .then(response => response.ok ? response.json() : Promise.reject("No post found."))
+        .then(data => {
+          this.displayResults(data);
+          Slider_map_search_init();
+        })
+        .catch(error => {
+          this.resultsContainer.innerHTML = `<p>${error}</p>`;
+        });
+    }
+
+
   }
 
 }
