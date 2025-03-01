@@ -45,17 +45,22 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
                     'user_link' => $user_link,
                 ) ); ?>
                 <div class="card__wrapper__title flex">
-						<span class="card__title flex flex--vertical-center">
+
+					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
+						<a href="<?php echo $user_link; ?>" class="card__title__owner"  style="margin-right: unset">
+							<?php echo $args["post_creator_name"]." ;" ;?>
+						</a><?php endif; ?>
+
+					<span class="card__title flex flex--vertical-center">
 							<?php
                             if($args["title_post"]) {
-                                echo ucfirst(strtolower($args["title_post"]))." ;";
+                                echo ucfirst(strtolower($args["title_post"]));
                             } else {
-                                echo ucfirst(strtolower($args["title"]))." ;";
+                                echo ucfirst(strtolower($args["title"])) ;
                             }
                             ?>
-						</span>
+					</span>
 
-                    <?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"];?></a><?php endif; ?>
 
                     <?php
                     //							if($args["user_id"] == $current_user_id) {

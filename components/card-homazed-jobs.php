@@ -44,26 +44,32 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
                     'user_link' => $user_link,
                 ) ); ?>
                 <div class="card__wrapper__title flex">
-						<span class="card__title flex flex--vertical-center">
+
+					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
+						<a href="<?php echo $user_link; ?>" class="card__title__owner"  style="margin-right: unset">
+							<?php echo $args["post_creator_name"]." ;"; ?>
+						</a><?php endif; ?>
+
+
+					<span class="card__title flex flex--vertical-center">
 							<?php
                             if($args["title_post"]) {
-                                echo ucfirst(strtolower($args["title_post"]))." ;";
+                                echo ucfirst(strtolower($args["title_post"]));
                             } else {
-                                echo ucfirst(strtolower($args["title"]))." ;";
+                                echo ucfirst(strtolower($args["title"])) ;
                             }
                             ?>
 						</span>
 
-                    <?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?> <a href="<?php echo $user_link; ?>" class="card__title__owner"><?php echo $args["post_creator_name"];?></a><?php endif; ?>
 
-                 
+
                 </div>
             </div>
 
             <!-- Post type -->
             <?php if($args["post_type"] && $args["post_type_slug"]): ?>
                 <div class="post-type flex flex--vertical-center">
-                    
+
 					<span class="post-type__name post-type__name--<?php echo $args["post_type_slug"]; ?>">
 							<?php switch ($args["post_type"]) {
                                 case "jobs": echo __('JOB', 'homazed'); break;
@@ -92,7 +98,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             </a>
         </div>
 
-         
+
     </button>
 
     <!-- Post image -->
@@ -407,6 +413,6 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
         ); ?>
         <?php // end todo_augustin gestion component share et profile ?>
 
- 
+
     </button>
 </div>

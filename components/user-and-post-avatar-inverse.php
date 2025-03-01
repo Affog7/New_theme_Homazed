@@ -1,7 +1,11 @@
 <div class="avatar__list">
     <div class="avatar__list--wrapper">
 
-
+		<?php if($args["post_main_picture"]) :  ?>
+			<div class="avatar">
+				<img class="avatar__image post__avatar" src="<?php echo wp_get_attachment_image_src($args["post_main_picture"], 'large-img-medium')[0]; ?>" alt="<?php echo $args["first_name"]." ".$args["last_name"]." profile image"; ?>" />
+			</div>
+		<?php  endif; ?>
         <?php if(isset($args["user_picture"])): ?>
             <a href="<?php echo $args["user_link"]; ?>" class="avatar owner__avatar">
                 <img class="avatar__image" src="<?php echo wp_get_attachment_image_src($args["user_picture"], 'large-img-medium')[0]; ?>" alt="<?php echo $args["first_name"]." ".$args["last_name"]." profile image"; ?>" />
@@ -14,10 +18,6 @@
             </div>
         <?php endif; ?>
 
-		<?php if($args["post_main_picture"]) :  ?>
-			<div class="avatar">
-				<img class="avatar__image post__avatar" src="<?php echo wp_get_attachment_image_src($args["post_main_picture"], 'large-img-medium')[0]; ?>" alt="<?php echo $args["first_name"]." ".$args["last_name"]." profile image"; ?>" />
-			</div>
-		<?php  endif; ?>
+
     </div>
 </div>

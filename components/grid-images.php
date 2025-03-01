@@ -5,10 +5,11 @@
 ?>
 
 <div class="card__img__grid card__img__grid--<?php echo $imgs_max_length; ?>">
-	<?php for ($i = 0; $i <= $imgs_length; $i++): ?>
+	<?php
+	for ($i = 0; $i <= $imgs_length; $i++): ?>
 
 		<a href="<?php echo wp_get_attachment_image_src($args['img'][$i], 'large-img-big')[0]; ?>"
-		class="card__img__grid__item card__img__grid__item--<?php echo $i; ?> glightbox"  data-gallery="gallery<?php echo $args["post_id"]; ?>">
+		   class="card__img__grid__item card__img__grid__item--<?php echo $i; ?> glightbox"  data-gallery="gallery<?php echo $args["post_id"]; ?>">
 
 			<img src="<?php echo wp_get_attachment_image_src($args['img'][$i], 'large-img-medium')[0] ?>" alt="<?php echo $args["post_creator_name"]." gallery image"; ?>" />
 		</a>

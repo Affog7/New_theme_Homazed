@@ -81,7 +81,7 @@ $post_id = get_the_ID();
 			$post_other = get_field("post_other", $post_id);
 
 			//$post_address = get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city");
-			$post_address = get_field("post_location_address") ? get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city") : get_field("post_address");
+			$post_address = get_field("post_location_address") ? get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city") : "";
 
 
 			$post_location_latitude = get_field("post_location_latitude");
@@ -105,8 +105,25 @@ $post_id = get_the_ID();
 			$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$author_id);
 
 
-			$user_avatar_id = get_field("user_avatar_ids", "user_".$author_id);
 
+		// si un post est lié, on recupère le main du post
+		if($post_w_linked) {
+			$main_picture_image_ids = get_field("post_home_main_picture_ids",intval($post_w_linked));
+			$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
+
+			if($main_picture_image_ids==null) {
+				$main_picture_image_ids = get_field("post_home_gallery_ids",intval($post_w_linked));
+				$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
+			}
+
+			$gallery_image_ids = get_field("post_home_gallery_ids");
+			$gallery_image_ids_array = explode(',', $gallery_image_ids);
+
+			$post_avatar_picture_id = (!empty($main_picture_image_ids_array[0])) ? $main_picture_image_ids_array[0] : $gallery_image_ids_array[0];
+			$user_avatar_id = $post_avatar_picture_id;
+		} else {
+			$user_avatar_id = get_field("user_avatar_ids", "user_".$author_id);
+		}
 		//______________todo augustin 15_12_2024
 			$i_request_this_contact = (!empty($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships)) ? true : false;
 			$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false;
@@ -176,9 +193,12 @@ $post_id = get_the_ID();
 					<div class="flex flex--vertical-center">
 						<h2 class="resume__name card-form__title">
 							<?php echo $author_first_name."&nbsp;".$author_last_name;
+
 						if($post_w_linked){
 								echo "<a href=".get_permalink(intval($post_w_linked))."> ; ".get_the_title(intval($post_w_linked))." </a>";
 							}?></h2>
+
+
 					</div>
 
 					<?php // Todo gerer les posts liés $post_w_linked  ?>
@@ -261,7 +281,7 @@ $post_id = get_the_ID();
 				<?php get_template_part( 'components/btn', null,
 					array(
 						'label' => 'Edit post',
-						'href' => $post_link."/?post_id=".$post_id,
+						'href' => $post_link."/?post_id=".$post_id."&post_auth=".$current_user_id,
 						'target' => "_self",
 						'skin'  => 'ghost',
 						'icon-only'  => false,
@@ -274,7 +294,7 @@ $post_id = get_the_ID();
 					)
 				); ?>
 				<?php endif; ?>
-				<?php get_template_part( 'components/btn', null,
+				<?php get_template_part('components/btn', null,
 					array(
 						'label' => 'Share',
 						'href' => "/",
@@ -519,7 +539,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Premium</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="37" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="45" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -534,7 +554,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="37" data-step="6"',
+										 'data-attribute' => 'id="submit_" data-form_id="45" data-step="6"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -651,6 +671,24 @@ document.addEventListener("DOMContentLoaded", function () {
 										'theme' => "",
 									)
 								); ?>
+							<?php endif; ?>
+							<?php if(!empty($video_) && $video_): ?>
+								<?php get_template_part( 'components/btn', null,
+									array(
+										'label' => 'Video',
+										'href' => esc_url(stripslashes($video_)),
+										'target' => "_blank",
+										'skin'  => 'ghost',
+										'icon-only'  => false,
+										'disabled'  => false,
+										'icon-position' => 'left',
+										'icon' => 'hyperlink-2',
+										'additional-classes' => 'btn--small',
+										'data-attribute' => '',
+										'theme' => "",
+									)
+								); ?>
+
 							<?php endif; ?>
 						</div>
 						<?php echo do_shortcode('[wplinkpreview  url= ' . $post_link_parsed . ' ]'); ?>
@@ -954,19 +992,24 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php endif; ?>
 			</div>
 
-			<br>
-			<dl><dt class="-light"></dt> </dl>
+
+
 			<?php
 			// todo_augustin : show map
 			$location = get_field( 'post_location_address', $post_id); // Récupérer la géolocalisation
 			$post_location_longitude = get_field( 'post_location_longitude', $post_id);
 			$post_location_latitude = get_field( 'post_location_latitude', $post_id);
-			echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
+
+			if($location&&$post_location_latitude&&$post_location_longitude) {
+				echo '<br><dl><dt class="-light"></dt> </dl>';
+				echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
+
+			}
 
 
 			?>
 
-			<div class="post-page__section bt-2">
+			<div class="post-page__section  <?php if($location) echo 'bt-2'; ?> ">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
 					<?php

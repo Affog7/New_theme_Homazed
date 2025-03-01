@@ -41,7 +41,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			endif; ?>
 			<?php if(get_current_user_id() == $user_id):
 					get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Edit your profile',
 							'href' => get_permalink("468"),
 							'target' => "_self",
@@ -51,12 +51,45 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 							'icon-position' => 'left',
 							'icon' => 'pencil-write',
 							'additional-classes' => '',
-							'data-attribute' => null,
+							'data-attribute' => 'data-open-modal=\'publish-profile\'',
 							'theme' => "",
 						)
 					);
 				endif; ?>
 		</div>
+
+
+		<!-- profile form -->
+		<div class="modal micromodal-slide modal--publish" id="publish-profile" aria-hidden="true">
+			<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+				<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-projects-title">
+					<header class="modal__header">
+						<div class="flex flex--vertical">
+							<h2 class="modal__title h2" id="publish-projects-title">Share your Profile </h2>
+						</div>
+						<?php get_template_part("components/btn", null, array( 'label' => 'Close this modal window', 'href' => "", 'target' => "_self", 'skin'  => 'transparent', 'icon-only'  => true, 'disabled'  => false, 'icon-position' => 'right', 'icon' => 'close', 'additional-classes' => '', 'data-attribute' => 'data-close-modal', 'theme' => "", )); ?>
+					</header>
+					<main class="modal__content contact__form contact__form--light" id="publish-projects-content">
+						<?php
+						$account_type = get_field("user_account_type", "user_".get_current_user_id());
+						/**
+						 * todo_augustin type de compte
+						 * */
+						echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
+
+						echo do_shortcode( '[gravityform id="52" ajax="true" title="false"]' );
+
+
+						?>
+					</main>
+				</div>
+			</div>
+		</div>
+		<!-- profile file -->
+
+
+
+
 
 		<!-- Profile actions -->
 		<div class="profile-actions" data-barba-prevent="all">
@@ -65,7 +98,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				<div class="btn-group btn-group--related">
 					<?php if(get_current_user_id() == $user_id):
 						get_template_part( 'components/btn', null,
-							array( 
+							array(
 								'label' => 'My favorites:',
 								'href' => get_permalink("468"),
 								'target' => "_self",
@@ -81,7 +114,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						);
 					endif; ?>
 					<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'List',
 							'href' => "",
 							'target' => "_self",
@@ -96,7 +129,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						)
 					); ?>
 					<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Grid',
 							'href' => "",
 							'target' => "_self",
@@ -111,7 +144,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						)
 					); ?>
 					<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => 'Map',
 							'href' => "",
 							'target' => "_self",
@@ -127,7 +160,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					); ?>
 				</div>
 				<?php get_template_part( 'components/btn', null,
-					array( 
+					array(
 						'label' => 'Profile',
 						'href' => "",
 						'target' => "_self",
@@ -152,17 +185,17 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					<?php $i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($user_id, $i_accept_contactlist_users_relationships)) ? true : false; ?>
 					<?php $him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false; ?>
 					<?php $him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false; ?>
-					<?php 
+					<?php
 					$contact_classes = 'relation_btn relation_btn--contact-list';
 					$contact_text = 'Add contact';
 					$contact_text_default = 'Add contact';
 					$contact_text_requested = 'Contact requested';
 					$contact_icon = 'add-square';
 					$relation_type = 'request-contact-list';
-					
+
 					if($i_request_this_contact && $i_accept_this_contact && $him_request_me && !$him_accept_me){
 						// I request & him did not accept yet [GREEN1]";
-						$contact_text = 'Contact requested';	
+						$contact_text = 'Contact requested';
 						$contact_classes .= ' relation_btn--contact-requested';
 						$contact_icon = 'single-neutral-actions-refresh';
 						$relation_type = 'remove-request-contact-list';
@@ -183,9 +216,9 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						// No request for now [Default & BLACK]";
 					}
 
-					 ?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+					 ?>
 					<?php get_template_part( 'components/btn', null,
-						array( 
+						array(
 							'label' => $contact_text,
 							'href' => "/",
 							'target' => "_self",
@@ -202,9 +235,9 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					<?php if($account_type['value'] == "company_user" || $account_type['value'] == "pro_user"): ?>
 						<?php $do_i_recommend_him = (!empty($i_recommend_users_relationships) && in_array($user_id, $i_recommend_users_relationships)) ? true : false; ?>
 						<?php $is_he_recommended_by_me = (!empty($him_recommend_users_relationships) && in_array($current_user_id, $him_recommend_users_relationships)) ? true : false; ?>
-						
+
 						<?php get_template_part( 'components/btn', null,
-							array( 
+							array(
 								'label' => 'Recommend',
 								'href' => "/",
 								'target' => "_self",
@@ -221,7 +254,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					<?php endif; ?>
 				<?php endif; ?>
 				<?php get_template_part( 'components/btn', null,
-					array( 
+					array(
 						'label' => 'Share',
 						'href' => "/",
 						'target' => "_self",
@@ -239,7 +272,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 		</div>
 
 		<!-- Profile content -->
-		<?php 
+		<?php
 			$sector_of_activity = get_field("user_current_user_sector_of_activity", "user_".$user_id);
 			$work_position = get_field("user_current_work_position", "user_".$user_id);
 			$services_products_provided = get_field("user_services_products_provided", "user_".$user_id);
@@ -250,13 +283,13 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			$email_address = $user_data->user_email;
 			$website_link = get_field("user_website_link", "user_".$user_id);
 			$events = get_field("user_event", "user_".$user_id);
-			
+
 			$user_location = get_field("user_location", "user_".$user_id);
 			$image_ids = get_field("user_gallery_ids", "user_".$user_id);
 			$image_ids_array = explode(',', $image_ids);
 		?>
 
-		<?php 
+		<?php
 			$posts_args = array(
 				"post_type" => "homes",
 				"post_status" => "publish",
@@ -265,17 +298,17 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				"order" => "DESC",
 				'author' => $user_id,
 			);
-		
+
 			$posts_query = new WP_Query($posts_args);
 			$users_post_content = [];
 			$users_post_content_for_map = [];
 
 			if(!empty($posts_query->have_posts())):
 				$posts = [];
-			
+
 				while($posts_query->have_posts()):
 					$posts_query->the_post();
-				
+
 					$post_address = get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city");
 					$post_location_latitude = get_field("post_location_latitude");
 					$post_location_longitude = get_field("post_location_longitude");
@@ -337,7 +370,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						"permalink" => get_the_permalink($post_id),
 						"lat" => $post_location_latitude,
 						"lng" => $post_location_longitude,
-						"account_type" => null, 
+						"account_type" => null,
 						"location" => $post_address,
 						"price" => $price,
 						"bedrooms" => $bedrooms,
@@ -345,7 +378,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						"home_size" => $home_size,
 						"outdoor_size" => $outdoor_size,
 					];
-				
+
 					array_push($users_post_content, $post);
 					array_push($users_post_content_for_map, $post_for_map);
 
@@ -359,12 +392,12 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			<?php if(isset($image_ids_array) && is_array($image_ids_array) ): ?>
 				<div class="profile-content__img">
 					<?php if(count($image_ids_array) > 1): ?>
-							<?php get_template_part("components/carrousel", null, array( 
+							<?php get_template_part("components/carrousel", null, array(
 								'img' => $image_ids_array,
 								'post_creator_name' => $first_name . " " . $last_name,
 							)); ?>
 						<?php else: ?>
-							<?php get_template_part("components/carrousel-single-image", null, array( 
+							<?php get_template_part("components/carrousel-single-image", null, array(
 								'img' => $image_ids_array,
 								'post_creator_name' => $first_name . " " . $last_name,
 							)); ?>
@@ -376,7 +409,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				<?php foreach ($events as $event): ?>
 					<div class="profile-content--sct bt-2">
 						<?php get_template_part( 'components/btn', null,
-								array( 
+								array(
 									'label' => $event['user_action_button_text'],
 									'href' => "/",
 									'target' => "_self",
@@ -401,7 +434,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			<div class="profile-content--sct bt-2">
 				<?php if(!empty($users_post_content) || !empty($him_recommend_users_relationships) || !empty($him_accept_contactlist_users_relationships)): ?>
 					<h3 class="h4 mb-sm">Connections</h3>
-					<ul class="connection__list">						
+					<ul class="connection__list">
 						<li class="connection__list__item">
 							<?php if(!empty($users_post_content)): ?>
 								<?php if(count($users_post_content) >= 1): ?>
@@ -447,7 +480,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 										<h2 class="modal__title h2" id="publish-home-title"><?php echo $connection_user_s_title ?></h2>
 									</div>
 									<?php get_template_part("components/btn", null,
-										array( 
+										array(
 											'label' => 'Close this modal window',
 											'href' => "",
 											'target' => "_self",
@@ -473,9 +506,9 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 												$user_permalink = get_permalink("602")."?user_id=". $user_id;
 												$user_avatar = get_field("user_profile_picture", "user_" . $user_id);
 											?>
-											
+
 											<?php get_template_part("components/user-avatar-list", null,
-												array( 
+												array(
 													'user_first_name' => $user_first_name,
 													'user_last_name' => $user_last_name,
 													'user_avatar' => $user_avatar,
@@ -498,7 +531,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 											<h2 class="modal__title h2" id="publish-home-title"><?php echo $recommend_user_s_title; ?></h2>
 										</div>
 										<?php get_template_part("components/btn", null,
-											array( 
+											array(
 												'label' => 'Close this modal window',
 												'href' => "",
 												'target' => "_self",
@@ -525,7 +558,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 													$user_avatar = get_field("user_profile_picture", "user_" . $user_id);
 												?>
 												<?php get_template_part("components/user-avatar-list", null,
-													array( 
+													array(
 														'user_first_name' => $user_first_name,
 														'user_last_name' => $user_last_name,
 														'user_avatar' => $user_avatar,
@@ -558,7 +591,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					<p><?php echo $services_products_provided; ?></p>
 				</div>
 			<?php endif; ?> -->
-			
+
 			<?php if($email_address || $phone_number || $website_link): ?>
 				<div class="profile-content--sct bt-2">
 					<h3 class="h4 mb-sm">Contact</h3>
@@ -607,7 +640,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			<div class="profile-content--sct bt-2">
 				<h3 class="h4 mb-sm">Currently looking for</h3>
 				<?php get_template_part( 'components/btn', null,
-					array( 
+					array(
 						'label' => '3 searching posts',
 						'href' => "/",
 						'target' => "_self",
@@ -682,7 +715,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 						<h2 class="h1">Share <?php echo $first_name . " " .$last_name; ?> profile</h2>
 					</div>
 					<?php get_template_part("components/btn", null,
-						array( 
+						array(
 							'label' => 'Close this modal window',
 							'href' => "",
 							'target' => "_self",

@@ -153,7 +153,7 @@
 						</div>
 						<div class="arrow"></div>
 					</div>
-					 
+
 			</div>
 		</div>
 	</div>
@@ -207,8 +207,8 @@
 					 * todo_augustin type de compte
 					 * */
 					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
-	 
-						echo do_shortcode( '[gravityform id="24" ajax="true" title="false"]' ); 
+
+						echo do_shortcode( '[gravityform id="24" ajax="true" title="false"]' );
 
 
 					?>
@@ -236,8 +236,8 @@
 					 * todo_augustin type de compte
 					 * */
 					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
-	 
-						echo do_shortcode( '[gravityform id="30" ajax="true" title="false"]' ); 
+
+						echo do_shortcode( '[gravityform id="30" ajax="true" title="false"]' );
 
 
 					?>
@@ -264,8 +264,8 @@
 					 * todo_augustin type de compte
 					 * */
 					echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
-	 
-						echo do_shortcode( '[gravityform id="43" ajax="true" title="false"]' ); 
+
+						echo do_shortcode( '[gravityform id="43" ajax="true" title="false"]' );
 
 
 					?>

@@ -278,6 +278,7 @@ add_action('rest_api_init', 'custom_api_register_routes');
 
 
 
+
 function register_get_posts_by_post_w_linked() {
 	function get_posts_by_post_w_linked($linked_post_id, $post_type = 'news') {
 		$args = [
@@ -313,6 +314,7 @@ function register_get_posts_by_post_w_linked() {
 
 			foreach ($posts as $post) {
 				$author_id_ = get_post_field('post_author', $post["ID"]);
+				$post_address = get_field("post_location_address", $post["ID"]) ? get_field("post_location_address", $post["ID"]) . ", " . get_field("post_location_zip", $post["ID"]) . " " . get_field("post_location_city", $post["ID"]) : get_field("post_address", $post["ID"]);
 
 				get_template_part("components/card-homazed-news", null, array(
 					"id" => $post["ID"],
@@ -322,7 +324,7 @@ function register_get_posts_by_post_w_linked() {
 					"card_gallery" => get_field("post_home_gallery_ids", $post["ID"]),
 					"video_" =>  get_field("post_home_video", $post["ID"]),
 					"card_gallery_display" => get_field("post_home_pictures_display", $post["ID"]),
-
+					'post_creator_name' => get_field("user_first_name", "user_".$author_id_)."&nbsp;".get_field("user_last_name", "user_".$author_id_),
 					"first_name"=> get_field("user_first_name", "user_".$author_id_),
 					"last_name" =>get_field("user_last_name", "user_".$author_id_),
 
@@ -332,7 +334,7 @@ function register_get_posts_by_post_w_linked() {
 					"post_type_slug" => "real-estate",
 					"img" => explode(',', get_field("post_home_gallery_ids", $post["ID"])),
 
-
+					'address_name' => $post_address,
 					// news post
 					"post_w_linked" => get_field("post_w_linked",$post["ID"]),
 					//------
@@ -353,47 +355,62 @@ function register_get_posts_by_post_w_linked() {
 }
 add_action('init', 'register_get_posts_by_post_w_linked');
 
+function register_get_news_grid_for_w_linked() {
+	function get_news_grid_for_w_linked($linked_post_id, $post_type = 'news') {
+		$args = [
+			'post_type'      => $post_type,
+			'posts_per_page' => -1,
+			'meta_query'     => [
+				[
+					'key'     => 'post_w_linked',
+					'value'   => $linked_post_id,
+					'compare' => '='
+				]
+			]
+		];
 
-//
-//add_filter('gform_pre_render_50', 'prepopulate_gravity_hopper_images');
-//add_filter('gform_pre_submission_filter_50', 'prepopulate_gravity_hopper_images');
-//
-//function prepopulate_gravity_hopper_images($form) {
-//	if (!isset($_GET['post_id'])) {
-//		return $form; // Si pas de post_id, ne rien modifier
-//	}
-//
-//	$post_id = intval($_GET['post_id']);
-//
-//	// Récupérer les IDs des images stockées dans un champ ACF (par ex. 'post_gallery_ids')
-//	$image_ids = get_field('post_home_gallery_ids', $post_id);
-//
-//	if (!empty($image_ids)) {
-//		if (!is_array($image_ids)) {
-//			$image_ids = explode(',', $image_ids); // Convertir en tableau si stocké en string
-//		}
-//
-//
-//		// Formater les IDs comme attendu par Gravity Image Hopper
-//		$formatted_images = array_map(function($id) {
-//			return (string) $id; // Gravity Forms stocke souvent sous forme de string
-//		}, $image_ids);
-//		// Modifier le formulaire et ajouter les images dans le champ Image Hopper
-//		foreach ($form['fields'] as &$field) {
-//
-//
-//			if ($field->id == 1) { // Supposons que le champ Image Hopper a l'ID 1
-//
-//				$field->value = json_encode($formatted_images); // Format attendu par Gravity
-//				var_dump($field->value);
-//				error_log('Pre-populated Image Hopper IDs: ' . print_r($formatted_images, true));
-//			}
-//		}
-//
-//	}
-//
-//	return $form;
-//}
+		$query = new WP_Query($args);
+		$posts = [];
+
+		if ($query->have_posts()) {
+			while ($query->have_posts()) {
+				$query->the_post();
+				$posts[] = [
+					'ID'    => get_the_ID(),
+					'title' => get_the_title(),
+					'link'  => get_permalink()
+				];
+			}
+			wp_reset_postdata();
+		}
+
+
+
+		if (!empty($posts)) {
+
+			foreach ($posts as $post) {
+
+				$post_gallery_image_ids = get_field("post_home_gallery_ids", $post["ID"]);
+				$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
+
+				foreach ($post_gallery_image_ids_array as $post_gallery_id):
+
+				 if ($post_gallery_id)
+					get_template_part("components/grid-slate", null, array(
+						"id" => $post_gallery_id,
+						"post_link" => "",
+						"image" => wp_get_attachment_image_src($post_gallery_id, 'large-img-medium')[0]
+					));
+				endforeach;
+			}
+
+		}
+		//return $posts;
+	}
+}
+add_action('init', 'register_get_news_grid_for_w_linked');
+
+
 
 
 

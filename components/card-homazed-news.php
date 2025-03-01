@@ -14,6 +14,11 @@ if($args["post_w_linked"]) {
 	$main_picture_image_ids = get_field("post_home_main_picture_ids",intval($args["post_w_linked"]));
 	$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
 
+	if($main_picture_image_ids==null) {
+		$main_picture_image_ids = get_field("post_home_gallery_ids",intval($args["post_w_linked"]));
+		$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
+	}
+
 	$gallery_image_ids = get_field("post_home_gallery_ids");
 	$gallery_image_ids_array = explode(',', $gallery_image_ids);
 
@@ -49,7 +54,7 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 			<div class="post-header__main-title flex flex--vertical-center">
 
 				<?php
-				get_template_part("components/user-and-post-avatar", null, array(
+				get_template_part("components/user-and-post-avatar-inverse", null, array(
 					'user_picture' => $user_avatar_id,
 					'post_main_picture' => $post_avatar_picture_id,
 					'first_name' => $args["first_name"],
@@ -58,23 +63,24 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 				) );
 				?>
 				<div class="card__wrapper__title flex">
-
+					<span class="card__title flex flex--vertical-center">
+						<?php
+						if($args["post_w_linked"]) {
+							echo "<a href=".get_permalink(intval($args["post_w_linked"])).">".get_the_title(intval($args["post_w_linked"]))."; </a>";
+						}
+						?>
+					</span>
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
 						<a href="<?php echo $user_link; ?>" class="card__title__owner" style="margin-right: unset">
 							<?php
-							echo $args["post_creator_name"].";";
+							echo $args["post_creator_name"];
 							?></a>
 					<?php endif; ?>
-					<span class="card__title flex flex--vertical-center">
-						<?php
-							 if($args["post_w_linked"]){
-								 echo "<a href=".get_permalink(intval($args["post_w_linked"])).">".get_the_title(intval($args["post_w_linked"]))."</a>";
-							 }
-						?>
-					</span>
+
 
 				</div>
 			</div>
+
 
 			<!-- Post type -->
 			<?php if($args["post_type"] && $args["post_type_slug"]): ?>
@@ -127,6 +133,24 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 							'icon-position' => 'left',
 							'icon' => 'hyperlink-2',
 							'additional-classes' => 'btn--small',
+							'data-attribute' => '',
+							'theme' => "",
+						)
+					); ?>
+				<?php endif; ?>
+
+				<?php if(!empty($args['video_']) && $args['video_']): ?>
+					<?php get_template_part('components/btn', null,
+						array(
+							'label' => 'Video',
+							'href' => esc_url(stripslashes($args["video_"])),
+							'target' => "_blank",
+							'skin'  => 'ghost',
+							'icon-only'  => false,
+							'disabled'  => false,
+							'icon-position' => 'left',
+							'icon' => 'hyperlink-2',
+							'additional-classes' => ' btn--small ',
 							'data-attribute' => '',
 							'theme' => "",
 						)

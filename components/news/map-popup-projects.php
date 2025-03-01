@@ -1,6 +1,6 @@
 <div id="map-popup-projects" class="  default-bckg map-slate">
     <a href="#" class="map-slate--link flex">
-		<div class="map-slate__image">
+		<div class="map-slate__image" style="box-shadow: unset">
 			<!-- D -->
 			<?php
 			$post_id = $args["id"];
@@ -27,11 +27,9 @@
 						$image_urls[] = $image_src[0];
 					}
 				}
-
-
-
 				?>
-				<div class="image-slider_a">
+
+				<div class="image-slider_a" style="border: unset;border-radius: unset">
 					<div class="slider-container_a">
 						<div class="slider-wrapper_a">
 							<!-- Les images dynamiques sont insérées ici via PHP -->

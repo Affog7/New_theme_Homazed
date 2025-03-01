@@ -1011,17 +1011,24 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 		<div class="tab-content default-bckg profile-content__grid hide" id="tabs-grid">
 			<div class="grid-slate__list">
-				<?php foreach($post_gallery_image_ids_array as $post_gallery_id):
+
+				<?php
+				get_news_grid_for_w_linked($post_id); // afficher les grid des news linked
+				foreach($post_gallery_image_ids_array as $post_gallery_id):
 					get_template_part("components/grid-slate", null, array(
-						"id" => "",
+						"id" => $post_gallery_id,
 						"post_link" => "",
 						"image" => wp_get_attachment_image_src($post_gallery_id, 'large-img-medium')[0]
 					));
-				endforeach; ?>
+				endforeach;
+
+				?>
 			</div>
 		</div>
 		<div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list">
 			<?php
+			// ajouter les news
+			get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
 				get_template_part("components/card-homazed-jobs", null, array(
 					"id" => $post_id,
 					"title" => $post_title,
@@ -1040,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					'img_size' => 'thumbnail-m',
 					"post_type" => get_post_type($post_id),
 					"post_type_slug" => "real-estate",
-					'address_name' => "post_address",
+					'address_name' => $post_address,
 					'address_link' => null,
 					'content' => $post_main_content_excerpt,
 					'video_' => $video_,
@@ -1056,8 +1063,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				));
 
 
-			// ajouter les news
-			 get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
+
 
 
 

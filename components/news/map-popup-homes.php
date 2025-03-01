@@ -1,6 +1,6 @@
 <div id="map-popup-homes" class="default-bckg map-slate">
    <a href="#" class="map-slate--link flex">
-      <div class="map-slate__image">
+      <div class="map-slate__image" style="box-shadow: unset">
          <!-- D -->
          <?php
             $post_id = $args["id"];
@@ -31,7 +31,7 @@
 				$post_outdoor_size = get_field("post_home_outdoor_size",$post_id);
 
             ?>
-         <div class="image-slider_a">
+         <div class="image-slider_a"  style="border: unset;border-radius: unset">
             <div class="slider-container_a">
                <div class="slider-wrapper_a">
                   <!-- Les images dynamiques sont insérées ici via PHP -->

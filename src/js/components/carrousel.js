@@ -46,37 +46,40 @@ const Carrousel_Init = (data) => {
 
       try {
         this.glide.mount();
+
+        const observer = new IntersectionObserver((entries, _observer) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting) {
+              this.glide.on('build.after', function() {
+                var slideHeight = glide_el.querySelector(".glide__slide--active").getBoundingClientRect().height;
+                var glideTrack = glide_el.querySelector(".glide__track").getBoundingClientRect().height;
+                if (slideHeight != glideTrack) {
+                  var newHeight = slideHeight;
+                  glide_el.querySelector(".glide__track").style.height  = newHeight  + 'px';
+                }
+              });
+
+              this.glide.on('run.after', function() {
+                var slideHeight = glide_el.querySelector(".glide__slide--active").getBoundingClientRect().height;
+                var glideTrack = glide_el.querySelector(".glide__track").getBoundingClientRect().height;
+                if (slideHeight != glideTrack) {
+                  var newHeight = slideHeight;
+                  glide_el.querySelector(".glide__track").style.height  = newHeight  + 'px';
+                }
+              })
+              this.glide.update();
+            }
+          });
+        });
+        observer.observe(glide_el);
       } catch (e) {
 
       }
+ 
 
 
-			const observer = new IntersectionObserver((entries, _observer) => {
-				entries.forEach(entry => {
-					if(entry.isIntersecting) {
-						this.glide.on('build.after', function() {
-							var slideHeight = glide_el.querySelector(".glide__slide--active").getBoundingClientRect().height;
-							var glideTrack = glide_el.querySelector(".glide__track").getBoundingClientRect().height;
-							if (slideHeight != glideTrack) {
-								var newHeight = slideHeight;
-								glide_el.querySelector(".glide__track").style.height  = newHeight  + 'px';
-							}
-						});
 
-						this.glide.on('run.after', function() {
-							var slideHeight = glide_el.querySelector(".glide__slide--active").getBoundingClientRect().height;
-							var glideTrack = glide_el.querySelector(".glide__track").getBoundingClientRect().height;
-							if (slideHeight != glideTrack) {
-								var newHeight = slideHeight;
-								glide_el.querySelector(".glide__track").style.height  = newHeight  + 'px';
-							}
-						})
-						this.glide.update();
-					}
-				});
-			});
 
-			observer.observe(glide_el);
 
 			function jsonConcat(o1, o2) {
 				for (var key in o2) {

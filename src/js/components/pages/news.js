@@ -23,7 +23,7 @@ const News_Init = () => {
         }
           // URL api preview
 
-            $('.copy_paste_news_176  input').on('change', function () {
+            $('.copy_paste_news_176  input').on('input', function () {
               let postLink = $(this).val(); // Récupère la valeur du champ input
               let inputField = $(this); // Stocke l’élément input
 

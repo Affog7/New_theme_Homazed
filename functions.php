@@ -1249,7 +1249,7 @@ function add_tags_to_post_and_meta($post_id, $feed, $entry, $form) {
 	// Mettre à jour le post existant avec ces informations
 	$post_data = array(
 		'ID'           => $post_id,           // L'ID du post à mettre à jour
-		'post_title'   => $post_title,        // Titre du post
+		//'post_title'   => $post_title,        // Titre du post
 		'post_name'    => $custom_slug,       // Slug personnalisé
 		'post_status'  => 'publish',          // Définir le statut du post
 	);

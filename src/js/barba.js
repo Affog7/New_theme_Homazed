@@ -35,6 +35,7 @@ import Cards_Init from './assets/cards';
 import FileUploadInit from "./components/dropzone";
 
 import {  animationEnter, animationLeave } from './animations';
+import Profile_Init from "./components/pages/profile";
 
 barba.hooks.once((data) => {
 	//signatureInConsole();
@@ -87,6 +88,7 @@ barba.init({
 				Modals_Init(next);
 				Cards_Init();
 News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -103,6 +105,7 @@ News_Init();
 				Modals_Init(next);
 				Cards_Init();
 News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -124,6 +127,7 @@ News_Init();
 				Modals_Init(next);
 				Cards_Init();
 News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -142,6 +146,7 @@ News_Init();
 				Modals_Init(next);
 				Cards_Init();
 News_Init();
+              Profile_Init();
 				CopyBtn_Init();
 				Maps_Init();
 				Tooltip_Init(next);
@@ -154,6 +159,7 @@ News_Init();
 
 				Tags_Init();
  News_Init();
+        Profile_Init();
 			}
         },
 		{
@@ -170,6 +176,7 @@ News_Init();
 				Modals_Init(next);
 				Cards_Init();
 News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -187,6 +194,7 @@ News_Init();
 				Modals_Init(next);
 				Cards_Init();
 News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -214,6 +222,7 @@ News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
         News_Init();
+              Profile_Init();
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -233,6 +242,7 @@ News_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
         News_Init();
+              Profile_Init();
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 
@@ -253,6 +263,7 @@ News_Init();
 				Tags_Init();
 				Checkbox_And_Radios_Init();
 				News_Init();
+              Profile_Init();
 				// Card_popup_link_Init(next);
 				MapLaunch(next.container);
 				Modals_Init(next);
@@ -270,6 +281,7 @@ News_Init();
 				Projects_Init(next);
 				Tags_Init();
 				News_Init();
+              Profile_Init();
 				Checkbox_And_Radios_Init();
 
 				// Card_popup_link_Init(next);
@@ -293,6 +305,7 @@ News_Init();
 				FileUploadInit();
 				Maps_Init();
 				News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();
@@ -310,6 +323,7 @@ News_Init();
 				FileUploadInit();
 				Maps_Init();
 				News_Init();
+              Profile_Init();
 				Jobs_Init(next);
 				Projects_Init(next);
 				Tags_Init();

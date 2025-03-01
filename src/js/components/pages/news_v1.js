@@ -7,6 +7,7 @@ class NewsV1 {
     this.resultsContainer = this.el.parentElement.querySelector("#results_news_selectors");
     this.resultsSelected = this.el.parentElement.querySelector("#results_selected");
     this.hiddenInput = this.el.parentElement.parentElement.querySelector(".link_w_post_hidden_173 input");
+    this.hiddenInput_user = this.el.parentElement.parentElement.querySelector(".user_hidden_id_179 input");
 
     // Stocke uniquement un seul ID sélectionné (au lieu de Set pour plusieurs)
     this.selectedPostId = this.hiddenInput.value ? this.hiddenInput.value.trim() : null;
@@ -39,7 +40,10 @@ class NewsV1 {
   }
 
   fetchTemplates(query) {
-    const apiUrl = `/wp-json/custom/v1/posts?search=${encodeURIComponent(query)}`;
+    const params = new URLSearchParams(window.location.search);
+    var post_auth = params.get("post_auth");
+    if(!post_auth) post_auth = this.hiddenInput_user?.value;
+    const apiUrl = `/wp-json/custom/v1/posts?search=${encodeURIComponent(query)}&post_auth=${post_auth}`;
 
     fetch(apiUrl)
       .then(response => response.ok ? response.json() : Promise.reject("No post found."))
@@ -114,18 +118,39 @@ class NewsV1 {
   }
 
   addPostToSelected(post) {
-    this.displayResults([post])
+   // this.displayResults([post])
     if (!this.resultsSelected) return;
 
     this.resultsSelected.innerHTML = `
-<br>
-<h4>Post Linked</h4>
+      <br>
+      <h4>Post Linked</h4>
       <div class="selected-post" data-id="${post.id}">
         <div>${post.content}</div>
-      </div>  `;
+      </div>
+       <label class="custom-checkbox">
+            <input type="checkbox" class="premium_renewal" data-id="${post.id}" name="" ${this.selectedPostId === post.id.toString() ? "checked" : ""}>
+            <span class="checkmark"></span>
+            <b>Select</b>
+        </label>
+
+`;
+
+    const checkbox = this.resultsSelected.querySelector(".premium_renewal");
+    checkbox.addEventListener("change", () => {
+
+      if (checkbox.checked) {
+        this.selectPost(post);
+      } else {
+        this.deselectPost();
+      }
+
+    });
+
+    Modals_Init(this.resultsSelected);
   }
 
   removePostFromSelected(postId) {
+    this.resultsSelected.innerHTML = '';
     const selectedPostElement = this.resultsSelected.querySelector(`.selected-post[data-id="${postId}"]`);
     if (selectedPostElement) {
       selectedPostElement.remove();
@@ -153,9 +178,13 @@ class NewsV1 {
       .then(post => this.addPostToSelected(post[0]))
       .catch(error => console.error(`Error ${this.selectedPostId}:`, error));
   }
+
   loadSelatestPost() {
     if (!this.selectedPostId) {
-      fetch(`/wp-json/custom/v1/posts?search=-1`)
+      const params = new URLSearchParams(window.location.search);
+      var post_auth = params.get("post_auth");
+      if(!post_auth) post_auth = this.hiddenInput_user?.value;
+      fetch(`/wp-json/custom/v1/posts?search=-1&post_auth=`+post_auth)
         .then(response => response.ok ? response.json() : Promise.reject("No post found."))
         .then(data => {
           this.displayResults(data);
@@ -166,9 +195,10 @@ class NewsV1 {
         });
     }
 
-
   }
 
 }
 
 export default NewsV1;
+
+

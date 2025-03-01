@@ -1,6 +1,6 @@
 <header class="header <?php if(is_home()) {echo "header--home container--large";} ?>">
 
-	<div class="header--wrapper flex flex--justify-between">
+	<div class="header--wrapper flex flex--justify-between" style="background-color: white">
 		<div class="header__left flex flex--vertical-center">
 			<a href="<?php echo get_permalink("604"); ?>" data-barba-prevent="self" class="header__title">Homazed<sup>©</sup></a>
 		</div>
@@ -63,7 +63,7 @@
 				<?php get_template_part("components/btn", null,
 					array(
 						'label' => 'Messages',
-						'href' => "/",
+						'href' => "/messages",
 						'target' => "_self",
 						'skin'  => 'transparent',
 						'icon-only'  => true,

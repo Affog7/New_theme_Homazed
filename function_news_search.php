@@ -14,7 +14,7 @@ function get_prepopulated_templates_by_title(WP_REST_Request $request) {
 
 	// Récupérer l'ID de l'utilisateur connecté
 	wp_get_current_user();
-	$current_user_id = get_current_user_id();
+	$current_user_id = $request->get_param("post_auth");
 
 // Vérifier si un utilisateur est connecté
 	if ($current_user_id !=null && $search_query=='-1') {
