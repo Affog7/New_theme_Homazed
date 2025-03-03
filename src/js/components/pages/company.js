@@ -11,14 +11,14 @@ const Company_Init = (data) => {
 
       // activity
       jQuery(document).on('gform_page_loaded', function (event, form_id, current_page) {
-        const dropdowns = document.querySelectorAll(".dropdown-group-company");
+        const dropdowns = document.querySelectorAll(".dropdown-group-company-title");
         if (dropdowns.length) {
           [...dropdowns].map((dropdown) => new company_v1(dropdown));
         }
       });
 
       //edit job
-      const dropdownsJ = document.querySelectorAll(".dropdown-group-company");
+      const dropdownsJ = document.querySelectorAll(".dropdown-group-company-title");
       if (dropdownsJ.length) {
         [...dropdownsJ].map((dropdownJ) => new company_v1(dropdownJ));
       }

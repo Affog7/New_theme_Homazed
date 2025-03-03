@@ -4,16 +4,17 @@ class company_v1 {
     this.input = this.el.querySelector("input");
     this.optionsContainer = this.el.querySelector(".options-container-company");
     this.tagsContainer = this.el.querySelector(".tags-container-company");
+    this.addButton = this.el.querySelector(".add-button-company");
     this.options = this.el.querySelectorAll(".options-container-company div");
+    this.hiddenTagsInput = document.querySelector(".company-i-work-for-input-175  input");
 
-    this.hiddenTagsInput = document.querySelector(".company-i-work-for-input-175 input");
-
-    // Charger les tags si existants
+    // Charger les tags si existants (par exemple, à partir du champ caché)
     this.loadTags();
 
     // Attacher les écouteurs d'événements
     this.input.addEventListener("focus", () => this.openDropdown());
     this.input.addEventListener("input", (e) => this.filterOptions(e));
+    this.addButton.addEventListener("click", () => this.addCustomTag());
     document.addEventListener("click", (e) => this.handleOutsideClick(e));
 
     this.options.forEach((option) => {
@@ -42,23 +43,33 @@ class company_v1 {
 
   addTag(tagText) {
     const existingTags = this.tagsContainer.querySelectorAll(".tag");
-    const tagExists = Array.from(existingTags).some(tag => tag.textContent.trim() === tagText);
 
-    if (!tagExists) {
+    // Vérifier s'il y a déjà un tag et ne pas permettre l'ajout de plus d'un tag
+    if (existingTags.length === 0) {
       const tag = document.createElement("div");
       tag.className = "tag";
       tag.innerHTML = `${tagText} <span class="remove-tag">x</span>`;
       this.tagsContainer.appendChild(tag);
 
-      // Attacher un événement pour supprimer le tag et mettre à jour les tags cachés
+      // Attacher un événement pour supprimer le tag et réactiver l'entrée
       tag.querySelector(".remove-tag").addEventListener("click", () => {
         tag.remove();
         this.updateHiddenTags();
+        this.input.disabled = false; // Réactiver l'entrée
       });
 
-      this.updateHiddenTags(); // Mettre à jour les tags dans le champ caché
+      this.input.value = '';
+      this.input.disabled = true; // Désactiver l'entrée après l'ajout d'un tag
+      this.closeDropdown();
+      this.updateHiddenTags();
     }
-    this.closeDropdown();
+  }
+
+  addCustomTag() {
+    const customTagText = this.input.value.trim();
+    if (customTagText) {
+      this.addTag(customTagText);
+    }
   }
 
   handleOutsideClick(e) {
@@ -73,24 +84,13 @@ class company_v1 {
       tags.push(tag.textContent.trim().replace("x", "").trim());
     });
 
-    // Mettre à jour la valeur du champ caché avec les tags
     this.hiddenTagsInput.value = tags.join(",");
   }
 
   loadTags() {
-    // Charger les tags depuis le champ caché si présents
     const savedTags = this.hiddenTagsInput.value.split(",").filter(tag => tag.trim() !== "");
     savedTags.forEach(tagText => {
-      const tag = document.createElement("div");
-      tag.className = "tag";
-      tag.innerHTML = `${tagText} <span class="remove-tag">x</span>`;
-      this.tagsContainer.appendChild(tag);
-
-      // Attacher un événement pour supprimer le tag et mettre à jour les tags cachés
-      tag.querySelector(".remove-tag").addEventListener("click", () => {
-        tag.remove();
-        this.updateHiddenTags();
-      });
+      this.addTag(tagText);
     });
   }
 }

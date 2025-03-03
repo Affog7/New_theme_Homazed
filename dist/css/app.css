@@ -6186,6 +6186,13 @@ hr {
   margin-bottom: 5px;
 }
 
+#mapss {
+  width: 100%;
+  height: 400px; /* Ajuste selon ton besoin */
+  position: relative;
+  z-index: 1;
+}
+
 .reset-password {
   display: block; /* Transforme le lien en élément de bloc */
   text-align: center; /* Centre le texte à l'intérieur */
