@@ -188,6 +188,8 @@ class AddressManager {
     });
   }
 
+
+
   addAddress(place) {
     const existingItems = this.listContainer.querySelectorAll(".address-item");
     const alreadyExists = Array.from(existingItems).some(item => item.dataset.address === place.display_name);
@@ -196,18 +198,22 @@ class AddressManager {
       const listItem = document.createElement("div");
       listItem.className = "address-item";
       listItem.dataset.address = place.display_name;
+      listItem.dataset.lat = place.lat;
+      listItem.dataset.lon = place.lon;
       listItem.innerHTML = `
-        <div class="address-box-profile">
-            <button class="close-btn-profile">✕</button>
-            <input type="text" class="address-input-profile" value="${place.display_name}" readonly>
-            <p class="link-text-profile">Link this location with the right Profile Page</p>
-            <div class="link-container-profile">
-                <a href="https://www.homazed.com/" class="main-link-profile">www.homazed.com/</a>
-                <span class="sub-link-profile"><input type="text" placeholder="officiel/charly-periu" /> </span>
+            <div class="address-box-profile">
+                <button class="close-btn-profile">✕</button>
+                <input type="text" class="address-input-profile" value="${place.display_name}" readonly>
+                <p class="link-text-profile">Link this location with the right Profile Page</p>
+                <div class="link-container-profile">
+                    <a href="https://www.homazed.com/" class="main-link-profile">www.homazed.com/</a>
+                    <span class="sub-link-profile"><input class="inputComplete" value="${place.user ?? ""}" type="text" placeholder="officiel/charly-periu" /></span>
+                </div>
             </div>
-        </div>
+        `;
 
-      `;
+      const inputComplete = listItem.querySelector(".inputComplete");
+      inputComplete.addEventListener("input", () => this.updateHiddenAddresses());
 
       listItem.querySelector(".close-btn-profile").addEventListener("click", () => {
         listItem.remove();
@@ -222,24 +228,46 @@ class AddressManager {
     this.closeDropdown();
   }
 
+  updateHiddenAddresses() {
+    const addresses = Array.from(this.listContainer.querySelectorAll(".address-item"))
+      .map(item => {
+        const address = item.dataset.address;
+        const lat = item.dataset.lat;
+        const lon = item.dataset.lon;
+        const inputComplete = item.querySelector(".inputComplete");
+        const inputValue = inputComplete ? inputComplete.value.trim() : "";
+        return inputValue ? `addr=${address}@user=${inputValue}@lat=${lat}@long=${lon}` : `addr=${address}@lat=${lat}@long=${lon}`;
+      });
+
+    this.hiddenInput.value = addresses.join("|");
+  }
+
+  loadAddresses() {
+    const savedAddresses = this.hiddenInput.value.split("|").filter(addr => addr.trim() !== "");
+    savedAddresses.forEach(addr => {
+      const addressMatch = addr.match(/addr=([^@]*)/);
+      const userMatch = addr.match(/user=([^@]*)/);
+      const latMatch = addr.match(/lat=([^@]*)/);
+      const lonMatch = addr.match(/long=([^@]*)/);
+
+      const address = addressMatch ? addressMatch[1] : "";
+      const user = userMatch ? userMatch[1] : "";
+      const lat = latMatch ? latMatch[1] : "";
+      const lon = lonMatch ? lonMatch[1] : "";
+
+      this.addAddress({ display_name: address, lat, lon, user });
+    });
+  }
+
+
   handleOutsideClick(e) {
     if (!this.el.contains(e.target)) {
       this.closeDropdown();
     }
   }
 
-  updateHiddenAddresses() {
-    const addresses = [];
-    this.listContainer.querySelectorAll(".address-item").forEach(item => {
-      addresses.push(item.dataset.address);
-    });
-    this.hiddenInput.value = addresses.join("|");
-  }
-
-  loadAddresses() {
-    const savedAddresses = this.hiddenInput.value.split("|").filter(addr => addr.trim() !== "");
-    savedAddresses.forEach(addr => this.addAddress({ display_name: addr }));
-  }
 }
+
+
 
 export default AddressManager;

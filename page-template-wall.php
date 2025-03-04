@@ -19,7 +19,7 @@
 			// 	'orderby' => 'display_name'
 			// );
 			$posts_args = array(
-				"post_type" => ["homes","jobs","projects","news"],
+				"post_type" => ["homes","jobs","projects","news","profile"],
 				//"post_status" => "publish",
 				"posts_per_page" => -1,
 				"orderby" => "date",
@@ -37,7 +37,7 @@
 					// 	'include' => $users_with_tag
 					// );
 					$posts_args = array(
-						"post_type" => ["homes","jobs","projects","news"],
+						"post_type" => ["homes","jobs","projects","news","profile"],
 						//"post_status" => "publish",
 						"posts_per_page" => -1,
 						"orderby" => "date",
