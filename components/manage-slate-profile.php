@@ -1,8 +1,8 @@
- 
+
 <div class="card-form" style="border: 2px solid #7e7c804d">
     <div class="post-container">
         <div class="post-header">
-            <h1>HOME</h1>
+            <h1>PROFILE</h1>
             <div class="options">
                 <button id="" class="premium-toggle premium-button">Premium</button>
                 <button id="" style="display: <?php echo (($args['event_type'] != "None") ? "block" : "none"); ?>" class="event-toggle event-button">Event</button>
@@ -11,8 +11,7 @@
 
         <div class="row">
             <div>
-                <strong><?php echo esc_html($args['category'])."   "; ?></strong>
-                <?php echo esc_html($args['action']); ?>
+                <strong><?php echo esc_html($args['title']) ; ?></strong>
             </div>
             <div>
                 <a href="<?php echo esc_url(get_permalink($args['id'])); ?>">

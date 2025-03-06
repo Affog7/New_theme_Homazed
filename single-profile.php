@@ -4,6 +4,10 @@ $current_user_id = get_current_user_id();
 global $post;
 $post_id = get_the_ID();
 
+//
+$account_category = get_field("account_category", "user_".$post->post_author);
+$is_for_recommandation = $account_category == "pro-user" || $account_category == "company-user";
+
 
 ?>
 
@@ -13,110 +17,99 @@ $post_id = get_the_ID();
 	<span class="hide current_user_id page_user_id" data-u-id="<?php echo $current_user_id; ?>"></span>
 	<div class="container container--default public-profile tabs-group">
 		<?php
-			$author_id = $post->post_author;
-			$author_data = get_user_by("id", intval($author_id));
-			$author_profile_picture = get_field("user_profile_picture", "user_".$author_id);
-			$author_first_name = get_field("user_first_name", "user_".$author_id);
-			$author_last_name = get_field("user_last_name", "user_".$author_id);
-			$author_permalink = get_permalink("602")."?user_id=".$author_id;
-			$author_phone_number = get_field("user_phone_number", "user_".$author_id);
-			$author_connections = get_field("user_connections", "user_".$author_id);
-			$author_profile_privacy = get_field("user_profile_privacy", "user_".$author_id);
-			$author_connections_settings = get_field("user_connections_settings", "user_".$author_id);
-			$author_email_address = $author_data->user_email;
+		$author_id = $post->post_author;
+		$author_data = get_user_by("id", intval($author_id));
+		$author_profile_picture = get_field("user_profile_picture", "user_".$author_id);
+		$author_first_name = get_field("user_first_name", "user_".$author_id);
+		$author_last_name = get_field("user_last_name", "user_".$author_id);
+		$author_profile_name = get_field("profile_name", "user_".$author_id) ?? $author_first_name . " " . $author_last_name;
 
-			$author_website_link = get_field("user_website_link", "user_".$author_id);
+		$user_avatar_id = get_field("user_avatar_ids", "user_".$author_id);
 
-			// checkbox  todo_augustin
-			$post_comment_available = get_field("post_comment_available", $post_id);
-			$post_phone_calls_available = get_field("post_phone_calls_available", $post_id);
-			$post_add_my_website_link = get_field("post_add_my_website_link", $post_id);
+		$author_permalink = get_permalink("602")."?user_id=".$author_id;
+		$author_phone_number = get_field("user_phone_number", "user_".$author_id);
+		$author_connections = get_field("user_connections", "user_".$author_id);
+		$author_profile_privacy = get_field("user_profile_privacy", "user_".$author_id);
+		$author_connections_settings = get_field("user_connections_settings", "user_".$author_id);
+		$author_email_address = $author_data->user_email;
 
-			$author_online_shop_link = get_field("user_online_shop_link", "user_".$author_id);
+		$author_website_link = get_field("user_website_link", "user_".$author_id);
 
-			// todo_augustin champs link
-			$post_author_link = get_field("post_author_link",$post_id);
-			$post_Add_my_webshop_link = get_field("post_Add_my_webshop_link", $post_id);
-			$Is_Add_my_webshop_link = get_field("Is_Add_my_webshop_link", $post_id);
+		// checkbox  todo_augustin
+		$post_comment_available = get_field("post_comment_available", $post_id);
+		$post_phone_calls_available = get_field("post_phone_calls_available", $post_id);
+		$post_add_my_website_link = get_field("post_add_my_website_link", $post_id);
 
+		$author_online_shop_link = get_field("user_online_shop_link", "user_".$author_id);
 
-			$post_home_event_privacy = get_field("home_event_privacy", $post_id);
-
-			$post_home_action_value = get_field("post_home_action", $post_id);
-			switch ($post_home_action_value) {
-				case "sale": $post_home_action_translate = "for Sale"; break;
-				case "rent": $post_home_action_translate = "for Rent"; break;
-				case "sold": $post_home_action_translate = "sold"; break;
-				case "rented": $post_home_action_translate = "rented"; break;
-			}
-			$post_home_category_value = get_field("post_home_category", $post_id);
-			switch ($post_home_category_value) {
-				case "house": $post_home_category_translate = "House"; break;
-				case "apartment": $post_home_category_translate = "Apartment"; break;
-				case "new_construction": $post_home_category_translate = "New construction"; break;
-				case "land_plot": $post_home_category_translate = "Land/Plot"; break;
-				case "office": $post_home_category_translate = "Office"; break;
-				case "commercial_industry": $post_home_category_translate = "Commercial/Industry"; break;
-				case "garage_parking": $post_home_category_translate = "Garage/Parking"; break;
-				case "other": $post_home_category_translate = "Other"; break;
-			}
-			$post_title = get_field("post_home_title") ? get_field("post_home_title") : get_the_title();
-			$post_link = get_the_permalink($post_id);;
-			$post_imgs = get_field("post_home_gallery", $post_id);
-			$post_gallery_image_ids = get_field("post_home_gallery_ids", $post_id);
-			$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
-			$post_main_content = get_the_content();
-			$post_main_content_excerpt = get_the_excerpt();
-			$post_price = get_field("post_home_price", $post_id);
-			$post_bedrooms = get_field("post_home_number_of_bedrooms", $post_id);
-			$post_bathrooms = get_field("post_home_number_of_bathrooms", $post_id);
-			$post_home_size = get_field("post_home_size", $post_id);
-			$post_outdoor_size = get_field("post_home_outdoor_size", $post_id);
-			$post_home_amenities = get_field("post_home_amenities", $post_id);
-			$post_home_year_built = get_field("post_home_year_built", $post_id);
-			$post_neighborhood_amenities = get_field("post_home_neighborhood_amenities", $post_id);
-			$post_transportation = get_field("post_home_transportation", $post_id);
-			$post_garages_parking = get_field("post_home_garages_parking", $post_id);
-			$post_schools = get_field("post_home_schools_nearby", $post_id);
-			$post_home_style_architecture = get_field("post_home_style_and_architecture", $post_id);
-			$post_additional_features = get_field("post_home_additional_home_features", $post_id);
-			$post_taxes = get_field("post_home_property_taxes", $post_id);
-			$post_fees = get_field("post_home_other_property_fees", $post_id);
-			$post_systems = get_field("post_heating_cooling_systems", $post_id);
-			$post_energy_rating = get_field("post_home_energy_rating", $post_id);
-
-			$post_energy_consumption = get_field("post_home_estimated_energy_rating_energy_consumption", $post_id);
-
-			//$post_address = get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city");
-			$post_address = get_field("post_location_address") ? get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city") : get_field("post_address");
+		// todo_augustin champs link
+		$post_author_link = get_field("post_author_link",$post_id);
+		$post_Add_my_webshop_link = get_field("post_Add_my_webshop_link", $post_id);
+		$Is_Add_my_webshop_link = get_field("Is_Add_my_webshop_link", $post_id);
 
 
-			$post_location_latitude = get_field("post_location_latitude");
-			$post_location_longitude = get_field("post_location_longitude");
-			$post_post_tags = get_the_terms($post_id, 'posttags');
-			if (!is_wp_error($post_post_tags) && !empty($post_post_tags)) {
+		$post_home_event_privacy = get_field("home_event_privacy", $post_id);
+
+		$post_home_action_value = get_field("post_home_action", $post_id);
+
+		$post_title = get_field("post_home_title") ? get_field("post_home_title") : get_the_title();
+		$post_link = get_the_permalink($post_id);;
+		$post_imgs = get_field("post_home_gallery", $post_id);
+		$post_gallery_image_ids = get_field("post_home_gallery_ids", $post_id);
+		$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
+		$post_main_content = get_the_content();
+		$post_main_content_excerpt = get_the_excerpt();
+		$post_price = get_field("post_home_price", $post_id);
+		$post_bedrooms = get_field("post_home_number_of_bedrooms", $post_id);
+		$post_bathrooms = get_field("post_home_number_of_bathrooms", $post_id);
+		$post_home_size = get_field("post_home_size", $post_id);
+		$post_outdoor_size = get_field("post_home_outdoor_size", $post_id);
+		$post_home_amenities = get_field("post_home_amenities", $post_id);
+		$post_home_year_built = get_field("post_home_year_built", $post_id);
+		$post_neighborhood_amenities = get_field("post_home_neighborhood_amenities", $post_id);
+		$post_transportation = get_field("post_home_transportation", $post_id);
+		$post_garages_parking = get_field("post_home_garages_parking", $post_id);
+		$post_schools = get_field("post_home_schools_nearby", $post_id);
+		$post_home_style_architecture = get_field("post_home_style_and_architecture", $post_id);
+		$post_additional_features = get_field("post_home_additional_home_features", $post_id);
+		$post_taxes = get_field("post_home_property_taxes", $post_id);
+		$post_fees = get_field("post_home_other_property_fees", $post_id);
+		$post_systems = get_field("post_heating_cooling_systems", $post_id);
+		$post_energy_rating = get_field("post_home_energy_rating", $post_id);
+
+		$post_energy_consumption = get_field("post_home_estimated_energy_rating_energy_consumption", $post_id);
+
+		//$post_address = get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city");
+		$post_address = get_field("post_location_address") ? get_field("post_location_address") . ", " . get_field("post_location_zip") . " " . get_field("post_location_city") : get_field("post_address");
+
+
+		$post_location_latitude = get_field("post_location_latitude");
+		$post_location_longitude = get_field("post_location_longitude");
+		$post_post_tags = get_the_terms($post_id, 'posttags');
+		if (!is_wp_error($post_post_tags) && !empty($post_post_tags)) {
 				usort($post_post_tags, function($a, $b) {
 					return $a->term_id - $b->term_id; // Tri en ordre croissant selon l'ID
 				});
 			}
 
-			$post_join_file_id = get_field("post_home_join_file");
-			$post_join_file = wp_get_attachment_url($post_join_file_id);
+		$post_join_file_id = get_field("post_home_join_file");
+		$post_join_file = wp_get_attachment_url($post_join_file_id);
 
-			$post_events_type = get_field("post_home_event_type");
-			$post_events_text_1 = get_field("post_home_event_text_1");
+		$post_events_type = get_field("post_home_event_type");
+		$post_events_text_1 = get_field("post_home_event_text_1");
 
-			$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
-			$i_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$current_user_id);
-			$him_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$author_id);
-			$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$author_id);
+		$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
+		$i_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$current_user_id);
+
+		$him_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$author_id);
+		$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$author_id);
 
 
- //______________todo augustin 15_12_2024
-			$i_request_this_contact = (!empty($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships)) ? true : false;
-			$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false;
-			$him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false;
-			$him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false;
+		//______________todo augustin 15_12_2024
+		$i_request_this_contact = (!empty($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships)) ? true : false;
+		$i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($author_id, $i_accept_contactlist_users_relationships)) ? true : false;
+		$him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false;
+		$him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false;
 
 
 		if($i_request_this_contact && $i_accept_this_contact && $him_request_me && !$him_accept_me){
@@ -125,42 +118,45 @@ $post_id = get_the_ID();
 			$contact_classes .= ' relation_btn--contact-requested';
 			$contact_icon = 'single-neutral-actions-refresh';
 			$relation_type = 'remove-request-contact-list';
- 		}elseif($i_request_this_contact && $i_accept_this_contact && $him_request_me && $him_accept_me){
+		}elseif($i_request_this_contact && $i_accept_this_contact && $him_request_me && $him_accept_me){
 			// relation done [RED]";
 			$post_events_text_1 = 'Contact accepted';
 			$contact_classes .= ' relation_btn--contact-relation-done';
 			$contact_icon = 'check-circle-1';
 			$relation_type = 'refuse-contact-list';
- 			// alert(are your sure ?)
+			// alert(are your sure ?)
 		}elseif($i_request_this_contact  && !$i_accept_this_contact && $him_request_me && $him_accept_me){
 			// He request, I did not accept yet [GREEN2]";
 			$post_events_text_1 = 'Accept contact';
 			$contact_classes .= ' relation_btn--contact-him-requested';
 			$contact_icon = 'check-circle-1';
 			$relation_type = 'accept-contact-list';
- 		}
-			if($i_request_this_contact && $i_accept_this_contact && $him_request_me && $him_accept_me){
+		}
+		if($i_request_this_contact && $i_accept_this_contact && $him_request_me && $him_accept_me){
 				// relation done [RED]";
 				$post_events_text_1 = 'Contact accepted';
 				$contact_classes .= ' relation_btn--contact-relation-done';
 				$contact_icon = 'check-circle-1';
 				$relation_type = 'refuse-contact-list';
 				// alert(are your sure ?)
- 			}
+			}
 
-//________________ 15_12_2024
+		//________________ 15_12_2024
 
-			$post_events_text_2 = get_field("post_home_event_text_2");
-			$post_events_privacy = get_field("post_home_event_privacy");
+		$post_events_text_2 = get_field("post_home_event_text_2");
+		$post_events_privacy = get_field("post_home_event_privacy");
 
-			$i_favorite_posts_relationships = get_field("i_favorite_posts_relationships", "user_".$current_user_id);
-			$i_like_posts_relationships = get_field("i_like_posts_relationships", "user_".$current_user_id);
+		$i_favorite_posts_relationships = get_field("i_favorite_posts_relationships", "user_".$current_user_id);
+		$i_like_posts_relationships = get_field("i_like_posts_relationships", "user_".$current_user_id);
 
-			$users_like_me_posts = get_field("users_like_me_posts", $post_id);
-			$users_favorite_me_posts = get_field("users_favorite_me_posts", $post_id);
+		$users_like_me_posts = get_field("users_like_me_posts", $post_id);
+		$users_favorite_me_posts = get_field("users_favorite_me_posts", $post_id);
 
-			$main_picture_image_ids = get_field("post_home_main_picture_ids", $post_id);
-			$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
+		$main_picture_image_ids = get_field("post_home_main_picture_ids", $post_id);
+
+
+
+		$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
 			$post_avatar_picture_id = ($main_picture_image_ids_array[0]) ? $main_picture_image_ids_array[0] : $post_gallery_image_ids_array[0];
 
 //			$id_entry = get_field("_gravityformsadvancedpostcreation_entry_id", $post_id);
@@ -170,18 +166,25 @@ $post_id = get_the_ID();
 
 		<!-- Post resume -->
 		<div class="card-form content" data-barba-prevent="all">
-			<div class="resume">
-				<?php get_template_part("components/post-avatar", null, array(
-						'post_main_picture' => wp_get_attachment_image_src($post_avatar_picture_id, 'large-img-medium'),
-						'title' => $post_title,
+			<div class="resume badge_pro">
+				<?php get_template_part("components/post-avatar-pro", null, array(
+						'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
+						'title' => $author_profile_name,
 				) ); ?>
 
 				<div class="resume__data">
 					<div class="flex flex--vertical-center">
-						<h2 class="resume__name card-form__title"><?php echo $post_title; ?></h2>
+						<h2 class="resume__name card-form__title"><?php echo $author_profile_name; ?></h2>
 					</div>
 
-					<p style=""><?php echo $post_home_category_translate; ?> <?php echo $post_home_action_translate; ?></p>
+					<p style=""><?php
+						if($account_category == "pro-user"){
+							get_first_element(  get_field("post_home_Jobs_title"));
+						} else {
+							get_first_element(  get_field("post_home_sector_activity"));
+						}
+						?>
+						 </p>
 
 					<ul class="resume__account-creation">
 						<?php if(!empty($post_address)): ?>
@@ -265,17 +268,7 @@ $post_id = get_the_ID();
 					); ?>
 
 
-				<?php //todo_augustin manage slate
-//				if (get_current_user_id() == $author_id) : ?>
-<!--					<a href="/manageslate/?post=--><?php //echo $post_id; ?><!--" title="Manage-Slate"   class="btn btn--ghost btn--icon  square active" >-->
-<!--						<span class="btn__content">-->
-<!--							<span class="u-sr-accessible">Manage Slate</span>-->
-<!--							<div class="o-svg-icon ">-->
-<!--								<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.85 8.75l4.15.83v4.84l-4.15.83 2.35 3.52-3.43 3.43-3.52-2.35-.83 4.15H9.58l-.83-4.15-3.52 2.35-3.43-3.43 2.35-3.52L0 14.42V9.58l4.15-.83L1.8 5.23 5.23 1.8l3.52 2.35L9.58 0h4.84l.83 4.15 3.52-2.35 3.43 3.43-2.35 3.52zm-1.57 5.07l4-.81v-2l-4-.81-.54-1.3 2.29-3.43-1.43-1.43-3.43 2.29-1.3-.54-.81-4h-2l-.81 4-1.3.54-3.43-2.29-1.43 1.43L6.38 8.9l-.54 1.3-4 .81v2l4 .81.54 1.3-2.29 3.43 1.43 1.43 3.43-2.29 1.3.54.81 4h2l.81-4 1.3-.54 3.43 2.29 1.43-1.43-2.29-3.43.54-1.3zm-8.186-4.672A3.43 3.43 0 0 1 12 8.57 3.44 3.44 0 0 1 15.43 12a3.43 3.43 0 1 1-5.336-2.852zm.956 4.274c.281.188.612.288.95.288A1.7 1.7 0 0 0 13.71 12a1.71 1.71 0 1 0-2.66 1.422z"></path></g></svg>-->
-<!--							</div>-->
-<!--						</span>-->
-<!--					</a>-->
-<!--				--><?php //endif; ?>
+
 
 
 			</div>
@@ -284,9 +277,47 @@ $post_id = get_the_ID();
 			<div class="flex profile-actions__quick-actions btn-group">
 				<?php if(get_current_user_id() != $author_id): ?>
 
+
+					<?php
+					get_template_part( 'components/btn', null,
+						array(
+							'label' => 'Add contact',
+							'href' => "",
+							'target' => "_self",
+							'skin'  => 'ghost',
+							'icon-only'  => false,
+							'disabled'  => false,
+							'icon-position' => '',
+							'icon' => '',
+							'additional-classes' => ' ',//edit_post_main
+							'data-attribute' => '',
+							'theme' => "",
+						)
+					);
+					if($is_for_recommandation) {
+						get_template_part("components/btn", null, array(
+							'label' => 'Like',
+							'href' => "",
+							'target' => "_self",
+							'skin'  => 'ghost',
+							'icon-only'  => true,
+							'disabled'  => false,
+							'icon-position' => '', // left or right
+							'icon' => 'like-1', // nom du fichier svg
+							'additional-classes' =>'',
+							'data-attribute' => "",
+							'theme' => "",
+						));
+					}
+
+					 ?>
+
+
+				<?php else: ?>
 					<?php $is_checked_favorite = (!empty($i_favorite_posts_relationships) && in_array($post_id, $i_favorite_posts_relationships)) ? true : false; ?>
 
-					<?php get_template_part("components/btn", null, array(
+				<?php
+					get_template_part("components/btn", null, array(
 						'label' => 'Favorite',
 						'href' => "",
 						'target' => "_self",
@@ -298,10 +329,8 @@ $post_id = get_the_ID();
 						'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn--favorite' : 'post-footer__button relation_btn relation_btn--favorite',
 						'data-attribute' => "data-relation-him=" . $post_id . " data-relation-type='favorite'",
 						'theme' => "",
-					)); ?>
-				<?php else: ?>
-
-				<?php get_template_part( 'components/btn', null,
+					));
+					get_template_part( 'components/btn', null,
 					array(
 						'label' => 'Edit post',
 						'href' => $post_link."/?post_id=".$post_id,
@@ -316,7 +345,9 @@ $post_id = get_the_ID();
 						'theme' => "",
 					)
 				); ?>
+
 				<?php endif; ?>
+
 				<?php get_template_part( 'components/btn', null,
 					array(
 						'label' => 'Share',
@@ -1131,7 +1162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php
 
 				$posts_args = array(
-					"post_type" => "homes",
+					"post_type" => "profile",
 					"p" => $post_id,
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
@@ -1159,13 +1190,9 @@ document.addEventListener("DOMContentLoaded", function () {
 						"lng" => get_field("post_location_longitude",$post_id_),
 						//"account_type" => null,
 						"location" => get_field("post_location_address",$post_id_) ? get_field("post_location_address",$post_id_) . ", " . get_field("post_location_zip",$post_id_) . " " . get_field("post_location_city",$post_id_) : get_field("post_address",$post_id_),
-//						"price" => get_field("post_home_price", $post_id_),
-//						"bedrooms" => get_field("post_home_number_of_bedrooms", $post_id_),
-//						"bathrooms" => get_field("post_home_number_of_bathrooms", $post_id_),
-//						"home_size" => get_field("post_home_size", $post_id_),
-//						"outdoor_size" => get_field("post_home_outdoor_size", $post_id_),
-						//"img" => get_the_post_thumbnail()
+//
 					];
+
 					array_push($post_content_for_map, $post_for_map);
 				endwhile;
 				endif;
@@ -1246,7 +1273,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
 			<div class="map map--single anim_els">
 				<div id="map">
-					<?php get_template_part( 'components/map-popup', null ); ?>
+					<?php get_template_part( 'components/map-popup-profile', null ); ?>
 				</div>
 
 			</div>
@@ -1589,7 +1616,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 	</div>
 
-	<?php comments_template(); ?>
 
 </main>
 

@@ -3,6 +3,12 @@
 $user_link = get_permalink("602")."?user_id=".$args["user_id"];
 
 $i_favorite_posts_relationships = get_field("i_favorite_posts_relationships", "user_".get_current_user_ID());
+
+$account_category = get_field("account_category", "user_".$args["user_id"]);
+
+
+$company_i_work = get_field("company_i_work",  $args["id"]);
+
 $i_like_posts_relationships = get_field("i_like_posts_relationships", "user_".get_current_user_ID());
 
 $users_like_me_posts = get_field("users_like_me_posts", $args["id"]);
@@ -37,9 +43,9 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             <!-- Post author -->
             <div class="post-header__main-title flex flex--vertical-center">
 
-                <?php get_template_part("components/user-and-post-avatar", null, array(
+                <?php get_template_part("components/post-avatar", null, array(
                     'user_picture' => $user_avatar_id,
-                    'post_main_picture' => $post_avatar_picture_id,
+                    'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),//$post_avatar_picture_id,
                     'first_name' => $args["first_name"],
                     'last_name' => $args["last_name"],
                     'user_link' => $user_link,
@@ -48,18 +54,10 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
 						<a href="<?php echo $user_link; ?>" class="card__title__owner"  style="margin-right: unset">
-							<?php echo $args["post_creator_name"]." ;" ;?>
+							<?php echo $args["post_creator_name"]  ;?>
 						</a><?php endif; ?>
 
-					<span class="card__title flex flex--vertical-center">
-							<?php
-                            if($args["title_post"]) {
-                                echo ucfirst(strtolower($args["title_post"]));
-                            } else {
-                                echo ucfirst(strtolower($args["title"])) ;
-                            }
-                            ?>
-					</span>
+
 
 
                     <?php
@@ -72,11 +70,15 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 
             <!-- Post type -->
             <?php if($args["post_type"] && $args["post_type_slug"]): ?>
-                <div class="post-type flex flex--vertical-center">
+			<div class="post-type flex flex--vertical-center">
+				<?php echo file_get_contents(get_stylesheet_directory().'/src/images/icons/badge-check-verified.svg'); ?>
+
+
 					<span class="post-type__name post-type__name--<?php echo $args["post_type_slug"]; ?>">
-							<?php switch ($args["post_type"]) {
-                                case "homes": echo __('Homes', 'homazed'); break;
-                                case "Services": echo __('Services', 'homazed'); break;
+							<?php switch ($account_category) {
+                                case "individual-user": echo __('Individual user', 'homazed'); break;
+                                case "pro-user": echo __('Pro user', 'homazed'); break;
+                                case "company-user": echo __('Company user', 'homazed'); break;
                             } ?>
 					</span>
                     <?php echo file_get_contents(get_stylesheet_directory().'/src/images/icons/post-type-'.$args["post_type_slug"].'.svg'); ?>
@@ -87,7 +89,14 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
         <div class="flex flex--justify-between card__header__item">
             <div class="flex flex--vertical-center owner_by">
 				<span class="post-category post_type">
-					<?php echo $args["home_category"]; ?> <?php echo $args["home_type"]; ?>
+					<?php
+					if($account_category == "pro-user"){
+						get_first_element(  $args["post_home_Jobs_title"]);
+					} else {
+						get_first_element(  $args["post_home_sector_activity"]);
+					}
+
+					?>
 				</span>
             </div>
             <?php if($args["address_name"]): ?>

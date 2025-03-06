@@ -32,7 +32,7 @@ if ($post_id != -1) {
 	// Cas : Charger tous les posts de l'utilisateur
 	$query = new WP_Query([
 		'post_author' => "$user_id",
-		'post_type' => ['homes','jobs','projects','news'],
+		'post_type' => ['homes','jobs','projects','news','profile'],
 		'posts_per_page' => -1,
 	]);
 	$user_posts = $query->posts;

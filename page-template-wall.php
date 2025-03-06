@@ -284,8 +284,8 @@
 					));
 
 
-					get_template_part("components/comments", null, array(
-						"post_id" => $content["id"]));
+//					get_template_part("components/comments", null, array(
+//						"post_id" => $content["id"]));
 
 				endif;
 			endforeach;

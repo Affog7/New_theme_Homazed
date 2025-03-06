@@ -6193,6 +6193,12 @@ hr {
   z-index: 1;
 }
 
+.badge_pro svg {
+  height: 20px;
+  position: absolute;
+  margin-top: 47px;
+}
+
 .reset-password {
   display: block; /* Transforme le lien en élément de bloc */
   text-align: center; /* Centre le texte à l'intérieur */
