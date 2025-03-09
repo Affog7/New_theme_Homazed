@@ -167,10 +167,22 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 		<!-- Post resume -->
 		<div class="card-form content" data-barba-prevent="all">
 			<div class="resume badge_pro">
-				<?php get_template_part("components/post-avatar-pro", null, array(
-						'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
-						'title' => $author_profile_name,
-				) ); ?>
+
+				<?php
+                $is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $post_id);
+
+                if($is_reniew_post_premium){
+                    get_template_part("components/post-avatar-pro", null, array(
+                        'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
+                        'title' => $author_profile_name,
+                    ) );
+                } else {
+                    get_template_part("components/post-avatar", null, array(
+                        'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
+                        'title' => $author_profile_name,
+                    ) );
+                }
+                ?>
 
 				<div class="resume__data">
 					<div class="flex flex--vertical-center">
@@ -377,7 +389,7 @@ $show = $post_id == $post_id_presenece;
 	<div class=" popup-content">
 		<div class="body-popup">
 			<div class="popup-header">
-				<h2>Home Post</h2>
+				<h2>Profile Post</h2>
 				<div class="popup-controls">
 					<?php
 					// Récupérer le statut actuel du post
@@ -471,7 +483,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Location</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="17" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="53" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -486,7 +498,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="17" data-step="2"',
+										 'data-attribute' => 'id="submit_" data-form_id="53" data-step="2"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -494,12 +506,12 @@ $show = $post_id == $post_id_presenece;
 				</div>
 			</div>
 
-			<!--  -->
+			<!-- Key infos  -->
 			<div class="form-step" id="step3" style="display:none; height:450px">
 				<div style="height: 400px; overflow: auto;">
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
 
-						<?php echo do_shortcode( '[gravityform id="8" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="54" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
 					</main>
 				</div>
@@ -515,7 +527,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="8" data-step="3"',
+										 'data-attribute' => 'id="submit_" data-form_id="54" data-step="3"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -529,7 +541,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Connections</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="22" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="55" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -544,7 +556,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="22" data-step="4"',
+										 'data-attribute' => 'id="submit_" data-form_id="55" data-step="4"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -557,7 +569,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Event</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="15" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="56" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -572,7 +584,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="15" data-step="5"',
+										 'data-attribute' => 'id="submit_" data-form_id="56" data-step="5"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -585,7 +597,7 @@ $show = $post_id == $post_id_presenece;
 				<div style="height: 400px; overflow: auto;">
 					<h3>Premium</h3>
 					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="20" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+						<?php echo do_shortcode( '[gravityform id="57" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 					</main>
 				</div>
 				<div>
@@ -600,7 +612,7 @@ $show = $post_id == $post_id_presenece;
 										 'icon-position' => '', // left or right
 										 'icon' => '',
 										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="20" data-step="6"',
+										 'data-attribute' => 'id="submit_" data-form_id="57" data-step="6"',
 										 'theme' => "",
 									 )
 								 ); ?>
@@ -674,22 +686,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							<?php if($current_user_id == $author_id): ?>
 								<div class="flex">
 									<div class="flex edit-area hide">
-										<?php
-										// get_template_part( 'components/btn', null,
-										// 	array(
-										// 		'label' => 'Edit price',
-										// 		'href' => "/",
-										// 		'target' => "_self",
-										// 		'skin'  => 'highlight',
-										// 		'icon-only'  => true,
-										// 		'disabled'  => false,
-										// 		'icon-position' => '',
-										// 		'icon' => 'pencil-write',
-										// 		'additional-classes' => 'btn--xsmall btn--inline edit_post_btn mg-r-1',
-										// 		'data-attribute' => 'data-open-modal=\'edit-post--price\'',
-										// 		'theme' => "",
-										// 	)
-										// ); ?>
+
 									</div>
 								<?php endif; ?>
 								<?php get_template_part( 'components/price', null, array(
@@ -701,22 +698,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							<ul class="post-details__caracteristics flex flex--vertical-center">
 								<?php if($current_user_id == $author_id): ?>
 									<li class="edit-area hide">
-										<?php
-										// get_template_part( 'components/btn', null,
-										// 	array(
-										// 		'label' => 'Edit details',
-										// 		'href' => "/",
-										// 		'target' => "_self",
-										// 		'skin'  => 'highlight',
-										// 		'icon-only'  => true,
-										// 		'disabled'  => false,
-										// 		'icon-position' => '',
-										// 		'icon' => 'pencil-write',
-										// 		'additional-classes' => 'btn--xsmall btn--inline edit_post_btn mg-r-1',
-										// 		'data-attribute' => 'data-open-modal=\'edit-post--details-sizes\'',
-										// 		'theme' => "",
-										// 	)
-										// ); ?>
+
 									</li>
 								<?php endif; ?>
 								<?php if($post_bedrooms): ?>
@@ -755,22 +737,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 								<?php if($current_user_id == $author_id): ?>
 									<div class="edit-area hide">
-										<?php
-										//  get_template_part( 'components/btn', null,
-										// 	array(
-										// 		'label' => 'Edit file',
-										// 		'href' => "/",
-										// 		'target' => "_self",
-										// 		'skin'  => 'highlight',
-										// 		'icon-only'  => true,
-										// 		'disabled'  => false,
-										// 		'icon-position' => '',
-										// 		'icon' => 'pencil-write',
-										// 		'additional-classes' => 'btn--xsmall btn--inline edit_post_btn mg-r-1',
-										// 		'data-attribute' => 'data-open-modal=\'edit-post--files\'',
-										// 		'theme' => "",
-										// 	)
-										// ); ?>
+
 									</div>
 								<?php endif; ?>
 								<?php if($post_join_file): ?>
@@ -833,22 +800,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 					<?php if($current_user_id == $author_id): ?>
 						<div class="edit-area hide">
-							<?php
-							//  get_template_part( 'components/btn', null,
-							// 		array(
-							// 			'label' => 'Edit images',
-							// 			'href' => "/",
-							// 			'target' => "_self",
-							// 			'skin'  => 'highlight',
-							// 			'icon-only'  => false,
-							// 			'disabled'  => false,
-							// 			'icon-position' => 'left',
-							// 			'icon' => 'pencil-write',
-							// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-							// 			'data-attribute' => 'data-open-modal=\'edit-post--images\'',
-							// 			'theme' => "",
-							// 		)
-							// 	); ?>
+
 						</div>
 					<?php endif; ?>
 				<?php endif; ?>
@@ -857,22 +809,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div class="post-page__section bt-2">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
-					<?php
-					//  get_template_part( 'components/btn', null,
-					// 		array(
-					// 			'label' => 'Edit events',
-					// 			'href' => "/",
-					// 			'target' => "_self",
-					// 			'skin'  => 'highlight',
-					// 			'icon-only'  => false,
-					// 			'disabled'  => false,
-					// 			'icon-position' => 'left',
-					// 			'icon' => 'pencil-write',
-					// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 			'data-attribute' => 'data-open-modal=\'edit-post--events\'',
-					// 			'theme' => "",
-					// 		)
-					// 	); ?>
+
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
@@ -899,22 +836,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div class="<?php if($post_post_tags) echo "bt-2" ?>">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
-					<?php
-					// get_template_part( 'components/btn', null,
-					// 	array(
-					// 		'label' => 'Edit tags',
-					// 		'href' => "/",
-					// 		'target' => "_self",
-					// 		'skin'  => 'highlight',
-					// 		'icon-only'  => false,
-					// 		'disabled'  => false,
-					// 		'icon-position' => 'left',
-					// 		'icon' => 'pencil-write',
-					// 		'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 		'data-attribute' => 'data-open-modal=\'edit-post--tags\'',
-					// 		'theme' => "",
-					// 	)
-					// ); ?>
+
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
@@ -945,22 +867,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div class="post-page__section bt-2">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
-					<?php
-					// get_template_part( 'components/btn', null,
-					// 		array(
-					// 			'label' => 'Edit description',
-					// 			'href' => "/",
-					// 			'target' => "_self",
-					// 			'skin'  => 'highlight',
-					// 			'icon-only'  => false,
-					// 			'disabled'  => false,
-					// 			'icon-position' => 'left',
-					// 			'icon' => 'pencil-write',
-					// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 			'data-attribute' => 'data-open-modal=\'edit-post--description\'',
-					// 			'theme' => "",
-					// 		)
-					// 	); ?>
+
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
@@ -1064,67 +971,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 
 
-			<div class="post-page__section bt-2 content">
-				<?php if($current_user_id == $author_id): ?>
-					<div class="flex edit-area hide">
-					<?php
-					// get_template_part( 'components/btn', null,
-					// 		array(
-					// 			'label' => 'Edit home features',
-					// 			'href' => "/",
-					// 			'target' => "_self",
-					// 			'skin'  => 'highlight',
-					// 			'icon-only'  => false,
-					// 			'disabled'  => false,
-					// 			'icon-position' => 'left',
-					// 			'icon' => 'pencil-write',
-					// 			'additional-classes' => 'btn--small edit_post_btn btn--inline',
-					// 			'data-attribute' => 'data-open-modal=\'edit-post--features\'',
-					// 			'theme' => "",
-					// 		)
-					// 	); ?>
-				<?php endif; ?>
-				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
-				<?php if($post_home_year_built): ?>
-					<dl><dt class="-light">Year built:</dt><dd><?php echo($post_home_year_built); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_home_amenities): ?>
-					<dl><dt class="-light">Home amenities:</dt><dd><?php echo($post_home_amenities); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_neighborhood_amenities): ?>
-					<dl><dt class="-light">Neighborhood amenities:</dt><dd><?php echo($post_neighborhood_amenities); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_transportation): ?>
-					<dl><dt class="-light">Transportation:</dt><dd><?php echo($post_transportation); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_garages_parking): ?>
-					<dl><dt class="-light">Nr of garages/parking:</dt><dd><?php echo($post_garages_parking); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_schools): ?>
-					<dl><dt class="-light">Schools nearby:</dt><dd><?php echo($post_schools); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_home_style_architecture): ?>
-					<dl><dt class="-light">Home style and architecture:</dt><dd><?php echo($post_home_style_architecture); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_additional_features): ?>
-					<dl><dt class="-light">Additional home features:</dt><dd><?php echo($post_additional_features); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_taxes): ?>
-					<dl><dt class="-light">Property taxes:</dt><dd><?php echo($post_taxes); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_fees): ?>
-					<dl><dt class="-light">Other property Fees:</dt><dd><?php echo($post_fees); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_systems): ?>
-					<dl><dt class="-light">Heating / Cooling systems:</dt><dd><?php echo($post_systems); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_energy_rating): ?>
-					<dl><dt class="-light">Energy rating:</dt><dd><?php echo($post_energy_rating); ?></dd></dl>
-				<?php endif; ?>
-				<?php if($post_energy_consumption): ?>
-					<dl><dt class="-light">Energy rating and consumption:</dt><dd><?php echo($post_energy_consumption); ?></dd></dl>
-				<?php endif; ?>
-			</div>
+
 
 			<br>
 			<dl><dt class="-light"></dt> </dl>
@@ -1141,22 +988,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			<div class="post-page__section bt-2">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
-					<?php
-//					get_template_part( 'components/btn', null,
-//							array(
-//								'label' => 'Edit location',
-//								'href' => "/",
-//								'target' => "_self",
-//								'skin'  => 'highlight',
-//								'icon-only'  => false,
-//								'disabled'  => false,
-//								'icon-position' => 'left',
-//								'icon' => 'pencil-write',
-//								'additional-classes' => 'btn--small edit_post_btn btn--inline',
-//								'data-attribute' => 'data-open-modal=\'edit-post--location\'',
-//								'theme' => "",
-//							)
-//						); ?>
+
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 				<?php
@@ -1222,49 +1054,21 @@ document.addEventListener("DOMContentLoaded", function () {
 						"image" => wp_get_attachment_image_src($post_gallery_id, 'large-img-medium')[0]
 					));
 				endforeach;
+
+                get_posts_grid_by_user($author_id);
 				?>
 			</div>
 		</div>
 		<div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list">
 			<?php
+            $post_id_presenece = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
+            $show2 = $post_id == $post_id_presenece;
 			// ajouter les news
-			get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
-				get_template_part("components/card-homazed-homes", null, array(
-					"id" => $post_id,
-					"title" => $post_title,
-					"user_id" => $author_id,
-					'type' => null, // null or compact
-					'home_category' => $post_home_category_translate,
-					'home_type' => $post_home_action_translate,
-					'post_creator_link' => get_permalink("602")."?user_id=".$author_id,
-					'post_creator_name' => $author_first_name."&nbsp;".$author_last_name,
-					'first_name' => $author_first_name,
-					'last_name' => $author_last_name,
-					'work_position' => "",
-					'main_picture' => $main_picture_image_ids_array,
-					'img' => $post_gallery_image_ids_array,
-					'img_display' => get_field("post_home_pictures_display", $post_id),
-					"card_gallery" => $post_gallery_image_ids,
-					'img_size' => 'thumbnail-m',
-					"post_type" => get_post_type($post_id),
-					"post_type_slug" => "real-estate",
-					'address_name' => $post_address,
-					'address_link' => null,
-					'content' => $post_main_content_excerpt,
-					'price' => $post_price,
-					'bedrooms' => $post_bedrooms,
-					'bathrooms' => $post_bathrooms,
-					'house' => $post_home_size,
-					'land' => $post_outdoor_size,
-					'video_' => $video_,
-					'tags' => $post_post_tags,
-					"events_type" => $post_events_type,
-					"events_text_1" => $post_events_text_1,
-					"events_text_2" => $post_events_text_2,
-					"events_privacy" => $post_events_privacy,
-					'publish_date' =>  get_time_ago(get_post_timestamp())
-				));
+		    if(!$show2) {
+                get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
 
+                get_posts_by_user($author_id,-1);
+            }
 
 			?>
 		</div>
@@ -1315,7 +1119,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 	</div>
 
-	<div class="modal micromodal-slide" id="edit-post--files" aria-hidden="true">
+
+<div class="modal micromodal-slide" id="edit-post--files" aria-hidden="true">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
 				<header class="modal__header">
@@ -1513,38 +1318,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 	</div>
 
-	<!-- <div class="modal micromodal-slide" id="edit-post--location" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php // echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit location <?php // echo $post_address; ?></div>
-						</div>
-					</div>
-					<?php // get_template_part("components/btn", null,
-						// array(
-						// 	'label' => 'Close this modal window',
-						// 	'href' => "",
-						// 	'target' => "_self",
-						// 	'skin'  => 'secondary',
-						// 	'icon-only'  => true,
-						// 	'disabled'  => false,
-						// 	'icon-position' => 'right', // left or right
-						// 	'icon' => 'close',
-						// 	'additional-classes' => '',
-						// 	'data-attribute' => 'data-close-modal',
-						// 	'theme' => "",
-						// )
-					// ); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php // echo do_shortcode( '[gravityform id="9" title="false" field_values="post_retrieved_id=' . $post_id . '&post_address=' . $post_address . '&post_location_latitude=' . $post_location_latitude . '&post_location_longitude=' . $post_location_longitude . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div> -->
+
 
 	<div class="modal micromodal-slide" id="edit-post--images" aria-hidden="true">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>

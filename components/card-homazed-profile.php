@@ -71,7 +71,9 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             <!-- Post type -->
             <?php if($args["post_type"] && $args["post_type_slug"]): ?>
 			<div class="post-type flex flex--vertical-center">
-				<?php echo file_get_contents(get_stylesheet_directory().'/src/images/icons/badge-check-verified.svg'); ?>
+				<?php
+				$is_reniew_post_premium = get_field("post_Is_Automatic_Renewal", $args["id"]);
+				if ($is_reniew_post_premium)echo file_get_contents(get_stylesheet_directory().'/src/images/icons/badge-check-verified.svg'); ?>
 
 
 					<span class="post-type__name post-type__name--<?php echo $args["post_type_slug"]; ?>">

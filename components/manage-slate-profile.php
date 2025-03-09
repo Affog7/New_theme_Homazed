@@ -8,10 +8,23 @@
                 <button id="" style="display: <?php echo (($args['event_type'] != "None") ? "block" : "none"); ?>" class="event-toggle event-button">Event</button>
             </div>
         </div>
-
         <div class="row">
             <div>
-                <strong><?php echo esc_html($args['title']) ; ?></strong>
+                <strong>  <?php
+                    $author_id = get_post_field('post_author', $args["id"]);
+
+                    $account_category = get_field("account_category", "user_".$author_id);
+
+                    if($account_category == "pro-user"){
+                        get_first_element(  $args["post_home_Jobs_title"]);
+                    } else {
+                        get_first_element(  $args["post_home_sector_activity"]);
+                    }
+                    ?>
+                </strong>
+            </div>
+            <div>
+                <b><?php echo $account_category;?></b>
             </div>
             <div>
                 <a href="<?php echo esc_url(get_permalink($args['id'])); ?>">
