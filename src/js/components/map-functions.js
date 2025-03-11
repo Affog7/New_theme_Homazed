@@ -423,6 +423,16 @@ const MapLaunch = (data) => {
 				// let postDetails = this.popup.querySelector(".post-details_project_category .value");
         //
 				// postDetails.innerHTML = postData.post_projects_category;
+			}else if(postData.post_type == "profile" ) {
+				let category = this.popup.querySelector(".category .value");
+				category.innerHTML = postData.account_category;
+
+				let postProfile = this.popup.querySelector(".post-profile");
+				postProfile.innerHTML = postData.profile_name;
+
+				let postDetails = this.popup.querySelector(".post-details_project_category");
+        //
+				postDetails.innerHTML = postData.current_or_sector;
 			}
 
 

@@ -19,6 +19,10 @@ function get_post_details_api( $request ) {
 	$post_location_latitude = get_field("post_location_latitude",$post_id);
 	$post_location_longitude = get_field("post_location_longitude",$post_id);
 
+
+	$account_category = get_field("account_category", "user_".$post->post_author);
+
+
 	// Galerie d'images
 	$post_gallery_image_ids = get_field("post_home_gallery_ids", $post_id);
 	$post_gallery_image_ids_array = explode(',', $post_gallery_image_ids);
@@ -102,6 +106,14 @@ function get_post_details_api( $request ) {
 	);
 	$bouton_share_template = ob_get_clean();
 
+	ob_start();
+	if($account_category == "pro-user"){
+		get_first_element(  get_field("post_home_Jobs_title", $post_id));
+	} else {
+		get_first_element(  get_field("post_home_sector_activity",$post_id));
+	}
+	$current_or_sector = ob_get_clean();
+
 	$i_favorite_posts_relationships = get_field("i_favorite_posts_relationships", "user_".$user_id);
 
 	$is_checked_favorite = (!empty($i_favorite_posts_relationships) && in_array($post_id, $i_favorite_posts_relationships)) ? true : false;
@@ -110,7 +122,9 @@ function get_post_details_api( $request ) {
 	ob_start();
 
 // Inclut le template, dont le contenu sera capturé dans le tampon
-	get_template_part("components/btn", null, array(
+	get_template_part(
+		"components/btn", null,
+		array(
 		'label' => 'Favorite',
 		'href' => "",
 		'target' => "_self",
@@ -118,7 +132,7 @@ function get_post_details_api( $request ) {
 		'icon-only'  => true,
 		'disabled'  => false,
 		'icon-position' => '', // left or right
-		'icon' => 'rating-star-ribbon', // nom du fichier svg
+		'icon' => $post->post_type=='profile' ?  'user-plus' : 'rating-star-ribbon', // nom du fichier svg
 		'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn__posts relation_btn--favorite' : 'post-footer__button relation_btn relation_btn__posts relation_btn--favorite',
 		'data-attribute' => "data-relation-him=" . $post_id. " data-relation-type='favorite'",
 		'theme' => "",
@@ -210,6 +224,8 @@ function get_post_details_api( $request ) {
 		"lat" => $post_location_latitude,
 		"lng" => $post_location_longitude,
 		"img" => $post_avatar_picture,
+		"account_category" => $account_category,
+		"current_or_sector" => $current_or_sector,
 		"card_gallery_images" => $image_urls,
 		"publish_date" => get_post_timestamp($post_id),
 		"post_permalink" => get_the_permalink($post_id),

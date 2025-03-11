@@ -61,7 +61,6 @@ function afficher_carte_openstreetmap_statique($atts) {
 	ob_start();
 	?>
 	<div id="osm-map" style="width: <?php echo esc_attr($atts['width']); ?>; height: <?php echo esc_attr($atts['height']); ?>;"></div>
-	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="" crossorigin=""></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			// Initialisation de la carte avec zoomControl désactivé
@@ -707,4 +706,5 @@ include get_template_directory() . '/function_file_edit.php';
 include get_template_directory() . '/function_modif_video.php';
 include get_template_directory() . '/function_meta_post.php';
 include get_template_directory() . '/function_news_search.php';
+include get_template_directory() . '/function_map_plus.php';
 

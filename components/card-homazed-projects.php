@@ -224,7 +224,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             }
             ?>
             <div class="card__body" style="max-height: unset">
-                <?php get_template_part( 'components/event', null,
+                <?php get_template_part('components/event', null,
                     array(
                         'event_type' => $post_events_type,
                         'event_privacy' => $post_events_privacy,

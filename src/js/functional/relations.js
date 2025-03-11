@@ -83,7 +83,7 @@ const makeRelationBtw = (me, him, post_type_clicked_on, relationBtn) => {
 	let me_uid = 'user_' + me;
 	let him_uid;
 	if(post_type_clicked_on === "real-estate") {
-		if(relationBtn.getAttribute("data-relation-type") === "favorite"){
+		if(relationBtn.getAttribute("data-relation-type") === "favorite") {
 			field_me = "i_favorite_posts_relationships";
 		}else{
 			field_me = "i_like_posts_relationships";
@@ -92,9 +92,9 @@ const makeRelationBtw = (me, him, post_type_clicked_on, relationBtn) => {
 		request.send('action=makeRelationBtw&me_uid=' + me_uid + '&him=' + him + '&field_me=' + field_me );
 	}
 	else if(post_type_clicked_on === "users") {
-		if(relationBtn.getAttribute("data-relation-type") === "favorite"){
+		if (relationBtn.getAttribute("data-relation-type") === "favorite") {
 			field_me = "i_favorite_users_relationships";
-		}else{
+		} else {
 			field_me = "i_like_users_relationships";
 		}
 		him_uid = 'user_' + him;

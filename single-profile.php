@@ -977,10 +977,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			<dl><dt class="-light"></dt> </dl>
 			<?php
 			// todo_augustin : show map
-			$location = get_field( 'post_location_address', $post_id); // Récupérer la géolocalisation
-			$post_location_longitude = get_field( 'post_location_longitude', $post_id);
-			$post_location_latitude = get_field( 'post_location_latitude', $post_id);
-			echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
+//			$location = get_field( 'post_location_address', $post_id); // Récupérer la géolocalisation
+//			$post_location_longitude = get_field( 'post_location_longitude', $post_id);
+//			$post_location_latitude = get_field( 'post_location_latitude', $post_id);
+//			echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
+			echo do_shortcode('[user_map]');
 
 
 			?>
@@ -999,7 +1000,6 @@ document.addEventListener("DOMContentLoaded", function () {
 					//"post_status" => "publish",
 					"posts_per_page" => -1,
 					"orderby" => "date",
-
 					"order" => "DESC"
 				);
 
