@@ -289,40 +289,55 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 			<div class="flex profile-actions__quick-actions btn-group">
 				<?php if(get_current_user_id() != $author_id): ?>
 
+                    <?php
+                $i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
 
-					<?php
-					get_template_part( 'components/btn', null,
-						array(
-							'label' => 'Add contact',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'ghost',
-							'icon-only'  => false,
-							'disabled'  => false,
-							'icon-position' => '',
-							'icon' => '',
-							'additional-classes' => ' ',//edit_post_main
-							'data-attribute' => '',
-							'theme' => "",
-						)
-					);
-					if($is_for_recommandation) {
-						get_template_part("components/btn", null, array(
-							'label' => 'Like',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'ghost',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => '', // left or right
-							'icon' => 'like-1', // nom du fichier svg
-							'additional-classes' =>'',
-							'data-attribute' => "",
-							'theme' => "",
-						));
-					}
+                // Vérifier si l'utilisateur cible est déjà dans la liste de contacts
+                $is_in_contact_list = is_array($i_request_contactlist_users_relationships) && in_array($author_id, $i_request_contactlist_users_relationships);
+                $active_class = $is_in_contact_list ? 'active' : '';
 
-					 ?>
+                get_template_part('components/btn', null, array(
+                    'label' => $is_in_contact_list ? 'Remove Contact' : 'Add Contact', // Modifier le label
+                    'href' => "#",
+                    'target' => "_self",
+                    'skin'  => 'ghost',
+                    'icon-only'  => false,
+                    'disabled'  => false,
+                    'icon-position' => '',
+                    'icon' => '',
+                    'additional-classes' => 'contact-toggle-btn ' . $active_class,
+                    'data-attribute' => "data-userid='".$current_user_id."' data-contactid='".$author_id."'",
+                    'theme' => "",
+                ));
+
+
+
+                    if ($is_for_recommandation) {
+                        $recommended_users = get_post_meta(get_the_ID(), 'profile-recommend', true);
+                        if (!is_array($recommended_users)) {
+                            $recommended_users = [];
+                        }
+
+                        $is_recommended = in_array(get_current_user_id(), $recommended_users) ? 'active' : '';
+
+                        get_template_part("components/btn", null, array(
+                            'label' => 'Like',
+                            'href' => "#",
+                            'target' => "_self",
+                            'skin'  => 'ghost',
+                            'icon-only'  => true,
+                            'disabled'  => false,
+                            'icon-position' => '',
+                            'icon' => 'like-1',
+                            'additional-classes' => 'profile-recommend-btn ' . $is_recommended, // Ajout de la classe active
+                            'data-attribute' => "data-recommanduser='".$author_id."' data-postid='".get_the_ID()."' data-userid='".get_current_user_id()."'",
+                            'theme' => "",
+                        ));
+                    }
+
+
+
+                    ?>
 
 
 				<?php else: ?>
@@ -876,6 +891,19 @@ document.addEventListener("DOMContentLoaded", function () {
 					limiterLignes($post_main_content,32); ?>
 			</div>
 
+        	<div class="post-page__section bt-2">
+				 <?php  if ($is_for_recommandation) {
+                     $recommended_users = get_post_meta(get_the_ID(), 'profile-recommend', true);
+                     if (!is_array($recommended_users)) {
+                         $recommended_users = [];
+                     }
+
+                     $is_recommended = in_array(get_current_user_id(), $recommended_users) ? 'active' : '';
+
+                 }
+                 ?>
+			</div>
+
       <div class="post-page__section bt-2">
 		<dl>
 
@@ -971,7 +999,18 @@ document.addEventListener("DOMContentLoaded", function () {
 		</div>
 
 
+            <hr>
+           <dl><dt class="-light">Sectors of activity :</dt>
+               <dd><?php echo (str_replace(",", ", ", get_field("post_home_sector_activity"))) ?></dd>
+           </dl>
 
+           <dl><dt class="-light">Current Job :</dt>
+               <dd><?php echo( get_field("post_home_Jobs_title")); ?></dd>
+           </dl>
+
+            <dl><dt class="-light">Other :</dt><dd><?php echo( get_field("post_other")); ?></dd></dl>
+
+            <dl><dt class="-light">Services & products :</dt><dd><?php echo( get_field("services_and_products")); ?></dd></dl>
 
 			<br>
 			<dl><dt class="-light"></dt> </dl>
@@ -981,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //			$post_location_longitude = get_field( 'post_location_longitude', $post_id);
 //			$post_location_latitude = get_field( 'post_location_latitude', $post_id);
 //			echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
-			echo do_shortcode('[user_map]');
+			echo do_shortcode('[user_map  user_id='.$author_id.' ]');
 
 
 			?>

@@ -26,6 +26,7 @@
             <?php
                 echo file_get_contents(get_stylesheet_directory().'/src/images/icons/badge-check-verified.svg');
             ?>
+
             </div>
             <div class="icon shareButon">
 				<svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">

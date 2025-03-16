@@ -85,7 +85,7 @@ const makeRelationBtw = (me, him, post_type_clicked_on, relationBtn) => {
 	if(post_type_clicked_on === "real-estate") {
 		if(relationBtn.getAttribute("data-relation-type") === "favorite") {
 			field_me = "i_favorite_posts_relationships";
-		}else{
+		} else {
 			field_me = "i_like_posts_relationships";
 		}
 		him_uid = him;

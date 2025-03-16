@@ -77,11 +77,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 
 
 					<span class="post-type__name post-type__name--<?php echo $args["post_type_slug"]; ?>">
-							<?php switch ($account_category) {
-                                case "individual-user": echo __('Individual user', 'homazed'); break;
-                                case "pro-user": echo __('Pro user', 'homazed'); break;
-                                case "company-user": echo __('Company user', 'homazed'); break;
-                            } ?>
+							<?php  print_User_Category($account_category); ?>
 					</span>
                     <?php echo file_get_contents(get_stylesheet_directory().'/src/images/icons/post-type-'.$args["post_type_slug"].'.svg'); ?>
                 </div>
@@ -408,22 +404,64 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 
             <ul class="post-footer__right flex flex--justify-end">
                 <li class="post-footer__favorite post-footer__relation">
+                    <?php
+						$account_category = get_field("account_category", "user_".$args["user_id"]);
+						$is_for_recommandation = $account_category == "pro-user" || $account_category == "company-user";
+
+					if ($is_for_recommandation) {
+						$recommended_users = get_post_meta($args["id"], 'profile-recommend', true);
+						if (!is_array($recommended_users)) {
+							$recommended_users = [];
+						}
+
+						$is_recommended = in_array(get_current_user_id(), $recommended_users) ? 'active' : '';
+
+						get_template_part("components/btn", null, array(
+							'label' => 'Like',
+							'href' => "#",
+							'target' => "_self",
+							'skin'  => 'transparent',
+							'icon-only'  => true,
+							'disabled'  => false,
+							'icon-position' => '',
+							'icon' => 'like-1',
+							'additional-classes' => 'profile-recommend-btn ' . $is_recommended, // Ajout de la classe active
+							'data-attribute' => "data-recommanduser='".$args["user_id"]."' data-postid='".get_the_ID()."' data-userid='".get_current_user_id()."'",
+							'theme' => "",
+						));
+					}
+
+					?>
+                </li>
+
+				<!-- Add contact -->
+				<li class="post-footer__favorite post-footer__relation">
                     <?php $is_checked_favorite = (!empty($i_favorite_posts_relationships) && in_array($args["id"], $i_favorite_posts_relationships)) ? true : false; ?>
 
-                    <?php get_template_part("components/btn", null, array(
-                        'label' => 'Favorite',
-                        'href' => "",
-                        'target' => "_self",
-                        'skin'  => 'transparent',
-                        'icon-only'  => true,
-                        'disabled'  => false,
-                        'icon-position' => '', // left or right
-                        'icon' => 'rating-star-ribbon', // nom du fichier svg
-                        'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn__posts relation_btn--favorite' : 'post-footer__button relation_btn relation_btn__posts relation_btn--favorite',
-                        'data-attribute' => "data-relation-him=" . $args["id"] . " data-relation-type='favorite'",
-                        'theme' => "",
-                    )); ?>
+                    <?php
+					$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
+
+					// Vérifier si l'utilisateur cible est déjà dans la liste de contacts
+					$is_in_contact_list = is_array($i_request_contactlist_users_relationships) && in_array($args["user_id"], $i_request_contactlist_users_relationships);
+					$active_class = $is_in_contact_list ? 'active' : '';
+
+					get_template_part('components/btn', null, array(
+						'label' => $is_in_contact_list ? 'Remove Contact' : 'Add Contact', // Modifier le label
+						'href' => "#",
+						'target' => "_self",
+						'skin'  => 'transparent',
+						'icon-only'  => true,
+						'disabled'  => false,
+						'icon-position' => '',
+						'icon' => $is_in_contact_list ? 'user-added': 'user-plus',
+						'additional-classes' => 'contact-toggle-btn ' . $active_class,
+						'data-attribute' => "data-userid='".$current_user_id."' data-contactid='".$args["user_id"]."'",
+						'theme' => "",
+					));
+
+					?>
                 </li>
+				<!-- End Contact -->
 
                 <li class="post-footer__share">
                     <?php

@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
- 
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -215,38 +215,133 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// edit map
+// grid instagram
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   var form = document.querySelector('#gform_17');
- 
- 
-//     console.log(13131)
-//       form.addEventListener('submit', function (event) {
-//       event.preventDefault(); // Empêche le rechargement de la page
+// Gestion des posts
+const posts = document.querySelectorAll(".post_prof");
 
-//       const formData = new FormData(form); // Collecte les données du formulaire
+posts.forEach((post) => {
+  const thumbnail = post.querySelector(".post_prof-thumbnail");
+  const gallery = post.querySelector(".post_prof-gallery");
 
-//       // Envoie les données via AJAX
-//       fetch(form.action, {
-//           method: 'POST',
-//           body: formData,
-//       })
-//           .then((response) => response.json())
-//           .then((data) => {
-//               // Vérifiez la réponse de Gravity Forms
-//               if (data.is_valid) {
-//                   alert('Formulaire soumis avec succès !');
-//                   form.reset(); // Réinitialise le formulaire si nécessaire
-//               } else {
-//                   alert('Erreur lors de la soumission du formulaire.');
-//               }
-//           })
-//           .catch((error) => {
-//               console.error('Erreur AJAX :', error);
-//               alert('Une erreur est survenue lors de la soumission.');
-//           });
-//   });
- 
+  // Ouvrir le modal au clic sur le thumbnail
+  thumbnail.addEventListener("click", () => {
+    const modal = document.getElementById("postModal_prof");
+    const modalContent = modal.querySelector(".modal_prof-content");
+    const prevBtn = modal.querySelector(".prev");
+    const nextBtn = modal.querySelector(".next");
 
-// });
+    // Vider le contenu du modal
+    modalContent.innerHTML = "";
+
+    // Ajouter les images du post dans le modal
+    const images = gallery.querySelectorAll("img");
+    let currentIndex = 0;
+
+    images.forEach((img) => {
+      const imgClone = img.cloneNode(true);
+      modalContent.appendChild(imgClone);
+    });
+
+    // Afficher la première image
+    showImage(currentIndex);
+
+    // Afficher le modal
+    modal.style.display = "block";
+
+    // Gestion de la navigation
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    function showImage(index) {
+      modalContent.querySelectorAll("img").forEach((img, i) => {
+        img.style.display = i === index ? "block" : "none";
+      });
+    }
+  });
+});
+
+// Fermer le modal
+const modal = document.getElementById("postModal_prof");
+const closeBtn = modal.querySelector(".close");
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+
+// recommandation
+
+jQuery(document).ready(function ($) {
+  $(".profile-recommend-btn").on("click", function (e) {
+    e.preventDefault();
+
+    let button = $(this);
+    let postId = button.attr("data-postid");
+    let userId = button.attr("data-userid");
+
+    $.ajax({
+      type: "POST",
+      url: ajaxurl, // WordPress fournit ajaxurl automatiquement si wp_localize_script est utilisé
+      data: {
+        action: "toggle_profile_recommend",
+        post_id: postId,
+        user_id: userId,
+      },
+      success: function (response) {
+        if (response.success) {
+          button.toggleClass("active");
+        } else {
+          alert("Erreur : " + response.data);
+        }
+      },
+    });
+  });
+});
+
+
+// add contact
+
+jQuery(document).ready(function ($) {
+  $(".contact-toggle-btn").on("click", function (e) {
+    e.preventDefault();
+
+    let button = $(this);
+    let userId = button.attr("data-userid");
+    let contactId = button.attr("data-contactid");
+
+    $.ajax({
+      type: "POST",
+      url: ajaxurl,
+      data: {
+        action: "toggle_contact",
+        user_id: userId,
+        contact_id: contactId,
+      },
+      success: function (response) {
+        if (response.success) {
+          if (response.data.status === "added") {
+            button.addClass("active").text("Remove Contact");
+          } else {
+            button.removeClass("active").text("Add Contact");
+          }
+        } else {
+          alert("Erreur : " + response.data);
+        }
+      },
+    });
+  });
+});

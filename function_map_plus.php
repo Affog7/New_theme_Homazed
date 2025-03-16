@@ -48,21 +48,33 @@ function wp_user_map_shortcode($atts) {
 	$profiles = get_posts($profile_args);
 	foreach ($profiles as $profile) {
 		$hidden_address = get_post_meta($profile->ID, 'hidden_address_plus', true);
+
+		$location_unity = get_post_meta($profile->ID, 'location_unity', true);
+		$location_unity_value = get_post_meta($profile->ID, 'location_unity_value', true);
+
+		// Convertir l'unité en mètres (ex: kilomètres en mètres)
+		$radius_in_meters = !empty($location_unity) && !empty($location_unity_value)
+			? ($location_unity === 'km' ? floatval($location_unity_value) * 1000 : floatval($location_unity_value))
+			: 1000; // Valeur par défaut : 1 km
+
 		if (!empty($hidden_address)) {
 			$addresses = explode('|', $hidden_address);
 			foreach ($addresses as $address) {
 				$parts = explode('@', $address);
 				$addr = explode('=', $parts[0])[1] ?? '';
+				$title =  explode('=', $parts[1])[1] ?? 'Profile';
 				$lat = explode('=', $parts[2])[1] ?? '';
 				$lng = explode('=', $parts[3])[1] ?? '';
+
 
 				if (!empty($addr) && !empty($lat) && !empty($lng)) {
 					$locations[] = [
 						'addr'      => esc_html($addr),
 						'lat'       => esc_html($lat),
 						'lng'       => esc_html($lng),
-						'title'     => 'Profil',
-						'post_type' => 'profile'
+						'title'     => $title,
+						'post_type' => 'profile',
+						'radius'    => $radius_in_meters // Ajouter le rayon pour le cercle
 					];
 				}
 			}
@@ -92,16 +104,30 @@ function wp_user_map_shortcode($atts) {
 			var bounds = [];
 
 			locations.forEach(function(loc) {
-				var marker = L.marker([loc.lat, loc.lng]).addTo(map)
+				var latLng = [loc.lat, loc.lng];
+
+				// Ajouter le marqueur
+				var marker = L.marker(latLng).addTo(map)
 					.bindPopup("<b>" + loc.title + "</b><br>Type: " + loc.post_type + "<br>" + loc.addr);
 
-				bounds.push([loc.lat, loc.lng]);
+				bounds.push(latLng);
+
+				// Ajouter un cercle si c'est un profil
+				if (loc.post_type === "profile" && loc.radius) {
+					L.circle(latLng, {
+						color: "blue",
+						fillColor: "#007bff",
+						fillOpacity: 0.2,
+						radius: loc.radius // Rayon défini en PHP
+					}).addTo(map);
+				}
 			});
 
 			if (bounds.length > 0) {
 				map.fitBounds(bounds, { padding: [20, 20] });
 			}
 		});
+
 	</script>
 	<?php
 

@@ -21,7 +21,9 @@ function get_post_details_api( $request ) {
 
 
 	$account_category = get_field("account_category", "user_".$post->post_author);
-
+	ob_start();
+	 print_User_Category($account_category);
+	$account_category = ob_get_clean();
 
 	// Galerie d'images
 	$post_gallery_image_ids = get_field("post_home_gallery_ids", $post_id);

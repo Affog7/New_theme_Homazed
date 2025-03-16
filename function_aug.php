@@ -37,6 +37,19 @@ function get_first_element($string) {
 add_action( 'get_first_element', 'get_first_element' );
 
 
+// Fonction get_first_element
+function print_User_Category($account_category) {
+ switch ($account_category) {
+		case "individual-user": echo __('Individual user', 'homazed'); break;
+		case "pro-user": echo __('Pro user', 'homazed'); break;
+		case "company-user": echo __('Company user', 'homazed'); break;
+	}
+}
+
+//todo_augustin
+add_action( 'print_User_Category', 'print_User_Category' );
+
+
 
 
 
@@ -580,7 +593,7 @@ add_action('init', 'register_get_posts_by_user');
 function register_get_posts_grid_by_user() {
 	function get_posts_grid_by_user($user_id) {
 		$args = [
-			'post_type'      => 'any',
+			'post_type'      => ['news','homes','projects','jobs','profile'],
 			'posts_per_page' => -1,
 			'author'         => $user_id
 		];
@@ -614,19 +627,35 @@ function register_get_posts_grid_by_user() {
 			wp_reset_postdata();
 		}
 
-
 		if (!empty($wall_content)) {
+			?>
+			<!-- Conteneur des posts -->
+				<div class="posts_prof">
+			<?php
 			foreach ($wall_content as $content) {
 
-
 				get_template_part("components/card-slide-grouped", null, array(
-					'main_picture' => $content["main_picture"],
+					'main_picture' => $content["main_picture"][0] !="" ? $content["main_picture"] : $content["card_gallery"],
 					'all_img' => $content["card_gallery"],
 					'img_size' => 'thumbnail-m',
 					'id' => $content["id"],
 					'post_type' => $content["post_type"]
 				));
 			}
+			?>
+				</div>
+				<!-- Modal pour afficher les images du post -->
+				<div id="postModal_prof" class="modal_prof">
+					<span class="close">&times;</span>
+					<div class="modal_prof-content">
+						<!-- Les images du post seront injectées ici -->
+					</div>
+					<div class="modal_prof-navigation">
+						<span class="prev">&lt;</span>
+						<span class="next">&gt;</span>
+					</div>
+				</div>
+			<?php
 		}
 
 		return $posts;
@@ -707,4 +736,6 @@ include get_template_directory() . '/function_modif_video.php';
 include get_template_directory() . '/function_meta_post.php';
 include get_template_directory() . '/function_news_search.php';
 include get_template_directory() . '/function_map_plus.php';
+include get_template_directory() . '/function_profile_recommend.php';
+include get_template_directory() . '/function_profile_add_contact.php';
 

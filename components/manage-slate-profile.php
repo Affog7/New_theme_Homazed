@@ -24,11 +24,11 @@
                 </strong>
             </div>
             <div>
-                <b><?php echo $account_category;?></b>
+                <b><?php  print_User_Category($account_category); ?></b>
             </div>
             <div>
                 <a href="<?php echo esc_url(get_permalink($args['id'])); ?>">
-                    <i>Go to Post Creation ></i>
+                    <i>Go to Profile Creation ></i>
                 </a>
             </div>
         </div>

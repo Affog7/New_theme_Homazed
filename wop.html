@@ -1,124 +1,229 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Recherche et Ajout d'Adresses sur OpenStreetMap</title>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-	<style>
-		body { font-family: Arial, sans-serif; }
-		#search-container { margin: 20px; }
-		#address-input { width: 300px; padding: 8px; }
-		#suggestions { border: 1px solid #ccc; max-width: 318px; background: white; position: absolute; z-index: 1000; }
-		.suggestion-item { padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd; }
-		.suggestion-item:hover { background-color: #f0f0f0; }
-		#map { height: 500px; width: 100%; margin-top: 20px; }
-		#address-list { margin-top: 20px; padding: 0; list-style: none; }
-		.address-item { padding: 8px; background: #f9f9f9; margin-bottom: 5px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-		.remove-btn { background: red; color: white; border: none; padding: 5px; cursor: pointer; }
-	</style>
-</head>
-<body>
 
-<div id="search-container">
-	<input type="text" id="address-input" placeholder="Rechercher une adresse..." oninput="searchAddress()">
-	<div id="suggestions"></div>
+	<style>
+
+		/* Conteneur des posts */
+		.posts {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 20px;
+			padding: 20px;
+		}
+
+		/* Style du post */
+		.post {
+			position: relative;
+			cursor: pointer;
+		}
+
+		.post-thumbnail img {
+			width: 100%;
+			height: 200px; /* Taille fixe pour les carrés */
+			object-fit: cover;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			transition: transform 0.3s ease;
+		}
+
+		.post-thumbnail:hover img {
+			transform: scale(1.05);
+		}
+
+		/* Galerie des images du post (cachée par défaut) */
+		.post-gallery {
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			background-color: white;
+			padding: 10px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		/* Modal pour afficher les images du post */
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			padding-top: 60px;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.9);
+		}
+
+		.modal-content {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 10px;
+			max-width: 90%;
+			margin: auto;
+		}
+
+		.modal-content img {
+			max-width: 100%;
+			max-height: 80vh;
+			border-radius: 10px;
+		}
+
+		.close {
+			position: absolute;
+			top: 20px;
+			right: 35px;
+			color: white;
+			font-size: 40px;
+			font-weight: bold;
+			transition: 0.3s;
+			cursor: pointer;
+		}
+
+		.close:hover {
+			color: #ccc;
+		}
+
+		/* Style pour les chevrons de navigation */
+		.modal-navigation {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			display: flex;
+			justify-content: space-between;
+			transform: translateY(-50%);
+		}
+
+		.modal-navigation span {
+			color: white;
+			font-size: 40px;
+			font-weight: bold;
+			cursor: pointer;
+			user-select: none;
+			padding: 0 20px;
+		}
+
+		.modal-navigation span:hover {
+			color: #ccc;
+		}
+	</style>
+
+
+<!-- Conteneur des posts -->
+<div class="posts">
+	<!-- Post 1 -->
+	<div class="post">
+		<div class="post-thumbnail">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Post 1">
+		</div>
+		<div class="post-gallery">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Image 1">
+		</div>
+	</div>
+
+	<!-- Post 2 -->
+	<div class="post">
+		<div class="post-thumbnail">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Post 2">
+		</div>
+		<div class="post-gallery">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Image 1">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Image 2">
+		</div>
+	</div>
+
+	<!-- Post 3 -->
+	<div class="post">
+		<div class="post-thumbnail">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Post 3">
+		</div>
+		<div class="post-gallery">
+			<img src="https://th.bing.com/th/id/OIP.L7oEUzr9aSXsF-XQ11btCgHaEv?rs=1&pid=ImgDetMain" alt="Image 1">
+			<img src="images/post3/image2.jpg" alt="Image 2">
+			<img src="images/post3/image3.jpg" alt="Image 3">
+			<img src="images/post3/image4.jpg" alt="Image 4">
+		</div>
+	</div>
 </div>
 
-<ul id="address-list"></ul> <!-- Liste des adresses ajoutées -->
+<!-- Modal pour afficher les images du post -->
+<div id="postModal" class="modal">
+	<span class="close">&times;</span>
+	<div class="modal-content">
+		<!-- Les images du post seront injectées ici -->
+	</div>
+	<div class="modal-navigation">
+		<span class="prev">&lt;</span>
+		<span class="next">&gt;</span>
+	</div>
+</div>
 
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-	var map = L.map('map').setView([48.8566, 2.3522], 5); // Vue initiale sur la France
-	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		attribution: '&copy; OpenStreetMap contributors'
-	}).addTo(map);
 
-	var markers = []; // Stocke tous les marqueurs
+	// Gestion des posts
+	const posts = document.querySelectorAll(".post");
 
-	function searchAddress() {
-		var query = document.getElementById("address-input").value;
-		var suggestionsContainer = document.getElementById("suggestions");
-		suggestionsContainer.innerHTML = "";
+	posts.forEach((post) => {
+		const thumbnail = post.querySelector(".post-thumbnail");
+		const gallery = post.querySelector(".post-gallery");
 
-		if (query.length < 3) {
-			return; // Ne lance pas la recherche si moins de 3 caractères
-		}
+		// Ouvrir le modal au clic sur le thumbnail
+		thumbnail.addEventListener("click", () => {
+			const modal = document.getElementById("postModal");
+			const modalContent = modal.querySelector(".modal-content");
+			const prevBtn = modal.querySelector(".prev");
+			const nextBtn = modal.querySelector(".next");
 
-		fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
-			.then(response => response.json())
-			.then(data => {
-				data.forEach(place => {
-					var item = document.createElement("div");
-					item.classList.add("suggestion-item");
-					item.innerHTML = place.display_name;
-					item.onclick = function() {
-						addAddress(place);
-					};
-					suggestionsContainer.appendChild(item);
+			// Vider le contenu du modal
+			modalContent.innerHTML = "";
+
+			// Ajouter les images du post dans le modal
+			const images = gallery.querySelectorAll("img");
+			let currentIndex = 0;
+
+			images.forEach((img) => {
+				const imgClone = img.cloneNode(true);
+				modalContent.appendChild(imgClone);
+			});
+
+			// Afficher la première image
+			showImage(currentIndex);
+
+			// Afficher le modal
+			modal.style.display = "block";
+
+			// Gestion de la navigation
+			prevBtn.addEventListener("click", () => {
+				currentIndex = (currentIndex - 1 + images.length) % images.length;
+				showImage(currentIndex);
+			});
+
+			nextBtn.addEventListener("click", () => {
+				currentIndex = (currentIndex + 1) % images.length;
+				showImage(currentIndex);
+			});
+
+			function showImage(index) {
+				modalContent.querySelectorAll("img").forEach((img, i) => {
+					img.style.display = i === index ? "block" : "none";
 				});
-			})
-			.catch(error => console.error(error));
-	}
-
-	function addAddress(place) {
-		var lat = place.lat;
-		var lon = place.lon;
-		var addressInput = document.getElementById("address-input");
-		addressInput.value = ""; // Efface le champ après sélection
-		document.getElementById("suggestions").innerHTML = ""; // Efface les suggestions
-
-		// Vérifie si l'adresse est déjà dans la liste
-		var existingItems = document.querySelectorAll('.address-item');
-		for (var i = 0; i < existingItems.length; i++) {
-			if (existingItems[i].dataset.lat == lat && existingItems[i].dataset.lon == lon) {
-				alert("Cette adresse est déjà ajoutée !");
-				return;
 			}
+		});
+	});
+
+	// Fermer le modal
+	const modal = document.getElementById("postModal");
+	const closeBtn = modal.querySelector(".close");
+
+	closeBtn.addEventListener("click", () => {
+		modal.style.display = "none";
+	});
+
+	window.addEventListener("click", (event) => {
+		if (event.target === modal) {
+			modal.style.display = "none";
 		}
-
-		// Ajouter un marqueur sur la carte
-		var marker = L.marker([lat, lon]).addTo(map)
-			.bindPopup(`<b>${place.display_name}</b>`)
-			.openPopup();
-
-		markers.push({ marker, lat, lon }); // Ajoute le marqueur à la liste
-
-		// Ajouter l'adresse à la liste
-		var addressList = document.getElementById("address-list");
-		var listItem = document.createElement("li");
-		listItem.classList.add("address-item");
-		listItem.dataset.lat = lat;
-		listItem.dataset.lon = lon;
-		listItem.innerHTML = `<span>${place.display_name}</span> <button class="remove-btn" onclick="removeAddress(this)">X</button>`;
-
-		listItem.onclick = function() {
-			map.setView([lat, lon], 12); // Zoomer sur l'adresse sélectionnée
-		};
-
-		addressList.appendChild(listItem);
-	}
-
-	function removeAddress(button) {
-		var listItem = button.parentNode;
-		var lat = listItem.dataset.lat;
-		var lon = listItem.dataset.lon;
-
-		// Supprimer le marqueur correspondant
-		for (var i = 0; i < markers.length; i++) {
-			if (markers[i].lat == lat && markers[i].lon == lon) {
-				map.removeLayer(markers[i].marker);
-				markers.splice(i, 1);
-				break;
-			}
-		}
-
-		// Supprimer l'élément de la liste
-		listItem.remove();
-	}
+	});
 </script>
 
-</body>
-</html>

@@ -8,7 +8,8 @@
 ?>
 
 <?php get_header(); ?>
-<main class="main wall--map" role="main" data-barba="container" data-barba-namespace="wall--map" data-theme="theme-light"  data-admin-ajax=<?php echo admin_url( 'admin-ajax.php' ); ?>>
+<main class="main wall--map" role="main" data-barba="container"
+	  data-barba-namespace="wall--map" data-theme="theme-light"  data-admin-ajax=<?php echo admin_url( 'admin-ajax.php' ); ?>>
 	<span class="hide current_user_id" data-u-id="<?php echo wp_get_current_user()->ID; ?>"></span>
 	<div class="container--xlarge">
 		<div data-barba-prevent="all" class="flex flex--vertical flex--wrap flex--vertical-center wall">
@@ -201,13 +202,13 @@
 							"card_gallery" => $gallery_image_ids_array,
 							"video_" => $video_,
 							"card_gallery_display" => get_field("post_home_pictures_display"),
-														
+
 							"first_name" => ucfirst($first_name),
 							"last_name" => ucfirst($last_name),
 							"user_id" => get_the_author_meta('ID'),
 							"work_position" => get_field("user_current_work_position", "user_".get_the_author_meta('ID')),
 							"title_post" => get_field("post_home_title"),
-							
+
 							// homes post
 							"home_type" => $post_home_action_translate,
 							"price" => get_field("post_home_price"),
@@ -237,13 +238,9 @@
 
 					 }
 
-
 				endwhile;
 			endif;
-
-			// shuffle($wall_content)	;
-
-			?>
+		?>
 			<div class="split-view grid">
 				<div class="left-map default-bckg np grid-col-5">
 					<div id="map-data" data-fit-bounds="true" data-page="wall--map" data-buildings="<?php echo htmlspecialchars(json_encode($wall_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
@@ -265,22 +262,22 @@
 									"user_id" => $content["user_id"],
 									'type' => null, // null or compact
 									'content' => $content["content"],
-			
-									//homes post						
+
+									//homes post
 									'home_type' => $content["home_type"],
-									'home_category' => $content["home_category"],						
+									'home_category' => $content["home_category"],
 									'price' => $content["price"],
 									'bedrooms' => $content["bedrooms"],
 									'bathrooms' => $content["bathrooms"],
 									'house' => $content["home_size"],
 									'land' => $content["outdoor_size"],
 									//-----
-			
+
 									// //jobs post
 									// "post_home_sector_activity" =>  $content["post_home_sector_activity"],
 									// "post_home_Jobs_title" =>  $content["post_home_Jobs_title"],
-			
-			
+
+
 									'post_creator_link' => get_permalink("602")."?user_id=".$content["user_id"],
 									'post_creator_name' => $content["first_name"]."&nbsp;".$content["last_name"],
 									'first_name' => $content["first_name"],
@@ -293,7 +290,7 @@
 									'post_type' => $content["post_type"],
 									'post_type_slug' => $content["post_type_slug"],
 									'address_name' => $content["location"],
-									'address_link' => null,						
+									'address_link' => null,
 									'tags' => $content["tags"],
 									"events_type" => $content["events_type"],
 									"events_text_1" => $content["events_text_1"],
