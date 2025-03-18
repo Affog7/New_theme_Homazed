@@ -371,7 +371,7 @@ add_action('init', 'register_get_posts_by_post_w_linked');
 function register_get_posts_by_user() {
 	function get_posts_by_user($user_id, $post_type = 'post') {
 		$args = [
-			'post_type'      => 'any',
+			'post_type'      => ["homes","projects","jobs","news"],
 			'posts_per_page' => -1,
 			'author'         => $user_id
 		];
@@ -738,4 +738,5 @@ include get_template_directory() . '/function_news_search.php';
 include get_template_directory() . '/function_map_plus.php';
 include get_template_directory() . '/function_profile_recommend.php';
 include get_template_directory() . '/function_profile_add_contact.php';
+include get_template_directory() . '/function_profile.php';
 

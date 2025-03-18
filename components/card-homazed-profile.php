@@ -43,13 +43,12 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             <!-- Post author -->
             <div class="post-header__main-title flex flex--vertical-center">
 
-                <?php get_template_part("components/post-avatar", null, array(
-                    'user_picture' => $user_avatar_id,
-                    'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),//$post_avatar_picture_id,
-                    'first_name' => $args["first_name"],
-                    'last_name' => $args["last_name"],
-                    'user_link' => $user_link,
-                ) ); ?>
+                <?php  get_template_part("components/user-avatar", null, array(
+					'title' => $args["post_creator_name"],
+					'image' => $user_avatar_id,
+					'first_name' => $args["first_name"],
+					'last_name' => $args["last_name"],
+				) ); ?>
                 <div class="card__wrapper__title flex">
 
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
@@ -403,6 +402,8 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             </div>
 
             <ul class="post-footer__right flex flex--justify-end">
+
+				<?php //add recommendation ?>
                 <li class="post-footer__favorite post-footer__relation">
                     <?php
 						$account_category = get_field("account_category", "user_".$args["user_id"]);
@@ -417,7 +418,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 						$is_recommended = in_array(get_current_user_id(), $recommended_users) ? 'active' : '';
 
 						get_template_part("components/btn", null, array(
-							'label' => 'Like',
+							'label' => '('.count($recommended_users).') Recommend',
 							'href' => "#",
 							'target' => "_self",
 							'skin'  => 'transparent',
@@ -426,7 +427,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 							'icon-position' => '',
 							'icon' => 'like-1',
 							'additional-classes' => 'profile-recommend-btn ' . $is_recommended, // Ajout de la classe active
-							'data-attribute' => "data-recommanduser='".$args["user_id"]."' data-postid='".get_the_ID()."' data-userid='".get_current_user_id()."'",
+							'data-attribute' => "data-recommanduser='".$args["user_id"]."' data-postid='".$args["id"]."' data-userid='".get_current_user_id()."'",
 							'theme' => "",
 						));
 					}

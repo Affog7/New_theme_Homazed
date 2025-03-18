@@ -124,19 +124,20 @@ function get_post_details_api( $request ) {
 	ob_start();
 
 // Inclut le template, dont le contenu sera capturé dans le tampon
-	get_template_part(
+	$relation_type =  $post->post_type=='profile' ? 'request-contact-list' : 'favorite';
+		get_template_part(
 		"components/btn", null,
 		array(
-		'label' => 'Favorite',
+		'label' =>  $post->post_type=='profile' ? 'Add Contact' : 'Favorite',
 		'href' => "",
 		'target' => "_self",
-		'skin'  => 'transparent',
+		'skin'  => 'ghost',
 		'icon-only'  => true,
 		'disabled'  => false,
 		'icon-position' => '', // left or right
 		'icon' => $post->post_type=='profile' ?  'user-plus' : 'rating-star-ribbon', // nom du fichier svg
 		'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn__posts relation_btn--favorite' : 'post-footer__button relation_btn relation_btn__posts relation_btn--favorite',
-		'data-attribute' => "data-relation-him=" . $post_id. " data-relation-type='favorite'",
+		'data-attribute' => "data-relation-him=" . $post_id. " data-relation-type='$relation_type'",
 		'theme' => "",
 	));
 
@@ -257,4 +258,3 @@ add_action('rest_api_init', function () {
 		'permission_callback' => '__return_true'
 	]);
 });
-

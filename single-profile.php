@@ -175,11 +175,15 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
                     get_template_part("components/post-avatar-pro", null, array(
                         'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
                         'title' => $author_profile_name,
+                        'first_name' => $author_first_name,
+                        'last_name' => $author_last_name
                     ) );
                 } else {
-                    get_template_part("components/post-avatar", null, array(
-                        'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
+                    get_template_part("components/user-avatar", null, array(
                         'title' => $author_profile_name,
+                        'image' => $user_avatar_id,
+                        'first_name' => $author_first_name,
+                        'last_name' => $author_last_name
                     ) );
                 }
                 ?>
@@ -321,7 +325,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
                         $is_recommended = in_array(get_current_user_id(), $recommended_users) ? 'active' : '';
 
                         get_template_part("components/btn", null, array(
-                            'label' => 'Like',
+                            'label' => '('.count($recommended_users).') Recommend',
                             'href' => "#",
                             'target' => "_self",
                             'skin'  => 'ghost',
@@ -395,299 +399,299 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 
 <!-- todo_augustin -->
 <!-- Popup Structure with Multi-Step Form -->
- <?php
-$post_id_presenece = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
-$show = $post_id == $post_id_presenece;
-?>
+     <?php
+    $post_id_presenece = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
+    $show = $post_id == $post_id_presenece;
+    ?>
 
-<div id="editPostPopup" class="popup" style="display: <?php if(!$show) echo 'none'  ?> ;    background: #6c6c64b5;">
-	<div class=" popup-content">
-		<div class="body-popup">
-			<div class="popup-header">
-				<h2>Profile Post</h2>
-				<div class="popup-controls">
-					<?php
-					// Récupérer le statut actuel du post
-					$current_status = get_post_status($post_id);
+    <div id="editPostPopup" class="popup" style="display: <?php if(!$show) echo 'none'  ?> ;    background: #6c6c64b5;">
+        <div class=" popup-content">
+            <div class="body-popup">
+                <div class="popup-header">
+                    <h2>Profile Post</h2>
+                    <div class="popup-controls">
+                        <?php
+                        // Récupérer le statut actuel du post
+                        $current_status = get_post_status($post_id);
 
-					// Définir un libellé pour chaque statut
-					$status_labels = array(
-						'publish'  => 'Active',
-						'private'  => 'Inactive',
-						'erase'    => 'Erase',
-					);
+                        // Définir un libellé pour chaque statut
+                        $status_labels = array(
+                            'publish'  => 'Active',
+                            'private'  => 'Inactive',
+                            'erase'    => 'Erase',
+                        );
 
-					// Vérifier si le statut actuel est dans le tableau, sinon par défaut 'Active'
-					$current_label = isset($status_labels[$current_status]) ? $status_labels[$current_status] : 'Active';
-					?>
+                        // Vérifier si le statut actuel est dans le tableau, sinon par défaut 'Active'
+                        $current_label = isset($status_labels[$current_status]) ? $status_labels[$current_status] : 'Active';
+                        ?>
 
-					<div class="dropdown">
-						<!-- Affichage dynamique du statut actuel -->
-						<span id="post-status" class="active-status" onclick="toggleDropdown()">
-					<?php echo esc_html($current_label); ?> ▼
-					</span>
-						<div id="status-options" class="dropdown-content">
-							<a href="#" onclick="setStatus('publish', <?php echo $post_id; ?>)">Active</a>
-							<a href="#" onclick="setStatus('private', <?php echo $post_id; ?>)">Inactive</a>
-							<a href="#" onclick="setStatus('erase', <?php echo $post_id; ?>)">Erase</a>
-						</div>
-					</div>
+                        <div class="dropdown">
+                            <!-- Affichage dynamique du statut actuel -->
+                            <span id="post-status" class="active-status" onclick="toggleDropdown()">
+                        <?php echo esc_html($current_label); ?> ▼
+                        </span>
+                            <div id="status-options" class="dropdown-content">
+                                <a href="#" onclick="setStatus('publish', <?php echo $post_id; ?>)">Active</a>
+                                <a href="#" onclick="setStatus('private', <?php echo $post_id; ?>)">Inactive</a>
+                                <a href="#" onclick="setStatus('erase', <?php echo $post_id; ?>)">Erase</a>
+                            </div>
+                        </div>
 
-								 <?php get_template_part( 'components/btn', null,
-									 array(
-										 'label' => 'close',
-										 'href' => $post_link ,
-										 'target' => "_self",
-										 'skin'  => 'ghost',
-										 'icon-only'  => false,
-										 'disabled'  => false,
-										 'icon-position' => '', // left or right
-										 'icon' => '',
-										 'additional-classes' => 'square',
-										 'data-attribute' => '',
-										 'theme' => "",
-									 )
-								 ); ?>
-
-
-					<!-- <span class="close-btn-circle">&times;</span> -->
-				</div>
-			</div>
-
-			<!-- Divider -->
-			<hr>
-
-			<!-- Sommaire (Step 0) -->
-			<div class="form-step" id="step0">
- 				<ul class="step-list">
-					<li><a href="#" onclick="goToStep(1)">Media ></a></li>
-					<li><a href="#" onclick="goToStep(2)">Location ></a></li>
-					<li><a href="#" onclick="goToStep(3)">Texts & Key Info ></a></li>
-					<li><a href="#" onclick="goToStep(4)">Connections ></a></li>
-					<li><a href="#" class="premium" onclick="goToStep(5)">add Event</a></li>
-					<li><a href="#" class="premium" onclick="goToStep(6)">add Premium</a></li>
-				</ul>
-			</div>
-
-			<!-- Autres étapes du formulaire -->
-			<div class="form-step" id="step1" style="display:none;">
-				<h3>Media</h3>
-				<main class="modal__content contact__form contact__form--light" >
-					<?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
-					; ?>
-<hr>
-
-					<?php	echo do_shortcode('[main_picture_manager   post_id="' . $post_id . '"]');
-					; ?>
-<hr>
-					<?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
-					; ?>
-
-<hr>
-
-					<?php	echo do_shortcode('[video_manager_url    post_id="' . $post_id . '"]');
-					; ?>
+                                     <?php get_template_part( 'components/btn', null,
+                                         array(
+                                             'label' => 'close',
+                                             'href' => $post_link ,
+                                             'target' => "_self",
+                                             'skin'  => 'ghost',
+                                             'icon-only'  => false,
+                                             'disabled'  => false,
+                                             'icon-position' => '', // left or right
+                                             'icon' => '',
+                                             'additional-classes' => 'square',
+                                             'data-attribute' => '',
+                                             'theme' => "",
+                                         )
+                                     ); ?>
 
 
-					<!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
+                        <!-- <span class="close-btn-circle">&times;</span> -->
+                    </div>
+                </div>
 
-			<!--  -->
-			<div class="form-step" id="step2" style="display:none;height:450px">
-				<div style="height: 400px; overflow: auto;">
-					<h3>Location</h3>
-					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="53" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-					</main>
-				</div>
-				<div>
-							<?php get_template_part( 'components/btn', null,
-									 array(
-										 'label' => 'SAVE updates',
-										 'href' => "#" ,
-										 'target' => "_self",
-										 'skin'  => 'ghost',
-										 'icon-only'  => false,
-										 'disabled'  => false,
-										 'icon-position' => '', // left or right
-										 'icon' => '',
-										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="53" data-step="2"',
-										 'theme' => "",
-									 )
-								 ); ?>
+                <!-- Divider -->
+                <hr>
 
-				</div>
-			</div>
+                <!-- Sommaire (Step 0) -->
+                <div class="form-step" id="step0">
+                    <ul class="step-list">
+                        <li><a href="#" onclick="goToStep(1)">Media ></a></li>
+                        <li><a href="#" onclick="goToStep(2)">Location ></a></li>
+                        <li><a href="#" onclick="goToStep(3)">Texts & Key Info ></a></li>
+                        <li><a href="#" onclick="goToStep(4)">Connections ></a></li>
+                        <li><a href="#" class="premium" onclick="goToStep(5)">add Event</a></li>
+                        <li><a href="#" class="premium" onclick="goToStep(6)">add Premium</a></li>
+                    </ul>
+                </div>
 
-			<!-- Key infos  -->
-			<div class="form-step" id="step3" style="display:none; height:450px">
-				<div style="height: 400px; overflow: auto;">
-					<main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
+                <!-- Autres étapes du formulaire -->
+                <div class="form-step" id="step1" style="display:none;">
+                    <h3>Media</h3>
+                    <main class="modal__content contact__form contact__form--light" >
+                        <?php	echo do_shortcode('[gallery_manager  max_images="15" size="medium" allowed_extensions="jpg,png"  post_id="' . $post_id . '"]');
+                        ; ?>
+    <hr>
 
-						<?php echo do_shortcode( '[gravityform id="54" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                        <?php	echo do_shortcode('[main_picture_manager   post_id="' . $post_id . '"]');
+                        ; ?>
+    <hr>
+                        <?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
+                        ; ?>
 
-					</main>
-				</div>
-				<div>
-							<?php get_template_part( 'components/btn', null,
-									 array(
-										 'label' => 'SAVE updates',
-										 'href' => "#" ,
-										 'target' => "_self",
-										 'skin'  => 'ghost',
-										 'icon-only'  => false,
-										 'disabled'  => false,
-										 'icon-position' => '', // left or right
-										 'icon' => '',
-										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="54" data-step="3"',
-										 'theme' => "",
-									 )
-								 ); ?>
+    <hr>
 
-				</div>
+                        <?php	echo do_shortcode('[video_manager_url    post_id="' . $post_id . '"]');
+                        ; ?>
 
-			</div>
 
-			<!--  -->
-			<div class="form-step" id="step4" style="display:none;height:450px">
-				<div style="height: 400px; overflow: auto;">
-					<h3>Connections</h3>
-					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="55" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-					</main>
-				</div>
-				<div>
-							<?php get_template_part( 'components/btn', null,
-									 array(
-										 'label' => 'SAVE updates',
-										 'href' => "#" ,
-										 'target' => "_self",
-										 'skin'  => 'ghost',
-										 'icon-only'  => false,
-										 'disabled'  => false,
-										 'icon-position' => '', // left or right
-										 'icon' => '',
-										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="55" data-step="4"',
-										 'theme' => "",
-									 )
-								 ); ?>
+                        <!--				--><?php	//echo do_shortcode( '[gravityform id="4" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                    </main>
+                </div>
 
-				</div>
-			</div>
+                <!--  -->
+                <div class="form-step" id="step2" style="display:none;height:450px">
+                    <div style="height: 400px; overflow: auto;">
+                        <h3>Location</h3>
+                        <main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+                            <?php echo do_shortcode( '[gravityform id="53" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                        </main>
+                    </div>
+                    <div>
+                                <?php get_template_part( 'components/btn', null,
+                                         array(
+                                             'label' => 'SAVE updates',
+                                             'href' => "#" ,
+                                             'target' => "_self",
+                                             'skin'  => 'ghost',
+                                             'icon-only'  => false,
+                                             'disabled'  => false,
+                                             'icon-position' => '', // left or right
+                                             'icon' => '',
+                                             'additional-classes' => 'square',
+                                             'data-attribute' => 'id="submit_" data-form_id="53" data-step="2"',
+                                             'theme' => "",
+                                         )
+                                     ); ?>
 
-			<!--  -->
-			<div class="form-step" id="step5" style="display:none;height:450px">
-				<div style="height: 400px; overflow: auto;">
-					<h3>Event</h3>
-					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="56" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-					</main>
-				</div>
-				<div>
-							<?php get_template_part( 'components/btn', null,
-									 array(
-										 'label' => 'SAVE updates',
-										 'href' => "#" ,
-										 'target' => "_self",
-										 'skin'  => 'ghost',
-										 'icon-only'  => false,
-										 'disabled'  => false,
-										 'icon-position' => '', // left or right
-										 'icon' => '',
-										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="56" data-step="5"',
-										 'theme' => "",
-									 )
-								 ); ?>
+                    </div>
+                </div>
 
-				</div>
-			</div>
+                <!-- Key infos  -->
+                <div class="form-step" id="step3" style="display:none; height:450px">
+                    <div style="height: 400px; overflow: auto;">
+                        <main class="modal__content contact__form contact__form--light" style="text-align: justify;" >
 
-			<!--  -->
-			<div class="form-step" id="step6" style="display:none;height:450px">
-				<div style="height: 400px; overflow: auto;">
-					<h3>Premium</h3>
-					<main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-						<?php echo do_shortcode( '[gravityform id="57" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-					</main>
-				</div>
-				<div>
-							<?php get_template_part( 'components/btn', null,
-									 array(
-										 'label' => 'SAVE updates',
-										 'href' => "#" ,
-										 'target' => "_self",
-										 'skin'  => 'ghost',
-										 'icon-only'  => false,
-										 'disabled'  => false,
-										 'icon-position' => '', // left or right
-										 'icon' => '',
-										 'additional-classes' => 'square',
-										 'data-attribute' => 'id="submit_" data-form_id="57" data-step="6"',
-										 'theme' => "",
-									 )
-								 ); ?>
+                            <?php echo do_shortcode( '[gravityform id="54" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
 
-				</div>
-			</div>
+                        </main>
+                    </div>
+                    <div>
+                                <?php get_template_part( 'components/btn', null,
+                                         array(
+                                             'label' => 'SAVE updates',
+                                             'href' => "#" ,
+                                             'target' => "_self",
+                                             'skin'  => 'ghost',
+                                             'icon-only'  => false,
+                                             'disabled'  => false,
+                                             'icon-position' => '', // left or right
+                                             'icon' => '',
+                                             'additional-classes' => 'square',
+                                             'data-attribute' => 'id="submit_" data-form_id="54" data-step="3"',
+                                             'theme' => "",
+                                         )
+                                     ); ?>
 
-			<!-- Contrôles de navigation -->
-			<div class="form-navigation" style="display : none">
-				<button id="prevBtn" onclick="navigateSteps(-1)">Previous</button>
-				 <span id="step-count">0 / 6</span>
-			 	<button id="nextBtn" onclick="navigateSteps(1)">Next</button>
-			</div>
-			<div>
-				<p class="active-status" id="status_notif_"></p>
-			</div>
+                    </div>
 
-		</div>
-	</div>
+                </div>
 
-</div>
-<?php if(isset($_GET["premium"])) : ?>
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-		navigateSteps(6)
-		})
-	</script>
+                <!--  -->
+                <div class="form-step" id="step4" style="display:none;height:450px">
+                    <div style="height: 400px; overflow: auto;">
+                        <h3>Connections</h3>
+                        <main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+                            <?php echo do_shortcode( '[gravityform id="55" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                        </main>
+                    </div>
+                    <div>
+                                <?php get_template_part( 'components/btn', null,
+                                         array(
+                                             'label' => 'SAVE updates',
+                                             'href' => "#" ,
+                                             'target' => "_self",
+                                             'skin'  => 'ghost',
+                                             'icon-only'  => false,
+                                             'disabled'  => false,
+                                             'icon-position' => '', // left or right
+                                             'icon' => '',
+                                             'additional-classes' => 'square',
+                                             'data-attribute' => 'id="submit_" data-form_id="55" data-step="4"',
+                                             'theme' => "",
+                                         )
+                                     ); ?>
 
-<?php endif ;?>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Sélectionner tous les boutons dont l'ID est 'submit_' et comportant l'attribut 'data-form_id'
-    const buttons = document.querySelectorAll('a#submit_');
+                    </div>
+                </div>
 
-    // Parcourir chaque bouton et ajouter un gestionnaire d'événements
-    buttons.forEach(button => {
-        button.addEventListener("click", function () {
-            // Récupérer l'ID du formulaire depuis l'attribut 'data-form_id'
-            const formId = button.getAttribute("data-form_id");
-            const idStep = button.getAttribute("data-step");
+                <!--  -->
+                <div class="form-step" id="step5" style="display:none;height:450px">
+                    <div style="height: 400px; overflow: auto;">
+                        <h3>Event</h3>
+                        <main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+                            <?php echo do_shortcode( '[gravityform id="56" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                        </main>
+                    </div>
+                    <div>
+                                <?php get_template_part( 'components/btn', null,
+                                         array(
+                                             'label' => 'SAVE updates',
+                                             'href' => "#" ,
+                                             'target' => "_self",
+                                             'skin'  => 'ghost',
+                                             'icon-only'  => false,
+                                             'disabled'  => false,
+                                             'icon-position' => '', // left or right
+                                             'icon' => '',
+                                             'additional-classes' => 'square',
+                                             'data-attribute' => 'id="submit_" data-form_id="56" data-step="5"',
+                                             'theme' => "",
+                                         )
+                                     ); ?>
 
-            // Trouver le formulaire et le bouton de soumission associé
-            const form = document.querySelector(`#step${idStep} form#gform_${formId}`);
-            const submitButton = form.querySelector(`#gform_submit_button_${formId}`);
+                    </div>
+                </div>
 
-            if (form && submitButton) {
-                // Simuler le clic sur le bouton de soumission du formulaire
-                submitButton.click();
-            } else {
-                // Afficher une notification d'erreur si le formulaire n'existe pas
-                const statusNotification = document.querySelector("#status_notif_");
-                if (statusNotification) {
-                    statusNotification.textContent = `Erreur : Formulaire pour l'ID ${formId} non trouvé.`;
-                    statusNotification.style.color = "red";
+                <!--  -->
+                <div class="form-step" id="step6" style="display:none;height:450px">
+                    <div style="height: 400px; overflow: auto;">
+                        <h3>Premium</h3>
+                        <main class="modal__content contact__form contact__form--light" style="text-align: justify;">
+                            <?php echo do_shortcode( '[gravityform id="57" ajax="false" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                        </main>
+                    </div>
+                    <div>
+                                <?php get_template_part( 'components/btn', null,
+                                         array(
+                                             'label' => 'SAVE updates',
+                                             'href' => "#" ,
+                                             'target' => "_self",
+                                             'skin'  => 'ghost',
+                                             'icon-only'  => false,
+                                             'disabled'  => false,
+                                             'icon-position' => '', // left or right
+                                             'icon' => '',
+                                             'additional-classes' => 'square',
+                                             'data-attribute' => 'id="submit_" data-form_id="57" data-step="6"',
+                                             'theme' => "",
+                                         )
+                                     ); ?>
+
+                    </div>
+                </div>
+
+                <!-- Contrôles de navigation -->
+                <div class="form-navigation" style="display : none">
+                    <button id="prevBtn" onclick="navigateSteps(-1)">Previous</button>
+                     <span id="step-count">0 / 6</span>
+                    <button id="nextBtn" onclick="navigateSteps(1)">Next</button>
+                </div>
+                <div>
+                    <p class="active-status" id="status_notif_"></p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <?php if(isset($_GET["premium"])) : ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            navigateSteps(6)
+            })
+        </script>
+
+    <?php endif ;?>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Sélectionner tous les boutons dont l'ID est 'submit_' et comportant l'attribut 'data-form_id'
+        const buttons = document.querySelectorAll('a#submit_');
+
+        // Parcourir chaque bouton et ajouter un gestionnaire d'événements
+        buttons.forEach(button => {
+            button.addEventListener("click", function () {
+                // Récupérer l'ID du formulaire depuis l'attribut 'data-form_id'
+                const formId = button.getAttribute("data-form_id");
+                const idStep = button.getAttribute("data-step");
+
+                // Trouver le formulaire et le bouton de soumission associé
+                const form = document.querySelector(`#step${idStep} form#gform_${formId}`);
+                const submitButton = form.querySelector(`#gform_submit_button_${formId}`);
+
+                if (form && submitButton) {
+                    // Simuler le clic sur le bouton de soumission du formulaire
+                    submitButton.click();
+                } else {
+                    // Afficher une notification d'erreur si le formulaire n'existe pas
+                    const statusNotification = document.querySelector("#status_notif_");
+                    if (statusNotification) {
+                        statusNotification.textContent = `Erreur : Formulaire pour l'ID ${formId} non trouvé.`;
+                        statusNotification.style.color = "red";
+                    }
                 }
-            }
+            });
         });
     });
-});
-</script>
+    </script>
 
 
 
@@ -695,55 +699,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- fin todo_augustin -->
 		<div class="tab-content default-bckg post-page <?php if(isset($post_gallery_image_ids_array) && count($post_gallery_image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" data-barba-prevent="all" id="tabs-home">
 			<div class="post-page__section">
-				<?php if($post_price || $post_bedrooms || $post_bathrooms || $post_home_size || $post_outdoor_size): ?>
-					<div class="flex flex--justify-between">
-						<?php if($post_price): ?>
-							<?php if($current_user_id == $author_id): ?>
-								<div class="flex">
-									<div class="flex edit-area hide">
 
-									</div>
-								<?php endif; ?>
-								<?php get_template_part( 'components/price', null, array(
-									'price' => $post_price, )
-								); ?>
-								<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
-						<?php endif; ?>
-						<?php if($post_bedrooms || $post_bathrooms || $post_home_size || $post_outdoor_size): ?>
-							<ul class="post-details__caracteristics flex flex--vertical-center">
-								<?php if($current_user_id == $author_id): ?>
-									<li class="edit-area hide">
-
-									</li>
-								<?php endif; ?>
-								<?php if($post_bedrooms): ?>
-									<li class="post-details__bedroom">
-										<span class="post-details__prefix p-xs">BDR</span>
-										<?php echo str_replace(' ', '', $post_bedrooms); ?>
-									</li>
-								<?php endif; ?>
-								<?php if($post_bathrooms): ?>
-								<li class="post-details__bathroom">
-									<span class="post-details__prefix p-xs">BTH</span>
-									<?php echo str_replace(' ', '', $post_bathrooms); ?>
-								</li>
-								<?php endif; ?>
-								<?php if($post_home_size): ?>
-								<li class="post-details__house">
-									<span class="post-details__prefix p-xs">H</span>
-									<?php echo str_replace(' ', '', $post_home_size); ?><span class="post-details__suffix p-xs">m2</span>
-								</li>
-								<?php endif; ?>
-								<?php if($post_outdoor_size): ?>
-								<li class="post-details__land">
-									<span class="post-details__prefix p-xs">L</span>
-									<?php echo str_replace(' ', '', $post_outdoor_size); ?><span class="post-details__suffix p-xs">m2</span>
-								</li>
-								<?php endif; ?>
-							</ul>
-						<?php endif; ?>
-					</div>
-				<?php endif; ?>
 			</div>
 			<div class="post-page__section bt-2">
 				<?php if(isset($post_gallery_image_ids_array) ): ?>
@@ -828,11 +784,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php endif; ?>
 				<?php if($current_user_id == $author_id): ?></div><?php endif; ?>
 
-				<div class="event event--tour">
-					<div class="event__frame">
-						<a class="event__frame__link" href="/?">Schedule my tour</a>
-					</div>
-				</div>
+
 
 
 				<?php if($post_events_text_1 && $post_events_type != "None"): ?>
@@ -876,9 +828,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				<?php endif; ?>
 			</div>
 
-
-
-
 			<div class="post-page__section bt-2">
 				<?php if($current_user_id == $author_id): ?>
 					<div class="flex edit-area hide">
@@ -891,112 +840,126 @@ document.addEventListener("DOMContentLoaded", function () {
 					limiterLignes($post_main_content,32); ?>
 			</div>
 
-        	<div class="post-page__section bt-2">
-				 <?php  if ($is_for_recommandation) {
-                     $recommended_users = get_post_meta(get_the_ID(), 'profile-recommend', true);
-                     if (!is_array($recommended_users)) {
-                         $recommended_users = [];
-                     }
+            <div class="post-page__section bt-2">
+                <?php
+                if ($is_for_recommandation) {
+                    $recommended_users = get_post_meta(get_the_ID(), 'profile-recommend', true);
+                    if (!is_array($recommended_users)) {
+                        $recommended_users = [];
+                    }
 
-                     $is_recommended = in_array(get_current_user_id(), $recommended_users) ? 'active' : '';
+                    $contact_list = get_field("i_request_contactlist_users_relationships", "user_".$author_id);
+                    if (!is_array($contact_list)) {
+                        $contact_list = [];
+                    }
 
-                 }
-                 ?>
-			</div>
-
-      <div class="post-page__section bt-2">
-		<dl>
-
-			<dt class="-light">Contact Information :</dt>
-			<br>
-
-			<dd>
-
-
-			<?php if ($author_data): ?>
-				<div class="post-page__section">
-					<?php get_template_part("components/user-resume-on-post", null, array(
-							"user" => $author_data,
-							'additional-classes' => '',
-						)); ?>
-				</div>
-			<?php endif; ?>
-
-			<?php if($author_email_address || $author_phone_number || $author_website_link || $post_Add_my_webshop_link) : ?>
-				<div class="post-page__section content">
-					<ul class="contact__list">
-						<?php if($author_email_address): ?>
-							<li class="contact__list__item">
-								<a href="<?php echo "mailto:" . $author_email_address; ?>" target="_blank">
-									<svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M256,0C114.609,0,0,114.609,0,256s114.609,256,256,256s256-114.609,256-256S397.391,0,256,0z M256,472 c-119.297,0-216-96.703-216-216S136.703,40,256,40s216,96.703,216,216S375.297,472,256,472z"></path> <g> <path d="M368,234.375v74.438l-54.5-59.422l16.719-11.312c-5.984-1.531-11.641-3.922-16.688-7.203L256,271.75L166.281,208H256 h37.625c-2.391-4.984-4-10.344-4.812-16H256H128v160h128h128V223.062C379.422,227.75,373.969,231.531,368,234.375z M144,212.531 l54.5,36.859L144,308.812V212.531z M256,336h-92.406l45.562-79.422L256,288.25l46.844-31.672L348.406,336H256z"></path> </g> <path d="M344,144c-22.094,0-40,17.906-40,40s17.906,40,40,40s40-17.906,40-40S366.094,144,344,144z M344,214.406L324.797,192H336 v-32h16v32h11.203L344,214.406z"></path> </g> </g></svg>
-									Send a message
-								</a>
-							</li>
-						<?php endif; ?>
+                    // Compter combien de contacts ont recommandé
+                    $contacts_who_recommended = array_intersect($recommended_users, $contact_list);
+                    $count_contacts_recommended = count($contacts_who_recommended);
+                    ?>
+                    <p><?php echo count($recommended_users) ?> Users recommend;    <?php echo $count_contacts_recommended; ?> of my contacts recommend</p>
+                    <p><?php echo count_user_posts($author_id,["homes","jobs","projects","news"],true) ; ?> Active posts;    </p>
 
 
+                    <?php
+                }
+                ?>
+            </div>
 
-						<?php
-						if(($author_phone_number && $post_phone_calls_available) ||($author_phone_number &&  $author_connections_settings && in_array("phone_calls_available", $author_connections_settings))): ?>
-							<li class="contact__list__item">
-								<a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">
-									<svg viewBox="0 0 24 24" height="20" width="20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 8H8.44444C8.2 8 8 8.2 8 8.44444C8 12.6178 11.3822 16 15.5556 16C15.8 16 16 15.8 16 15.5556V14.0044C16 13.76 15.8 13.56 15.5556 13.56C15.0044 13.56 14.4667 13.4711 13.9689 13.3067C13.9244 13.2889 13.8756 13.2844 13.8311 13.2844C13.7156 13.2844 13.6044 13.3289 13.5156 13.4133L12.5378 14.3911C11.28 13.7467 10.2489 12.72 9.60889 11.4622L10.5867 10.4844C10.7111 10.36 10.7467 10.1867 10.6978 10.0311C10.5333 9.53333 10.4444 9 10.4444 8.44444C10.4444 8.2 10.2444 8 10 8ZM9.77333 10.04C9.66667 9.67111 9.6 9.28444 9.57333 8.88889H8.90222C8.94222 9.47556 9.05778 10.04 9.24 10.5733L9.77333 10.04ZM15.1111 14.4311C14.72 14.4044 14.3333 14.3378 13.9556 14.2311L13.4222 14.76C13.96 14.9378 14.5244 15.0533 15.1111 15.0933V14.4311Z" fill="#000000"></path> <path d="M13.2216 9.52112V9.10456H15.3044V11.1874H14.8879V9.81568L12.9376 11.766L12.643 11.4714L14.5933 9.52112H13.2216Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="#000000"></path> </g></svg>
-									Call
-								</a>
-							</li>
-						<?php endif; ?>
 
-						<?php if($author_website_link && $post_add_my_website_link && in_array("add_website_link", $author_connections_settings)): ?>
-<!--							<li class="contact__list__item">-->
-<!--								<a href="--><?php //echo esc_url($author_website_link); ?><!--" target="_blank">-->
-<!--									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>-->
-<!--									Website-->
-<!--								</a>-->
-<!--							</li>-->
-						<?php endif; ?>
+            <div class="post-page__section bt-2">
+                <dl>
 
-						<?php if($author_online_shop_link && in_array("add_online_shop_link", $author_connections_settings)): ?>
-<!--							<li class="contact__list__item">-->
-<!--								<a href="--><?php //echo $author_online_shop_link; ?><!--" target="_blank">-->
-<!--									<svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.52 491.52" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M491.52,419.84V0H0v419.84h153.6v51.2h-40.96v20.48h266.24v-20.48h-40.96v-51.2H491.52z M20.48,20.48h450.56v317.44H20.48 V20.48z M317.44,471.04H174.08v-51.2h143.36V471.04z M20.48,399.36V358.4h450.56v40.96H20.48z"></path> </g> </g> <g> <g> <path d="M386.67,128.24l-23.88-66.8h-53.555H288.43H256h-20.48h-32.43h-20.805H128.73l-23.88,66.8 c-4.605,12.9-2.715,26.74,5.2,37.96c3.427,4.869,7.843,8.833,12.83,11.842V296.96h245.76V178.042 c4.987-3.01,9.402-6.973,12.83-11.842C389.385,154.98,391.275,141.14,386.67,128.24z M348.36,81.92l14.639,40.96h-42.779 L312.9,81.92H348.36z M256,81.92h36.091l7.323,40.96H256V81.92z M302.506,143.36c-0.225,4.526-1.904,8.841-4.951,12.48 c-4.255,5.08-10.565,8-17.315,8h-1.94c-11.892,0-21.556-9.099-22.181-20.48H302.506z M199.429,81.92h36.091v40.96h-43.414 L199.429,81.92z M235.401,143.36c-0.626,11.381-10.289,20.48-22.181,20.48h-1.94c-6.75,0-13.06-2.92-17.315-8 c-3.047-3.639-4.726-7.954-4.951-12.48H235.401z M143.16,81.92h35.46l-7.319,40.96h-42.783L143.16,81.92z M126.79,154.41 c-2.357-3.349-3.53-7.161-3.738-11.05h44.589l-0.456,2.55c-1.86,10.39-11.1,17.93-21.975,17.93 C137.725,163.84,131.015,160.4,126.79,154.41z M348.16,276.48h-204.8v-92.271c0.619,0.026,1.228,0.111,1.85,0.111 c13.2,0,25.123-5.917,33.022-15.373c0.009,0.011,0.014,0.022,0.023,0.033c8.16,9.75,20.195,15.34,33.025,15.34h1.94 c13.094,0,24.687-5.945,32.54-15.093c7.853,9.148,19.446,15.093,32.54,15.093h1.94c12.83,0,24.865-5.59,33.025-15.34 c0.009-0.011,0.014-0.022,0.022-0.033c7.899,9.456,19.823,15.373,33.023,15.373c0.622,0,1.231-0.085,1.85-0.111V276.48z M364.73,154.41c-4.225,5.99-10.935,9.43-18.42,9.43c-10.875,0-20.115-7.54-21.975-17.93l-0.456-2.55h44.588 C368.261,147.249,367.088,151.061,364.73,154.41z"></path> </g> </g> </g></svg>-->
-<!--									Online shop-->
-<!--								</a>-->
-<!--							</li>-->
-						<?php endif; ?>
+                        <dt class="-light">Contact Information :</dt>
+                        <br>
 
-						<?php if($post_home_event_privacy): ?>
-							<li class="contact__list__item">
-								<a href="<?php echo $post_home_event_privacy; ?>" target="_blank">
-									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
-									Privacy
-								</a>
-							</li>
-						<?php endif; ?>
+                        <dd>
 
-						<?php if( $post_author_link && $post_add_my_website_link): ?>
-							<li class="contact__list__item">
-								<a href="<?php echo esc_url($post_author_link); ?>" target="_blank">
-									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
-									Website
-								</a>
-							</li>
-						<?php endif; ?>
 
-						<?php if($post_Add_my_webshop_link  && $Is_Add_my_webshop_link): ?>
-							<li class="contact__list__item">
-								<a href="<?php echo esc_url($post_Add_my_webshop_link); ?>" target="_blank">
-									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
-									Webshop
-								</a>
-							</li>
-						<?php endif; ?>
-					</ul>
+                        <?php if ($author_data): ?>
+                            <div class="post-page__section">
+                                <?php get_template_part("components/user-resume-on-post", null, array(
+                                        "user" => $author_data,
+                                        'additional-classes' => '',
+                                    )); ?>
+                            </div>
+                        <?php endif; ?>
 
-				</div>
-			<?php endif; ?>
-			</dd>
-		</dl>
-		</div>
+                        <?php if($author_email_address || $author_phone_number || $author_website_link || $post_Add_my_webshop_link) : ?>
+                            <div class="post-page__section content">
+                                <ul class="contact__list">
+                                    <?php if($author_email_address): ?>
+                                        <li class="contact__list__item">
+                                            <a href="<?php echo "mailto:" . $author_email_address; ?>" target="_blank">
+                                                <svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M256,0C114.609,0,0,114.609,0,256s114.609,256,256,256s256-114.609,256-256S397.391,0,256,0z M256,472 c-119.297,0-216-96.703-216-216S136.703,40,256,40s216,96.703,216,216S375.297,472,256,472z"></path> <g> <path d="M368,234.375v74.438l-54.5-59.422l16.719-11.312c-5.984-1.531-11.641-3.922-16.688-7.203L256,271.75L166.281,208H256 h37.625c-2.391-4.984-4-10.344-4.812-16H256H128v160h128h128V223.062C379.422,227.75,373.969,231.531,368,234.375z M144,212.531 l54.5,36.859L144,308.812V212.531z M256,336h-92.406l45.562-79.422L256,288.25l46.844-31.672L348.406,336H256z"></path> </g> <path d="M344,144c-22.094,0-40,17.906-40,40s17.906,40,40,40s40-17.906,40-40S366.094,144,344,144z M344,214.406L324.797,192H336 v-32h16v32h11.203L344,214.406z"></path> </g> </g></svg>
+                                                Send a message
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+
+
+
+                                    <?php
+                                    if(($author_phone_number && $post_phone_calls_available) ||($author_phone_number &&  $author_connections_settings && in_array("phone_calls_available", $author_connections_settings))): ?>
+                                        <li class="contact__list__item">
+                                            <a href="<?php echo "tel:" . $author_phone_number; ?>" target="_blank">
+                                                <svg viewBox="0 0 24 24" height="20" width="20" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M10 8H8.44444C8.2 8 8 8.2 8 8.44444C8 12.6178 11.3822 16 15.5556 16C15.8 16 16 15.8 16 15.5556V14.0044C16 13.76 15.8 13.56 15.5556 13.56C15.0044 13.56 14.4667 13.4711 13.9689 13.3067C13.9244 13.2889 13.8756 13.2844 13.8311 13.2844C13.7156 13.2844 13.6044 13.3289 13.5156 13.4133L12.5378 14.3911C11.28 13.7467 10.2489 12.72 9.60889 11.4622L10.5867 10.4844C10.7111 10.36 10.7467 10.1867 10.6978 10.0311C10.5333 9.53333 10.4444 9 10.4444 8.44444C10.4444 8.2 10.2444 8 10 8ZM9.77333 10.04C9.66667 9.67111 9.6 9.28444 9.57333 8.88889H8.90222C8.94222 9.47556 9.05778 10.04 9.24 10.5733L9.77333 10.04ZM15.1111 14.4311C14.72 14.4044 14.3333 14.3378 13.9556 14.2311L13.4222 14.76C13.96 14.9378 14.5244 15.0533 15.1111 15.0933V14.4311Z" fill="#000000"></path> <path d="M13.2216 9.52112V9.10456H15.3044V11.1874H14.8879V9.81568L12.9376 11.766L12.643 11.4714L14.5933 9.52112H13.2216Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z" fill="#000000"></path> </g></svg>
+                                                Call
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php if($author_website_link && $post_add_my_website_link && in_array("add_website_link", $author_connections_settings)): ?>
+            <!--							<li class="contact__list__item">-->
+            <!--								<a href="--><?php //echo esc_url($author_website_link); ?><!--" target="_blank">-->
+            <!--									<svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>-->
+            <!--									Website-->
+            <!--								</a>-->
+            <!--							</li>-->
+                                    <?php endif; ?>
+
+                                    <?php if($author_online_shop_link && in_array("add_online_shop_link", $author_connections_settings)): ?>
+            <!--							<li class="contact__list__item">-->
+            <!--								<a href="--><?php //echo $author_online_shop_link; ?><!--" target="_blank">-->
+            <!--									<svg fill="#000000" height="20" width="20" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.52 491.52" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M491.52,419.84V0H0v419.84h153.6v51.2h-40.96v20.48h266.24v-20.48h-40.96v-51.2H491.52z M20.48,20.48h450.56v317.44H20.48 V20.48z M317.44,471.04H174.08v-51.2h143.36V471.04z M20.48,399.36V358.4h450.56v40.96H20.48z"></path> </g> </g> <g> <g> <path d="M386.67,128.24l-23.88-66.8h-53.555H288.43H256h-20.48h-32.43h-20.805H128.73l-23.88,66.8 c-4.605,12.9-2.715,26.74,5.2,37.96c3.427,4.869,7.843,8.833,12.83,11.842V296.96h245.76V178.042 c4.987-3.01,9.402-6.973,12.83-11.842C389.385,154.98,391.275,141.14,386.67,128.24z M348.36,81.92l14.639,40.96h-42.779 L312.9,81.92H348.36z M256,81.92h36.091l7.323,40.96H256V81.92z M302.506,143.36c-0.225,4.526-1.904,8.841-4.951,12.48 c-4.255,5.08-10.565,8-17.315,8h-1.94c-11.892,0-21.556-9.099-22.181-20.48H302.506z M199.429,81.92h36.091v40.96h-43.414 L199.429,81.92z M235.401,143.36c-0.626,11.381-10.289,20.48-22.181,20.48h-1.94c-6.75,0-13.06-2.92-17.315-8 c-3.047-3.639-4.726-7.954-4.951-12.48H235.401z M143.16,81.92h35.46l-7.319,40.96h-42.783L143.16,81.92z M126.79,154.41 c-2.357-3.349-3.53-7.161-3.738-11.05h44.589l-0.456,2.55c-1.86,10.39-11.1,17.93-21.975,17.93 C137.725,163.84,131.015,160.4,126.79,154.41z M348.16,276.48h-204.8v-92.271c0.619,0.026,1.228,0.111,1.85,0.111 c13.2,0,25.123-5.917,33.022-15.373c0.009,0.011,0.014,0.022,0.023,0.033c8.16,9.75,20.195,15.34,33.025,15.34h1.94 c13.094,0,24.687-5.945,32.54-15.093c7.853,9.148,19.446,15.093,32.54,15.093h1.94c12.83,0,24.865-5.59,33.025-15.34 c0.009-0.011,0.014-0.022,0.022-0.033c7.899,9.456,19.823,15.373,33.023,15.373c0.622,0,1.231-0.085,1.85-0.111V276.48z M364.73,154.41c-4.225,5.99-10.935,9.43-18.42,9.43c-10.875,0-20.115-7.54-21.975-17.93l-0.456-2.55h44.588 C368.261,147.249,367.088,151.061,364.73,154.41z"></path> </g> </g> </g></svg>-->
+            <!--									Online shop-->
+            <!--								</a>-->
+            <!--							</li>-->
+                                    <?php endif; ?>
+
+                                    <?php if($post_home_event_privacy): ?>
+                                        <li class="contact__list__item">
+                                            <a href="<?php echo $post_home_event_privacy; ?>" target="_blank">
+                                                <svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
+                                                Privacy
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php if( $post_author_link && $post_add_my_website_link): ?>
+                                        <li class="contact__list__item">
+                                            <a href="<?php echo esc_url($post_author_link); ?>" target="_blank">
+                                                <svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
+                                                Website
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php if($post_Add_my_webshop_link  && $Is_Add_my_webshop_link): ?>
+                                        <li class="contact__list__item">
+                                            <a href="<?php echo esc_url($post_Add_my_webshop_link); ?>" target="_blank">
+                                                <svg viewBox="0 0 64 64" height="20" width="20" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M39.93,55.72A24.86,24.86,0,1,1,56.86,32.15a37.24,37.24,0,0,1-.73,6"></path><path d="M37.86,51.1A47,47,0,0,1,32,56.7"></path><path d="M32,7A34.14,34.14,0,0,1,43.57,30a34.07,34.07,0,0,1,.09,4.85"></path><path d="M32,7A34.09,34.09,0,0,0,20.31,32.46c0,16.2,7.28,21,11.66,24.24"></path><line x1="10.37" y1="19.9" x2="53.75" y2="19.9"></line><line x1="32" y1="6.99" x2="32" y2="56.7"></line><line x1="11.05" y1="45.48" x2="37.04" y2="45.48"></line><line x1="7.14" y1="32.46" x2="56.86" y2="31.85"></line><path d="M53.57,57,58,52.56l-8-8,4.55-2.91a.38.38,0,0,0-.12-.7L39.14,37.37a.39.39,0,0,0-.46.46L42,53.41a.39.39,0,0,0,.71.13L45.57,49Z"></path></g></svg>
+                                                Webshop
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+
+                            </div>
+                        <?php endif; ?>
+                        </dd>
+                </dl>
+            </div>
 
 
             <hr>
@@ -1007,10 +970,10 @@ document.addEventListener("DOMContentLoaded", function () {
            <dl><dt class="-light">Current Job :</dt>
                <dd><?php echo( get_field("post_home_Jobs_title")); ?></dd>
            </dl>
-
-            <dl><dt class="-light">Other :</dt><dd><?php echo( get_field("post_other")); ?></dd></dl>
-
             <dl><dt class="-light">Services & products :</dt><dd><?php echo( get_field("services_and_products")); ?></dd></dl>
+
+            <dl><dt class="-light">More about :</dt><dd><?php echo( get_field("post_other")); ?></dd></dl>
+
 
 			<br>
 			<dl><dt class="-light"></dt> </dl>
@@ -1071,10 +1034,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					?>
 
-				<!-- <div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
-				<div class="map map--single anim_els">
-					<div id="map"></div>
-				</div> -->
+
 				<div class="post-page__section post-page__section--footer mt-2 ">
 					<p class="post-footer__publish-date p-xs">
 						<?php echo get_time_ago(get_post_timestamp()); ?>
@@ -1082,19 +1042,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				</div>
 			</div>
 		</div>
+
+
+
 		<div class="tab-content default-bckg profile-content__grid hide" id="tabs-grid">
 			<div class="grid-slate__list">
 				<?php
-				get_news_grid_for_w_linked($post_id); // afficher les grid des news linked
-				foreach($post_gallery_image_ids_array as $post_gallery_id):
-					get_template_part("components/grid-slate", null, array(
-						"id" => $post_gallery_id,
-						"post_link" => "",
-						"image" => wp_get_attachment_image_src($post_gallery_id, 'large-img-medium')[0]
-					));
-				endforeach;
-
-                get_posts_grid_by_user($author_id);
+				 get_posts_grid_by_user($author_id);
 				?>
 			</div>
 		</div>
@@ -1104,6 +1058,7 @@ document.addEventListener("DOMContentLoaded", function () {
             $show2 = $post_id == $post_id_presenece;
 			// ajouter les news
 		    if(!$show2) {
+
                 get_posts_by_post_w_linked($post_id, 'news'); // Change 'news' si nécessaire
 
                 get_posts_by_user($author_id,-1);
@@ -1123,275 +1078,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		</div>
 
-<?php if($current_user_id == $author_id): ?>
 
-	<div class="modal micromodal-slide" id="edit-post--price" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit price</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="3" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-
-<div class="modal micromodal-slide" id="edit-post--files" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit file</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="13" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal micromodal-slide" id="edit-post--details-sizes" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit details</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="14" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal micromodal-slide" id="edit-post--events" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit events</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="15" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal micromodal-slide" id="edit-post--description" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit description</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="7" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal micromodal-slide" id="edit-post--tags" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit tags</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="11" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal micromodal-slide" id="edit-post--features" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit features</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="8" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="modal micromodal-slide" id="edit-post--images" aria-hidden="true">
-		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-			<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="edit-home-title">
-				<header class="modal__header">
-					<div class="flex flex--vertical">
-						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title"><?php echo $post_title ?></h2>
-							<div class="resume__title_supplement">- Edit images</div>
-						</div>
-					</div>
-					<?php get_template_part("components/btn", null,
-						array(
-							'label' => 'Close this modal window',
-							'href' => "",
-							'target' => "_self",
-							'skin'  => 'secondary',
-							'icon-only'  => true,
-							'disabled'  => false,
-							'icon-position' => 'right', // left or right
-							'icon' => 'close',
-							'additional-classes' => '',
-							'data-attribute' => 'data-close-modal',
-							'theme' => "",
-						)
-					); ?>
-				</header>
-				<main class="modal__content contact__form contact__form--light">
-					<?php echo do_shortcode( '[gravityform id="4" title="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
-				</main>
-			</div>
-		</div>
-	</div>
-<?php endif; ?>
 
 	<div class="modal micromodal-slide" id="share-post" aria-hidden="true" style = "z-index: 1001">
 		<div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -1399,7 +1086,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				<header class="modal__header">
 					<div class="flex flex--vertical">
 						<div class="flex flex--vertical-center">
-							<h2 class="resume__name card-form__title">SHARE POST</h2>
+							<h2 class="resume__name card-form__title">SHARE PROFILE</h2>
 						</div>
 					</div>
 					<?php get_template_part("components/btn", null,
@@ -1420,7 +1107,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				</header>
 				<main class="modal__content contact__form contact__form--light">
 					<?php get_template_part("components/share-box", null, array(
-							'post_permalink' => $post_link,
+							'post_permalink' => get_field("user_profile_url", "user_".$author_id),
 							"post_id" => $post_id
 						)
 					); ?>

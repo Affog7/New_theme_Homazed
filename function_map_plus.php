@@ -14,7 +14,7 @@ function wp_user_map_shortcode($atts) {
 	$args = array(
 		'author'        => $user_id,
 		'post_status'   => 'publish',
-		'post_type'     => 'any', // Tous types de posts
+		'post_type'     => ["homes","jobs","projects","news","profile"],
 		'posts_per_page'=> -1,
 	);
 
