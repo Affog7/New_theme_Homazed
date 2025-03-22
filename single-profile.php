@@ -357,8 +357,9 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 						'disabled'  => false,
 						'icon-position' => '', // left or right
 						'icon' => 'rating-star-ribbon', // nom du fichier svg
-						'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn--favorite' : 'post-footer__button relation_btn relation_btn--favorite',
-						'data-attribute' => "data-relation-him=" . $post_id . " data-relation-type='favorite'",
+                        'additional-classes' => 'tab-button',
+						//'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn--favorite' : 'post-footer__button relation_btn relation_btn--favorite',
+                        'data-attribute' =>  'data-tabs-id=\'tabs-list-saved\'',
 						'theme' => "",
 					));
 					get_template_part( 'components/btn', null,
@@ -1063,6 +1064,13 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 
                 get_posts_by_user($author_id,-1);
             }
+
+			?>
+		</div>
+
+        <div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list-saved">
+			<?php
+            get_favoris_posts_by_user($current_user_id);
 
 			?>
 		</div>

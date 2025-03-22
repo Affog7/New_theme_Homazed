@@ -43,12 +43,15 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             <!-- Post author -->
             <div class="post-header__main-title flex flex--vertical-center">
 
-                <?php  get_template_part("components/user-avatar", null, array(
-					'title' => $args["post_creator_name"],
-					'image' => $user_avatar_id,
-					'first_name' => $args["first_name"],
-					'last_name' => $args["last_name"],
-				) ); ?>
+				<div class="avatar__list--wrapper">
+					<?php  get_template_part("components/profile-avatar", null, array(
+						'title' => $args["post_creator_name"],
+						'image' => $user_avatar_id,
+						'first_name' => $args["first_name"],
+						'last_name' => $args["last_name"],
+					) ); ?>
+				</div>
+
                 <div class="card__wrapper__title flex">
 
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
