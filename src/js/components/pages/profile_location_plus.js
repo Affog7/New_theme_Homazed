@@ -29,7 +29,7 @@ class AddressManager {
       return;
     }
 
-    this.map = L.map(this.mapss.id).setView([48.8566, 2.3522], 13);
+    this.map = L.map(this.mapss.id);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'

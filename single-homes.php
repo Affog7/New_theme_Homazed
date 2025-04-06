@@ -101,7 +101,7 @@ $post_id = get_the_ID();
 			}
 
 			$post_join_file_id = get_field("post_home_join_file");
-			$post_join_file = wp_get_attachment_url($post_join_file_id);
+			$post_join_file = !wp_get_attachment_url($post_join_file_id)?$post_join_file_id:wp_get_attachment_url($post_join_file_id);
 
 			$post_events_type = get_field("post_home_event_type");
 			$post_events_text_1 = get_field("post_home_event_text_1");

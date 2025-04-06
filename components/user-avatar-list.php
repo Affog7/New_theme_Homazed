@@ -1,6 +1,18 @@
 <div class="avatar-line resume__profile-picture">
-	<?php if($args["user_avatar"]): ?>
-		<img class="resume__image" src="<?php echo $args["user_avatar"]['sizes']['thumbnail']; ?>" alt="<?php echo $args["user_first_name"]." ".$args["user_last_name"]." profile image"; ?>"/>
+	<?php
+
+	if($args["user_avatar"]): ?>
+		<img class="resume__image" src="<?php
+		if(  !is_array($args["user_avatar"]) && strlen($args["user_avatar"]) > 6){
+			echo $args["user_avatar"];
+		} else {
+			$avatar_ids_array = explode(',', $args["user_avatar"]);
+
+			echo wp_get_attachment_image_src($avatar_ids_array[0], 'large-img-medium');
+		} ?>"
+
+
+			 alt="<?php echo $args["user_first_name"]." ".$args["user_last_name"]." profile image"; ?>"/>
 	<?php else: ?>
 		<div class="resume__image resume__image--blank flex flex--horizontal-center flex--center">
 			<span class="first-letters"><?php echo $args["user_first_name"][0].$args["user_last_name"][0]; ?></span>
@@ -9,7 +21,7 @@
 	<a class="avatar-line__name" href="<?php echo $args["user_permalink"]; ?>"><?php echo $args["user_first_name"]." ".$args["user_last_name"]; ?></a>
 	<?php if(get_current_user_id() != $args['user_id']): ?>
 		<div class="avatar-line__actions btn-group btn-group--related">
-			<?php 
+			<?php
 				$current_user_id = get_current_user_id();
 
 				$i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
@@ -18,7 +30,7 @@
 				$him_accept_contactlist_users_relationships = get_field("i_accept_contactlist_users_relationships", "user_".$args["user_id"]);
 				// $i_refused_contactlist_users_relationships = get_field("i_refused_contactlist_users_relationships", "user_".$current_user_id);
 				$i_recommend_users_relationships = get_field("i_recommend_users_relationships", "user_".$current_user_id);
-				$him_recommend_users_relationships = get_field("users_recommend_me_relationships", "user_".$args["user_id"]);	
+				$him_recommend_users_relationships = get_field("users_recommend_me_relationships", "user_".$args["user_id"]);
 			?>
 
 			<?php  // $i_refused_this_contact = (!empty($i_refused_contactlist_users_relationships) && in_array($args["user_id"], $i_refused_contactlist_users_relationships)) ? true : false; ?>
@@ -26,7 +38,7 @@
 			<?php $i_accept_this_contact = (!empty($i_accept_contactlist_users_relationships) && in_array($args["user_id"], $i_accept_contactlist_users_relationships)) ? true : false; ?>
 			<?php $him_request_me = (!empty($him_request_contactlist_users_relationships ) && in_array($current_user_id, $him_request_contactlist_users_relationships )) ? true : false; ?>
 			<?php $him_accept_me = (!empty($him_accept_contactlist_users_relationships ) && in_array($current_user_id, $him_accept_contactlist_users_relationships )) ? true : false; ?>
-			<?php 
+			<?php
 			$contact_classes = 'relation_btn relation_btn--contact-list';
 			$contact_text = 'Add contact';
 			$contact_text_default = 'Add contact';
@@ -36,7 +48,7 @@
 
 			if($i_request_this_contact && $i_accept_this_contact && $him_request_me && !$him_accept_me){
 				// I request & him did not accept yet [GREEN1]";
-				$contact_text = 'Contact requested';	
+				$contact_text = 'Contact requested';
 				$contact_classes .= ' relation_btn--contact-requested';
 				$contact_icon = 'single-neutral-actions-refresh';
 				$relation_type = 'remove-request-contact-list';
@@ -57,9 +69,9 @@
 				// No request for now [Default & BLACK]";
 			}
 
-			?>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+			?>
 			<?php get_template_part( 'components/btn', null,
-				array( 
+				array(
 					'label' => $contact_text,
 					'href' => "/",
 					'target' => "_self",
@@ -76,9 +88,9 @@
 			<?php // if($account_type['value'] == "company_user" || $account_type['value'] == "pro_user"): ?>
 				<?php $do_i_recommend_him = (!empty($i_recommend_users_relationships) && in_array($args["user_id"], $i_recommend_users_relationships)) ? true : false; ?>
 				<?php $is_he_recommended_by_me = (!empty($him_recommend_users_relationships) && in_array($current_user_id, $him_recommend_users_relationships)) ? true : false; ?>
-				
+
 				<?php get_template_part( 'components/btn', null,
-					array( 
+					array(
 						'label' => 'Recommend',
 						'href' => "/",
 						'target' => "_self",
@@ -95,9 +107,9 @@
 			<?php // endif; ?>
 			<?php $do_i_recommend_him = (!empty($i_recommend_users_relationships) && in_array($args["user_id"], $i_recommend_users_relationships)) ? true : false; ?>
 			<?php $is_he_recommended_by_me = (!empty($him_recommend_users_relationships) && in_array($current_user_id, $him_recommend_users_relationships)) ? true : false; ?>
-			
+
 			<?php get_template_part( 'components/btn', null,
-				array( 
+				array(
 					'label' => 'Recommend',
 					'href' => "/",
 					'target' => "_self",

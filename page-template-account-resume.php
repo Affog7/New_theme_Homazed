@@ -38,7 +38,7 @@ get_header(); ?>
 						<div class="flex flex--vertical">
 							<h3 class="h4">Account type</h3>
 							<?php if($account_type): ?>
-								<p class="p-sm -light"><?php echo $account_type['label']; ?></p>
+								<p class="p-sm -light"><?php echo $account_type; ?></p>
 							<?php else: ?>
 								<p class="p-sm -light">Not defined</p>
 							<?php endif; ?>
@@ -70,7 +70,7 @@ get_header(); ?>
 								</dl>
 							</p>
 						</div>
-						
+
 						<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 					</a>
 					<a href="<?php echo $edit_account_password_link; ?>" class="quicklinks--item">
@@ -78,7 +78,7 @@ get_header(); ?>
 						<?php  echo "<div class='o-svg-icon o-svg-icon-arrow'>"; include get_stylesheet_directory() . '/src/images/icons/pencil-write.svg'; echo "</div>"; ?>
 					</a>
 					<a href="<?php echo $edit_account_link. "?scrollto=af-field-section-preferences"; ?>" data-scroll-to-class="af-field-section-preferences" class="quicklinks--item">
-						
+
 						<div class="flex flex--vertical">
 							<h3 class="h4">Preferences</h3>
 							<p>
@@ -120,7 +120,7 @@ get_header(); ?>
 						<?php
 						$logout = esc_url(wp_logout_url(home_url()));
 						get_template_part("components/btn", null,
-							array( 
+							array(
 								'label' => 'Logout',
 								'href' => $logout,
 								'target' => "_self",

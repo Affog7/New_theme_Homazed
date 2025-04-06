@@ -4,6 +4,7 @@ $first_name = ucfirst($args["user"]->user_firstname);
 $last_name = ucfirst($args["user"]->user_lastname);
 
 $account_type = get_field("user_account_type", "user_".$user_id);
+$account_category = get_field("account_category", "user_".$user_id);
 $avatar_ids = get_field("user_avatar_ids", "user_".$user_id);
 $user_permalink = get_permalink("602")."?user_id=".$user_id;
 ?>
@@ -36,8 +37,8 @@ $user_permalink = get_permalink("602")."?user_id=".$user_id;
 <div class="resume__data flex flex--vertical-center" style="justify-content: space-between; align-items: center;">
     <div style="display: contents">
         <span class=""><?php echo $first_name . " " . $last_name; ?></span>
-        <?php if ($account_type): ?>
-            <p class="resume__account_type"><?php echo $account_type['label'] ?></p>
+        <?php if ($account_type || $account_category): ?>
+            <p class="resume__account_type"><?php echo  ($account_category ? print_User_Category($account_category) : $account_type['label']); ?></p>
         <?php endif; ?>
     </div>
 
@@ -50,7 +51,7 @@ $i_request_this_contact = (!empty($i_request_contactlist_users_relationships) &&
 
     <!-- Bouton Ajouter Contact uniquement si ce n'est pas mon post -->
     <?php if (!$is_own_post): ?>
-        <button class=" add-contact-btn_" data-c ="<?php var_dump($i_request_contactlist_users_relationships); ?>" data-request-contact-default="Add contact"  data-relation-him="<?php echo $post_author_id; ?>" data-u-id="<?php echo wp_get_current_user()->ID; ?>" >
+        <button class=" add-contact-btn_" data-c =" " data-request-contact-default="Add contact"  data-relation-him="<?php echo $post_author_id; ?>" data-u-id="<?php echo wp_get_current_user()->ID; ?>" >
             Add contact
         </button>
     <?php endif; ?>

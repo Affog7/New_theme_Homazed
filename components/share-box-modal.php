@@ -4,7 +4,7 @@
 		<div class="modal__container" style="overflow: hidden" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">
 			<header class="modal__header">
 				<div class="flex flex--vertical">
-					<h2 class="h1">SHARE POST
+					<h2 class="h1">SHARE  <?php  echo (get_post_type($args["id"]) == "profile") ? 'PROFILE' :  'POST';  ?>
 						<?php
 //						echo $args["first_name"] . " " .$args["last_name"]; ?><!-- -->
 						 </h2>

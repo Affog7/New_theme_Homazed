@@ -270,9 +270,9 @@ posts.forEach((post) => {
 
 // Fermer le modal
 const modal = document.getElementById("postModal_prof");
-const closeBtn = modal.querySelector(".close");
+const closeBtn = modal?.querySelector(".close");
 
-closeBtn.addEventListener("click", () => {
+closeBtn?.addEventListener("click", () => {
   modal.style.display = "none";
 });
 

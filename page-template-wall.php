@@ -246,6 +246,7 @@
 						'bathrooms' => $content["bathrooms"],
 						'house' => $content["home_size"],
 						'land' => $content["outdoor_size"],
+
 						//-----
 
 						//jobs post

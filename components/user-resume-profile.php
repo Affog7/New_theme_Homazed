@@ -17,7 +17,7 @@ $user_permalink = get_permalink($user_id);
 <div class="resume <?php if ( $args['additional-classes'] ) { echo $args['additional-classes']; }?>">
 
 	<?php get_template_part("components/user-avatar", null,
-		array( 
+		array(
 			'image' => $avatar_ids,
 			'first_name' => $first_name,
 			'last_name' => $last_name
@@ -29,7 +29,7 @@ $user_permalink = get_permalink($user_id);
 		<div class="resume__username">
 			<?php
 			if(!empty($account_type)):
-				echo $account_type["label"];
+ 				  print_User_Category($account_type)  ;
 			endif;
 			?>
 		</div>
@@ -40,9 +40,11 @@ $user_permalink = get_permalink($user_id);
 				<?php if(!empty($user_location_zip) && !empty($user_location_city)): ?><?php echo ", " . $user_location_zip . " " . $user_location_city; ?><?php endif; ?>
 				<?php if(!empty($user_location_country)): ?><?php echo ", " . $user_location_country; ?><?php endif; ?>
 			</li>
+			<?php if(user_has_profile_post($user_id)) : ?>
 			<li>
-				<a class="btn btn--transparent--inline" href="<?php echo $user_permalink; ?>">See profile</a>
+				<a class="btn btn--transparent--inline" href="<?php echo get_permalink(user_has_profile_post($user_id)); ?>">See profile</a>
 			</li>
+			<?php endif; ?>
 		</ul>
 	</div>
 </div>

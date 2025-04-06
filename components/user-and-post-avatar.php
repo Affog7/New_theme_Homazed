@@ -2,10 +2,16 @@
     <div class="avatar__list--wrapper">
 
 
-        <?php if(isset($args["user_picture"])): ?>
+        <?php  if(isset($args["user_picture"]) && $args["user_picture"] ): ?>
+
             <a href="<?php echo $args["user_link"]; ?>" class="avatar owner__avatar">
-                <img class="avatar__image" src="<?php echo wp_get_attachment_image_src($args["user_picture"], 'large-img-medium')[0]; ?>" alt="<?php echo $args["first_name"]." ".$args["last_name"]." profile image"; ?>" />
+				<?php  if( !is_array($args["user_picture"]) && strlen($args["user_picture"]) > 6){ ?>
+					<img class="avatar__image" src="<?php echo  $args["user_picture"] ; ?>" alt="<?php echo $args["first_name"]." ".$args["last_name"]." profile image"; ?>" />
+				<?php } else { ?>
+					<img class="avatar__image" src="<?php echo wp_get_attachment_image_src($args["user_picture"], 'large-img-medium')[0]; ?>" alt="<?php echo $args["first_name"]." ".$args["last_name"]." profile image"; ?>" />
+				<?php } ?>
             </a>
+
             <?php else: ?>
             <div class="avatar">
                 <a href="<?php echo $args["user_link"]; ?>" class="avatar__image avatar--blank flex flex--horizontal-center flex--center">

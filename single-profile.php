@@ -8,6 +8,10 @@ $post_id = get_the_ID();
 $account_category = get_field("account_category", "user_".$post->post_author);
 $is_for_recommandation = $account_category == "pro-user" || $account_category == "company-user";
 
+$show_list = "list";
+if( isset($_GET["show_list"])   ) {
+	$show_list = $_GET["show_list"];
+}
 
 ?>
 
@@ -93,7 +97,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 			}
 
 		$post_join_file_id = get_field("post_home_join_file");
-		$post_join_file = wp_get_attachment_url($post_join_file_id);
+		$post_join_file = !wp_get_attachment_url($post_join_file_id)?$post_join_file_id:wp_get_attachment_url($post_join_file_id);
 
 		$post_events_type = get_field("post_home_event_type");
 		$post_events_text_1 = get_field("post_home_event_text_1");
@@ -173,7 +177,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 
                 if($is_reniew_post_premium){
                     get_template_part("components/post-avatar-pro", null, array(
-                        'post_main_picture' => wp_get_attachment_image_src($user_avatar_id, 'large-img-medium'),
+                        'post_main_picture' =>   $user_avatar_id!=null && $user_avatar_id!=""  ?  $user_avatar_id : $main_picture_image_ids_array,
                         'title' => $author_profile_name,
                         'first_name' => $author_first_name,
                         'last_name' => $author_last_name
@@ -181,7 +185,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
                 } else {
                     get_template_part("components/user-avatar", null, array(
                         'title' => $author_profile_name,
-                        'image' => $user_avatar_id,
+                        'image' => !empty($user_avatar_id) ? $user_avatar_id : $main_picture_image_ids_array,
                         'first_name' => $author_first_name,
                         'last_name' => $author_last_name
                     ) );
@@ -219,6 +223,10 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 		<div class="profile-actions" data-barba-prevent="all">
 			<!-- Profile display -->
 			<div class="left">
+<!-- Start list -->
+			<?php
+				if( $show_list == "list") :
+			?>
 				<div class="btn-group btn-group--related">
 					<?php get_template_part( 'components/btn', null,
 						array(
@@ -266,18 +274,79 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 							)
 						); ?>
 				</div>
+			<?php
+				endif;
+			?>
+<!-- End list -->
+
+<!-- Start Favorite -->
+				<?php
+					if($current_user_id == $author_id && $show_list == "favorite") :
+				?>
+				<div class="btn-group btn-group--related">
+					<?php get_template_part( 'components/btn', null,
+						array(
+							'label' => 'List',
+							'href' => "",
+							'target' => "_self",
+							'skin'  => 'ghost',
+							'icon-only'  => false,
+							'disabled'  => false,
+							'icon-position' => '', // left or right
+							'icon' => '',
+							'additional-classes' => 'tab-button active ',
+							'data-attribute' => 'data-tabs-id=\'tabs-list-saved\'',
+							'theme' => "",
+						)
+					); ?>
+					<?php get_template_part( 'components/btn', null,
+							array(
+								'label' => 'Grid',
+								'href' => "",
+								'target' => "_self",
+								'skin'  => 'ghost',
+								'icon-only'  => false,
+								'disabled'  => false,
+								'icon-position' => '', // left or right
+								'icon' => '',
+								'additional-classes' => 'tab-button',
+								'data-attribute' => 'data-tabs-id=\'tabs-grid-saved\'',
+								'theme' => "",
+							)
+						); ?>
+					<?php get_template_part( 'components/btn', null,
+							array(
+								'label' => 'Map',
+								'href' => "",
+								'target' => "_self",
+								'skin'  => 'ghost',
+								'icon-only'  => false,
+								'disabled'  => false,
+								'icon-position' => '', // left or right
+								'icon' => '',
+								'additional-classes' => 'tab-button',
+								'data-attribute' => 'data-tabs-id=\'tabs-map-saved\'',
+								'theme' => "",
+							)
+						); ?>
+				</div>
+				<?php
+				  endif;
+				?>
+<!-- End list -->
+
 
 					<?php get_template_part( 'components/btn', null,
 						array(
 							'label' => 'Home',
-							'href' => "",
+							'href' => $show_list =='list' ? "$post_link/?show_list=favorite" : "$post_link/?show_list=list",
 							'target' => "_self",
 							'skin'  => 'ghost',
 							'icon-only'  => true,
 							'disabled'  => false,
 							'icon-position' => '',
 							'icon' => 'house-chimney-2',
-							'additional-classes' => 'tab-button square active',
+							'additional-classes' => $show_list =='list' ?  ' square active' : ' square',
 							'data-attribute' => 'data-tabs-id=\'tabs-home\'',
 							'theme' => "",
 						)
@@ -350,21 +419,21 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 				<?php
 					get_template_part("components/btn", null, array(
 						'label' => 'Favorite',
-						'href' => "",
+						'href' => $show_list =='list' ? "$post_link/?show_list=favorite" : "$post_link/?show_list=list",
 						'target' => "_self",
 						'skin'  => 'ghost',
 						'icon-only'  => true,
 						'disabled'  => false,
 						'icon-position' => '', // left or right
 						'icon' => 'rating-star-ribbon', // nom du fichier svg
-                        'additional-classes' => 'tab-button',
+                        'additional-classes' => $show_list =='list' ? "" : " active",
 						//'additional-classes' => $is_checked_favorite ? 'post-footer__button relation_btn--checked relation_btn relation_btn--favorite' : 'post-footer__button relation_btn relation_btn--favorite',
-                        'data-attribute' =>  'data-tabs-id=\'tabs-list-saved\'',
+                        'data-attribute' =>  '',
 						'theme' => "",
 					));
 					get_template_part( 'components/btn', null,
 					array(
-						'label' => 'Edit post',
+						'label' => 'Edit profile',
 						'href' => $post_link."/?post_id=".$post_id,
 						'target' => "_self",
 						'skin'  => 'ghost',
@@ -482,7 +551,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
                         ; ?>
     <hr>
 
-                        <?php	echo do_shortcode('[main_picture_manager   post_id="' . $post_id . '"]');
+                        <?php	echo do_shortcode('[main_picture_manager is_profile="true"   post_id="' . $post_id . '"]');
                         ; ?>
     <hr>
                         <?php	echo do_shortcode('[manage_post_media   post_id="' . $post_id . '"]');
@@ -503,7 +572,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
                     <div style="height: 400px; overflow: auto;">
                         <h3>Location</h3>
                         <main class="modal__content contact__form contact__form--light" style="text-align: justify;">
-                            <?php echo do_shortcode( '[gravityform id="53" title="false" ajax="false" field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
+                            <?php echo do_shortcode( '[gravityform id="53" title="false"  field_values="post_retrieved_id=' . $post_id . '"]' ); ?>
                         </main>
                     </div>
                     <div>
@@ -698,7 +767,9 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 
 
 <!-- fin todo_augustin -->
-		<div class="tab-content default-bckg post-page <?php if(isset($post_gallery_image_ids_array) && count($post_gallery_image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" data-barba-prevent="all" id="tabs-home">
+		<div class="tab-content default-bckg post-page <?php
+		if($current_user_id == $author_id && $show_list == "favorite") echo ' hide ';
+			if(isset($post_gallery_image_ids_array) && count($post_gallery_image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" data-barba-prevent="all" id="tabs-home">
 			<div class="post-page__section">
 
 			</div>
@@ -843,7 +914,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 
             <div class="post-page__section bt-2">
                 <?php
-                if ($is_for_recommandation) {
+//                if ($is_for_recommandation) {
                     $recommended_users = get_post_meta(get_the_ID(), 'profile-recommend', true);
                     if (!is_array($recommended_users)) {
                         $recommended_users = [];
@@ -863,7 +934,7 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 
 
                     <?php
-                }
+//                }
                 ?>
             </div>
 
@@ -984,7 +1055,10 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 //			$post_location_longitude = get_field( 'post_location_longitude', $post_id);
 //			$post_location_latitude = get_field( 'post_location_latitude', $post_id);
 //			echo do_shortcode('[osm_map address ="'.$location.'" latitude="'.$post_location_latitude.'" longitude="'.$post_location_longitude.'"  height="400px" width="100%" zoom="15"]');
-			echo do_shortcode('[user_map  user_id='.$author_id.' ]');
+            if(!$show) {
+                echo do_shortcode('[user_map  user_id='.$author_id.' is_profile=true ]');
+            }
+
 
 
 			?>
@@ -1045,6 +1119,9 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 		</div>
 
 
+		<?php
+		if($show_list == "list") :
+			?>
 
 		<div class="tab-content default-bckg profile-content__grid hide" id="tabs-grid">
 			<div class="grid-slate__list">
@@ -1068,12 +1145,8 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 			?>
 		</div>
 
-        <div class="tab-content post-page hide" data-barba-prevent="all" id="tabs-list-saved">
-			<?php
-            get_favoris_posts_by_user($current_user_id);
 
-			?>
-		</div>
+
 		<div class="tab-content default-bckg post-page hide " data-barba-prevent="all" id="tabs-map">
 			<h3 class="map"></h3>
 			<div id="map-data" data-fit-bounds="true" data-page="single-post" data-buildings="<?php echo htmlspecialchars(json_encode($post_content_for_map), ENT_QUOTES, 'UTF-8'); ?>"></div>
@@ -1085,7 +1158,50 @@ $is_for_recommandation = $account_category == "pro-user" || $account_category ==
 			</div>
 
 		</div>
+		<?php
+		endif;
+		?>
 
+<?php
+	if($current_user_id == $author_id && $show_list == "favorite") :
+?>
+		<div class="tab-content default-bckg profile-content__grid hide" id="tabs-grid-saved">
+			<div class="grid-slate__list">
+				<?php
+				$ids = get_field("i_favorite_posts_relationships", "user_".$current_user_id);
+ 				// Vérifier que $ids est bien un tableau
+				if (!is_array($ids) || empty($ids)) {
+					$ids = [];
+				}
+
+					 get_posts_grid_by_user($author_id,$ids);
+
+				?>
+			</div>
+		</div>
+		<div class="tab-content post-page  " data-barba-prevent="all" id="tabs-list-saved">
+			<?php
+            $post_id_presenece = isset($_GET["post_id"]) ? intval($_GET["post_id"]) : 0;
+            $show2 = $post_id == $post_id_presenece;
+			// ajouter les news
+		    if(!$show2) {
+
+				if ($author_id == $current_user_id) get_favoris_posts_by_user($current_user_id);
+
+			}
+
+			?>
+		</div>
+
+
+		<div class="tab-content default-bckg post-page hide " data-barba-prevent="all" id="tabs-map-saved">
+			<h3 class="map"></h3>
+
+
+
+		</div>
+
+<?php endif; ?>
 
 
 	<div class="modal micromodal-slide" id="share-post" aria-hidden="true" style = "z-index: 1001">

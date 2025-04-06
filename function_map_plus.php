@@ -1,7 +1,8 @@
 <?php
 function wp_user_map_shortcode($atts) {
 	$atts = shortcode_atts(array(
-		'user_id' => get_current_user_id() // ID utilisateur par défaut
+		'user_id' => get_current_user_id(), // ID utilisateur par défaut
+		'is_profile' => false,
 	), $atts);
 
 	$user_id = intval($atts['user_id']);
@@ -47,6 +48,7 @@ function wp_user_map_shortcode($atts) {
 
 	$profiles = get_posts($profile_args);
 	foreach ($profiles as $profile) {
+		//@pour les profile
 		$hidden_address = get_post_meta($profile->ID, 'hidden_address_plus', true);
 
 		$location_unity = get_post_meta($profile->ID, 'location_unity', true);
@@ -122,6 +124,22 @@ function wp_user_map_shortcode($atts) {
 					}).addTo(map);
 				}
 			});
+
+			if (<?php echo json_encode($atts['is_profile']); ?>) {
+				if (bounds.length > 0) {
+					var circleBounds = L.latLngBounds(bounds);
+					var center = circleBounds.getCenter();
+					var radius = center.distanceTo(circleBounds.getSouthWest());
+
+					L.circle(center, {
+						color: "red",
+						fillColor: "#ff0000",
+						fillOpacity: 0.2,
+						radius: radius
+					}).addTo(map);
+				}
+			}
+
 
 			if (bounds.length > 0) {
 				map.fitBounds(bounds, { padding: [20, 20] });

@@ -371,7 +371,7 @@ add_action('init', 'register_get_posts_by_post_w_linked');
 function register_get_posts_by_user() {
 	function get_posts_by_user($user_id, $post_type = 'post') {
 		$args = [
-			'post_type'      => ["homes","projects","jobs","news"],
+			'post_type'      => ["homes","projects","jobs","news","profile"],
 			'posts_per_page' => -1,
 			'author'         => $user_id
 		];
@@ -590,75 +590,77 @@ function register_get_posts_by_user() {
 }
 add_action('init', 'register_get_posts_by_user');
 
+
 function register_get_posts_grid_by_user() {
-	function get_posts_grid_by_user($user_id) {
+	function get_posts_grid_by_user($user_id, $post_id = []) {
 		$args = [
-			'post_type'      => ['news','homes','projects','jobs','profile'],
+			'post_type'      => ['news', 'homes', 'projects', 'jobs', 'profile'],
 			'posts_per_page' => -1,
-			'author'         => $user_id
+
 		];
+		// Si un post_id est fourni, on filtre directement sur ce post
+		if (!empty($post_id)) {
+			$args['post__in'] = $post_id;
+		} else {
+			$args['author'] = $user_id;
+		}
 
 		$query = new WP_Query($args);
-		$posts = [];
+
+
+
 		$wall_content = [];
+
 		if ($query->have_posts()) {
-			while($query->have_posts()):
+			while ($query->have_posts()) {
 				$query->the_post();
-				$post_id = get_the_ID();
+				$current_post_id = get_the_ID();
 
-					$main_picture_image_ids = get_field("post_home_main_picture_ids");
-					$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
+ 				$main_picture_image_ids = [];
+				$main_picture_image_ids_array = !empty($main_picture_image_ids) ? explode(',', $main_picture_image_ids) : [];
 
-					$gallery_image_ids = get_field("post_home_gallery_ids");
-					$gallery_image_ids_array = explode(',', $gallery_image_ids);
+				$gallery_image_ids = get_field("post_home_gallery_ids", $current_post_id);
+				$gallery_image_ids_array = !empty($gallery_image_ids) ? explode(',', $gallery_image_ids) : [];
 
-					$post = [
-						"id" => $post_id,
-						"post_type" => get_post_type($post_id),
-						"main_picture" => $main_picture_image_ids_array,
-						"card_gallery" => $gallery_image_ids_array,
-					];
-
-					//todo_augustin_var
-					array_push($wall_content, $post);
-
-
-			endwhile;
+				$wall_content[] = [
+					"id" => $current_post_id,
+					"post_type" => get_post_type($current_post_id),
+					"main_picture" => $main_picture_image_ids_array,
+					"card_gallery" => $gallery_image_ids_array,
+				];
+			}
 			wp_reset_postdata();
 		}
-
-		if (!empty($wall_content)) {
+ 		if (!empty($wall_content)) {
 			?>
 			<!-- Conteneur des posts -->
-				<div class="posts_prof">
-			<?php
-			foreach ($wall_content as $content) {
+			<div class="posts_prof">
+				<?php foreach ($wall_content as $content): ?>
+					<?php
+					get_template_part("components/card-slide-grouped", null, array(
+						'main_picture' => !empty($content["main_picture"][0]) ? $content["main_picture"] : $content["card_gallery"],
+						'all_img' => $content["card_gallery"],
+						'img_size' => 'thumbnail-m',
+						'id' => $content["id"],
+						'post_type' => $content["post_type"]
+					));
+					?>
+				<?php endforeach; ?>
+			</div>
 
-				get_template_part("components/card-slide-grouped", null, array(
-					'main_picture' => $content["main_picture"][0] !="" ? $content["main_picture"] : $content["card_gallery"],
-					'all_img' => $content["card_gallery"],
-					'img_size' => 'thumbnail-m',
-					'id' => $content["id"],
-					'post_type' => $content["post_type"]
-				));
-			}
-			?>
+			<!-- Modal pour afficher les images du post -->
+			<div id="postModal_prof" class="modal_prof">
+				<span class="close">&times;</span>
+				<div class="modal_prof-content">
+					<!-- Les images du post seront injectées ici -->
 				</div>
-				<!-- Modal pour afficher les images du post -->
-				<div id="postModal_prof" class="modal_prof">
-					<span class="close">&times;</span>
-					<div class="modal_prof-content">
-						<!-- Les images du post seront injectées ici -->
-					</div>
-					<div class="modal_prof-navigation">
-						<span class="prev">&lt;</span>
-						<span class="next">&gt;</span>
-					</div>
+				<div class="modal_prof-navigation">
+					<span class="prev">&lt;</span>
+					<span class="next">&gt;</span>
 				</div>
+			</div>
 			<?php
 		}
-
-		return $posts;
 	}
 }
 add_action('init', 'register_get_posts_grid_by_user');

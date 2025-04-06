@@ -61,7 +61,7 @@ function shortcode_gallery_manager($atts) {
 			<i style="margin-top: 10px; font-size: 12px; color: #888;">
 				Extensions allowed : <?php echo esc_html($atts['allowed_extensions']); ?>.
 			</i>
-			
+
 		</form>
 	</div>
 
@@ -276,16 +276,18 @@ add_action('wp_ajax_delete_gallery_image', 'ajax_delete_gallery_image');
  */
 //-------------------------------------------------------------------------------------------------------------
 
- 
+
 // Shortcode pour gérer l'image principale
 function shortcode_main_picture_manager($atts) {
     $atts = shortcode_atts([
         'post_id' => 0,
         'size' => 'thumbnail',
 		'allowed_extensions' => 'jpg,png,jpeg',
+		'is_profile' => false,
     ], $atts);
 
     $post_id = intval($atts['post_id']);
+    $is_profile = 	 filter_var($atts["is_profile"], FILTER_VALIDATE_BOOLEAN);
     if (!$post_id) {
         return '<p>Post ID non spécifié ou invalide.</p>';
     }
@@ -295,6 +297,8 @@ function shortcode_main_picture_manager($atts) {
     }
 
     $current_main_image = get_post_meta($post_id, 'post_home_main_picture_ids', true);
+
+
 
     ob_start();
     ?>
@@ -310,6 +314,7 @@ function shortcode_main_picture_manager($atts) {
                         id="delete-main-picture-button"
                         data-id="<?php echo esc_attr($current_main_image); ?>"
                         data-post-id="<?php echo esc_attr($post_id); ?>"
+                        data-is-profile="<?php echo esc_attr($is_profile); ?>"
                         style="position: absolute; top: -10px; right: -10px; background: #ff5f5f; color: white; border: none; border-radius: 50%; padding: 5px; cursor: pointer;"
                     >
                         &times;
@@ -321,14 +326,14 @@ function shortcode_main_picture_manager($atts) {
         </div>
 
         <!-- Formulaire pour changer l'image principale -->
-        <form id="main-picture-form" data-post-id="<?php echo esc_attr($post_id); ?>" style="text-align: center;">
+        <form id="main-picture-form" data-post-id="<?php echo esc_attr($post_id); ?>" data-is-profile="<?php echo esc_attr($is_profile); ?>" style="text-align: center;">
             <input
                 type="file"
                 id="main-picture-upload"
                 accept=".jpg,.png,.jpeg"
                 style="margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; text-align: center;"
             > <br>
-			<button   class="btn btn--ghost"  style="background-color: #0073aa ;    padding: 10px 20px;color: white;    border: none;  font-size: 14px;cursor: pointer;" 
+			<button   class="btn btn--ghost"  style="background-color: #0073aa ;    padding: 10px 20px;color: white;    border: none;  font-size: 14px;cursor: pointer;"
 			type="button"
                 id="set-main-picture-button"
                 style="padding: 10px 20px; background-color: #0073aa; color: white; border: none; border-radius: 5px; cursor: pointer;"
@@ -344,7 +349,7 @@ function shortcode_main_picture_manager($atts) {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const postId = <?php echo esc_js($post_id); ?>;
-
+			const  is_profile = <?php echo esc_js($is_profile); ?>
             // Ajouter une nouvelle image principale
             document.getElementById('set-main-picture-button').addEventListener('click', function () {
                 const fileInput = document.getElementById('main-picture-upload');
@@ -358,6 +363,7 @@ function shortcode_main_picture_manager($atts) {
                 formData.append('image', file);
                 formData.append('action', 'set_main_picture');
                 formData.append('post_id', postId);
+                formData.append('is_profile', is_profile);
 
                 fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
                     method: 'POST',
@@ -375,6 +381,7 @@ function shortcode_main_picture_manager($atts) {
                                     id="delete-main-picture-button"
                                     data-id="${data.data.id}"
                                     data-post-id="${postId}"
+                                    data-is-profile="${is_profile}"
                                     style="position: absolute; top: -10px; right: -10px; background: #ff5f5f; color: white; border: none; border-radius: 50%; padding: 5px; cursor: pointer;"
                                 >
                                     &times;
@@ -402,6 +409,7 @@ function shortcode_main_picture_manager($atts) {
                     formData.append('action', 'delete_main_picture');
                     formData.append('post_id', postId);
                     formData.append('image_id', imageId);
+                    formData.append('is_profile', is_profile);
 
                     fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
                         method: 'POST',
@@ -434,6 +442,7 @@ add_shortcode('main_picture_manager', 'shortcode_main_picture_manager');
 function ajax_set_main_picture() {
     if (isset($_POST['post_id']) && !empty($_FILES['image'])) {
         $post_id = intval($_POST['post_id']);
+		$is_profile = filter_var($_POST['is_profile'], FILTER_VALIDATE_BOOLEAN);
 
         if (!current_user_can('edit_post', $post_id)) {
             wp_send_json_error('Permission refusée.');
@@ -454,6 +463,12 @@ function ajax_set_main_picture() {
             require_once(ABSPATH . 'wp-admin/includes/image.php');
             wp_update_attachment_metadata($attachment_id, wp_generate_attachment_metadata($attachment_id, $upload['file']));
 
+			if ($is_profile) {
+				$author_id = get_post_field('post_author', $post_id);
+
+				update_user_meta($author_id, 'user_profile_picture', $attachment_id);
+				update_user_meta($author_id, 'user_avatar_ids', $attachment_id);
+			}
             update_post_meta($post_id, 'post_home_main_picture_ids', $attachment_id);
 
             wp_send_json_success([
@@ -473,10 +488,18 @@ function ajax_delete_main_picture() {
     if (isset($_POST['post_id']) && isset($_POST['image_id'])) {
         $post_id = intval($_POST['post_id']);
         $image_id = intval($_POST['image_id']);
+		$is_profile = filter_var($_POST['is_profile'], FILTER_VALIDATE_BOOLEAN);
 
         if (!current_user_can('edit_post', $post_id)) {
             wp_send_json_error('Permission refusée.');
         }
+
+		if ($is_profile) {
+			$author_id = get_post_field('post_author', $post_id);
+
+			delete_user_meta($author_id, 'user_profile_picture');
+			delete_user_meta($author_id, 'user_avatar_ids');
+		}
 
         // Supprimer l'image de la méta
         delete_post_meta($post_id, 'post_home_main_picture_ids');

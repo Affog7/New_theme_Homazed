@@ -64,45 +64,54 @@ function manage_post_media_shortcode($atts) {
 
 	// Traitement des actions de formulaire
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if (isset($_POST['delete_file']) && $post_join_file_id) {
-			wp_delete_attachment($post_join_file_id, true);
-			update_field('post_home_join_file', null, $post_id);
-			$output .= '<p class="success-message">The file has been successfully deleted.</p>';
-		}
-
-		if (isset($_POST['replace_file_submit']) && isset($_FILES['replace_file'])) {
-			$file = $_FILES['replace_file'];
-
-			if ($file['error'] === UPLOAD_ERR_OK) {
-				$upload = wp_handle_upload($file, array('test_form' => false));
-
-				if (!isset($upload['error'])) {
-					$attachment_id = wp_insert_attachment(
-						array(
-							'guid'           => $upload['url'],
-							'post_mime_type' => $upload['type'],
-							'post_title'     => basename($upload['file']),
-							'post_content'   => '',
-							'post_status'    => 'inherit',
-						),
-						$upload['file'],
-						$post_id
-					);
-
-					require_once ABSPATH . 'wp-admin/includes/image.php';
-					$attach_data = wp_generate_attachment_metadata($attachment_id, $upload['file']);
-					wp_update_attachment_metadata($attachment_id, $attach_data);
-
-					update_field('post_home_join_file', $attachment_id, $post_id);
-
-					$output .= '<p class="success-message">The file has been successfully replaced.</p>';
-				} else {
-					$output .= '<p class="error-message">Error : ' . esc_html($upload['error']) . '</p>';
-				}
-			} else {
-				$output .= '<p class="error-message">Error uploading.</p>';
+		try {
+			if (isset($_POST['delete_file']) && $post_join_file_id) {
+				wp_delete_attachment($post_join_file_id, true);
+				update_field('post_home_join_file', null, $post_id);
+				$output .= '<p class="success-message">The file has been successfully deleted.</p>';
 			}
+
+			if (isset($_POST['replace_file_submit']) && isset($_FILES['replace_file'])) {
+
+				$file = $_FILES['replace_file'];
+
+				if ($file['error'] === UPLOAD_ERR_OK) {
+					if (!function_exists('wp_handle_upload')) {
+						require_once ABSPATH . 'wp-admin/includes/file.php';
+					}
+
+					$upload = wp_handle_upload($file, array('test_form' => false));
+					if (!isset($upload['error'])) {
+						$attachment_id = wp_insert_attachment(
+							array(
+								'guid'           => $upload['url'],
+								'post_mime_type' => $upload['type'],
+								'post_title'     => basename($upload['file']),
+								'post_content'   => '',
+								'post_status'    => 'inherit',
+							),
+							$upload['file'],
+							$post_id
+						);
+
+						require_once ABSPATH . 'wp-admin/includes/image.php';
+						$attach_data = wp_generate_attachment_metadata($attachment_id, $upload['file']);
+						wp_update_attachment_metadata($attachment_id, $attach_data);
+
+						update_field('post_home_join_file', $attachment_id, $post_id);
+
+						$output .= '<p class="success-message">The file has been successfully replaced.</p>';
+					} else {
+						$output .= '<p class="error-message">Error : ' . esc_html($upload['error']) . '</p>';
+					}
+				} else {
+					$output .= '<p class="error-message">Error uploading.</p>';
+				}
+			}
+		}catch (Exception $e) {
+
 		}
+
 	}
 
 	return $output;

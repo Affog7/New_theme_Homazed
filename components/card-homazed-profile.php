@@ -14,7 +14,12 @@ $i_like_posts_relationships = get_field("i_like_posts_relationships", "user_".ge
 $users_like_me_posts = get_field("users_like_me_posts", $args["id"]);
 $users_favorite_me_posts = get_field("users_favorite_me_posts", $args["id"]);
 $user_avatar_id = get_field("user_avatar_ids", "user_".$args["user_id"]);
-$post_avatar_picture_id = (!empty($args['main_picture'][0])) ? $args['main_picture'][0] : $args['img'][0];
+
+
+$main_picture_image_ids = get_field("post_home_main_picture_ids",  $args["id"]);
+
+$main_picture_image_ids_array = explode(',', $main_picture_image_ids);
+
 $current_user_id = get_current_user_id();
 
 $post_events_type = get_field("post_home_event_type", $args["id"]);
@@ -23,7 +28,7 @@ $post_events_text_2 = get_field("post_home_event_text_2", $args["id"]);
 $post_events_privacy = get_field("post_home_event_privacy", $args["id"]);
 
 $post_join_file_id = get_field("post_home_join_file", $args["id"]);
-$post_join_file = wp_get_attachment_url($post_join_file_id);
+$post_join_file = !wp_get_attachment_url($post_join_file_id)?$post_join_file_id:wp_get_attachment_url($post_join_file_id);
 $post_permalink = get_the_permalink($args['id']);
 
 $i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
@@ -44,9 +49,9 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
             <div class="post-header__main-title flex flex--vertical-center">
 
 				<div class="avatar__list--wrapper">
-					<?php  get_template_part("components/profile-avatar", null, array(
+					<?php   get_template_part("components/user-avatar", null, array(
 						'title' => $args["post_creator_name"],
-						'image' => $user_avatar_id,
+						'image' =>  $user_avatar_id !=null ? $user_avatar_id : $main_picture_image_ids_array[0],
 						'first_name' => $args["first_name"],
 						'last_name' => $args["last_name"],
 					) ); ?>
@@ -55,7 +60,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
                 <div class="card__wrapper__title flex">
 
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
-						<a href="<?php echo $user_link; ?>" class="card__title__owner"  style="margin-right: unset">
+						<a href="<?php echo user_has_profile_post($args["user_id"]) ? get_permalink(user_has_profile_post($args["user_id"])) : $user_link; ?>" class="card__title__owner"  style="margin-right: unset">
 							<?php echo $args["post_creator_name"]  ;?>
 						</a><?php endif; ?>
 
@@ -458,7 +463,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
 						'disabled'  => false,
 						'icon-position' => '',
 						'icon' => $is_in_contact_list ? 'user-added': 'user-plus',
-						'additional-classes' => 'contact-toggle-btn ' . $active_class,
+						'additional-classes' => ' contact-toggle-btn  ' . $active_class,
 						'data-attribute' => "data-userid='".$current_user_id."' data-contactid='".$args["user_id"]."'",
 						'theme' => "",
 					));
@@ -504,7 +509,7 @@ $post_comment_available = get_field("post_comment_available", $args['id']);
                 'first_name' => $args["first_name"],
                 'last_name' => $args["last_name"],
                 "id" => $args["id"],
-                'post_permalink' => $post_permalink
+                'post_permalink' => get_field("user_profile_url", "user_".$args["user_id"]),
             )
         ); ?>
         <?php // end todo_augustin gestion component share et profile ?>

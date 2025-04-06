@@ -46,14 +46,33 @@
 				<?php $user = wp_get_current_user(); ?>
 				<?php $first_name = $user->user_firstname; ?>
 				<?php $last_name = $user->user_lastname; ?>
+				<?php $id_profile = user_has_profile_post(); ?>
 
+			<?php if($id_profile) : ?>
+				<a href="<?php echo get_permalink($id_profile)  ?>" class="owner__link--header flex flex--vertical-center">
+
+			<?php else: ?>
 				<a href="<?php echo get_permalink("602")."?user=".$first_name."-".$last_name; ?>" class="owner__link--header flex flex--vertical-center">
+
+			<?php endif; ?>
+
 					<?php $profile_picture = get_field('user_profile_picture', "user_".$user->ID); ?>
 					<?php if($profile_picture): ?>
 						<?php if(is_array($profile_picture)){
 							$profile_picture = array_values($profile_picture)[0];
-						} ?>
-						<img src="<?php echo esc_url(wp_get_attachment_url($profile_picture)); ?>" alt="<?php echo $first_name." ".$last_name." profile image"; ?>" class="owner__avatar owner__avatar--header act-for act-for-profile-resume act-for-edit-profile act-for-single-user <?php echo $is_active; ?>" />
+						}
+
+						if(strlen($profile_picture) > 6){
+						?>
+							<img src="<?php echo esc_url($profile_picture); ?>" alt="<?php echo $first_name." ".$last_name." profile image"; ?>" class="owner__avatar owner__avatar--header act-for act-for-profile-resume act-for-edit-profile act-for-single-user <?php echo $is_active; ?>" />
+
+							<?php
+							} else {
+							?>
+							<img src="<?php echo esc_url(wp_get_attachment_url($profile_picture)); ?>" alt="<?php echo $first_name." ".$last_name." profile image"; ?>" class="owner__avatar owner__avatar--header act-for act-for-profile-resume act-for-edit-profile act-for-single-user <?php echo $is_active; ?>" />
+
+						<?php	} ?>
+
 					<?php else: ?>
 						<div class="owner__avatar owner__avatar--header owner__avatar--header--blank act-for act-for-profile-resume act-for-edit-profile act-for-single-user flex flex--horizontal-center flex--center<?php echo $is_active; ?>">
 							<span class="first-letters"><?php echo $first_name[0].$last_name[0]; ?></span>
@@ -132,8 +151,14 @@
 									<div class="notifications--section" id="notification-<?php echo $pendig_contactlist_request_id; ?>">
 										<div class="flex">
 											<div class="avatar-small">
-												<?php $avatar = get_field("user_profile_picture", "user_".$pendig_contactlist_request_id); ?>
-												<img src="<?php echo $avatar['sizes']['thumbnail']; ?>" alt="">
+												<?php $avatar = get_field("user_profile_picture", "user_".$pendig_contactlist_request_id);
+												if(!is_array($avatar)){
+													?>
+													<img src="<?php echo $avatar ; ?>" alt="">
+												<?php } else {
+												?>
+													<img src="<?php echo $avatar['sizes']['thumbnail']; ?>" alt="">
+												<?php } ?>
 											</div>
 											<p>
 												<a href="<?php echo get_permalink("602")."?user_id=".$pendig_contactlist_request_id; ?>"><?php echo get_field("user_first_name", "user_".$pendig_contactlist_request_id); ?> <?php echo get_field("user_last_name", "user_".$pendig_contactlist_request_id); ?></a> wants to join your contact list

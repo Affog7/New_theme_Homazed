@@ -4,12 +4,12 @@ function register_get_favoris_posts_by_user() {
 
 		$ids = get_field("i_favorite_posts_relationships", "user_".$user_id);
 
-		// Vérifier que $ids est bien un tableau
+ 		// Vérifier que $ids est bien un tableau
 		if (!is_array($ids) || empty($ids)) {
 			$ids = [];
+			return ;
 		}
-
-		$args = [
+ 		$args = [
 			'post_type'      => ["homes", "projects", "jobs", "news"],
 			'posts_per_page' => -1,
 			'post__in'     => $ids, // Filtrer uniquement les posts dont l'auteur est dans $ids
@@ -229,3 +229,35 @@ function register_get_favoris_posts_by_user() {
 	}
 }
 add_action('init', 'register_get_favoris_posts_by_user');
+
+// pour prendre l'id d'une image grace à l'url
+function get_attachment_id_from_url($url) {
+
+	global $wpdb;
+	$attachment_id = $wpdb->get_var($wpdb->prepare(
+		"SELECT ID FROM {$wpdb->posts} WHERE guid=%s", $url
+	));
+	return $attachment_id;
+}
+
+
+
+// fonction de checking
+function user_has_profile_post($user_id = null) {
+	$user_id = $user_id ?: get_current_user_id(); // Utilise l'ID fourni ou celui de l'utilisateur connecté
+
+	$query = new WP_Query([
+		'post_type'      => 'profile',
+		'author'         => $user_id,
+		'posts_per_page' => 1, // On prend uniquement le premier post
+		'fields'         => 'ids', // Récupère uniquement les IDs pour optimiser la requête
+	]);
+
+	$post_id = $query->have_posts() ? $query->posts[0] : false;
+
+	wp_reset_postdata(); // Réinitialisation de la requête pour éviter les conflits
+
+	return $post_id; // Retourne l'ID du post s'il existe, sinon false
+}
+
+

@@ -33,7 +33,7 @@ $post_events_text_2 = get_field("post_home_event_text_2", $args["id"]);
 $post_events_privacy = get_field("post_home_event_privacy", $args["id"]);
 
 $post_join_file_id = get_field("post_home_join_file", $args["id"]);
-$post_join_file = wp_get_attachment_url($post_join_file_id);
+$post_join_file = !wp_get_attachment_url($post_join_file_id)?$post_join_file_id:wp_get_attachment_url($post_join_file_id);
 $post_permalink = get_the_permalink($args['id']);
 
 $i_request_contactlist_users_relationships = get_field("i_request_contactlist_users_relationships", "user_".$current_user_id);
@@ -54,12 +54,12 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 			<div class="post-header__main-title flex flex--vertical-center">
 
 				<?php
-				get_template_part("components/user-and-post-avatar-inverse", null, array(
+				get_template_part("components/user-and-post-avatar", null, array(
 					'user_picture' => $user_avatar_id,
 					'post_main_picture' => $post_avatar_picture_id,
 					'first_name' => $args["first_name"],
 					'last_name' => $args["last_name"],
-					'user_link' => $user_link,
+					'user_link' => user_has_profile_post($args["user_id"]) ? get_permalink(user_has_profile_post($args["user_id"])) : $user_link,
 				) );
 				?>
 				<div class="card__wrapper__title flex">
@@ -71,7 +71,7 @@ $post_link_parsed =  get_field("post_link_parsed",$args['id']);
 						?>
 					</span>
 					<?php if(!empty($args["post_creator_name"]) && $args["post_creator_name"] != " "): ?>
-						<a href="<?php echo $user_link; ?>" class="card__title__owner" style="margin-right: unset">
+						<a href="<?php echo user_has_profile_post($args["user_id"]) ? get_permalink(user_has_profile_post($args["user_id"])) : $user_link; ?>" class="card__title__owner" style="margin-right: unset">
 							<?php
 							echo $args["post_creator_name"];
 							?></a>

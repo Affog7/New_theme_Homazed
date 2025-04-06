@@ -42,7 +42,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			<?php if(get_current_user_id() == $user_id):
 					get_template_part( 'components/btn', null,
 						array(
-							'label' => 'Edit your profile',
+							'label' => 'Complete your profile',
 							'href' => get_permalink("468"),
 							'target' => "_self",
 							'skin'  => 'ghost',
@@ -65,19 +65,19 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-projects-title">
 					<header class="modal__header">
 						<div class="flex flex--vertical">
-							<h2 class="modal__title h2" id="publish-projects-title">Share your Profile </h2>
+							<h2 class="modal__title h2" id="publish-projects-title">Complete your Profile </h2>
 						</div>
 						<?php get_template_part("components/btn", null, array( 'label' => 'Close this modal window', 'href' => "", 'target' => "_self", 'skin'  => 'transparent', 'icon-only'  => true, 'disabled'  => false, 'icon-position' => 'right', 'icon' => 'close', 'additional-classes' => '', 'data-attribute' => 'data-close-modal', 'theme' => "", )); ?>
 					</header>
 					<main class="modal__content contact__form contact__form--light" id="publish-projects-content">
 						<?php
-						$account_type = get_field("user_account_type", "user_".get_current_user_id());
+							$account_type = get_field("user_account_type", "user_".get_current_user_id());
 						/**
 						 * todo_augustin type de compte
 						 * */
-						echo '<input type="hidden" value="'.$account_type["value"].'" id="_account_type_id_">';
+							echo '<input type="hidden" value="'.$account_type.'" id="_account_type_id_">';
 
-						echo do_shortcode( '[gravityform id="52" ajax="true" title="false"]' );
+							echo do_shortcode( '[gravityform id="52" ajax="true" title="false"]' );
 
 
 						?>
@@ -96,23 +96,23 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 			<!-- Profile display -->
 			<div class="left">
 				<div class="btn-group btn-group--related">
-					<?php if(get_current_user_id() == $user_id):
-						get_template_part( 'components/btn', null,
-							array(
-								'label' => 'My favorites:',
-								'href' => get_permalink("468"),
-								'target' => "_self",
-								'skin'  => 'ghost',
-								'icon-only'  => false,
-								'disabled'  => false,
-								'icon-position' => 'left',
-								'icon' => 'rating-star-ribbon',
-								'additional-classes' => '',
-								'data-attribute' => 'data-action=\'show-favorites-only\'',
-								'theme' => "",
-							)
-						);
-					endif; ?>
+<!--					--><?php //if(get_current_user_id() == $user_id):
+//						get_template_part( 'components/btn', null,
+//							array(
+//								'label' => 'My favorites:',
+//								'href' => get_permalink("468"),
+//								'target' => "_self",
+//								'skin'  => 'ghost',
+//								'icon-only'  => false,
+//								'disabled'  => false,
+//								'icon-position' => 'left',
+//								'icon' => 'rating-star-ribbon',
+//								'additional-classes' => '',
+//								'data-attribute' => 'data-action=\'show-favorites-only\'',
+//								'theme' => "",
+//							)
+//						);
+//					endif; ?>
 					<?php get_template_part( 'components/btn', null,
 						array(
 							'label' => 'List',
@@ -232,7 +232,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 							'theme' => "",
 						)
 					); ?>
-					<?php if($account_type['value'] == "company_user" || $account_type['value'] == "pro_user"): ?>
+					<?php if($account_type == "company_user" || $account_type == "pro_user"): ?>
 						<?php $do_i_recommend_him = (!empty($i_recommend_users_relationships) && in_array($user_id, $i_recommend_users_relationships)) ? true : false; ?>
 						<?php $is_he_recommended_by_me = (!empty($him_recommend_users_relationships) && in_array($current_user_id, $him_recommend_users_relationships)) ? true : false; ?>
 
@@ -296,14 +296,14 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				"posts_per_page" => -1,
 				"orderby" => "date",
 				"order" => "DESC",
-				'author' => $user_id,
+				'author' => $current_user_id,
 			);
 
 			$posts_query = new WP_Query($posts_args);
 			$users_post_content = [];
 			$users_post_content_for_map = [];
 
-			if(!empty($posts_query->have_posts())):
+			if(!empty($posts_query->have_posts())  ):
 				$posts = [];
 
 				while($posts_query->have_posts()):
@@ -325,62 +325,64 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					}else{
 						$post_category = get_field("post_home_category");
 					}
+					if(get_the_author_meta('ID')==$user_id) {
+						$post = [
+							"id" => $post_id,
+							"title" => get_the_title(),
+							"post_type" => "Homes",
+							"post_type_slug" => "real-estate",
+							"card_gallery" => get_field("post_gallery"),
+							"card_gallery_display" => get_field("post_pictures_display"),
+							"type" => get_field("post_action"),
+							"home_category" => get_field("post_home_category"),
+							"first_name" => $first_name,
+							"last_name" => $last_name,
+							"user_id" => $user_id,
+							"profile_picture" => get_field("user_profile_picture", "user_".get_the_author_meta('ID')),
+							"work_position" => get_field("user_current_work_position", "user_".get_the_author_meta('ID')),
+							"main_picture" => get_field("post_main_picture"),
+							"price" => $price,
+							"bedrooms" => $bedrooms,
+							"bathrooms" => $bathrooms,
+							"home_size" => $home_size,
+							"outdoor_size" => $outdoor_size,
+							"tags" => $post_init_terms,
+							"home_amenities" => get_field("post_home_amenities"),
+							"neighborhood_amenities" => get_field("post_neighborhood_amenities"),
+							"transportation" => get_field("post_transportation"),
+							"garages_parking" => get_field("post_garages_parking"),
+							"schools" => get_field("post_schools_nearby"),
+							"home_style_architecture" => get_field("post_home_style_and_architecture"),
+							"additional_features" => get_field("post_additional_home_features"),
+							"taxes" => get_field("post_property_taxes"),
+							"fees" => get_field("post_other_property_fees"),
+							"systems" => get_field("post_heating_cooling_systems"),
+							"energy_rating" => get_field("post_energy_rating"),
+							"energy_consumption" => get_field("post_estimated_energy_consumption"),
+							"location" => $post_address,
+							"publish_date" => get_post_timestamp()
+						];
 
-					$post = [
-						"id" => $post_id,
-						"title" => get_the_title(),
-						"post_type" => "Homes",
-						"post_type_slug" => "real-estate",
-						"card_gallery" => get_field("post_gallery"),
-						"card_gallery_display" => get_field("post_pictures_display"),
-						"type" => get_field("post_action"),
-						"home_category" => get_field("post_home_category"),
-						"first_name" => $first_name,
-						"last_name" => $last_name,
-						"user_id" => $user_id,
-						"profile_picture" => get_field("user_profile_picture", "user_".get_the_author_meta('ID')),
-						"work_position" => get_field("user_current_work_position", "user_".get_the_author_meta('ID')),
-						"main_picture" => get_field("post_main_picture"),
-						"price" => $price,
-						"bedrooms" => $bedrooms,
-						"bathrooms" => $bathrooms,
-						"home_size" => $home_size,
-						"outdoor_size" => $outdoor_size,
-						"tags" => $post_init_terms,
-						"home_amenities" => get_field("post_home_amenities"),
-						"neighborhood_amenities" => get_field("post_neighborhood_amenities"),
-						"transportation" => get_field("post_transportation"),
-						"garages_parking" => get_field("post_garages_parking"),
-						"schools" => get_field("post_schools_nearby"),
-						"home_style_architecture" => get_field("post_home_style_and_architecture"),
-						"additional_features" => get_field("post_additional_home_features"),
-						"taxes" => get_field("post_property_taxes"),
-						"fees" => get_field("post_other_property_fees"),
-						"systems" => get_field("post_heating_cooling_systems"),
-						"energy_rating" => get_field("post_energy_rating"),
-						"energy_consumption" => get_field("post_estimated_energy_consumption"),
-						"location" => $post_address,
-						"publish_date" => get_post_timestamp()
-					];
+						$post_for_map = [
+							"id" => $post_id,
+							"title" => "Home", // house type
+							"post_type_slug" => "real-estate",
+							"permalink" => get_the_permalink($post_id),
+							"lat" => $post_location_latitude,
+							"lng" => $post_location_longitude,
+							"account_type" => null,
+							"location" => $post_address,
+							"price" => $price,
+							"bedrooms" => $bedrooms,
+							"bathrooms" => $bathrooms,
+							"home_size" => $home_size,
+							"outdoor_size" => $outdoor_size,
+						];
 
-					$post_for_map = [
-						"id" => $post_id,
-						"title" => "Home", // house type
-						"post_type_slug" => "real-estate",
-						"permalink" => get_the_permalink($post_id),
-						"lat" => $post_location_latitude,
-						"lng" => $post_location_longitude,
-						"account_type" => null,
-						"location" => $post_address,
-						"price" => $price,
-						"bedrooms" => $bedrooms,
-						"bathrooms" => $bathrooms,
-						"home_size" => $home_size,
-						"outdoor_size" => $outdoor_size,
-					];
+						array_push($users_post_content, $post);
+						array_push($users_post_content_for_map, $post_for_map);
+					}
 
-					array_push($users_post_content, $post);
-					array_push($users_post_content_for_map, $post_for_map);
 
 				endwhile;
 			endif;
@@ -389,202 +391,208 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 		?>
 
 		<div class="tab-content default-bckg profile-content__informations  content <?php if(isset($image_ids_array) && count($image_ids_array) > 1 ){  echo "carrousel glide"; } ?>" id="tabs-profile">
-			<?php if(isset($image_ids_array) && is_array($image_ids_array) ): ?>
-				<div class="profile-content__img">
-					<?php if(count($image_ids_array) > 1): ?>
-							<?php get_template_part("components/carrousel", null, array(
-								'img' => $image_ids_array,
-								'post_creator_name' => $first_name . " " . $last_name,
-							)); ?>
-						<?php else: ?>
-							<?php get_template_part("components/carrousel-single-image", null, array(
-								'img' => $image_ids_array,
-								'post_creator_name' => $first_name . " " . $last_name,
-							)); ?>
-					<?php endif; ?>
-				</div>
-			<?php endif; ?>
+<!--			--><?php //if(isset($image_ids_array) && is_array($image_ids_array) ): ?>
+<!--				<div class="profile-content__img">-->
+<!--					--><?php //if(count($image_ids_array) > 1): ?>
+<!--							--><?php //get_template_part("components/carrousel", null, array(
+//								'img' => $image_ids_array,
+//								'post_creator_name' => $first_name . " " . $last_name,
+//							)); ?>
+<!--						--><?php //else: ?>
+<!--							--><?php //get_template_part("components/carrousel-single-image", null, array(
+//								'img' => $image_ids_array,
+//								'post_creator_name' => $first_name . " " . $last_name,
+//							)); ?>
+<!--					--><?php //endif; ?>
+<!--				</div>-->
+<!--			--><?php //endif; ?>
 
 			<?php if($events): ?>
-				<?php foreach ($events as $event): ?>
-					<div class="profile-content--sct bt-2">
-						<?php get_template_part( 'components/btn', null,
-								array(
-									'label' => $event['user_action_button_text'],
-									'href' => "/",
-									'target' => "_self",
-									'skin'  => 'primary',
-									'icon-only'  => false,
-									'disabled'  => false,
-									'icon-position' => '',
-									'icon' => '',
-									'additional-classes' => '',
-									'data-attribute' => null,
-									'theme' => "",
-								)
-							); ?>
-							<?php if($event['user_add_more_text']): ?>
-								<p class="p-sm mg-t-1"><?php echo $event['user_add_more_text']; ?></p>
-							<?php endif; ?>
-						</div>
-					<?php endforeach; ?>
+				<?php
+//				foreach ($events as $event): ?>
+<!--					<div class="profile-content--sct bt-2">-->
+<!--						--><?php //get_template_part( 'components/btn', null,
+//								array(
+//									'label' => $event['user_action_button_text'],
+//									'href' => "/",
+//									'target' => "_self",
+//									'skin'  => 'primary',
+//									'icon-only'  => false,
+//									'disabled'  => false,
+//									'icon-position' => '',
+//									'icon' => '',
+//									'additional-classes' => '',
+//									'data-attribute' => null,
+//									'theme' => "",
+//								)
+//							); ?>
+<!--							--><?php //if($event['user_add_more_text']): ?>
+<!--								<p class="p-sm mg-t-1">--><?php //echo $event['user_add_more_text']; ?><!--</p>-->
+<!--							--><?php //endif; ?>
+<!--						</div>-->
+<!--					--><?php //endforeach; ?>
 			<?php endif; ?>
 
 			<!-- <h2 class="h3 bt-2"">Profile informations</h2> -->
 			<div class="profile-content--sct bt-2">
-				<?php if(!empty($users_post_content) || !empty($him_recommend_users_relationships) || !empty($him_accept_contactlist_users_relationships)): ?>
-					<h3 class="h4 mb-sm">Connections</h3>
-					<ul class="connection__list">
-						<li class="connection__list__item">
-							<?php if(!empty($users_post_content)): ?>
-								<?php if(count($users_post_content) >= 1): ?>
-									<?php $active_post_s_content = (count($users_post_content) == 1) ? "active post" :  "active posts"; ?>
-									<a href="" class="tab-button" data-tabs-id="tabs-list"><?php echo count($users_post_content); ?> <?php echo $active_post_s_content; ?></a>
-								<?php endif; ?>
-							<?php else: ?>
-								<p>No posts for now</p>
-							<?php endif; ?>
-						</li>
-
-						<li class="connection__list__item">
-							<?php if(!empty($him_recommend_users_relationships)): ?>
-								<?php if(count($him_recommend_users_relationships) >= 1): ?>
-									<?php $recommend_user_s_content = (count($him_recommend_users_relationships) == 1) ? "user recommend" :  "users recommend"; ?>
-									<?php $recommend_user_s_title = (count($him_recommend_users_relationships) == 1) ? $first_name . " " . $last_name . " 's recommendation" : $first_name . " " . $last_name . " 's recommendations"; ?>
-									<a href="/" data-open-modal="list-recommendations"><?php echo count($him_recommend_users_relationships); ?> <?php echo $recommend_user_s_content; ?></a>
-								<?php endif; ?>
-							<?php else: ?>
-								<p>No recommendations for now</p>
-							<?php endif; ?>
-						</li>
-
-						<li class="connection__list__item">
-							<?php if(!empty($him_accept_contactlist_users_relationships)): ?>
-								<?php if(count($him_accept_contactlist_users_relationships) > 1): ?>
-									<?php $connection_user_s_content = (count($him_accept_contactlist_users_relationships) == 1) ? "user in contact list" :  "users in contact list"; ?>
-									<?php $connection_user_s_title = $first_name . " " . $last_name . " 's contact list"; ?>
-									<a href="/" data-open-modal="list-connections"><?php echo count($him_accept_contactlist_users_relationships); ?> <?php echo $connection_user_s_content; ?></a>
-								<?php endif; ?>
-							<?php else: ?>
-								<p>No users in contact list for now</p>
-							<?php endif; ?>
-						</li>
-					</ul>
-				<?php endif; ?>
-				<?php if(!empty($him_accept_contactlist_users_relationships)): ?>
-					<div class="modal micromodal-slide" id="list-connections" aria-hidden="true">
-						<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-							<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">
-								<header class="modal__header">
-									<div class="flex flex--vertical">
-										<h2 class="modal__title h2" id="publish-home-title"><?php echo $connection_user_s_title ?></h2>
-									</div>
-									<?php get_template_part("components/btn", null,
-										array(
-											'label' => 'Close this modal window',
-											'href' => "",
-											'target' => "_self",
-											'skin'  => 'secondary',
-											'icon-only'  => true,
-											'disabled'  => false,
-											'icon-position' => 'right', // left or right
-											'icon' => 'close',
-											'additional-classes' => '',
-											'data-attribute' => 'data-close-modal',
-											'theme' => "",
-										)
-									); ?>
-								</header>
-								<main class="modal__content contact__form contact__form--light">
-									<div class="avatar-list">
-										<?php foreach ($him_accept_contactlist_users_relationships as $user_connection_id): ?>
-											<?php
-												$user_connected = get_user_by('id', $user_connection_id);
-												$user_id = $user_connected->data->ID;
-												$user_first_name = get_field("user_first_name", "user_" . $user_id);
-												$user_last_name = get_field("user_last_name", "user_" . $user_id);
-												$user_permalink = get_permalink("602")."?user_id=". $user_id;
-												$user_avatar = get_field("user_profile_picture", "user_" . $user_id);
-											?>
-
-											<?php get_template_part("components/user-avatar-list", null,
-												array(
-													'user_first_name' => $user_first_name,
-													'user_last_name' => $user_last_name,
-													'user_avatar' => $user_avatar,
-													'user_id' => $user_connected->ID
-												)
-											); ?>
-										<?php endforeach; ?>
-									</div>
-								</main>
-							</div>
-						</div>
-					</div>
-				<?php endif; ?>
-				<?php if(!empty($him_recommend_users_relationships)): ?>
-					<div class="modal micromodal-slide" id="list-recommendations" aria-hidden="true">
-							<div class="modal__overlay" tabindex="-1" data-micromodal-close>
-								<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">
-									<header class="modal__header">
-										<div class="flex flex--vertical">
-											<h2 class="modal__title h2" id="publish-home-title"><?php echo $recommend_user_s_title; ?></h2>
-										</div>
-										<?php get_template_part("components/btn", null,
-											array(
-												'label' => 'Close this modal window',
-												'href' => "",
-												'target' => "_self",
-												'skin'  => 'secondary',
-												'icon-only'  => true,
-												'disabled'  => false,
-												'icon-position' => 'right', // left or right
-												'icon' => 'close',
-												'additional-classes' => '',
-												'data-attribute' => 'data-close-modal',
-												'theme' => "",
-											)
-										); ?>
-									</header>
-									<main class="modal__content contact__form contact__form--light">
-										<div class="avatar-list">
-											<?php foreach ($him_recommend_users_relationships as $user_recommended_id): ?>
-												<?php
-													$user_recommended = get_user_by('id', $user_recommended_id);
-													$user_id = $user_recommended->data->ID;
-													$user_first_name = get_field("user_first_name", "user_" . $user_id);
-													$user_last_name = get_field("user_last_name", "user_" . $user_id);
-													$user_permalink = get_permalink("602")."?user_id=". $user_id;
-													$user_avatar = get_field("user_profile_picture", "user_" . $user_id);
-												?>
-												<?php get_template_part("components/user-avatar-list", null,
-													array(
-														'user_first_name' => $user_first_name,
-														'user_last_name' => $user_last_name,
-														'user_avatar' => $user_avatar,
-														'user_id' => $user_recommended->ID
-													)
-												); ?>
-											<?php endforeach; ?>
-										</div>
-									</main>
-								</div>
-							</div>
-						</div>
-				<?php endif; ?>
+				<?php
+//				if(!empty($users_post_content) || !empty($him_recommend_users_relationships) || !empty($him_accept_contactlist_users_relationships)): ?>
+<!--					<h3 class="h4 mb-sm">Connections</h3>-->
+<!--					<ul class="connection__list">-->
+<!--						<li class="connection__list__item">-->
+<!--							--><?php //if(!empty($users_post_content)): ?>
+<!--								--><?php //if(count($users_post_content) >= 1): ?>
+<!--									--><?php //$active_post_s_content = (count($users_post_content) == 1) ? "active post" :  "active posts"; ?>
+<!--									<a href="" class="tab-button" data-tabs-id="tabs-list">--><?php //echo count($users_post_content); ?><!-- --><?php //echo $active_post_s_content; ?><!--</a>-->
+<!--								--><?php //endif; ?>
+<!--							--><?php //else: ?>
+<!--								<p>No posts for now</p>-->
+<!--							--><?php //endif; ?>
+<!--						</li>-->
+<!---->
+<!--						<li class="connection__list__item">-->
+<!--							--><?php //if(!empty($him_recommend_users_relationships)): ?>
+<!--								--><?php //if(count($him_recommend_users_relationships) >= 1): ?>
+<!--									--><?php //$recommend_user_s_content = (count($him_recommend_users_relationships) == 1) ? "user recommend" :  "users recommend"; ?>
+<!--									--><?php //$recommend_user_s_title = (count($him_recommend_users_relationships) == 1) ? $first_name . " " . $last_name . " 's recommendation" : $first_name . " " . $last_name . " 's recommendations"; ?>
+<!--									<a href="/" data-open-modal="list-recommendations">--><?php //echo count($him_recommend_users_relationships); ?><!-- --><?php //echo $recommend_user_s_content; ?><!--</a>-->
+<!--								--><?php //endif; ?>
+<!--							--><?php //else: ?>
+<!--								<p>No recommendations for now</p>-->
+<!--							--><?php //endif; ?>
+<!--						</li>-->
+<!---->
+<!--						<li class="connection__list__item">-->
+<!--							--><?php //if(!empty($him_accept_contactlist_users_relationships)): ?>
+<!--								--><?php //if(count($him_accept_contactlist_users_relationships) > 1): ?>
+<!--									--><?php //$connection_user_s_content = (count($him_accept_contactlist_users_relationships) == 1) ? "user in contact list" :  "users in contact list"; ?>
+<!--									--><?php //$connection_user_s_title = $first_name . " " . $last_name . " 's contact list"; ?>
+<!--									<a href="/" data-open-modal="list-connections">--><?php //echo count($him_accept_contactlist_users_relationships); ?><!-- --><?php //echo $connection_user_s_content; ?><!--</a>-->
+<!--								--><?php //endif; ?>
+<!--							--><?php //else: ?>
+<!--								<p>No users in contact list for now</p>-->
+<!--							--><?php //endif; ?>
+<!--						</li>-->
+<!--					</ul>-->
+<!--				--><?php //endif; ?>
+				<?php
+//				if(!empty($him_accept_contactlist_users_relationships)): ?>
+<!--					<div class="modal micromodal-slide" id="list-connections" aria-hidden="true">-->
+<!--						<div class="modal__overlay" tabindex="-1" data-micromodal-close>-->
+<!--							<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">-->
+<!--								<header class="modal__header">-->
+<!--									<div class="flex flex--vertical">-->
+<!--										<h2 class="modal__title h2" id="publish-home-title">--><?php //echo $connection_user_s_title ?><!--</h2>-->
+<!--									</div>-->
+<!--									--><?php //get_template_part("components/btn", null,
+//										array(
+//											'label' => 'Close this modal window',
+//											'href' => "",
+//											'target' => "_self",
+//											'skin'  => 'secondary',
+//											'icon-only'  => true,
+//											'disabled'  => false,
+//											'icon-position' => 'right', // left or right
+//											'icon' => 'close',
+//											'additional-classes' => '',
+//											'data-attribute' => 'data-close-modal',
+//											'theme' => "",
+//										)
+//									); ?>
+<!--								</header>-->
+<!--								<main class="modal__content contact__form contact__form--light">-->
+<!--									<div class="avatar-list">-->
+<!--										--><?php //foreach ($him_accept_contactlist_users_relationships as $user_connection_id): ?>
+<!--											--><?php
+//												$user_connected = get_user_by('id', $user_connection_id);
+//												$user_id = $user_connected->data->ID;
+//												$user_first_name = get_field("user_first_name", "user_" . $user_id);
+//												$user_last_name = get_field("user_last_name", "user_" . $user_id);
+//												$user_permalink = get_permalink("602")."?user_id=". $user_id;
+//												$user_avatar = get_field("user_profile_picture", "user_" . $user_id);
+//
+//												?>
+<!---->
+<!--											--><?php //get_template_part("components/user-avatar-list", null,
+//												array(
+//													'user_first_name' => $user_first_name,
+//													'user_last_name' => $user_last_name,
+//													'user_avatar' => $user_avatar,
+//													'user_id' => $user_connected->ID
+//												)
+//											); ?>
+<!--										--><?php //endforeach; ?>
+<!--									</div>-->
+<!--								</main>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				--><?php //endif; ?>
+				<?php
+//				if(!empty($him_recommend_users_relationships)): ?>
+<!--					<div class="modal micromodal-slide" id="list-recommendations" aria-hidden="true">-->
+<!--							<div class="modal__overlay" tabindex="-1" data-micromodal-close>-->
+<!--								<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-home-title">-->
+<!--									<header class="modal__header">-->
+<!--										<div class="flex flex--vertical">-->
+<!--											<h2 class="modal__title h2" id="publish-home-title">--><?php //echo $recommend_user_s_title; ?><!--</h2>-->
+<!--										</div>-->
+<!--										--><?php //get_template_part("components/btn", null,
+//											array(
+//												'label' => 'Close this modal window',
+//												'href' => "",
+//												'target' => "_self",
+//												'skin'  => 'secondary',
+//												'icon-only'  => true,
+//												'disabled'  => false,
+//												'icon-position' => 'right', // left or right
+//												'icon' => 'close',
+//												'additional-classes' => '',
+//												'data-attribute' => 'data-close-modal',
+//												'theme' => "",
+//											)
+//										); ?>
+<!--									</header>-->
+<!--									<main class="modal__content contact__form contact__form--light">-->
+<!--										<div class="avatar-list">-->
+<!--											--><?php //foreach ($him_recommend_users_relationships as $user_recommended_id): ?>
+<!--												--><?php
+//													$user_recommended = get_user_by('id', $user_recommended_id);
+//													$user_id = $user_recommended->data->ID;
+//													$user_first_name = get_field("user_first_name", "user_" . $user_id);
+//													$user_last_name = get_field("user_last_name", "user_" . $user_id);
+//													$user_permalink = get_permalink("602")."?user_id=". $user_id;
+//													$user_avatar = get_field("user_profile_picture", "user_" . $user_id);
+//												?>
+<!--												--><?php //get_template_part("components/user-avatar-list", null,
+//													array(
+//														'user_first_name' => $user_first_name,
+//														'user_last_name' => $user_last_name,
+//														'user_avatar' => $user_avatar,
+//														'user_id' => $user_recommended->ID
+//													)
+//												); ?>
+<!--											--><?php //endforeach; ?>
+<!--										</div>-->
+<!--									</main>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--				--><?php //endif; ?>
 			</div>
 
 			<?php $user_init_terms = get_the_terms($user_id, 'usertags'); ?>
-			<?php if($user_init_terms): ?>
-				<div class="profile-content--sct bt-2">
-					<h3 class="h4 mb-sm">Tags</h3>
-					<div class="tag-list">
-						<?php foreach ($user_init_terms as $tags): ?>
-							<a href="<?php echo get_permalink("604"); ?>?tag=<?php echo $tags->slug ?>" class="tag">#<?php echo $tags->name ; ?></a>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			<?php endif; ?>
+			<?php
+//			 if($user_init_terms): ?>
+<!--				<div class="profile-content--sct bt-2">-->
+<!--					<h3 class="h4 mb-sm">Tags</h3>-->
+<!--					<div class="tag-list">-->
+<!--						--><?php //foreach ($user_init_terms as $tags): ?>
+<!--							<a href="--><?php //echo get_permalink("604"); ?><!--?tag=--><?php //echo $tags->slug ?><!--" class="tag">#--><?php //echo $tags->name ; ?><!--</a>-->
+<!--						--><?php //endforeach; ?>
+<!--					</div>-->
+<!--				</div>-->
+<!--			--><?php //endif; ?>
 
 			<!-- <?php if($services_products_provided): ?>
 				<div class="profile-content--sct bt-2">
@@ -609,11 +617,11 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				</div>
 			<?php endif; ?>
 			<div class="profile-content--sct bt-2">
-				<h3 class="h4 mb-sm">Linked account</h3>
-				<ul class="contact__list">
-					<li class="contact__list__item"><a href="">Todo: linked account</a></li>
-					<li class="contact__list__item"><a href="">Todo: linked account</a></li>
-				</ul>
+<!--				<h3 class="h4 mb-sm">Linked account</h3>-->
+<!--				<ul class="contact__list">-->
+<!--					<li class="contact__list__item"><a href="">Todo: linked account</a></li>-->
+<!--					<li class="contact__list__item"><a href="">Todo: linked account</a></li>-->
+<!--				</ul>-->
 			</div>
 
 			<?php if($sector_of_activity || $work_position || $services_products_provided || $work_and_skills || $interests): ?>
@@ -734,7 +742,7 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 					<?php get_template_part( 'components/copy-paste', null,
 						array(
 							'label' => 'Copy user link',
-							'copyValue' => $user_permalink,
+							'copyValue' =>  get_field("user_profile_url", "user_".$user_id),
 							"iteration" => $user_id
 						)
 					); ?>

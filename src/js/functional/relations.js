@@ -52,16 +52,16 @@ const makeRelationBtw = (me, him, post_type_clicked_on, relationBtn) => {
 
 
         // Récupérer la valeur actuelle du compteur
-        var currentCount = parseInt(likeCount.textContent) ? parseInt(likeCount.textContent) :  0;  // Convertir la valeur en nombre
+       if(likeCount) var currentCount = parseInt(likeCount.textContent) ? parseInt(likeCount.textContent) :  0;  // Convertir la valeur en nombre
 
 
 
 				if(this.response === "Relation added") {
 					relationBtn.classList.add("relation_btn--checked");
-          likeCount.textContent = currentCount + 1;
+         if(likeCount) likeCount.textContent = currentCount + 1;
 				}else{
 					relationBtn.classList.remove("relation_btn--checked");
-          likeCount.textContent = currentCount - 1;
+         if(likeCount) likeCount.textContent = currentCount - 1;
 				}
 			}else if(relation_type === "recommend" ){
 				if(this.response === "Relation added") {
@@ -99,6 +99,11 @@ const makeRelationBtw = (me, him, post_type_clicked_on, relationBtn) => {
 		}
 		him_uid = 'user_' + him;
 		request.send('action=makeRelationBtw&me_uid=' + me_uid + '&him=' + him + '&field_me=' + field_me );
+    if(relationBtn.hasClass('active')) {
+      relationBtn.removeClass('active')
+    } else {
+      relationBtn.addClass('active')
+    }
 	}
 	else if(post_type_clicked_on === "request-contact-list") {
 		field_me = "i_request_contactlist_users_relationships";
