@@ -218,10 +218,9 @@ function enqueue_custom_tag_script() {
 	wp_localize_script('custom-tags-js', 'ajaxurl', admin_url('admin-ajax.php'));
 
 
-	// Enqueue the script on specific pages or everywhere
-	if (is_page() || is_single()) { // Adjust to target specific pages or conditions
+
 		wp_enqueue_script('custom-tags-js');
-	}
+
 
 	// Localize script to pass nonce
 	wp_localize_script('custom-tags-js', 'customApi', array(

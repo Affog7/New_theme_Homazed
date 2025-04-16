@@ -58,9 +58,9 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				endif; ?>
 		</div>
 
-
+<?php  if($current_user_id==$user_id) : ?>
 		<!-- profile form -->
-		<div class="modal micromodal-slide modal--publish" id="publish-profile" aria-hidden="true">
+		<div class="modal micromodal-slide modal--publish is-open" id="publish-profile" aria-hidden="true">
 			<div class="modal__overlay" tabindex="-1" data-micromodal-close>
 				<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="publish-projects-title">
 					<header class="modal__header">
@@ -85,6 +85,11 @@ $him_recommend_users_relationships = get_field("users_recommend_me_relationships
 				</div>
 			</div>
 		</div>
+
+<?php  endif; ?>
+
+
+
 		<!-- profile file -->
 
 

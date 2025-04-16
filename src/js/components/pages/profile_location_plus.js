@@ -8,6 +8,7 @@ class AddressManager {
     this.inputDistance = this.el.parentElement.parentElement.querySelector(".cercle_valeur_r_182 input");
     this.mapss = this.el.parentElement.parentElement.querySelector("#mapss");
     this.unitSelect = this.el.parentElement.parentElement.querySelector(".cercle_unit_r_183 select");
+    this.profileUrl = this.el.parentElement.parentElement.querySelector(".profile_url input");
 
     this.hiddenAddressesInput = document.querySelector(".hidden-addresses-input");
 
@@ -191,6 +192,7 @@ class AddressManager {
 
 
   addAddress(place) {
+    this.input.value = ""
     const existingItems = this.listContainer.querySelectorAll(".address-item");
     const alreadyExists = Array.from(existingItems).some(item => item.dataset.address === place.display_name);
 
@@ -207,7 +209,7 @@ class AddressManager {
                 <p class="link-text-profile">Link this location with the right Profile Page</p>
                 <div class="link-container-profile">
                     <a href="https://www.homazed.com/" class="main-link-profile">www.homazed.com/</a>
-                    <span class="sub-link-profile"><input class="inputComplete" value="${place.user ?? ""}" type="text" placeholder="officiel/charly-periu" /></span>
+                    <span class="sub-link-profile"><input class="inputComplete" value="official/${place.user ?? this.profileUrl?.value }" type="text" placeholder="officiel/charly-periu" /></span>
                 </div>
             </div>
         `;

@@ -48,7 +48,7 @@
             <div class="premium-options">
                 <label class="custom-checkbox">
                     <input type="checkbox" class="premium_renewal" data-null="" data-id="<?php echo $args['id']; ?>" name="post_Is_Automatic_Renewal" value="Automatic Renewal" <?php echo $args['renewal'] ? "checked" : ""; ?> />
-                    <span class="checkmark"></span> <b>Premium Post - Automatic Renewal</b>
+                    <span class="checkmark"></span> <b>Premium <Profile></Profile> - Automatic Renewal</b>
                 </label>
             </div>
             <hr />

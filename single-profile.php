@@ -478,7 +478,7 @@ if( isset($_GET["show_list"])   ) {
         <div class=" popup-content">
             <div class="body-popup">
                 <div class="popup-header">
-                    <h2>Profile Post</h2>
+                    <h2>Edit Profile</h2>
                     <div class="popup-controls">
                         <?php
                         // Récupérer le statut actuel du post

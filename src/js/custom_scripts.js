@@ -333,6 +333,7 @@ jQuery(document).ready(function ($) {
       },
       success: function (response) {
         if (response.success) {
+          alert(34)
           if (response.data.status === "added") {
             button.addClass("active").text("Remove Contact");
           } else {
